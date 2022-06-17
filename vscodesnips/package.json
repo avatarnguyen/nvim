@@ -1,0 +1,31 @@
+{
+  "name": "nvim-snippets",
+  "author": "anh",
+  "engines": {
+    "vscode": "^1.11.0"
+  },
+  "contributes": {
+    "snippets": [
+      {
+        "language": "dart",
+        "path": "./flutter.json"
+      },
+      {
+        "language": "dart",
+        "path": "./flutter_bloc.json"
+      },
+      {
+        "language": "dart",
+        "path": "./bloc.json"
+      },
+      {
+        "language": "dart",
+        "path": "./bloc_test.json"
+      },
+      {
+        "language": "dart",
+        "path": "./freezed_bloc.json"
+      }
+    ]
+  }
+}
