@@ -71,7 +71,7 @@ return packer.startup(function(use)
 
   -- snippets
   use { "L3MON4D3/LuaSnip", commit = "79b2019c68a2ff5ae4d732d50746c901dd45603a" } --snippet engine
-  use { "rafamadriz/friendly-snippets", commit = "d27a83a363e61009278b6598703a763ce9c8e617" } -- a bunch of snippets to use
+  use { "rafamadriz/friendly-snippets" } -- a bunch of snippets to use
 
   -- LSP
   use { "neovim/nvim-lspconfig", commit = "148c99bd09b44cf3605151a06869f6b4d4c24455" } -- enable LSP
@@ -85,7 +85,6 @@ return packer.startup(function(use)
   -- Treesitter
   use {
     "nvim-treesitter/nvim-treesitter",
-    commit = "518e27589c0463af15463c9d675c65e464efc2fe",
   }
 
   -- Git
