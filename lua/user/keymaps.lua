@@ -29,6 +29,8 @@ keymap("n", "<C-s>", "<cmd>w!<CR>", opts)
 keymap("i", "<C-s>", "<ESC><cmd>w!<CR>", opts)
 keymap("v", "<C-s>", "<cmd>w!<CR>", opts)
 
+keymap("v", "<C-n>", "<cmd>nohlsearch<CR>", opts)
+
 keymap("n", "<leader><leader>", "<cmd>lua require('telescope.builtin').buffers(require('telescope.themes').get_dropdown{previewer = false})<cr>", opts)
 
 -- paste register
@@ -72,19 +74,19 @@ keymap(
 
 -- Hop 
 -- place this in one of your configuration file(s)
-keymap('n', "<leader-n>", "<cmd>lua require'hop'.hint_lines()<cr>", opts)
-keymap('n', "<leader-m>", "<cmd>lua require'hop'.hint_words()<cr>", opts)
+-- keymap('n', "<leader-n>", "<cmd>lua require'hop'.hint_lines()<cr>", opts)
+-- keymap('n', "<leader-m>", "<cmd>lua require'hop'.hint_words()<cr>", opts)
 
-keymap('v', "<leader-n>", "<cmd>lua require'hop'.hint_lines()<cr>", opts)
-keymap('x', "<leader-n>", "<cmd>lua require'hop'.hint_lines()<cr>", opts)
-keymap('v', "<leader-m>", "<cmd>lua require'hop'.hint_words()<cr>", opts)
+-- keymap('v', "<leader-n>", "<cmd>lua require'hop'.hint_lines()<cr>", opts)
+-- keymap('x', "<leader-n>", "<cmd>lua require'hop'.hint_lines()<cr>", opts)
+-- keymap('v', "<leader-m>", "<cmd>lua require'hop'.hint_words()<cr>", opts)
 
-keymap('n', 'f', "<cmd>lua require'hop'.hint_char1({ direction = require'hop.hint'.HintDirection.AFTER_CURSOR, current_line_only = false })<cr>", {})
-keymap('n', 'F', "<cmd>lua require'hop'.hint_char1({ direction = require'hop.hint'.HintDirection.BEFORE_CURSOR, current_line_only = false })<cr>", {})
-keymap('o', 'f', "<cmd>lua require'hop'.hint_char1({ direction = require'hop.hint'.HintDirection.AFTER_CURSOR, current_line_only = false, inclusive_jump = true })<cr>", {})
-keymap('o', 'F', "<cmd>lua require'hop'.hint_char1({ direction = require'hop.hint'.HintDirection.BEFORE_CURSOR, current_line_only = false, inclusive_jump = true })<cr>", {})
-keymap('', 't', "<cmd>lua require'hop'.hint_char1({ direction = require'hop.hint'.HintDirection.AFTER_CURSOR, current_line_only = true })<cr>", {})
-keymap('', 'T', "<cmd>lua require'hop'.hint_char1({ direction = require'hop.hint'.HintDirection.BEFORE_CURSOR, current_line_only = true })<cr>", {})
+-- keymap('n', 'f', "<cmd>lua require'hop'.hint_char1({ direction = require'hop.hint'.HintDirection.AFTER_CURSOR, current_line_only = false })<cr>", {})
+-- keymap('n', 'F', "<cmd>lua require'hop'.hint_char1({ direction = require'hop.hint'.HintDirection.BEFORE_CURSOR, current_line_only = false })<cr>", {})
+-- keymap('o', 'f', "<cmd>lua require'hop'.hint_char1({ direction = require'hop.hint'.HintDirection.AFTER_CURSOR, current_line_only = false, inclusive_jump = true })<cr>", {})
+-- keymap('o', 'F', "<cmd>lua require'hop'.hint_char1({ direction = require'hop.hint'.HintDirection.BEFORE_CURSOR, current_line_only = false, inclusive_jump = true })<cr>", {})
+-- keymap('', 't', "<cmd>lua require'hop'.hint_char1({ direction = require'hop.hint'.HintDirection.AFTER_CURSOR, current_line_only = true })<cr>", {})
+-- keymap('', 'T', "<cmd>lua require'hop'.hint_char1({ direction = require'hop.hint'.HintDirection.BEFORE_CURSOR, current_line_only = true })<cr>", {})
 
 -- Open code actions for the selected visual range
 keymap("v", "<S-h>", "<esc><cmd>lua require('lsp-fastaction').range_code_action()<CR>", opts)
@@ -128,7 +130,7 @@ keymap("v", "<", "<gv", opts)
 keymap("v", ">", ">gv", opts)
 
 -- NvimTree
-keymap("n", "<leader>e", ":NvimTreeToggle<CR>", opts)
+-- keymap("n", "<leader>e", ":NvimTreeToggle<CR>", opts)
 
 -- Harpoon Plugins
 keymap("n", "<A-Tab>", "<CMD> lua require('harpoon.ui').nav_next()<CR>", opts)
@@ -145,13 +147,13 @@ keymap("n", "<leader>3", "<CMD> lua require('harpoon.ui').nav_file(3)<CR>", opts
 -- keymap("t", "<C-l>", "<C-\\><C-N><C-w>l", term_opts)
 
 -- Telescope
-keymap("n", "<leader>ff", ":Telescope find_files<CR>", opts)
-keymap("n", "<leader>ft", ":Telescope live_grep<CR>", opts)
-keymap("n", "<leader>fp", ":Telescope projects<CR>", opts)
-keymap("n", "<leader>fb", ":Telescope buffers<CR>", opts)
+-- keymap("n", "<leader>ff", ":Telescope find_files<CR>", opts)
+-- keymap("n", "<leader>ft", ":Telescope live_grep<CR>", opts)
+-- keymap("n", "<leader>fp", ":Telescope projects<CR>", opts)
+-- keymap("n", "<leader>fb", ":Telescope buffers<CR>", opts)
 
 -- Git
-keymap("n", "<leader>gg", "<cmd>lua _LAZYGIT_TOGGLE()<CR>", opts)
+-- keymap("n", "<leader>gg", "<cmd>lua _LAZYGIT_TOGGLE()<CR>", opts)
 
 -- Comment
 keymap("n", "<leader>/", "<cmd>lua require('Comment.api').toggle_current_linewise()<CR>", opts)

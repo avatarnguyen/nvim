@@ -85,13 +85,11 @@ local mappings = {
   --   "Buffers",
   -- },
   ["q"] = {" <Cmd>lua require('telescope.builtin').current_buffer_fuzzy_find(require('telescope.themes').get_dropdown{})<CR>", "Find in Buffer", },
-  -- ["e"] = { "<cmd>NvimTreeToggle<cr>", "Explorer" },
-  ["e"] = { "<cmd>Neotree filesystem reveal float<cr>", "Float Explorer" },
-  ["E"] = { "<cmd>Neotree toggle filesystem reveal left<cr>", "Explorer" },
+  ["e"] = { "<cmd>NvimTreeToggle<cr>", "Explorer" },
   ["A"] = { "<cmd>w!<CR>", "Save" },
   ["Q"] = { "<cmd>q<CR>", "Quit" },
   ["c"] = { "<cmd>Bdelete!<CR>", "Close Buffer" },
-  ["h"] = { "<cmd>nohlsearch<CR>", "No Highlight" },
+  -- ["h"] = { "<cmd>nohlsearch<CR>", "No Highlight" },
   ["f"] = {
     "<cmd>lua require('telescope.builtin').find_files(require('telescope.themes').get_dropdown{})<cr>",
     "Find files",
@@ -99,7 +97,6 @@ local mappings = {
   ["F"] = { "<cmd>lua require('telescope.builtin').live_grep()<cr>", "Find Text" },
   ["W"] = { "<cmd>lua require('telescope.builtin').grep_string()<cr>", "Find Word" },
   ["P"] = { "<cmd>Telescope projects<cr>", "Projects" },
-  ["0"] = { "<cmd>Alpha<cr>", "Alpha" },
   ["p"] = { "<cmd>:lua require('telescope').extensions.neoclip.default(require('telescope.themes').get_dropdown{})<CR>", "Clipboard" },
   ["D"] = { "<cmd>:lua require('telescope').extensions.flutter.commands()<CR>", "Flutter Commands" },
 
@@ -216,10 +213,7 @@ local mappings = {
 
   T = {
     name = "Terminal",
-    -- n = { "<cmd>lua _NODE_TOGGLE()<cr>", "Node" },
-    -- u = { "<cmd>lua _NCDU_TOGGLE()<cr>", "NCDU" },
     t = { "<cmd>lua _HTOP_TOGGLE()<cr>", "Htop" },
-    -- p = { "<cmd>lua _PYTHON_TOGGLE()<cr>", "Python" },
     f = { "<cmd>ToggleTerm direction=float<cr>", "Float" },
     h = { "<cmd>ToggleTerm size=10 direction=horizontal<cr>", "Horizontal" },
     v = { "<cmd>ToggleTerm size=80 direction=vertical<cr>", "Vertical" },
