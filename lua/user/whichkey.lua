@@ -35,7 +35,7 @@ local setup = {
   },
   icons = {
     breadcrumb = "»", -- symbol used in the command line area that shows your active key combo
-    separator = "➜", -- symbol used between a key and it's label
+    separator = "-", -- symbol used between a key and it's label
     group = "+", -- symbol prepended to a group
   },
   popup_mappings = {
@@ -79,7 +79,6 @@ local opts = {
 }
 
 local mappings = {
-  ["a"] = {" <Cmd>lua require('telescope.builtin').lsp_code_actions(require('telescope.themes').get_cursor{layout_config={height=0.3, width=0.4,}})<CR>", "Code Action", },
   -- ["b"] = {
   --   "<cmd>lua require('telescope.builtin').buffers(require('telescope.themes').get_dropdown{previewer = false})<cr>",
   --   "Buffers",
@@ -152,18 +151,17 @@ local mappings = {
 
   l = {
     name = "LSP",
-    -- a = { "<cmd>lua vim.lsp.buf.code_action()<cr>", "Code Action" },
     -- d = {
     --   "<cmd>Telescope lsp_document_diagnostics<cr>",
     --   "Document Diagnostics",
     -- },
     d = { "<cmd>Trouble document_diagnostics<cr>", "Document Diagnostics" },
+    e = { "<cmd>lua vim.diagnostic.open_float()<cr>", "Diagnostics Float" },
     W = {
       "<cmd>Telescope diagnostics<cr>",
       "Workspace Diagnostics Popup",
     },
     w = { "<cmd>Trouble workspace_diagnostics<cr>", "Workspace Diagnostics" },
-    e = { "<Cmd>lua vim.lsp.buf.definition()<CR>", "Definitions" },
     f = { "<cmd>lua vim.lsp.buf.formatting()<cr>", "Format" },
     i = { "<cmd>LspInfo<cr>", "Info" },
     I = { "<cmd>LspInstallInfo<cr>", "Installer Info" },
@@ -221,10 +219,10 @@ local mappings = {
 
   d = {
     name = "Flutter",
-    r = { "<cmd>lua require('flutter-tools.commands').run_command()<cr>", "Run" },
-    R = { "<cmd>lua require('flutter-tools.commands').run_command('--flavor development --target lib/main_development.dart')<cr>", "Run Dev Flavor" },
-    d = { "<cmd>lua require('flutter-tools.devices').list_devices()<cr>", "Show Devices" },
+    d = { "<cmd>lua require('flutter-tools.commands').run_command()<cr>", "Run" },
     D = { "<cmd>lua require('flutter-tools.commands').run_command('--profile')<cr>", "Run Profile Mode" },
+    -- R = { "<cmd>lua require('flutter-tools.commands').run_command('--flavor development --target lib/main_development.dart')<cr>", "Run Dev Flavor" },
+    l = { "<cmd>lua require('flutter-tools.devices').list_devices()<cr>", "Show Devices" },
     v = { "<cmd>lua require('flutter-tools.commands').visual_debug()<cr>", "Start Visual Debugger" },
     e = { "<cmd>lua require('flutter-tools.devices').list_emulators()<cr>", "Show Emulators" },
     t = { "<cmd>lua require('flutter-tools.dev_tools').start()<cr>", "Show Dev Tools" },
@@ -255,15 +253,15 @@ local mappings = {
     d = { "<cmd>SessionManager load_current_dir_session<cr>", "Load current Dir session" },
   },
 
-  -- o = {
-  --   name = "Harpoon",
-  --   a = { "<CMD> lua require('harpoon.mark').add_file()<CR>", "Add File" },
-  --   o = { "<CMD> lua require('harpoon.ui').toggle_quick_menu()<CR>", "Toggle Menu" },
-  --   h = { "<CMD> lua require('harpoon.ui').nav_file(1)<CR>", "Go To File 1" },
-  --   j = { "<CMD> lua require('harpoon.ui').nav_file(2)<CR>", "Go To File 2" },
-  --   k = { "<CMD> lua require('harpoon.ui').nav_file(3)<CR>", "Go To File 3" },
-  --   l = { "<CMD> lua require('harpoon.ui').nav_file(4)<CR>", "Go To File 4" },
-  -- },
+  h = {
+    name = "Harpoon",
+    a = { "<CMD> lua require('harpoon.mark').add_file()<CR>", "Add File" },
+    o = { "<CMD> lua require('harpoon.ui').toggle_quick_menu()<CR>", "Toggle Menu" },
+    h = { "<CMD> lua require('harpoon.ui').nav_file(1)<CR>", "Go To File 1" },
+    j = { "<CMD> lua require('harpoon.ui').nav_file(2)<CR>", "Go To File 2" },
+    k = { "<CMD> lua require('harpoon.ui').nav_file(3)<CR>", "Go To File 3" },
+    l = { "<CMD> lua require('harpoon.ui').nav_file(4)<CR>", "Go To File 4" },
+  },
 
   u = {
     name = "Debugger",
