@@ -5,8 +5,9 @@ end
 
 
 flutter.setup{
-  flutter_path = "$HOME/fvm/default", -- <-- this takes priority over the lookup
-  fvm = true, -- takes priority over path, uses <workspace>/.fvm/flutter_sdk if enabled
+  -- flutter_path = "$HOME/fvm/default", -- <-- this takes priority over the lookup
+  -- flutter_path = "$HOME/flutter/bin/flutter/", -- <-- this takes priority over the lookup
+  fvm = false, -- takes priority over path, uses <workspace>/.fvm/flutter_sdk if enabled
   dev_log = {
     open_cmd = "tabedit",
   },
