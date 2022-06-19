@@ -92,7 +92,7 @@ local mappings = {
   ["f"] = {
     "<cmd>lua require('telescope.builtin').find_files(require('telescope.themes').get_dropdown{})<cr>",
     "Find files",
-  }, 
+  },
   ["F"] = { "<cmd>lua require('telescope.builtin').live_grep()<cr>", "Find Text" },
   ["W"] = { "<cmd>lua require('telescope.builtin').grep_string()<cr>", "Find Word" },
   ["P"] = { "<cmd>Telescope projects<cr>", "Projects" },
@@ -114,8 +114,8 @@ local mappings = {
   -- bdelete
   name = "Close Buffer Option",
   c = { "<cmd>lua require('close_buffers').delete({ type = 'hidden', force = true }) <cr>", "Delete all non-visible" }, -- Delete all non-visible buffers
-  n = { "<cmd>lua require('close_buffers').delete({ type = 'nameless' })<cr>", "Delete all buffers without name" }, 
-  t = { "<cmd>lua require('close_buffers').delete({ type = 'this' })<cr>", "Delete the current buffer" }, 
+  n = { "<cmd>lua require('close_buffers').delete({ type = 'nameless' })<cr>", "Delete all buffers without name" },
+  t = { "<cmd>lua require('close_buffers').delete({ type = 'this' })<cr>", "Delete the current buffer" },
 
   -- bwipeout
   -- require('close_buffers').wipe({ type = 'all', force = true }) -- Wipe all buffers
@@ -125,7 +125,6 @@ local mappings = {
 
   g = {
     name = "Git",
-    e = { "<cmd>Neotree git_status<cr>", "Float Explorer" },
     g = { "<cmd>lua _LAZYGIT_TOGGLE()<CR>", "Lazygit" },
     j = { "<cmd>lua require 'gitsigns'.next_hunk()<cr>", "Next Hunk" },
     k = { "<cmd>lua require 'gitsigns'.prev_hunk()<cr>", "Prev Hunk" },
@@ -147,6 +146,8 @@ local mappings = {
     },
     h = { "<cmd>DiffviewFileHistory<cr>", "File History" },
     C = { "<cmd>DiffviewClose<cr>", "Close Diffview" },
+    t = { "<cmd>lua require('telescope').extensions.git_worktree.git_worktrees() <cr>", "Show All Git Worktrees" },
+    w = { "<cmd>lua require('telescope').extensions.git_worktree.create_git_worktree()<cr>", "Add Git Worktree" },
   },
 
   l = {
@@ -178,7 +179,7 @@ local mappings = {
       "Workspace Symbols",
     },
   },
-  r = {
+  t = {
     name = "Run Test",
     r = { "<cmd>TestNearest<cr>", "Test Nearest" },
     f = { "<cmd>TestFile<cr>", "Test File" },
@@ -190,12 +191,12 @@ local mappings = {
     n = { "<cmd>UltestNearest<cr>", "Run Ultest Nearest" },
   },
 
-  I = {
-    name = "Interface",
-    b = { "<cmd>sp<CR><C-w>J20<C-w>_<cr>", "Bottom Window" },
-    t = { "<cmd>vsplit<cr><cmd>split<cr>", "Triple Window" },
-    c = { "<cmd>vsplit<cr><cmd>vsplit<cr>", "3 Columns" },
-  },
+  -- I = {
+  --   name = "Interface",
+  --   b = { "<cmd>sp<CR><C-w>J20<C-w>_<cr>", "Bottom Window" },
+  --   t = { "<cmd>vsplit<cr><cmd>split<cr>", "Triple Window" },
+  --   c = { "<cmd>vsplit<cr><cmd>vsplit<cr>", "3 Columns" },
+  -- },
 
   S = {
     name = "Search",
@@ -221,14 +222,14 @@ local mappings = {
     name = "Flutter",
     d = { "<cmd>lua require('flutter-tools.commands').run_command()<cr>", "Run" },
     D = { "<cmd>lua require('flutter-tools.commands').run_command('--profile')<cr>", "Run Profile Mode" },
-    -- R = { "<cmd>lua require('flutter-tools.commands').run_command('--flavor development --target lib/main_development.dart')<cr>", "Run Dev Flavor" },
+    r = { "<cmd>lua require('flutter-tools.commands').run_command('--flavor dev --debug')<cr>", "Run Dev Flavor" },
     l = { "<cmd>lua require('flutter-tools.devices').list_devices()<cr>", "Show Devices" },
     v = { "<cmd>lua require('flutter-tools.commands').visual_debug()<cr>", "Start Visual Debugger" },
     e = { "<cmd>lua require('flutter-tools.devices').list_emulators()<cr>", "Show Emulators" },
     t = { "<cmd>lua require('flutter-tools.dev_tools').start()<cr>", "Show Dev Tools" },
     c = { "<cmd>lua require('flutter-tools.log').clear()<cr>", "Clear Logs" },
     C = { "<cmd>lua require('flutter-tools.commands').copy_profiler_url()<cr>", "Copy Profile Url" },
-    h = { "<cmd>ColorHighlight<cr>", "Highlight Log" },
+    -- h = { "<cmd>ColorHighlight<cr>", "Highlight Log" },
     p = { "<cmd>lua require('flutter-tools.commands').pub_get()<cr>", "Run Pub Get" },
     q = { "<cmd>lua require('flutter-tools.commands').quit()<cr>", "Quit Flutter" },
     s = { "<cmd>lua require('flutter-tools.commands').restart()<cr> <cmd>lua require('flutter-tools.log').clear()<cr>", "Restart Flutter" },
@@ -236,11 +237,11 @@ local mappings = {
     f = { "<cmd>lua require('telescope').extensions.flutter.fvm()<cr>", "Change Flutter Version" },
   },
 
-  t = {
+  x = {
     name = "Trouble",
-    r = { "<cmd>Trouble lsp_references<cr>", "References" },
-    f = { "<cmd>Trouble lsp_definitions<cr>", "Definitions" },
-    d = { "<cmd>Trouble lsp_document_diagnostics<cr>", "Diagnostics" },
+    r = { "<cmd>Trouble references<cr>", "References" },
+    f = { "<cmd>Trouble definitions<cr>", "Definitions" },
+    d = { "<cmd>Trouble document_diagnostics<cr>", "Diagnostics" },
     q = { "<cmd>Trouble quickfix<cr>", "QuickFix" },
     l = { "<cmd>Trouble loclist<cr>", "LocationList" },
     w = { "<cmd>Trouble workspace_diagnostics<cr>", "Workspace Diagnostics" },
@@ -268,8 +269,13 @@ local mappings = {
     a = { "<CMD> lua require'dap'.toggle_breakpoint()<CR>", "Toggle Breadpoint" },
     c = { "<CMD> lua require'dap'.continue()<CR>", "Continue" },
     o = { "<CMD> lua require'dap'.step_over()<CR>", "Step Over" },
+    O = { "<CMD> lua require'dap'.step_out()<CR>", "Step Out" },
     i = { "<CMD> lua require'dap'.step_into()<CR>", "Step Into" },
     u = { "<CMD> lua require('dapui').toggle()<CR>", "Toggle Dap UI" },
+    b = { "<CMD> lua require'dap'.toggle_breakpoint()<CR>", "Toggle Breakpoint" },
+    r = {"<cmd>lua require'dap'.repl.toggle()<cr>", "Toggle Repl"},
+    l = { "<cmd>lua require'dap'.run_last()<cr>", "Run Last" } ,
+    t = { "<cmd>lua require'dap'.terminate()<cr>", "Terminate" } ,
   }
 }
 

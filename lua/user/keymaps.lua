@@ -1,5 +1,7 @@
 local opts = { noremap = true, silent = true }
 
+local term_opts = { silent = true }
+
 -- Shorten function name
 local keymap = vim.keymap.set
 
@@ -30,7 +32,9 @@ keymap("i", "<C-s>", "<ESC><cmd>w!<CR>", opts)
 keymap("v", "<C-s>", "<cmd>w!<CR>", opts)
 
 
+-- Telescope
 keymap("n", "<leader><leader>", "<cmd>lua require('telescope.builtin').buffers(require('telescope.themes').get_dropdown{previewer = false})<cr>", opts)
+keymap("n", "<C-p>", "<cmd>lua require('telescope.builtin').find_files(require('telescope.themes').get_dropdown{})<cr>", opts)
 
 -- paste register
 keymap("n", ",p", '"0p', opts)
@@ -64,12 +68,11 @@ keymap(
 
 -- Hop
 -- place this in one of your configuration file(s)
-keymap('n', "<leader-n>", "<cmd>lua require'hop'.hint_lines()<cr>", opts)
-keymap('n', "<leader-m>", "<cmd>lua require'hop'.hint_words()<cr>", opts)
-
-keymap('v', "<leader-n>", "<cmd>lua require'hop'.hint_lines()<cr>", opts)
-keymap('x', "<leader-n>", "<cmd>lua require'hop'.hint_lines()<cr>", opts)
-keymap('v', "<leader-m>", "<cmd>lua require'hop'.hint_words()<cr>", opts)
+keymap('n', "<C-k>", "<cmd>lua require'hop'.hint_lines({ multi_windows = true })<cr>", opts)
+keymap('v', "<C-k>", "<cmd>lua require'hop'.hint_lines()<cr>", opts)
+keymap('x', "<C-k>", "<cmd>lua require'hop'.hint_lines()<cr>", opts)
+keymap('n', "<leader>n", "<cmd>lua require'hop'.hint_words()<cr>", opts)
+keymap('v', "<leader>n", "<cmd>lua require'hop'.hint_words()<cr>", opts)
 
 keymap('n', 'f', "<cmd>lua require'hop'.hint_char1({ direction = require'hop.hint'.HintDirection.AFTER_CURSOR, current_line_only = false })<cr>", {})
 keymap('n', 'F', "<cmd>lua require'hop'.hint_char1({ direction = require'hop.hint'.HintDirection.BEFORE_CURSOR, current_line_only = false })<cr>", {})
@@ -82,18 +85,21 @@ keymap('', 'T', "<cmd>lua require'hop'.hint_char1({ direction = require'hop.hint
 keymap("v", "<S-h>", "<esc><cmd>lua require('lsp-fastaction').range_code_action()<CR>", opts)
 keymap("n", "<S-h>", "<cmd>lua require('lsp-fastaction').code_action()<CR>", opts)
 
-keymap("n", "<leader>o", "<Cmd>lua require('flutter-tools.outline').toggle()<CR>", opts)
-keymap("n", "<leader>O", "<cmd>lua require('telescope.builtin').lsp_document_symbols(require('telescope.themes').get_dropdown{})<cr>", opts)
+keymap("n", "<leader>b", "<Cmd>lua require('flutter-tools.outline').toggle()<CR>", opts)
+keymap("n", "<leader>o", "<cmd>lua require('telescope.builtin').lsp_document_symbols(require('telescope.themes').get_dropdown{})<cr>", opts)
 
--- substitute plugin
+-- SUBSTITUTE plugin
+-- keymap("x", "s", "<cmd>lua require('substitute').visual()<cr>", { noremap = true })
 keymap("n", "s", "<cmd>lua require('substitute').operator()<cr>", { noremap = true })
 keymap("n", "ss", "<cmd>lua require('substitute').line()<cr>", { noremap = true })
 keymap("n", "<S-s>", "<cmd>lua require('substitute').eol()<cr>", { noremap = true })
--- keymap("x", "s", "<cmd>lua require('substitute').visual()<cr>", { noremap = true })
-
 keymap("n", "<leader>s", "<cmd>lua require('substitute.range').operator()<cr>", { noremap = true })
 keymap("x", "<leader>s", "<cmd>lua require('substitute.range').visual()<cr>", {})
 keymap("n", "<leader>ss", "<cmd>lua require('substitute.range').word()<cr>", {})
+keymap("n", "<leader>ss", "<cmd>lua require('substitute.range').word()<cr>", {})
+
+keymap("n", "<leader>r", ":%s///g<Left><Left>", {})
+keymap("x", "<leader>r", ":s///g<Left><Left>", opts)
 
 -- Resize with arrows
 keymap("n", "<A-Up>", ":resize -2<CR>", opts)
@@ -110,14 +116,27 @@ keymap("n", "<S-Tab>", ":bprevious<CR>", opts)
 -- Move text up and down
 keymap("n", "<A-j>", "<Esc>:m .+1<CR>==gi", opts)
 keymap("n", "<A-k>", "<Esc>:m .-2<CR>==gi", opts)
--- Insert --
--- Press jk fast to enter
-keymap("i", "jk", "<ESC>", opts)
 
 -- Visual --
 -- Stay in indent mode
 keymap("v", "<", "<gv", opts)
 keymap("v", ">", ">gv", opts)
+
+-- Move text up and down
+keymap("v", "<A-j>", ":m .+1<CR>==", opts)
+keymap("v", "<A-k>", ":m .-2<CR>==", opts)
+keymap("v", "p", '"_dP', opts)
+
+-- Visual Block --
+-- Move text up and down
+keymap("x", "J", ":move '>+1<CR>gv-gv", opts)
+keymap("x", "K", ":move '<-2<CR>gv-gv", opts)
+keymap("x", "<A-j>", ":move '>+1<CR>gv-gv", opts)
+keymap("x", "<A-k>", ":move '<-2<CR>gv-gv", opts)
+
+-- Insert --
+-- Press jk fast to enter
+keymap("i", "jk", "<ESC>", opts)
 
 -- Bufferline
 keymap("n", "<leader>1", "<Cmd>BufferLineGoToBuffer 1<CR>", opts)
@@ -136,23 +155,22 @@ keymap("n", "<leader>6", "<Cmd>BufferLineGoToBuffer 6<CR>", opts)
 
 -- Terminal --
 -- Better terminal navigation
--- keymap("t", "<C-h>", "<C-\\><C-N><C-w>h", term_opts)
--- keymap("t", "<C-j>", "<C-\\><C-N><C-w>j", term_opts)
--- keymap("t", "<C-k>", "<C-\\><C-N><C-w>k", term_opts)
--- keymap("t", "<C-l>", "<C-\\><C-N><C-w>l", term_opts)
+keymap("t", "<C-h>", "<C-\\><C-N><C-w>h", term_opts)
+keymap("t", "<C-j>", "<C-\\><C-N><C-w>j", term_opts)
+keymap("t", "<C-k>", "<C-\\><C-N><C-w>k", term_opts)
+keymap("t", "<C-l>", "<C-\\><C-N><C-w>l", term_opts)
 
+-- Misc
+-- keymap("n", "<F1>", ":e ~/Notes/<cr>", opts)
+-- keymap("n", "<F3>", ":e .<cr>", opts)
+-- keymap("n", "<F4>", "<cmd>Telescope resume<cr>", opts)
+-- keymap("n", "<F5>", "<cmd>Telescope commands<CR>", opts)
+-- keymap("n", "<F7>", "<cmd>TSHighlightCapturesUnderCursor<cr>", opts)
+-- keymap("n", "<F8>", "<cmd>TSPlaygroundToggle<cr>", opts)
+-- keymap("n", "<F11>", "<cmd>lua vim.lsp.buf.references()<CR>", opts)
+-- keymap("n", "<F12>", "<cmd>lua vim.lsp.buf.definition()<CR>", opts)
+-- keymap("v", "//", [[y/\V<C-R>=escape(@",'/\')<CR><CR>]], opts)
 
 -- Comment
 keymap("n", "<leader>/", "<cmd>lua require('Comment.api').toggle_current_linewise()<CR>", opts)
 keymap("x", "<leader>/", '<ESC><CMD>lua require("Comment.api").toggle_linewise_op(vim.fn.visualmode())<CR>')
-
--- DAP
-keymap("n", "<leader>db", "<cmd>lua require'dap'.toggle_breakpoint()<cr>", opts)
-keymap("n", "<leader>dc", "<cmd>lua require'dap'.continue()<cr>", opts)
-keymap("n", "<leader>di", "<cmd>lua require'dap'.step_into()<cr>", opts)
-keymap("n", "<leader>do", "<cmd>lua require'dap'.step_over()<cr>", opts)
-keymap("n", "<leader>dO", "<cmd>lua require'dap'.step_out()<cr>", opts)
-keymap("n", "<leader>dr", "<cmd>lua require'dap'.repl.toggle()<cr>", opts)
-keymap("n", "<leader>dl", "<cmd>lua require'dap'.run_last()<cr>", opts)
-keymap("n", "<leader>du", "<cmd>lua require'dapui'.toggle()<cr>", opts)
-keymap("n", "<leader>dt", "<cmd>lua require'dap'.terminate()<cr>", opts)
