@@ -61,7 +61,6 @@ return packer.startup(function(use)
   use { "folke/tokyonight.nvim", commit = "8223c970677e4d88c9b6b6d81bda23daf11062bb" }
   use "bluz71/vim-nightfly-guicolors"
   use "rebelot/kanagawa.nvim"
-  use "ray-x/aurora"
 
   -- cmp plugins
   use { "hrsh7th/nvim-cmp", commit = "df6734aa018d6feb4d76ba6bda94b1aeac2b378a" } -- The completion plugin
@@ -73,6 +72,7 @@ return packer.startup(function(use)
   use { "folke/trouble.nvim",
         cmd = "TroubleToggle",
       }
+  use "filipdutescu/renamer.nvim"
  -- use {
  --  "tzachar/cmp-tabnine",
  --    config = function()
