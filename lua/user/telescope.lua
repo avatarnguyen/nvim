@@ -43,9 +43,6 @@ telescope.setup {
         ["<C-n>"] = actions.cycle_history_next,
         ["<C-p>"] = actions.cycle_history_prev,
 
-        ["<C-j>"] = actions.move_selection_next,
-        ["<C-k>"] = actions.move_selection_previous,
-
         ["<C-c>"] = actions.close,
 
         ["<Down>"] = actions.move_selection_next,
@@ -119,7 +116,7 @@ telescope.setup {
       override_file_sorter = true,     -- override the file sorter
       case_mode = "smart_case",        -- or "ignore_case" or "respect_case"
                                        -- the default case_mode is "smart_case"
-    },  
+    },
     ["ui-select"] = {
       require("telescope.themes").get_dropdown {
         -- even more opts
@@ -131,4 +128,5 @@ telescope.setup {
 telescope.load_extension('fzf')
 telescope.load_extension('flutter')
 telescope.load_extension("ui-select")
--- telescope.load_extension('harpoon')
+telescope.load_extension("git_worktree")
+telescope.load_extension('harpoon')
