@@ -60,6 +60,8 @@ return packer.startup(function(use)
   -- Colorschemes
   use { "folke/tokyonight.nvim", commit = "8223c970677e4d88c9b6b6d81bda23daf11062bb" }
   use "bluz71/vim-nightfly-guicolors"
+  use "rebelot/kanagawa.nvim"
+  use "ray-x/aurora"
 
   -- cmp plugins
   use { "hrsh7th/nvim-cmp", commit = "df6734aa018d6feb4d76ba6bda94b1aeac2b378a" } -- The completion plugin
@@ -110,6 +112,14 @@ return packer.startup(function(use)
       }
   -- use 'dart-lang/dart-vim-plugin'
   use {'windwp/lsp-fastaction.nvim'}
+  -- use "mtdl9/vim-log-highlighting"
+  use {
+        'chrisbra/Colorizer',
+        config = function()
+          vim.g.colorizer_auto_filetype = 'log'
+          vim.g.colorizer_disable_bufleave = 1
+        end,
+      }
 
   -- Telescope
   use { "nvim-telescope/telescope.nvim", commit = "d96eaa914aab6cfc4adccb34af421bdd496468b0" }
@@ -138,6 +148,7 @@ return packer.startup(function(use)
   -- Git
   use { "lewis6991/gitsigns.nvim", commit = "c18e016864c92ecf9775abea1baaa161c28082c3" }
   use { 'sindrets/diffview.nvim', requires = 'nvim-lua/plenary.nvim' }
+  use "ThePrimeagen/git-worktree.nvim"
 
   -- DAP
   use { "mfussenegger/nvim-dap", commit = "014ebd53612cfd42ac8c131e6cec7c194572f21d" }
