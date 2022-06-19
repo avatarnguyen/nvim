@@ -41,6 +41,8 @@ local location = {
   padding = 1,
 }
 
+-- local filepath = vim.fn.expand("%:t")
+
 local spaces = function()
   return "spaces: " .. vim.api.nvim_buf_get_option(0, "shiftwidth")
 end
