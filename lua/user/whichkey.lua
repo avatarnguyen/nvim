@@ -85,10 +85,10 @@ local mappings = {
   -- },
   ["q"] = {" <Cmd>lua require('telescope.builtin').current_buffer_fuzzy_find(require('telescope.themes').get_dropdown{})<CR>", "Find in Buffer", },
   ["e"] = { "<cmd>NvimTreeToggle<cr>", "Explorer" },
-  ["A"] = { "<cmd>w!<CR>", "Save" },
+  -- ["E"] = { "<cmd>NvimTreeFocus<cr>", "Explorer" },
+  ["A"] = { "<cmd>wa<CR>", "Save All" },
   ["Q"] = { "<cmd>q<CR>", "Quit" },
   ["c"] = { "<cmd>Bdelete!<CR>", "Close Buffer" },
-  -- ["h"] = { "<cmd>nohlsearch<CR>", "No Highlight" },
   ["f"] = {
     "<cmd>lua require('telescope.builtin').find_files(require('telescope.themes').get_dropdown{})<cr>",
     "Find files",
@@ -158,11 +158,11 @@ local mappings = {
     -- },
     d = { "<cmd>Trouble document_diagnostics<cr>", "Document Diagnostics" },
     e = { "<cmd>lua vim.diagnostic.open_float()<cr>", "Diagnostics Float" },
-    W = {
+    w = {
       "<cmd>Telescope diagnostics<cr>",
       "Workspace Diagnostics Popup",
     },
-    w = { "<cmd>Trouble workspace_diagnostics<cr>", "Workspace Diagnostics" },
+    W = { "<cmd>Trouble workspace_diagnostics<cr>", "Workspace Diagnostics" },
     f = { "<cmd>lua vim.lsp.buf.formatting()<cr>", "Format" },
     i = { "<cmd>LspInfo<cr>", "Info" },
     I = { "<cmd>LspInstallInfo<cr>", "Installer Info" },
@@ -173,9 +173,8 @@ local mappings = {
     -- r = { "<cmd>lua vim.lsp.buf.rename()<cr>", "Rename" },
     r = { "<cmd>lua require('renamer').rename()<cr>", "Rename" },
     R = { "<cmd>Trouble lsp_references<cr>", "References" },
-    -- s = { "<cmd>Telescope lsp_document_symbols<cr>", "Document Symbols" },
-    s = { "<cmd>lua require('telescope.builtin').lsp_document_symbols(require('telescope.themes').get_dropdown{})<cr>", "Document Symbols" },
-    S = {
+    S = { "<cmd>lua require('telescope.builtin').lsp_document_symbols(require('telescope.themes').get_dropdown{})<cr>", "Document Symbols" },
+    s = {
       "<cmd>Telescope lsp_dynamic_workspace_symbols<cr>",
       "Workspace Symbols",
     },
@@ -233,8 +232,8 @@ local mappings = {
     -- h = { "<cmd>ColorHighlight<cr>", "Highlight Log" },
     p = { "<cmd>lua require('flutter-tools.commands').pub_get()<cr>", "Run Pub Get" },
     q = { "<cmd>lua require('flutter-tools.commands').quit()<cr>", "Quit Flutter" },
-    s = { "<cmd>lua require('flutter-tools.commands').restart()<cr> <cmd>lua require('flutter-tools.log').clear()<cr>", "Restart Flutter" },
-    S = { "<cmd>lua require('flutter-tools.commands').reload()<cr>", "Reload Flutter" },
+    S = { "<cmd>lua require('flutter-tools.commands').restart()<cr> <cmd>lua require('flutter-tools.log').clear()<cr>", "Restart Flutter" },
+    s = { "<cmd>lua require('flutter-tools.commands').reload()<cr>", "Reload Flutter" },
     f = { "<cmd>lua require('telescope').extensions.flutter.fvm()<cr>", "Change Flutter Version" },
   },
 
@@ -258,11 +257,12 @@ local mappings = {
   h = {
     name = "Harpoon",
     a = { "<CMD> lua require('harpoon.mark').add_file()<CR>", "Add File" },
-    o = { "<CMD> lua require('harpoon.ui').toggle_quick_menu()<CR>", "Toggle Menu" },
-    h = { "<CMD> lua require('harpoon.ui').nav_file(1)<CR>", "Go To File 1" },
-    j = { "<CMD> lua require('harpoon.ui').nav_file(2)<CR>", "Go To File 2" },
-    k = { "<CMD> lua require('harpoon.ui').nav_file(3)<CR>", "Go To File 3" },
-    l = { "<CMD> lua require('harpoon.ui').nav_file(4)<CR>", "Go To File 4" },
+    h = { "<CMD> lua require('harpoon.ui').toggle_quick_menu()<CR>", "Toggle Menu" },
+    ['1'] = { "<CMD> lua require('harpoon.ui').nav_file(1)<CR>", "Go To File 1" },
+    ['2'] = { "<CMD> lua require('harpoon.ui').nav_file(2)<CR>", "Go To File 2" },
+    ['3'] = { "<CMD> lua require('harpoon.ui').nav_file(3)<CR>", "Go To File 3" },
+    ['4'] = { "<CMD> lua require('harpoon.ui').nav_file(4)<CR>", "Go To File 4" },
+    ['5'] = { "<CMD> lua require('harpoon.ui').nav_file(5)<CR>", "Go To File 5" },
   },
 
   u = {

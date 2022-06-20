@@ -31,6 +31,13 @@ keymap("n", "<C-s>", "<cmd>w!<CR>", opts)
 keymap("i", "<C-s>", "<ESC><cmd>w!<CR>", opts)
 keymap("v", "<C-s>", "<cmd>w!<CR>", opts)
 
+-- Flutter
+-- s = { "<cmd>lua require('flutter-tools.commands').reload()<cr>", "Reload Flutter" },
+
+-- NvimTree
+keymap("n", "<leader>E", "<cmd>NvimTreeFocus<CR>", opts)
+keymap("x", "<leader>E", "<cmd>NvimTreeFocus<CR>", opts)
+
 
 -- Telescope
 keymap("n", "<leader><leader>", "<cmd>lua require('telescope.builtin').buffers(require('telescope.themes').get_dropdown{previewer = false})<cr>", opts)
@@ -48,9 +55,10 @@ keymap("n", "<C-n>", "<cmd>nohlsearch<CR>", opts)
 keymap("n", "<S-q>", "<cmd>Bdelete!<CR>", opts)
 
 -- LSP Mapping
+keymap("n", "<leader>a", "<Cmd>lua vim.lsp.buf.code_action()<CR>", opts)
+keymap("v", "<leader>a", "<Cmd>lua vim.lsp.buf.code_action()<CR>", opts)
 -- keymap("n", "H", "<cmd>:lua require('telescope').extensions.neoclip.default(require('telescope.themes').get_dropdown{})<CR>", opts)
 keymap("v", "<leader>lr", "<Cmd>lua require('renamer').rename()<CR>", opts)
-keymap("n", "<leader>a", "<Cmd>lua vim.lsp.buf.code_action()<CR>", opts)
 keymap("n", "K", "<Cmd>lua vim.lsp.buf.hover()<CR>", opts)
 keymap('n', 'gD', '<cmd>lua vim.lsp.buf.declaration()<CR>', opts)
 keymap("n", "gd", "<cmd>lua require('telescope.builtin').lsp_definitions()<cr>", opts)
@@ -83,8 +91,8 @@ keymap('', 't', "<cmd>lua require'hop'.hint_char1({ direction = require'hop.hint
 keymap('', 'T', "<cmd>lua require'hop'.hint_char1({ direction = require'hop.hint'.HintDirection.BEFORE_CURSOR, current_line_only = true })<cr>", {})
 
 -- Open code actions for the selected visual range
-keymap("v", "<S-h>", "<esc><cmd>lua require('lsp-fastaction').range_code_action()<CR>", opts)
-keymap("n", "<S-h>", "<cmd>lua require('lsp-fastaction').code_action()<CR>", opts)
+-- keymap("v", "<S-h>", "<esc><cmd>lua require('lsp-fastaction').range_code_action()<CR>", opts)
+-- keymap("n", "<S-h>", "<cmd>lua require('lsp-fastaction').code_action()<CR>", opts)
 
 keymap("n", "<leader>b", "<Cmd>lua require('flutter-tools.outline').toggle()<CR>", opts)
 keymap("n", "<leader>o", "<cmd>lua require('telescope.builtin').lsp_document_symbols(require('telescope.themes').get_dropdown{})<cr>", opts)
@@ -146,6 +154,7 @@ keymap("n", "<leader>3", "<Cmd>BufferLineGoToBuffer 3<CR>", opts)
 keymap("n", "<leader>4", "<Cmd>BufferLineGoToBuffer 4<CR>", opts)
 keymap("n", "<leader>5", "<Cmd>BufferLineGoToBuffer 5<CR>", opts)
 keymap("n", "<leader>6", "<Cmd>BufferLineGoToBuffer 6<CR>", opts)
+keymap("n", "<leader>7", "<Cmd>BufferLineGoToBuffer 7<CR>", opts)
 
 -- Harpoon Plugins
 -- keymap("n", "<A-Tab>", "<CMD> lua require('harpoon.ui').nav_next()<CR>", opts)
@@ -156,10 +165,10 @@ keymap("n", "<leader>6", "<Cmd>BufferLineGoToBuffer 6<CR>", opts)
 
 -- Terminal --
 -- Better terminal navigation
-keymap("t", "<C-h>", "<C-\\><C-N><C-w>h", term_opts)
-keymap("t", "<C-j>", "<C-\\><C-N><C-w>j", term_opts)
-keymap("t", "<C-k>", "<C-\\><C-N><C-w>k", term_opts)
-keymap("t", "<C-l>", "<C-\\><C-N><C-w>l", term_opts)
+-- keymap("t", "<C-h>", "<C-\\><C-N><C-w>h", term_opts)
+-- keymap("t", "<C-j>", "<C-\\><C-N><C-w>j", term_opts)
+-- keymap("t", "<C-k>", "<C-\\><C-N><C-w>k", term_opts)
+-- keymap("t", "<C-l>", "<C-\\><C-N><C-w>l", term_opts)
 
 -- Misc
 -- keymap("n", "<F1>", ":e ~/Notes/<cr>", opts)
