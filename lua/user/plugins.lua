@@ -52,6 +52,7 @@ return packer.startup(function(use)
   use { "moll/vim-bbye", commit = "25ef93ac5a87526111f43e5110675032dbcacf56" }
   use { "nvim-lualine/lualine.nvim", commit = "3362b28f917acc37538b1047f187ff1b5645ecdd" }
   use { "akinsho/toggleterm.nvim", commit = "aaeed9e02167c5e8f00f25156895a6fd95403af8" }
+  -- use { "akinsho/toggleterm.nvim" }
   use { "ahmedkhalf/project.nvim", commit = "541115e762764bc44d7d3bf501b6e367842d3d4f" }
   use { "lewis6991/impatient.nvim", commit = "969f2c5c90457612c09cf2a13fee1adaa986d350" }
   use { "lukas-reineke/indent-blankline.nvim", commit = "6177a59552e35dfb69e1493fd68194e673dc3ee2" }
@@ -105,21 +106,22 @@ return packer.startup(function(use)
   use {"ray-x/lsp_signature.nvim",
     commit = "4852d99f9511d090745d3cc1f09a75772b9e07e9"
   }
+  -- use({
+  --     'ray-x/navigator.lua',
+  --     requires = {
+  --         { 'ray-x/guihua.lua', run = 'cd lua/fzy && make' },
+  --         { 'neovim/nvim-lspconfig' },
+  --     },
+  -- })
 
   -- Flutter
   use { 'akinsho/flutter-tools.nvim',
         requires = 'nvim-lua/plenary.nvim'
       }
-  -- use 'dart-lang/dart-vim-plugin'
-  use {'windwp/lsp-fastaction.nvim'}
-  -- use "mtdl9/vim-log-highlighting"
-  use {
-        'chrisbra/Colorizer',
-        config = function()
-          vim.g.colorizer_auto_filetype = 'log'
-          vim.g.colorizer_disable_bufleave = 1
-        end,
-      }
+  use 'dart-lang/dart-vim-plugin'
+  -- use {'windwp/lsp-fastaction.nvim'} -- not supported anymore
+  use "avatarnguyen/lsp-fastaction.nvim"
+  use "mtdl9/vim-log-highlighting"
 
   -- Telescope
   use { "nvim-telescope/telescope.nvim", commit = "d96eaa914aab6cfc4adccb34af421bdd496468b0" }
@@ -175,6 +177,7 @@ return packer.startup(function(use)
   use "p00f/nvim-ts-rainbow"
   use "ThePrimeagen/harpoon"
   use "Shatur/neovim-session-manager"
+  use "chentoast/marks.nvim"
   -- use 'kazhala/close-buffers.nvim'
   -- use "petertriho/nvim-scrollbar"
   use "norcalli/nvim-colorizer.lua"
