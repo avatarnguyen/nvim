@@ -29,10 +29,6 @@ fastaction.setup({
       { pattern = 'for%-in', key = 'f', order = 2 },
       { pattern = 'setstate', key = 's', order = 2 },
     },
-    ['typescript'] = {
-      { pattern = 'to existing import declaration', key = 'a', order = 2 },
-      { pattern = 'from module', key = 'i', order = 1 },
-    },
   },
 })
 

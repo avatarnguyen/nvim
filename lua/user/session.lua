@@ -16,6 +16,16 @@ session.setup({
     'gitcommit',
     'nvimtree',
     'log',
-  }, 
+  },
   autosave_only_in_session = false, -- Always autosaves session. If true, only autosaves after a session is active.
 })
+
+-- local tele_status_ok, telescope = pcall(require, "telescope")
+-- if not tele_status_ok then
+-- 	return
+-- end
+--
+-- local tele_session_status_ok, _ = pcall(telescope.load_extension, "sessions")
+-- if not tele_session_status_ok then
+-- 	return
+-- end

@@ -12,7 +12,7 @@ flutter.setup{
     open_cmd = "tabedit",
   },
   outline = {
-    open_cmd = "60vnew", -- command to use to open the outline buffer
+    open_cmd = "50vnew", -- command to use to open the outline buffer
     auto_open = false -- if true this will open the outline automatically when it is first populated
   },
   decorations = {
@@ -24,18 +24,18 @@ flutter.setup{
   debugger = { -- integrate with nvim dap + install dart code debugger
     enabled = true,
     run_via_dap = false, -- use dap instead of a plenary job to run flutter apps
-    register_configurations = function(_)
+    -- register_configurations = function(_)
       -- require("dap").configurations.dart = {
         -- <put here config that you would find in .vscode/launch.json>
       -- }
       -- require("dap.ext.vscode").load_launchjs()
-    end,
+    -- end,
   },
   lsp = {
     color = { -- show the derived colours for dart variables
       enabled = true,
       background = true, -- highlight the background
-      foreground = true, -- highlight the foreground
+      foreground = false, -- highlight the foreground
       virtual_text = true, -- show the highlight using virtual text
       virtual_text_str = "■", -- the virtual text character to highlight
     },
