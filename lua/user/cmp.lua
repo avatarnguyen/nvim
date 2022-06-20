@@ -8,7 +8,9 @@ if not snip_status_ok then
   return
 end
 
-require("luasnip/loaders/from_vscode").lazy_load()
+luasnip.filetype_extend("dart", {"flutter"})
+require("luasnip/loaders/from_vscode").load()
+require("luasnip/loaders/from_vscode").lazy_load({ paths = { "~/.config/nvim/vscodesnips" } })
 
 local check_backspace = function()
   local col = vim.fn.col "." - 1
