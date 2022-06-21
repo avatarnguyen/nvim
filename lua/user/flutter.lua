@@ -12,7 +12,7 @@ flutter.setup{
     open_cmd = "tabedit",
   },
   outline = {
-    open_cmd = "50vnew", -- command to use to open the outline buffer
+    open_cmd = "40vnew", -- command to use to open the outline buffer
     auto_open = false -- if true this will open the outline automatically when it is first populated
   },
   decorations = {
@@ -40,6 +40,8 @@ flutter.setup{
       virtual_text_str = "■", -- the virtual text character to highlight
     },
     on_attach = function (client, bufnr)
+      vim.g.dart_style_guide = 2
+      vim.g.dart_format_on_save = 1
       local istatus_ok, illuminate = pcall(require, "illuminate")
       if not istatus_ok then
         return
