@@ -106,6 +106,10 @@ return packer.startup(function(use)
   use {"ray-x/lsp_signature.nvim",
     commit = "4852d99f9511d090745d3cc1f09a75772b9e07e9"
   }
+  use {
+    'rmagatti/goto-preview',
+  }
+  use "j-hui/fidget.nvim"
   -- use({
   --     'ray-x/navigator.lua',
   --     requires = {

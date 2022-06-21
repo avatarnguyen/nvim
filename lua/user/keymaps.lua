@@ -57,15 +57,14 @@ keymap("n", "<S-q>", "<cmd>Bdelete!<CR>", opts)
 -- LSP Mapping
 keymap("n", "<leader>a", "<Cmd>lua vim.lsp.buf.code_action()<CR>", opts)
 keymap("v", "<leader>a", "<Cmd>lua vim.lsp.buf.code_action()<CR>", opts)
--- keymap("n", "H", "<cmd>:lua require('telescope').extensions.neoclip.default(require('telescope.themes').get_dropdown{})<CR>", opts)
 keymap("v", "<leader>lr", "<Cmd>lua require('renamer').rename()<CR>", opts)
-keymap("n", "K", "<Cmd>lua vim.lsp.buf.hover()<CR>", opts)
+keymap("n", "H", "<Cmd>lua vim.lsp.buf.hover()<CR>", opts)
 keymap('n', 'gD', '<cmd>lua vim.lsp.buf.declaration()<CR>', opts)
 keymap("n", "gd", "<cmd>lua require('telescope.builtin').lsp_definitions()<cr>", opts)
-keymap("n", "gh", "<cmd>lua require('telescope.builtin').lsp_definitions(require('telescope.themes').get_cursor{jump_type = 'never', layout_config={height=0.5, width=0.5,}})<cr><ESC>", opts)
+-- keymap("n", "gh", "<cmd>lua require('telescope.builtin').lsp_definitions(require('telescope.themes').get_cursor{jump_type = 'never', layout_config={height=0.5, width=0.5,}})<cr><ESC>", opts)
 keymap("n", "gE", '<cmd>lua vim.diagnostic.goto_prev({ border = "rounded" })<CR>', opts)
 keymap("n", "ge", '<cmd>lua vim.diagnostic.goto_next({ border = "rounded" })<CR>', opts)
-keymap("n", "gi", "<cmd>lua vim.lsp.buf.implementation()<CR>", opts)
+keymap("n", "gm", "<cmd>lua vim.lsp.buf.implementation()<CR>", opts)
 keymap('n', '<C-k>', '<cmd>lua vim.lsp.buf.signature_help()<CR>', opts)
 keymap("i", "<C-space>", "<cmd> LspSignatureHelp<CR>", opts)
 keymap('n', 'gy', '<cmd>lua vim.lsp.buf.type_definition()<CR>', opts)
@@ -75,7 +74,11 @@ keymap(
   "n", "gl",
   '<cmd>lua vim.lsp.diagnostic.show_line_diagnostics({ border = "rounded" })<CR>', opts)
 
--- Hop
+-- fastaction
+keymap("v", "<S-k>", "<esc><cmd>lua require('lsp-fastaction').range_code_action()<CR>", opts)
+keymap("n", "<S-k>", "<cmd>lua require('lsp-fastaction').code_action()<CR>", opts)
+
+-- Hop ---
 -- place this in one of your configuration file(s)
 keymap('n', "<C-l>", "<cmd>lua require'hop'.hint_lines({ multi_windows = true })<cr>", opts)
 keymap('v', "<C-l>", "<cmd>lua require'hop'.hint_lines()<cr>", opts)
@@ -90,9 +93,6 @@ keymap('o', 'F', "<cmd>lua require'hop'.hint_char1({ direction = require'hop.hin
 keymap('', 't', "<cmd>lua require'hop'.hint_char1({ direction = require'hop.hint'.HintDirection.AFTER_CURSOR, current_line_only = true })<cr>", {})
 keymap('', 'T', "<cmd>lua require'hop'.hint_char1({ direction = require'hop.hint'.HintDirection.BEFORE_CURSOR, current_line_only = true })<cr>", {})
 
--- Open code actions for the selected visual range
--- keymap("v", "<S-h>", "<esc><cmd>lua require('lsp-fastaction').range_code_action()<CR>", opts)
--- keymap("n", "<S-h>", "<cmd>lua require('lsp-fastaction').code_action()<CR>", opts)
 
 keymap("n", "<leader>b", "<Cmd>lua require('flutter-tools.outline').toggle()<CR>", opts)
 keymap("n", "<leader>o", "<cmd>lua require('telescope.builtin').lsp_document_symbols(require('telescope.themes').get_dropdown{})<cr>", opts)
