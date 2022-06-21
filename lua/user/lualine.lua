@@ -10,17 +10,17 @@ end
 local diagnostics = {
   "diagnostics",
   sources = { "nvim_diagnostic" },
-  sections = { "error", "warn" },
+  sections = { "error", "warn", "info"},
   symbols = { error = " ", warn = " " },
-  colored = false,
+  colored = true,
   update_in_insert = false,
-  always_visible = true,
+  always_visible = false,
 }
 
 local diff = {
   "diff",
   colored = false,
-  symbols = { added = "", modified = "", removed = "" }, -- changes diff symbols
+  symbols = { added = " ", modified = " ", removed = " " }, -- changes diff symbols
   cond = hide_in_width,
 }
 
@@ -41,6 +41,12 @@ local location = {
   padding = 0,
 }
 
+local filepath = {
+  'filename',
+  file_status = true, -- displays file status (readonly status, modified status)
+  path = 1 -- 0 = just filename, 1 = relative path, 2 = absolute path
+}
+
 local spaces = function()
   return "spaces: " .. vim.api.nvim_buf_get_option(0, "shiftwidth")
 end
@@ -58,7 +64,7 @@ lualine.setup {
   sections = {
     lualine_a = { "mode" },
     lualine_b = {branch},
-    lualine_c = { diagnostics },
+    lualine_c = { diagnostics, filepath },
     lualine_x = { diff, spaces, "encoding", filetype },
     lualine_y = { location },
     lualine_z = { "progress" },
