@@ -1,0 +1,113 @@
+{
+  "HookWidget": {
+    "scope": "dart",
+    "prefix": "hookW",
+    "description": "Creates a HookWidget class.",
+    "body": [
+        "class $1 extends HookWidget {",
+        "\tconst $1({Key? key}) : super(key: key);",
+        "\n\t@override",
+        "\tWidget build(BuildContext context) {",
+        "\t\treturn const SizedBox();",
+        "\t}",
+        "}"
+    ],
+  },
+  "StatefulHookWidget": {
+    "scope": "dart",
+    "prefix": "hookSW",
+    "description": "Creates a StatefulHookWidget class.",
+    "body": [
+        "class $1 extends StatefulHookWidget {",
+        "\tconst $1({Key? key}) : super(key: key);",
+        "\n\t@override",
+        "\t_$1State createState() => _$1State();",
+        "}\n",
+        "class _$1State extends State<$1> {",
+        "\t@override",
+        "\tWidget build(BuildContext context) {",
+        "\t\treturn const SizedBox();",
+        "\t}",
+        "}"
+   ],
+  }
+  "useState": {
+    "scope": "dart",
+    "prefix": "useS",
+    "body": [
+        "useState<$1>($2);",
+    ],
+  },
+  "useEffect": {
+    "scope": "dart",
+    "prefix": "useE",
+    "body": [
+        "useEffect(() {",
+        "\t$1",
+        "}, const []);"
+    ],
+  },
+  "useMemoized": {
+    "scope": "dart",
+    "prefix": "useM",
+    "body": [
+        "useMemoized<$1>(() {",
+        "\treturn $2;",
+        "}, const []);"
+    ],
+  },
+  "useReducer": {
+    "scope": "dart",
+    "prefix": "useR",
+    "body": [
+        "useReducer<$1, $2>(($1 state, $2 action) {",
+        "\treturn $3;",
+        "}, initialState: $4, initialAction: $5);"
+    ],
+  },
+  "useValueChanged": {
+    "scope": "dart",
+    "prefix": "useVc",
+    "body": [
+        "useValueChanged<$1, $2?>($3, ($1 value, $2? valueChange) {",
+        "\treturn $4;",
+        "});"
+    ],
+  },
+  "useValueNotifier": {
+    "scope": "dart",
+    "prefix": "useVn",
+    "body": [
+        "useValueNotifier<$1>($2);",
+    ],
+  }
+  "Hook": {
+    "scope": "dart",
+    "prefix": "hook",
+    "description": "Creates a Hook class",
+    "body": [
+        "class $1Hook extends Hook<$2> {",
+        "\tconst $1Hook();",
+        "\n\t@override",
+        "\tHookState<$2, Hook<$2>> createState() => $1HookState();",
+        "}",
+        "\nclass $1HookState extends HookState<$2, $1Hook> {",
+        "\t@override",
+        "\t$2 build(BuildContext context) {",
+        "\t\treturn $3;",
+        "\t}",
+        "}"
+    ],
+  },
+  "InitHook": {
+    "scope": "dart",
+    "prefix": "initHook",
+    "body": [
+        "@override",
+        "void initHook() {",
+        "\tsuper.initHook();",
+        "\t$1",
+        "}"
+    ],
+  }
+} 

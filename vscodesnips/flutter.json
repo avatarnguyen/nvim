@@ -1,0 +1,124 @@
+{
+  "Main Test Suite Setup": {
+    "prefix": "testm",
+    "body": [
+      "import 'package:flutter_test/flutter_test.dart';",
+      "",
+      "void main() {",
+      " \tgroup('${1:${TM_FILENAME_BASE/(.*)/${1:/pascalcase}/g}} -', (){",
+      "",
+      " \t});",
+      "}"
+    ],
+    "description": "Main Test Suite Setup"
+  },
+  "Test Group Setup": {
+    "prefix": "testg",
+    "body": ["group('${1} -', () {", " \ttest('${2}', () {", " \t});", "});"],
+    "description": "Creates a Test group with a test"
+  },
+  "Single Test Setup": {
+    "prefix": "tests",
+    "body": [" test('${1}', () {", "\t });"],
+    "description": "Creates a single test"
+  },
+  "triple_a_test": {
+    "prefix": "testa",
+    "body": [
+      "test(",
+      "\t'should $1',",
+      "\t()async {",
+      "\t\t// arrange",
+      "\t\t$2",
+      "\t\t// act",
+      "\t\t$3",
+      "\t\t// assert",
+      "\t\t$4",
+      "\t},",
+      ");"
+    ]
+  },
+  "triple_a_bloc_test": {
+    "prefix": "testb",
+    "body": [
+      "blocTest<$1, $2>(",
+      "\t'emit $3',",
+      "\t\tbuild: () => bloc,",
+      "\t\tsetUp: () {$4},",
+      "\t\tact: (_bloc) {$5},",
+      "\texpect: () => <$2>[],",
+      ");"
+    ]
+  },
+  "define_logger": {
+    "prefix": "logger",
+    "body": ["final log = logger($1);"]
+  },
+  "HiveType class extends HiveObject": {
+    "prefix": "hive",
+    "body": [
+      "import 'package:hive/hive.dart';",
+      "",
+      "part '${TM_FILENAME_BASE}.g.dart';",
+      "",
+      "@HiveType()",
+      "class ${TM_FILENAME_BASE/(.*)/${1:/pascalcase}/} extends HiveObject {",
+      "\t@HiveField(0)",
+      "\tString id;",
+      "\t${0:// Hive fields go here}",
+      "}"
+    ],
+    "description": "Creates an HiveType class extending HiveObject structure based on the filename."
+  },
+  "HiveType class": {
+    "prefix": "hivc",
+    "body": [
+      "import 'package:hive/hive.dart';",
+      "",
+      "part '${TM_FILENAME_BASE}.g.dart';",
+      "",
+      "@HiveType()",
+      "class ${TM_FILENAME_BASE/(.*)/${1:/pascalcase}/} {",
+      "\t@HiveField(0)",
+      "\tString id;",
+      "\t${0:// Hive fields go here}",
+      "}"
+    ],
+    "description": "Creates an HiveType class structure based on the filename."
+  },
+  "@HiveField(#)": {
+    "prefix": "hf",
+    "body": ["@HiveField(${1})", "${2};", "${0}"],
+    "description": "Creates @HiveField({number})"
+  },
+  "@HiveType()": {
+    "prefix": "ht",
+    "body": ["@HiveType()", "${0}"],
+    "description": "Creates @HiveType()"
+  },
+  "@HiveField(#) String": {
+    "prefix": "hfs",
+    "body": ["@HiveField(${1})", "String ${2};", "${0}"],
+    "description": "Creates @HiveField({number}) String"
+  },
+  "@HiveField(#) int": {
+    "prefix": "hfi",
+    "body": ["@HiveField(${1})", "int ${2};", "${0}"],
+    "description": "Creates @HiveField({number}) int"
+  },
+  "@HiveField(#) bool": {
+    "prefix": "hfb",
+    "body": ["@HiveField(${1})", "bool ${2};", "${0}"],
+    "description": "Creates @HiveField({number}) bool"
+  },
+  "@HiveField(#) List": {
+    "prefix": "hfl",
+    "body": ["@HiveField(${1})", "List<${2}> ${3};", "${0}"],
+    "description": "Creates @HiveField({number}) List<>"
+  },
+  "@HiveField(#) double": {
+    "prefix": "hfd",
+    "body": ["@HiveField(${1})", "double ${2};", "${0}"],
+    "description": "Creates @HiveField({number}) double"
+  }
+}
