@@ -29,14 +29,14 @@ local actions = require "telescope.actions"
 telescope.setup {
   defaults = {
 
-    buffer_previewer_maker = new_maker,
-    file_sorter = require('telescope.sorters').fuzzy_with_index_bias,
     color_devicons = true,
 
     prompt_prefix = " ",
     selection_caret = " ",
     path_display = { "smart" },
     file_ignore_patterns = { ".git/", "node_modules", "gen_l10n/" },
+
+    buffer_previewer_maker = new_maker,
 
     mappings = {
       i = {
@@ -109,24 +109,12 @@ telescope.setup {
     }
   },
   extensions = {
-    flutter = {},
-    fzf = {
-      fuzzy = true,                    -- false will only do exact matching
-      override_generic_sorter = true,  -- override the generic sorter
-      override_file_sorter = true,     -- override the file sorter
-      case_mode = "smart_case",        -- or "ignore_case" or "respect_case"
-                                       -- the default case_mode is "smart_case"
-    },
     ["ui-select"] = {
-      require("telescope.themes").get_dropdown {
-        -- even more opts
-      }
+      require("telescope.themes").get_cursor {}
     },
   },
 }
 
-telescope.load_extension('fzf')
-telescope.load_extension('flutter')
 telescope.load_extension("ui-select")
 telescope.load_extension("git_worktree")
 telescope.load_extension('harpoon')
