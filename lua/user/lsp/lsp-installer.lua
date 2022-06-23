@@ -12,6 +12,7 @@ local servers = {
   "tsserver",
   "yamlls",
   "bashls",
+  "dartls",
 }
 
 -- "pyright",
