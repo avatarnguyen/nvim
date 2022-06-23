@@ -133,7 +133,7 @@ return packer.startup(function(use)
 
 	-- Treesitter
 	use("nvim-treesitter/nvim-treesitter")
-	use("nvim-treesitter/nvim-treesitter-context")
+	-- use("nvim-treesitter/nvim-treesitter-context")
 
 	-- Git
 	use({ "lewis6991/gitsigns.nvim", commit = "c18e016864c92ecf9775abea1baaa161c28082c3" })
@@ -158,15 +158,15 @@ return packer.startup(function(use)
 	use("tpope/vim-repeat")
 
 	-- Misc
-	use({
-		"rmagatti/auto-session",
-	})
+	-- use({
+	-- 	"rmagatti/auto-session",
+	-- })
 	use("abecodes/tabout.nvim")
 	use("folke/which-key.nvim")
 	use("karb94/neoscroll.nvim")
 	use("p00f/nvim-ts-rainbow")
 	use("ThePrimeagen/harpoon")
-	--  use "Shatur/neovim-session-manager"
+	 use "Shatur/neovim-session-manager"
 	use("chentoast/marks.nvim")
 	-- use 'kazhala/close-buffers.nvim'
 	use("norcalli/nvim-colorizer.lua")
