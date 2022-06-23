@@ -31,9 +31,9 @@ keymap("n", "<C-s>", "<cmd>w!<CR>", opts)
 keymap("i", "<C-s>", "<ESC><cmd>w!<CR>", opts)
 keymap("v", "<C-s>", "<cmd>w!<CR>", opts)
 
--- Flutter
--- s = { "<cmd>lua require('flutter-tools.commands').reload()<cr>", "Reload Flutter" },
-
+-- TMUX Flutter
+keymap("n", "ga", "<cmd>!tmux send-keys -t flutter 'r'<CR><CR>", opts)
+keymap("n", "gA", "<cmd>!tmux send-keys -t flutter 'R'<CR><CR>", opts)
 -- NvimTree
 keymap("n", "<leader>E", "<cmd>NvimTreeFocus<CR>", opts)
 keymap("x", "<leader>E", "<cmd>NvimTreeFocus<CR>", opts)
@@ -58,7 +58,7 @@ keymap("n", "<S-q>", "<cmd>Bdelete!<CR>", opts)
 keymap("n", "<leader>a", "<Cmd>lua vim.lsp.buf.code_action()<CR>", opts)
 keymap("v", "<leader>a", "<Cmd>lua vim.lsp.buf.code_action()<CR>", opts)
 keymap("v", "<leader>lr", "<Cmd>lua require('renamer').rename()<CR>", opts)
-keymap("n", "H", "<Cmd>lua vim.lsp.buf.hover()<CR>", opts)
+keymap("n", "K", "<Cmd>lua vim.lsp.buf.hover()<CR>", opts)
 keymap('n', 'gD', '<cmd>lua vim.lsp.buf.declaration()<CR>', opts)
 keymap("n", "gd", "<cmd>lua require('telescope.builtin').lsp_definitions()<cr>", opts)
 -- keymap("n", "gh", "<cmd>lua require('telescope.builtin').lsp_definitions(require('telescope.themes').get_cursor{jump_type = 'never', layout_config={height=0.5, width=0.5,}})<cr><ESC>", opts)
@@ -75,8 +75,8 @@ keymap(
   '<cmd>lua vim.lsp.diagnostic.show_line_diagnostics({ border = "rounded" })<CR>', opts)
 
 -- fastaction
-keymap("v", "<S-k>", "<esc><cmd>lua require('lsp-fastaction').range_code_action()<CR>", opts)
-keymap("n", "<S-k>", "<cmd>lua require('lsp-fastaction').code_action()<CR>", opts)
+keymap("v", "<S-h>", "<esc><cmd>lua require('lsp-fastaction').range_code_action()<CR>", opts)
+keymap("n", "<S-h>", "<cmd>lua require('lsp-fastaction').code_action()<CR>", opts)
 
 -- Hop ---
 -- place this in one of your configuration file(s)
