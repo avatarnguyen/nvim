@@ -11,10 +11,10 @@ flutter.setup({
 		open_cmd = "tabedit",
 	},
 	widget_guides = {
-		enabled = false,
+		enabled = true,
 	},
 	closing_tags = {
-		enabled = false, -- set to false to disable
+		enabled = true, -- set to false to disable
 	},
 	outline = {
 		open_cmd = "40vnew", -- command to use to open the outline buffer
