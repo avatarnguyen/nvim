@@ -11,14 +11,14 @@ saga.init_lsp_saga {
   -- show diagnostic source
   show_diagnostic_source = true,
   -- add bracket or something with diagnostic source,just have 2 elements
-  -- diagnostic_source_bracket = {},
+  diagnostic_source_bracket = {'❴','❵'},
   -- use emoji lightbulb in default
-  code_action_icon = '💡',
+  -- code_action_icon = '💡',
   -- if true can press number to execute the codeaction in codeaction window
   code_action_num_shortcut = true,
   -- same as nvim-lightbulb but async
   code_action_lightbulb = {
-    enable = true,
+    enable = false,
     sign = true,
     sign_priority = 20,
     virtual_text = true,
@@ -43,5 +43,5 @@ saga.init_lsp_saga {
   -- if you don't use nvim-lspconfig you must pass your server name and
   -- the related filetypes into this table
   -- like server_filetype_map = {metals = {'sbt', 'scala'}}
-  server_filetype_map = {},
+  -- server_filetype_map = {},
 }
