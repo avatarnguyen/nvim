@@ -369,7 +369,7 @@
         "description": "Returns a string representation of this object."
     },
     "debugPrint": {
-        "prefix": "debugP",
+        "prefix": "debugp",
         "body": [
             "debugPrint(${1:statement});"
         ],
