@@ -93,8 +93,13 @@ local mappings = {
     "<cmd>lua require('telescope.builtin').find_files(require('telescope.themes').get_dropdown{})<cr>",
     "Find files",
   },
+  -- ["f"] = {
+  --   "<cmd>lua require('telescope').extensions.fzf_writer.files()<cr>",
+  --   "Find files",
+  -- },
   ["F"] = { "<cmd>lua require('telescope.builtin').live_grep()<cr>", "Find Text" },
-  ["W"] = { "<cmd>lua require('telescope.builtin').grep_string()<cr>", "Find Word" },
+  -- ["F"] = { "<cmd>lua require('telescope').extensions.fzf_writer.grep()<cr>", "Find Text" },
+  ["w"] = { "<cmd>lua require('telescope.builtin').grep_string()<cr>", "Find String" },
   ["P"] = { "<cmd>Telescope projects<cr>", "Projects" },
   ["p"] = { "<cmd>:lua require('telescope').extensions.neoclip.default(require('telescope.themes').get_dropdown{})<CR>", "Clipboard" },
   ["D"] = { "<cmd>:lua require('telescope').extensions.flutter.commands()<CR>", "Flutter Commands" },
@@ -256,13 +261,14 @@ local mappings = {
 
   h = {
     name = "Harpoon",
-    a = { "<CMD> lua require('harpoon.mark').add_file()<CR>", "Add File" },
-    h = { "<CMD> lua require('harpoon.ui').toggle_quick_menu()<CR>", "Toggle Menu" },
-    ['1'] = { "<CMD> lua require('harpoon.ui').nav_file(1)<CR>", "Go To File 1" },
-    ['2'] = { "<CMD> lua require('harpoon.ui').nav_file(2)<CR>", "Go To File 2" },
-    ['3'] = { "<CMD> lua require('harpoon.ui').nav_file(3)<CR>", "Go To File 3" },
-    ['4'] = { "<CMD> lua require('harpoon.ui').nav_file(4)<CR>", "Go To File 4" },
-    ['5'] = { "<CMD> lua require('harpoon.ui').nav_file(5)<CR>", "Go To File 5" },
+    a = { "<CMD>lua require('harpoon.mark').add_file()<CR>", "Add File" },
+    h = { "<CMD>lua require('harpoon.ui').toggle_quick_menu()<CR>", "Toggle Menu" },
+    l = { "<CMD>Telescope harpoon marks<CR>", "List" },
+    ['1'] = { "<CMD>lua require('harpoon.ui').nav_file(1)<CR>", "Go To File 1" },
+    ['2'] = { "<CMD>lua require('harpoon.ui').nav_file(2)<CR>", "Go To File 2" },
+    ['3'] = { "<CMD>lua require('harpoon.ui').nav_file(3)<CR>", "Go To File 3" },
+    ['4'] = { "<CMD>lua require('harpoon.ui').nav_file(4)<CR>", "Go To File 4" },
+    ['5'] = { "<CMD>lua require('harpoon.ui').nav_file(5)<CR>", "Go To File 5" },
   },
 
   u = {

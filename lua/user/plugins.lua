@@ -95,7 +95,9 @@ return packer.startup(function(use)
 
   -- Telescope
   use({ "nvim-telescope/telescope.nvim" })
-  use("nvim-telescope/telescope-ui-select.nvim")
+  use {'nvim-telescope/telescope-fzf-native.nvim', run = 'cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build' }
+  -- use "nvim-telescope/telescope-fzf-writer.nvim"
+  -- use("nvim-telescope/telescope-ui-select.nvim")
   -- use "nvim-telescope/telescope-media-files.nvim"
   -- use "tom-anders/telescope-vim-bookmarks.nvim"
   -- use "nvim-telescope/telescope-file-browser.nvim"
@@ -109,6 +111,8 @@ return packer.startup(function(use)
 
   -- Treesitter
   use("nvim-treesitter/nvim-treesitter")
+  -- use { 'nvim-treesitter/nvim-treesitter', run = ':TSUpdate' }
+
   --	use("nvim-treesitter/nvim-treesitter-context")
 
   -- Git
