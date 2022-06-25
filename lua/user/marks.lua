@@ -30,7 +30,7 @@ marks.setup {
   -- default virt_text is "".
   bookmark_0 = {
     sign = "⚑",
-    virt_text = "hello world"
+    -- virt_text = "hello world"
   },
   mappings = {}
 }
