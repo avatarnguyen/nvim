@@ -116,21 +116,15 @@ telescope.setup {
       -- override_file_sorter = true, -- override the file sorter
       -- case_mode = "smart_case", -- or "ignore_case" or "respect_case"
       -- the default case_mode is "smart_case"
-    }
-    -- not working!!!
-    -- fzf_writer = {
-    --   minimum_grep_characters = 2,
-    --   minimum_files_characters = 2,
-    --
-    --   -- Disabled by default.
-    --   -- Will probably slow down some aspects of the sorter, but can make color highlights.
-    --   -- I will work on this more later.
-    --   use_highlighter = false,
-    -- }
+    },
+    ["ui-select"] = {
+			require("telescope.themes").get_cursor({}),
+		},
   },
 }
 
 -- telescope.load_extension('fzf_writer')
+telescope.load_extension("ui-select")
 telescope.load_extension('fzf')
 telescope.load_extension("git_worktree")
 telescope.load_extension('harpoon')
