@@ -11,7 +11,7 @@ flutter.setup({
 		open_cmd = "tabedit",
 	},
 	widget_guides = {
-		enabled = true,
+		enabled = false,
 	},
 	closing_tags = {
 		enabled = true, -- set to false to disable
