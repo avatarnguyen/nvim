@@ -85,7 +85,7 @@ return packer.startup(function(use)
     "rmagatti/goto-preview",
   })
   use("j-hui/fidget.nvim")
-  use("glepnir/lspsaga.nvim")
+  -- use("glepnir/lspsaga.nvim")
 
   -- Flutter
   use({ "akinsho/flutter-tools.nvim", requires = "nvim-lua/plenary.nvim" })
@@ -97,7 +97,7 @@ return packer.startup(function(use)
   use({ "nvim-telescope/telescope.nvim" })
   use {'nvim-telescope/telescope-fzf-native.nvim', run = 'cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build' }
   -- use "nvim-telescope/telescope-fzf-writer.nvim"
-  -- use("nvim-telescope/telescope-ui-select.nvim")
+  use("nvim-telescope/telescope-ui-select.nvim")
   -- use "nvim-telescope/telescope-media-files.nvim"
   -- use "tom-anders/telescope-vim-bookmarks.nvim"
   -- use "nvim-telescope/telescope-file-browser.nvim"
