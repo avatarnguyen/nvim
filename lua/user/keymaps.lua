@@ -55,17 +55,20 @@ keymap("n", "<C-n>", "<cmd>nohlsearch<CR>", opts)
 keymap("n", "<S-q>", "<cmd>Bdelete!<CR>", opts)
 
 -- LSP Mapping
-keymap("n", "<leader>a", "<Cmd>lua vim.lsp.buf.code_action()<CR>", opts)
-keymap("v", "<leader>a", "<Cmd>lua vim.lsp.buf.code_action()<CR>", opts)
+-- keymap("n", "<leader>a", "<Cmd>lua vim.lsp.buf.code_action()<CR>", opts)
+-- keymap("v", "<leader>a", "<Cmd>lua vim.lsp.buf.code_action()<CR>", opts)
+keymap("n", "<leader>a", "<Cmd>lua require('lspsaga.codeaction').code_action()<CR>", opts)
+keymap("v", "<leader>a", ":<C-U>lua require('lspsaga.codeaction').range_code_action()<CR>", opts)
 keymap("v", "<leader>lr", "<Cmd>lua require('renamer').rename()<CR>", opts)
-keymap("n", "K", "<Cmd>lua vim.lsp.buf.hover()<CR>", opts)
+-- keymap("n", "K", "<Cmd>lua vim.lsp.buf.hover()<CR>", opts)
+keymap("n", "K", "<Cmd>lua require('lspsaga.hover').render_hover_doc()<CR>", opts)
 keymap('n', 'gD', '<cmd>lua vim.lsp.buf.declaration()<CR>', opts)
 keymap("n", "gd", "<cmd>lua require('telescope.builtin').lsp_definitions()<cr>", opts)
--- keymap("n", "gh", "<cmd>lua require('telescope.builtin').lsp_definitions(require('telescope.themes').get_cursor{jump_type = 'never', layout_config={height=0.5, width=0.5,}})<cr><ESC>", opts)
 keymap("n", "gE", '<cmd>lua vim.diagnostic.goto_prev({ border = "rounded" })<CR>', opts)
 keymap("n", "ge", '<cmd>lua vim.diagnostic.goto_next({ border = "rounded" })<CR>', opts)
 keymap("n", "gm", "<cmd>lua vim.lsp.buf.implementation()<CR>", opts)
 keymap('n', '<C-k>', '<cmd>lua vim.lsp.buf.signature_help()<CR>', opts)
+keymap('n', '<C-h>', "<cmd>lua require('lspsaga.signaturehelp').signature_help()<CR>", opts)
 keymap("i", "<C-space>", "<cmd> LspSignatureHelp<CR>", opts)
 keymap('n', 'gy', '<cmd>lua vim.lsp.buf.type_definition()<CR>', opts)
 keymap("n", "gr", "<cmd>lua require('telescope.builtin').lsp_references()<cr>", opts)
@@ -73,10 +76,12 @@ keymap('n', 'E', '<Cmd>lua vim.diagnostic.open_float()<CR>', opts)
 keymap(
   "n", "gl",
   '<cmd>lua vim.lsp.diagnostic.show_line_diagnostics({ border = "rounded" })<CR>', opts)
+keymap('n', '<C-f>', "<Cmd>lua require('lspsaga.action').smart_scroll_with_saga(1)<CR>", opts)
+keymap('n', '<C-b>', "<Cmd>lua require('lspsaga.action').smart_scroll_with_saga(-1)<CR>", opts)
 
 -- fastaction
-keymap("v", "<S-h>", "<esc><cmd>lua require('lsp-fastaction').range_code_action()<CR>", opts)
-keymap("n", "<S-h>", "<cmd>lua require('lsp-fastaction').code_action()<CR>", opts)
+-- keymap("v", "<S-h>", "<esc><cmd>lua require('lsp-fastaction').range_code_action()<CR>", opts)
+-- keymap("n", "<S-h>", "<cmd>lua require('lsp-fastaction').code_action()<CR>", opts)
 
 -- Hop ---
 -- place this in one of your configuration file(s)
