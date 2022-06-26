@@ -109,8 +109,8 @@ return packer.startup(function(use)
   })
 
   -- Treesitter
-  use("nvim-treesitter/nvim-treesitter")
-  -- use { 'nvim-treesitter/nvim-treesitter', run = ':TSUpdate' }
+  -- use("nvim-treesitter/nvim-treesitter")
+  use { 'nvim-treesitter/nvim-treesitter', run = ':TSUpdate' }
 
   --	use("nvim-treesitter/nvim-treesitter-context")
 
