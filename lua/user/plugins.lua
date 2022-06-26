@@ -95,10 +95,9 @@ return packer.startup(function(use)
 
   -- Telescope
   use({ "nvim-telescope/telescope.nvim" })
-  use {'nvim-telescope/telescope-fzf-native.nvim', run = 'cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build' }
-  -- use "nvim-telescope/telescope-fzf-writer.nvim"
+  use { 'nvim-telescope/telescope-fzf-native.nvim',
+    run = 'cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build' }
   use("nvim-telescope/telescope-ui-select.nvim")
-  -- use "nvim-telescope/telescope-media-files.nvim"
   -- use "tom-anders/telescope-vim-bookmarks.nvim"
   -- use "nvim-telescope/telescope-file-browser.nvim"
 
@@ -155,9 +154,9 @@ return packer.startup(function(use)
   use "rcarriga/nvim-notify"
 
   -- UML
-  -- use "aklt/plantuml-syntax"
-  -- use { "weirongxu/plantuml-previewer.vim", opt = true }
-  -- use { "tyru/open-browser.vim", opt = true }
+  use "aklt/plantuml-syntax"
+  use { "weirongxu/plantuml-previewer.vim" }
+  use { "tyru/open-browser.vim" } --  opt = true
 
   -- Automatically set up your configuration after cloning packer.nvim
   -- Put this at the end after all plugins

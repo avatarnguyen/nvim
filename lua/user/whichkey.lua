@@ -83,7 +83,8 @@ local mappings = {
   --   "<cmd>lua require('telescope.builtin').buffers(require('telescope.themes').get_dropdown{previewer = false})<cr>",
   --   "Buffers",
   -- },
-  ["q"] = {" <Cmd>lua require('telescope.builtin').current_buffer_fuzzy_find(require('telescope.themes').get_dropdown{})<CR>", "Find in Buffer", },
+  ["q"] = { " <Cmd>lua require('telescope.builtin').current_buffer_fuzzy_find(require('telescope.themes').get_dropdown{})<CR>",
+    "Find in Buffer", },
   ["e"] = { "<cmd>NvimTreeToggle<cr>", "Explorer" },
   -- ["E"] = { "<cmd>NvimTreeFocus<cr>", "Explorer" },
   ["A"] = { "<cmd>wa<CR>", "Save All" },
@@ -101,7 +102,8 @@ local mappings = {
   -- ["F"] = { "<cmd>lua require('telescope').extensions.fzf_writer.grep()<cr>", "Find Text" },
   ["w"] = { "<cmd>lua require('telescope.builtin').grep_string()<cr>", "Find String" },
   ["P"] = { "<cmd>Telescope projects<cr>", "Projects" },
-  ["p"] = { "<cmd>:lua require('telescope').extensions.neoclip.default(require('telescope.themes').get_dropdown{})<CR>", "Clipboard" },
+  ["p"] = { "<cmd>:lua require('telescope').extensions.neoclip.default(require('telescope.themes').get_dropdown{})<CR>",
+    "Clipboard" },
   ["D"] = { "<cmd>:lua require('telescope').extensions.flutter.commands()<CR>", "Flutter Commands" },
 
   ["M"] = { "<cmd>:lua require('telescope').extensions.macroscope.default()<CR>", "Macros" },
@@ -116,16 +118,16 @@ local mappings = {
   -- },
 
   C = {
-  -- bdelete
-  name = "Close Buffer Option",
-  c = { "<cmd>lua require('close_buffers').delete({ type = 'hidden', force = true }) <cr>", "Delete all non-visible" }, -- Delete all non-visible buffers
-  n = { "<cmd>lua require('close_buffers').delete({ type = 'nameless' })<cr>", "Delete all buffers without name" },
-  t = { "<cmd>lua require('close_buffers').delete({ type = 'this' })<cr>", "Delete the current buffer" },
+    -- bdelete
+    name = "Close Buffer Option",
+    c = { "<cmd>lua require('close_buffers').delete({ type = 'hidden', force = true }) <cr>", "Delete all non-visible" }, -- Delete all non-visible buffers
+    n = { "<cmd>lua require('close_buffers').delete({ type = 'nameless' })<cr>", "Delete all buffers without name" },
+    t = { "<cmd>lua require('close_buffers').delete({ type = 'this' })<cr>", "Delete the current buffer" },
 
-  -- bwipeout
-  -- require('close_buffers').wipe({ type = 'all', force = true }) -- Wipe all buffers
-  -- require('close_buffers').wipe({ type = 'other' }) -- Wipe all buffers except the current focused
-  -- require('close_buffers').wipe({ type = 'hidden', glob = '*.lua' }) -- Wipe all buffers matching the glob
+    -- bwipeout
+    -- require('close_buffers').wipe({ type = 'all', force = true }) -- Wipe all buffers
+    -- require('close_buffers').wipe({ type = 'other' }) -- Wipe all buffers except the current focused
+    -- require('close_buffers').wipe({ type = 'hidden', glob = '*.lua' }) -- Wipe all buffers matching the glob
   },
 
   g = {
@@ -157,10 +159,6 @@ local mappings = {
 
   l = {
     name = "LSP",
-    -- d = {
-    --   "<cmd>Telescope lsp_document_diagnostics<cr>",
-    --   "Document Diagnostics",
-    -- },
     d = { "<cmd>Trouble document_diagnostics<cr>", "Document Diagnostics" },
     e = { "<cmd>lua vim.diagnostic.open_float()<cr>", "Diagnostics Float" },
     w = {
@@ -174,11 +172,10 @@ local mappings = {
     -- u = { "<cmd>lua require'lspsaga.provider'.lsp_finder()<CR>", "Usage" },
     l = { "<cmd>lua vim.lsp.codelens.run()<cr>", "CodeLens Action" },
     q = { "<cmd>lua vim.lsp.diagnostic.set_loclist()<cr>", "Quickfix" },
-    -- r = { "<cmd>lua require('lspsaga.rename').rename()<CR>", "Rename" },
-    -- r = { "<cmd>lua vim.lsp.buf.rename()<cr>", "Rename" },
     r = { "<cmd>lua require('renamer').rename()<cr>", "Rename" },
     R = { "<cmd>Trouble lsp_references<cr>", "References" },
-    S = { "<cmd>lua require('telescope.builtin').lsp_document_symbols(require('telescope.themes').get_dropdown{})<cr>", "Document Symbols" },
+    S = { "<cmd>lua require('telescope.builtin').lsp_document_symbols(require('telescope.themes').get_dropdown{})<cr>",
+      "Document Symbols" },
     s = {
       "<cmd>Telescope lsp_dynamic_workspace_symbols<cr>",
       "Workspace Symbols",
@@ -237,7 +234,8 @@ local mappings = {
     -- h = { "<cmd>ColorHighlight<cr>", "Highlight Log" },
     p = { "<cmd>lua require('flutter-tools.commands').pub_get()<cr>", "Run Pub Get" },
     q = { "<cmd>lua require('flutter-tools.commands').quit()<cr>", "Quit Flutter" },
-    S = { "<cmd>lua require('flutter-tools.commands').restart()<cr> <cmd>lua require('flutter-tools.log').clear()<cr>", "Restart Flutter" },
+    S = { "<cmd>lua require('flutter-tools.commands').restart()<cr> <cmd>lua require('flutter-tools.log').clear()<cr>",
+      "Restart Flutter" },
     s = { "<cmd>lua require('flutter-tools.commands').reload()<cr>", "Reload Flutter" },
     f = { "<cmd>lua require('telescope').extensions.flutter.fvm()<cr>", "Change Flutter Version" },
   },
@@ -257,6 +255,12 @@ local mappings = {
     l = { "<cmd>SessionManager load_session<CR>", "Load Sessions" },
     s = { "<cmd>SessionManager save_current_session<cr>", "Save current session" },
     d = { "<cmd>SessionManager load_current_dir_session<cr>", "Load current Dir session" },
+  },
+
+  m = {
+    name = "Plantuml",
+    o = { "<cmd>PlantumlOpen<CR>", "Open UML" },
+    s = { "<cmd>PlantumlSave ", "Save Diagram" },
   },
 
   h = {
@@ -280,9 +284,9 @@ local mappings = {
     i = { "<CMD> lua require'dap'.step_into()<CR>", "Step Into" },
     u = { "<CMD> lua require('dapui').toggle()<CR>", "Toggle Dap UI" },
     b = { "<CMD> lua require'dap'.toggle_breakpoint()<CR>", "Toggle Breakpoint" },
-    r = {"<cmd>lua require'dap'.repl.toggle()<cr>", "Toggle Repl"},
-    l = { "<cmd>lua require'dap'.run_last()<cr>", "Run Last" } ,
-    t = { "<cmd>lua require'dap'.terminate()<cr>", "Terminate" } ,
+    r = { "<cmd>lua require'dap'.repl.toggle()<cr>", "Toggle Repl" },
+    l = { "<cmd>lua require'dap'.run_last()<cr>", "Run Last" },
+    t = { "<cmd>lua require'dap'.terminate()<cr>", "Terminate" },
   }
 }
 

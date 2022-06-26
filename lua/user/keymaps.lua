@@ -59,7 +59,8 @@ keymap("n", "<leader>a", "<Cmd>lua vim.lsp.buf.code_action()<CR>", opts)
 keymap("v", "<leader>a", ":<C-U>lua vim.lsp.buf.range_code_action()<CR>", opts)
 -- keymap("n", "<leader>a", "<Cmd>lua require('lspsaga.codeaction').code_action()<CR>", opts)
 -- keymap("v", "<leader>a", ":<C-U>lua require('lspsaga.codeaction').range_code_action()<CR>", opts)
-keymap("v", "<leader>lr", "<Cmd>lua require('renamer').rename()<CR>", opts)
+
+keymap("v", "<leader>lr", "<Cmd>lua require('renamer').rename()<CR>", opts) -- in whickkeys
 keymap("n", "K", "<Cmd>lua vim.lsp.buf.hover()<CR>", opts)
 -- keymap("n", "K", "<Cmd>lua require('lspsaga.hover').render_hover_doc()<CR>", opts)
 keymap('n', 'gD', '<cmd>lua vim.lsp.buf.declaration()<CR>', opts)
@@ -80,8 +81,8 @@ keymap(
 -- keymap('n', '<C-b>', "<Cmd>lua require('lspsaga.action').smart_scroll_with_saga(-1)<CR>", opts)
 
 -- fastaction
--- keymap("v", "<S-h>", "<esc><cmd>lua require('lsp-fastaction').range_code_action()<CR>", opts)
--- keymap("n", "<S-h>", "<cmd>lua require('lsp-fastaction').code_action()<CR>", opts)
+keymap("v", "<S-h>", "<esc><cmd>lua require('lsp-fastaction').range_code_action()<CR>", opts)
+keymap("n", "<S-h>", "<cmd>lua require('lsp-fastaction').code_action()<CR>", opts)
 
 -- Hop ---
 -- place this in one of your configuration file(s)
