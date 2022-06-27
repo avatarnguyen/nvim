@@ -55,10 +55,14 @@ keymap("n", "<C-n>", "<cmd>nohlsearch<CR>", opts)
 keymap("n", "<S-q>", "<cmd>Bdelete!<CR>", opts)
 
 -- LSP Mapping
-keymap("n", "<leader>a", "<Cmd>lua vim.lsp.buf.code_action()<CR>", opts)
-keymap("v", "<leader>a", ":<C-U>lua vim.lsp.buf.range_code_action()<CR>", opts)
+keymap("n", "<S-h>", "<Cmd>lua vim.lsp.buf.code_action()<CR>", opts)
+keymap("v", "<S-h>", ":<C-U>lua vim.lsp.buf.range_code_action()<CR>", opts)
 -- keymap("n", "<leader>a", "<Cmd>lua require('lspsaga.codeaction').code_action()<CR>", opts)
 -- keymap("v", "<leader>a", ":<C-U>lua require('lspsaga.codeaction').range_code_action()<CR>", opts)
+-- fastaction
+keymap("v", "<leader>a", "<esc><cmd>lua require('lsp-fastaction').range_code_action()<CR>", opts)
+keymap("n", "<leader>a", "<cmd>lua require('lsp-fastaction').code_action()<CR>", opts)
+
 
 keymap("v", "<leader>lr", "<Cmd>lua require('renamer').rename()<CR>", opts) -- in whickkeys
 keymap("n", "K", "<Cmd>lua vim.lsp.buf.hover()<CR>", opts)
@@ -79,10 +83,6 @@ keymap(
   '<cmd>lua vim.lsp.diagnostic.show_line_diagnostics({ border = "rounded" })<CR>', opts)
 -- keymap('n', '<C-f>', "<Cmd>lua require('lspsaga.action').smart_scroll_with_saga(1)<CR>", opts)
 -- keymap('n', '<C-b>', "<Cmd>lua require('lspsaga.action').smart_scroll_with_saga(-1)<CR>", opts)
-
--- fastaction
-keymap("v", "<S-h>", "<esc><cmd>lua require('lsp-fastaction').range_code_action()<CR>", opts)
-keymap("n", "<S-h>", "<cmd>lua require('lsp-fastaction').code_action()<CR>", opts)
 
 -- Hop ---
 -- place this in one of your configuration file(s)
