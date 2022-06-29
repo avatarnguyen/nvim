@@ -69,7 +69,7 @@ flutter.setup({
 			},
 			renameFilesWithClasses = "prompt", -- "always"
 			enableSnippets = true,
-			lineLength = 800,
+			lineLength = 2000,
 		},
 	},
 })
