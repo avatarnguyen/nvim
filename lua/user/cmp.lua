@@ -1,16 +1,19 @@
 local cmp_status_ok, cmp = pcall(require, "cmp")
 if not cmp_status_ok then
+  vim.api.nvim_err_writeln "Failed to load cmp"
   return
 end
 
 local snip_status_ok, luasnip = pcall(require, "luasnip")
 if not snip_status_ok then
+  vim.api.nvim_err_writeln "Failed to load cmp luasnip"
   return
 end
 
+
 luasnip.filetype_extend("dart", {"flutter"})
-require("luasnip/loaders/from_vscode").load()
 require("luasnip/loaders/from_vscode").lazy_load({ paths = { "~/.config/nvim/vscodesnips" } })
+require("luasnip/loaders/from_vscode").load()
 
 local check_backspace = function()
   local col = vim.fn.col "." - 1
