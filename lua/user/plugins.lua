@@ -85,7 +85,7 @@ return packer.startup(function(use)
     "rmagatti/goto-preview",
   })
   use("j-hui/fidget.nvim")
-  -- use("glepnir/lspsaga.nvim")
+  use("glepnir/lspsaga.nvim")
 
   -- Flutter
   use({ "akinsho/flutter-tools.nvim", requires = "nvim-lua/plenary.nvim" })

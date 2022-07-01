@@ -7,7 +7,7 @@ end
 saga.init_lsp_saga {
   -- use emoji
   -- like {'🙀','😿','😾','😺'}
-  diagnostic_header_icon = {'😡', '😥', '😤', '😐'}, --{ ' ', ' ', ' ', 'ﴞ ' },
+  -- diagnostic_header_icon = {'😡', '😥', '😤', '😐'}, --{ ' ', ' ', ' ', 'ﴞ ' },
   -- show diagnostic source
   show_diagnostic_source = true,
   -- add bracket or something with diagnostic source,just have 2 elements
@@ -23,8 +23,8 @@ saga.init_lsp_saga {
     sign_priority = 20,
     virtual_text = true,
   },
-  finder_definition_icon = '  ',
-  finder_reference_icon = '  ',
+  -- finder_definition_icon = '  ',
+  -- finder_reference_icon = '  ',
   -- preview lines of lsp_finder and definition preview
   max_preview_lines = 15,
   finder_action_keys = {
@@ -45,3 +45,12 @@ saga.init_lsp_saga {
   -- like server_filetype_map = {metals = {'sbt', 'scala'}}
   -- server_filetype_map = {},
 }
+local action = require("lspsaga.action")
+-- scroll down hover doc or scroll in definition preview
+vim.keymap.set("n", "<F1>", function()
+    action.smart_scroll_with_saga(1)
+end, { silent = true })
+-- scroll up hover doc
+vim.keymap.set("n", "<F2>", function()
+    action.smart_scroll_with_saga(-1)
+end, { silent = true })
