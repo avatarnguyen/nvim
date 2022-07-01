@@ -48,7 +48,6 @@ keymap("n", ",p", '"0p', opts)
 
 -- Clear highlights
 keymap("n", "<C-n>", "<cmd>nohlsearch<CR>", opts)
--- keymap("n", "<leader>h", "<cmd>nohlsearch<CR>", opts)
 
 -- Close buffers
 keymap("n", "<S-q>", "<cmd>Bdelete!<CR>", opts)
@@ -62,8 +61,8 @@ keymap("n", "<leader>a", "<cmd>lua require('lsp-fastaction').code_action()<CR>",
 
 
 keymap("v", "<leader>lr", "<Cmd>lua require('renamer').rename()<CR>", opts) -- in whickkeys
-keymap("n", "K", "<Cmd>lua vim.lsp.buf.hover()<CR>", opts)
--- keymap("n", "K", "<Cmd>lua require('lspsaga.hover').render_hover_doc()<CR>", opts)
+-- keymap("n", "K", "<Cmd>lua vim.lsp.buf.hover({ border = 'rounded' })<CR>", opts)
+keymap("n", "K", "<Cmd>lua require('lspsaga.hover').render_hover_doc()<CR>", opts)
 keymap('n', 'gD', '<cmd>lua vim.lsp.buf.declaration()<CR>', opts)
 keymap("n", "gd", "<cmd>lua require('telescope.builtin').lsp_definitions()<cr>", opts)
 keymap("n", "gE", '<cmd>lua vim.diagnostic.goto_prev({ border = "rounded" })<CR>', opts)
@@ -77,16 +76,14 @@ keymap('n', 'E', '<Cmd>lua vim.diagnostic.open_float()<CR>', opts)
 keymap(
   "n", "gl",
   '<cmd>lua vim.lsp.diagnostic.show_line_diagnostics({ border = "rounded" })<CR>', opts)
--- keymap('n', '<C-f>', "<Cmd>lua require('lspsaga.action').smart_scroll_with_saga(1)<CR>", opts)
--- keymap('n', '<C-b>', "<Cmd>lua require('lspsaga.action').smart_scroll_with_saga(-1)<CR>", opts)
 
 -- Hop ---
 -- place this in one of your configuration file(s)
-keymap('n', "<C-l>", "<cmd>lua require'hop'.hint_lines({ multi_windows = true })<cr>", opts)
-keymap('v', "<C-l>", "<cmd>lua require'hop'.hint_lines()<cr>", opts)
-keymap('x', "<C-l>", "<cmd>lua require'hop'.hint_lines()<cr>", opts)
-keymap('n', "<leader>n", "<cmd>lua require'hop'.hint_words()<cr>", opts)
-keymap('v', "<leader>n", "<cmd>lua require'hop'.hint_words()<cr>", opts)
+keymap('n', "<leader>nl", "<cmd>lua require'hop'.hint_lines({ multi_windows = true })<cr>", opts)
+keymap('v', "<leader>nl", "<cmd>lua require'hop'.hint_lines()<cr>", opts)
+keymap('x', "<leader>nl", "<cmd>lua require'hop'.hint_lines()<cr>", opts)
+keymap('n', "<leader>nw", "<cmd>lua require'hop'.hint_words()<cr>", opts)
+keymap('v', "<leader>nw", "<cmd>lua require'hop'.hint_words()<cr>", opts)
 
 keymap('n', 'f', "<cmd>lua require'hop'.hint_char1({ direction = require'hop.hint'.HintDirection.AFTER_CURSOR, current_line_only = false })<cr>", {})
 keymap('n', 'F', "<cmd>lua require'hop'.hint_char1({ direction = require'hop.hint'.HintDirection.BEFORE_CURSOR, current_line_only = false })<cr>", {})
@@ -157,13 +154,6 @@ keymap("n", "<leader>4", "<Cmd>BufferLineGoToBuffer 4<CR>", opts)
 keymap("n", "<leader>5", "<Cmd>BufferLineGoToBuffer 5<CR>", opts)
 keymap("n", "<leader>6", "<Cmd>BufferLineGoToBuffer 6<CR>", opts)
 keymap("n", "<leader>7", "<Cmd>BufferLineGoToBuffer 7<CR>", opts)
-
--- Harpoon Plugins
--- keymap("n", "<A-Tab>", "<CMD> lua require('harpoon.ui').nav_next()<CR>", opts)
--- keymap("n", "<A-S-Tab>", "<CMD> lua require('harpoon.ui').nav_prev()<CR>", opts)
--- keymap("n", "<leader>1", "<CMD> lua require('harpoon.ui').nav_file(1)<CR>", opts)
--- keymap("n", "<leader>2", "<CMD> lua require('harpoon.ui').nav_file(2)<CR>", opts)
--- keymap("n", "<leader>3", "<CMD> lua require('harpoon.ui').nav_file(3)<CR>", opts)
 
 -- Terminal --
 -- Better terminal navigation

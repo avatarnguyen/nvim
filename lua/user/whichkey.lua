@@ -91,12 +91,13 @@ local mappings = {
   ["Q"] = { "<cmd>q<CR>", "Quit" },
   ["c"] = { "<cmd>Bdelete!<CR>", "Close Buffer" },
   ["f"] = {
-    "<cmd>lua require('telescope.builtin').find_files(require('telescope.themes').get_dropdown{file_ignore_patterns = {'ios/', 'android/', 'assets/', 'fonts/', 'packages/', 'doc/'}})<cr>",
+    "<cmd>lua require('telescope.builtin').find_files(require('telescope.themes').get_dropdown{file_ignore_patterns = {'ios/', 'android/', 'fonts/', 'assets/', 'packages/', 'doc/'}})<cr>",
     "Find files",
   },
-  ["F"] = { "<cmd>lua require('telescope.builtin').live_grep({ debounce = 300, file_ignore_patterns = {'ios/', 'android/', 'assets/', 'fonts/', 'packages/', 'doc/'} })<cr>",
-    "Find Text" },
-  ["w"] = { "<cmd>lua require('telescope.builtin').grep_string({file_ignore_patterns = {'ios/', 'android/', 'assets/', 'fonts/', 'packages/', 'doc/'}})<cr>", "Find String" },
+  -- ["F"] = { "<cmd>lua require('telescope.builtin').live_grep({ debounce = 300, file_ignore_patterns = {'ios/', 'android/', 'assets/', 'fonts/', 'packages/', 'doc/'} })<cr>",
+  --   "Find Text" },
+  ["w"] = { "<cmd>lua require('telescope.builtin').grep_string({file_ignore_patterns = {'ios/', 'android/', 'assets/', 'fonts/', 'packages/', 'doc/'}})<cr>",
+    "Find String" },
   ["P"] = { "<cmd>Telescope projects<cr>", "Projects" },
   ["p"] = { "<cmd>:lua require('telescope').extensions.neoclip.default(require('telescope.themes').get_dropdown{})<CR>",
     "Clipboard" },
@@ -104,14 +105,21 @@ local mappings = {
 
   ["M"] = { "<cmd>:lua require('telescope').extensions.macroscope.default()<CR>", "Macros" },
 
-  -- s = {
-  --   name = "Search",
-  --   c = { "<cmd>PackerCompile<cr>", "Compile" },
-  --   i = { "<cmd>PackerInstall<cr>", "Install" },
-  --   s = { "<cmd>PackerSync<cr>", "Sync" },
-  --   S = { "<cmd>PackerStatus<cr>", "Status" },
-  --   u = { "<cmd>PackerUpdate<cr>", "Update" },
-  -- },
+
+  s = {
+    a = {
+      "<cmd>lua require('telescope.builtin').find_files(require('telescope.themes').get_dropdown{search_dirs = { '~/Developer/app-flutter/assets/' }})<cr>",
+      "Find Assets",
+    },
+    f = {
+      "<cmd>lua require('telescope.builtin').find_files(require('telescope.themes').get_dropdown{search_dirs = { '~/Developer/app-flutter/lib/' }, file_ignore_patterns = {'l10n/'}})<cr>",
+      "Find files in lib",
+    },
+    l = { "<cmd>lua require('telescope.builtin').live_grep({ search_dirs = { '~/Developer/app-flutter/lib/' }, file_ignore_patterns = {'l10n/'} })<cr>",
+      "Find Text in App" },
+    t = { "<cmd>lua require('telescope.builtin').live_grep({ debounce = 300, file_ignore_patterns = {'ios/', 'android/', 'assets/', 'fonts/', 'packages/', 'doc/'} })<cr>",
+      "Find Text" },
+  },
 
   C = {
     -- bdelete
@@ -190,19 +198,13 @@ local mappings = {
     n = { "<cmd>UltestNearest<cr>", "Run Ultest Nearest" },
   },
 
-  s = {
+  S = {
     name = "Search",
-    f = {
-      "<cmd>lua require('telescope.builtin').find_files(require('telescope.themes').get_dropdown{search_dirs = { '~/Developer/app-flutter/lib/' }, file_ignore_patterns = {'l10n/'}})<cr>",
-      "Find files in lib",
-    },
-    l = { "<cmd>lua require('telescope.builtin').live_grep({ search_dirs = { '~/Developer/app-flutter/lib/' }, file_ignore_patterns = {'l10n/'} })<cr>",
-      "Find Text in App" },
     d = { "<cmd>lua require('telescope.builtin').reloader()<cr>", "Reloader", },
     b = { "<cmd>Telescope git_branches<cr>", "Checkout branch" },
-    -- c = { "<cmd>Telescope colorscheme<cr>", "Colorscheme" },
-    -- h = { "<cmd>Telescope help_tags<cr>", "Find Help" },
-    -- M = { "<cmd>Telescope man_pages<cr>", "Man Pages" },
+    c = { "<cmd>Telescope colorscheme<cr>", "Colorscheme" },
+    h = { "<cmd>Telescope help_tags<cr>", "Find Help" },
+    M = { "<cmd>Telescope man_pages<cr>", "Man Pages" },
     r = { "<cmd>Telescope oldfiles<cr>", "Open Recent File" },
     R = { "<cmd>Telescope registers<cr>", "Registers" },
     K = { "<cmd>Telescope keymaps<cr>", "Keymaps" },
