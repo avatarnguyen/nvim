@@ -12,8 +12,8 @@ end
 
 
 luasnip.filetype_extend("dart", {"flutter"})
-require("luasnip/loaders/from_vscode").lazy_load({ paths = { "~/.config/nvim/vscodesnips" } })
 require("luasnip/loaders/from_vscode").load()
+require("luasnip/loaders/from_vscode").lazy_load({ paths = { "~/.config/nvim/vscodesnips" } })
 
 local check_backspace = function()
   local col = vim.fn.col "." - 1
