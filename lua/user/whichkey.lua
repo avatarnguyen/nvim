@@ -79,14 +79,10 @@ local opts = {
 }
 
 local mappings = {
-  -- ["b"] = {
-  --   "<cmd>lua require('telescope.builtin').buffers(require('telescope.themes').get_dropdown{previewer = false})<cr>",
-  --   "Buffers",
-  -- },
   ["q"] = { " <Cmd>lua require('telescope.builtin').current_buffer_fuzzy_find(require('telescope.themes').get_dropdown{})<CR>",
     "Find in Buffer", },
   ["e"] = { "<cmd>NvimTreeToggle<cr>", "Explorer" },
-  -- ["E"] = { "<cmd>NvimTreeFocus<cr>", "Explorer" },
+  ["E"] = { "<cmd>NvimTreeFocus<cr>", "Explorer" },
   ["A"] = { "<cmd>wa<CR>", "Save All" },
   ["Q"] = { "<cmd>q<CR>", "Quit" },
   ["c"] = { "<cmd>Bdelete!<CR>", "Close Buffer" },
@@ -94,8 +90,6 @@ local mappings = {
     "<cmd>lua require('telescope.builtin').find_files(require('telescope.themes').get_dropdown{file_ignore_patterns = {'ios/', 'android/', 'fonts/', 'assets/', 'packages/', 'doc/'}})<cr>",
     "Find files",
   },
-  -- ["F"] = { "<cmd>lua require('telescope.builtin').live_grep({ debounce = 300, file_ignore_patterns = {'ios/', 'android/', 'assets/', 'fonts/', 'packages/', 'doc/'} })<cr>",
-  --   "Find Text" },
   ["w"] = { "<cmd>lua require('telescope.builtin').grep_string({file_ignore_patterns = {'ios/', 'android/', 'assets/', 'fonts/', 'packages/', 'doc/'}})<cr>",
     "Find String" },
   ["P"] = { "<cmd>Telescope projects<cr>", "Projects" },
@@ -107,9 +101,14 @@ local mappings = {
 
 
   s = {
+    name = "pickers",
     a = {
       "<cmd>lua require('telescope.builtin').find_files(require('telescope.themes').get_dropdown{search_dirs = { '~/Developer/app-flutter/assets/' }})<cr>",
       "Find Assets",
+    },
+    b = {
+      "<cmd>lua require('telescope').extensions.file_browser.file_browser()<cr>",
+      "File Browser",
     },
     f = {
       "<cmd>lua require('telescope.builtin').find_files(require('telescope.themes').get_dropdown{search_dirs = { '~/Developer/app-flutter/lib/' }, file_ignore_patterns = {'l10n/'}})<cr>",
@@ -119,6 +118,8 @@ local mappings = {
       "Find Text in App" },
     t = { "<cmd>lua require('telescope.builtin').live_grep({ debounce = 300, file_ignore_patterns = {'ios/', 'android/', 'assets/', 'fonts/', 'packages/', 'doc/'} })<cr>",
       "Find Text" },
+    c = { "<cmd>:lua require('telescope').extensions.neoclip.default(require('telescope.themes').get_dropdown{})<CR>",
+      "Clipboard" },
   },
 
   C = {
@@ -127,11 +128,6 @@ local mappings = {
     c = { "<cmd>lua require('close_buffers').delete({ type = 'hidden', force = true }) <cr>", "Delete all non-visible" }, -- Delete all non-visible buffers
     n = { "<cmd>lua require('close_buffers').delete({ type = 'nameless' })<cr>", "Delete all buffers without name" },
     t = { "<cmd>lua require('close_buffers').delete({ type = 'this' })<cr>", "Delete the current buffer" },
-
-    -- bwipeout
-    -- require('close_buffers').wipe({ type = 'all', force = true }) -- Wipe all buffers
-    -- require('close_buffers').wipe({ type = 'other' }) -- Wipe all buffers except the current focused
-    -- require('close_buffers').wipe({ type = 'hidden', glob = '*.lua' }) -- Wipe all buffers matching the glob
   },
 
   g = {
@@ -163,6 +159,7 @@ local mappings = {
 
   l = {
     name = "LSP",
+    c = { "<cmd>TSContextToggle<cr>", "Treesitter Context" },
     d = { "<cmd>Trouble document_diagnostics<cr>", "Document Diagnostics" },
     e = { "<cmd>lua vim.diagnostic.open_float()<cr>", "Diagnostics Float" },
     w = {
@@ -173,10 +170,11 @@ local mappings = {
     f = { "<cmd>lua vim.lsp.buf.formatting()<cr>", "Format" },
     i = { "<cmd>LspInfo<cr>", "Info" },
     I = { "<cmd>LspInstallInfo<cr>", "Installer Info" },
-    -- u = { "<cmd>lua require'lspsaga.provider'.lsp_finder()<CR>", "Usage" },
+    u = { "<cmd>lua require'lspsaga.provider'.lsp_finder()<CR>", "Usage" },
     l = { "<cmd>lua vim.lsp.codelens.run()<cr>", "CodeLens Action" },
     q = { "<cmd>lua vim.lsp.diagnostic.set_loclist()<cr>", "Quickfix" },
-    r = { "<cmd>lua require('renamer').rename()<cr>", "Rename" },
+    r = { "<cmd>Lspsaga rename<cr>", "Rename" },
+    -- r = { "<cmd>lua require('renamer').rename()<cr>", "Rename" },
     R = { "<cmd>Trouble lsp_references<cr>", "References" },
     S = { "<cmd>lua require('telescope.builtin').lsp_document_symbols(require('telescope.themes').get_dropdown{})<cr>",
       "Document Symbols" },

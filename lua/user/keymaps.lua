@@ -50,11 +50,11 @@ keymap("n", ",p", '"0p', opts)
 keymap("n", "<C-n>", "<cmd>nohlsearch<CR>", opts)
 
 -- Close buffers
-keymap("n", "<S-q>", "<cmd>Bdelete!<CR>", opts)
+keymap("n", "<S-q>", "<cmd>q<CR>", opts)
 
 -- LSP Mapping
-keymap("n", "<S-h>", "<Cmd>lua vim.lsp.buf.code_action()<CR>", opts)
-keymap("v", "<S-h>", ":<C-U>lua vim.lsp.buf.range_code_action()<CR>", opts)
+keymap("n", "<leader>la", "<Cmd>lua vim.lsp.buf.code_action()<CR>", opts)
+keymap("v", "<leader>la", ":<C-U>lua vim.lsp.buf.range_code_action()<CR>", opts)
 -- fastaction
 keymap("v", "<leader>a", "<esc><cmd>lua require('lsp-fastaction').range_code_action()<CR>", opts)
 keymap("n", "<leader>a", "<cmd>lua require('lsp-fastaction').code_action()<CR>", opts)
@@ -93,8 +93,8 @@ keymap('', 't', "<cmd>lua require'hop'.hint_char1({ direction = require'hop.hint
 keymap('', 'T', "<cmd>lua require'hop'.hint_char1({ direction = require'hop.hint'.HintDirection.BEFORE_CURSOR, current_line_only = true })<cr>", {})
 
 
-keymap("n", "<leader><leader>b", "<Cmd>lua require('flutter-tools.outline').toggle()<CR>", opts)
-keymap("n", "<leader>o", "<cmd>lua require('telescope.builtin').lsp_document_symbols(require('telescope.themes').get_dropdown{})<cr>", opts)
+keymap("n", "<leader>oo", "<Cmd>lua require('flutter-tools.outline').toggle()<CR>", opts)
+keymap("n", "<leader>os", "<cmd>lua require('telescope.builtin').lsp_document_symbols(require('telescope.themes').get_dropdown{})<cr>", opts)
 
 -- SUBSTITUTE plugin
 -- keymap("x", "s", "<cmd>lua require('substitute').visual()<cr>", { noremap = true })
