@@ -68,8 +68,8 @@ keymap("n", "gd", "<cmd>lua require('telescope.builtin').lsp_definitions()<cr>",
 keymap("n", "gE", '<cmd>lua vim.diagnostic.goto_prev({ border = "rounded" })<CR>', opts)
 keymap("n", "ge", '<cmd>lua vim.diagnostic.goto_next({ border = "rounded" })<CR>', opts)
 keymap("n", "gm", "<cmd>lua vim.lsp.buf.implementation()<CR>", opts)
-keymap('n', '<C-space>', '<cmd>lua vim.lsp.buf.signature_help()<CR>', opts)
--- keymap('n', '<C-h>', "<cmd>lua require('lspsaga.signaturehelp').signature_help()<CR>", opts)
+-- keymap('n', '<C-space>', '<cmd>lua vim.lsp.buf.signature_help()<CR>', opts)
+keymap('n', '<C-space>', "<cmd>lua require('lspsaga.signaturehelp').signature_help()<CR>", opts)
 keymap('n', 'gy', '<cmd>lua vim.lsp.buf.type_definition()<CR>', opts)
 keymap("n", "gr", "<cmd>lua require('telescope.builtin').lsp_references()<cr>", opts)
 keymap('n', 'E', '<Cmd>lua vim.diagnostic.open_float()<CR>', opts)
@@ -91,10 +91,6 @@ keymap('o', 'f', "<cmd>lua require'hop'.hint_char1({ direction = require'hop.hin
 keymap('o', 'F', "<cmd>lua require'hop'.hint_char1({ direction = require'hop.hint'.HintDirection.BEFORE_CURSOR, current_line_only = false, inclusive_jump = true })<cr>", {})
 keymap('', 't', "<cmd>lua require'hop'.hint_char1({ direction = require'hop.hint'.HintDirection.AFTER_CURSOR, current_line_only = true })<cr>", {})
 keymap('', 'T', "<cmd>lua require'hop'.hint_char1({ direction = require'hop.hint'.HintDirection.BEFORE_CURSOR, current_line_only = true })<cr>", {})
-
-
-keymap("n", "<leader>oo", "<Cmd>lua require('flutter-tools.outline').toggle()<CR>", opts)
-keymap("n", "<leader>os", "<cmd>lua require('telescope.builtin').lsp_document_symbols(require('telescope.themes').get_dropdown{})<cr>", opts)
 
 -- SUBSTITUTE plugin
 -- keymap("x", "s", "<cmd>lua require('substitute').visual()<cr>", { noremap = true })

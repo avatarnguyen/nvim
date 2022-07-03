@@ -11,7 +11,7 @@ saga.init_lsp_saga {
   -- show diagnostic source
   show_diagnostic_source = true,
   -- add bracket or something with diagnostic source,just have 2 elements
-  diagnostic_source_bracket = {'❴','❵'},
+  diagnostic_source_bracket = { '❴', '❵' },
   -- use emoji lightbulb in default
   -- code_action_icon = '💡',
   -- if true can press number to execute the codeaction in codeaction window
@@ -30,13 +30,14 @@ saga.init_lsp_saga {
   finder_action_keys = {
     open = 'o', vsplit = 's', split = 'i', quit = 'q', scroll_down = '<C-d>', scroll_up = '<C-u>' -- quit can be a table
   },
-  rename_action_quit = '<ESC>',
-  -- code_action_keys = {
-  --   quit = 'q', exec = '<CR>'
-  -- },
---  rename_action_keys = {
---    quit = '<C-c>', exec = '<CR>' -- quit can be a table
---  },
+  code_action_keys = {
+    quit = "q",
+    exec = "<CR>",
+  },
+  rename_action_quit = "<C-c>",
+  --  rename_action_keys = {
+  --    quit = '<C-c>', exec = '<CR>' -- quit can be a table
+  --  },
   definition_preview_icon = '  ',
   -- "single" "double" "rounded" "bold" "plus"
   -- border_style = "single",
@@ -45,12 +46,12 @@ saga.init_lsp_saga {
   -- like server_filetype_map = {metals = {'sbt', 'scala'}}
   -- server_filetype_map = {},
 }
-local action = require("lspsaga.action")
+-- local action = require("lspsaga.action")
 -- scroll down hover doc or scroll in definition preview
-vim.keymap.set("n", "<F1>", function()
-    action.smart_scroll_with_saga(1)
-end, { silent = true })
--- scroll up hover doc
-vim.keymap.set("n", "<F2>", function()
-    action.smart_scroll_with_saga(-1)
-end, { silent = true })
+-- vim.keymap.set("n", "<C-=>", function()
+--   action.smart_scroll_with_saga(1)
+-- end, { silent = true })
+-- -- scroll up hover doc
+-- vim.keymap.set("n", "<C-->", function()
+--   action.smart_scroll_with_saga(-1)
+-- end, { silent = true })
