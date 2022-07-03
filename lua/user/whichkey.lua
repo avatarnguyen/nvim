@@ -106,7 +106,11 @@ local mappings = {
       "<cmd>lua require('telescope.builtin').find_files(require('telescope.themes').get_dropdown{search_dirs = { '~/Developer/app-flutter/assets/' }})<cr>",
       "Find Assets",
     },
-    b = {
+    h = {
+      "<cmd>lua require('telescope.builtin').find_files({search_dirs = { '~/Developer/app-flutter/lib/constants/' }})<cr>",
+      "Find App Constants",
+    },
+    e = {
       "<cmd>lua require('telescope').extensions.file_browser.file_browser()<cr>",
       "File Browser",
     },
@@ -118,7 +122,7 @@ local mappings = {
       "Find Text in App" },
     t = { "<cmd>lua require('telescope.builtin').live_grep({ debounce = 300, file_ignore_patterns = {'ios/', 'android/', 'assets/', 'fonts/', 'packages/', 'doc/'} })<cr>",
       "Find Text" },
-    c = { "<cmd>:lua require('telescope').extensions.neoclip.default(require('telescope.themes').get_dropdown{})<CR>",
+    c = { "<cmd>lua require('telescope').extensions.neoclip.default(require('telescope.themes').get_dropdown{})<CR>",
       "Clipboard" },
   },
 
