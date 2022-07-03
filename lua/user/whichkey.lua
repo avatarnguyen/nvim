@@ -82,7 +82,7 @@ local mappings = {
   ["q"] = { " <Cmd>lua require('telescope.builtin').current_buffer_fuzzy_find(require('telescope.themes').get_dropdown{})<CR>",
     "Find in Buffer", },
   ["e"] = { "<cmd>NvimTreeToggle<cr>", "Explorer" },
-  ["E"] = { "<cmd>NvimTreeFocus<cr>", "Explorer" },
+  -- ["E"] = { "<cmd>NvimTreeFocus<cr>", "Explorer" },
   ["A"] = { "<cmd>wa<CR>", "Save All" },
   ["Q"] = { "<cmd>q<CR>", "Quit" },
   ["c"] = { "<cmd>Bdelete!<CR>", "Close Buffer" },
@@ -124,6 +124,16 @@ local mappings = {
       "Find Text" },
     c = { "<cmd>lua require('telescope').extensions.neoclip.default(require('telescope.themes').get_dropdown{})<CR>",
       "Clipboard" },
+  },
+
+  o = {
+    name = "Outlines",
+    o = { "<cmd>lua require('flutter-tools.outline').toggle()<cr>", "Flutter Outlines" },
+    n = { "<cmd>lua require('telescope.builtin').lsp_document_symbols(require('telescope.themes').get_dropdown{})<cr>", "Document Symbols" },
+    w = {
+      "<cmd>lua require('telescope.builtin').lsp_dynamic_workspace_symbols(require('telescope.themes').get_dropdown{ debounce = 200 })<cr>",
+      "Workspace Symbols",
+    },
   },
 
   C = {
@@ -171,21 +181,20 @@ local mappings = {
       "Workspace Diagnostics Popup",
     },
     W = { "<cmd>Trouble workspace_diagnostics<cr>", "Workspace Diagnostics" },
-    f = { "<cmd>lua vim.lsp.buf.formatting()<cr>", "Format" },
+    f = { "<cmd>lua vim.lsp.buf.format{ async = true }<cr>", "Format" },
     i = { "<cmd>LspInfo<cr>", "Info" },
     I = { "<cmd>LspInstallInfo<cr>", "Installer Info" },
-    u = { "<cmd>lua require'lspsaga.provider'.lsp_finder()<CR>", "Usage" },
     l = { "<cmd>lua vim.lsp.codelens.run()<cr>", "CodeLens Action" },
     q = { "<cmd>lua vim.lsp.diagnostic.set_loclist()<cr>", "Quickfix" },
     r = { "<cmd>Lspsaga rename<cr>", "Rename" },
     -- r = { "<cmd>lua require('renamer').rename()<cr>", "Rename" },
     R = { "<cmd>Trouble lsp_references<cr>", "References" },
-    S = { "<cmd>lua require('telescope.builtin').lsp_document_symbols(require('telescope.themes').get_dropdown{})<cr>",
-      "Document Symbols" },
-    s = {
-      "<cmd>lua require('telescope.builtin').lsp_dynamic_workspace_symbols(require('telescope.themes').get_dropdown{ debounce = 200 })<cr>",
-      "Workspace Symbols",
-    },
+    -- S = { "<cmd>lua require('telescope.builtin').lsp_document_symbols(require('telescope.themes').get_dropdown{})<cr>",
+    --   "Document Symbols" },
+    -- s = {
+    --   "<cmd>lua require('telescope.builtin').lsp_dynamic_workspace_symbols(require('telescope.themes').get_dropdown{ debounce = 200 })<cr>",
+    --   "Workspace Symbols",
+    -- },
   },
 
   t = {
