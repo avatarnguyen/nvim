@@ -13,7 +13,7 @@ vim.api.nvim_create_autocmd({ "BufWinEnter", "FileType" }, {
   pattern = { "arb", "*.arb" },
   callback = function()
     vim.cmd [[
-      set filetype=ruby
+      set filetype=json
     ]]
   end,
 })
