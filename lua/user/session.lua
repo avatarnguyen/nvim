@@ -16,6 +16,7 @@ session.setup({
     'gitcommit',
     'nvimtree',
     'log',
+    'lua',
   },
   autosave_only_in_session = false, -- Always autosaves session. If true, only autosaves after a session is active.
 })
