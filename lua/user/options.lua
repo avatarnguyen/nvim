@@ -24,6 +24,21 @@ vim.opt.expandtab = true                        -- convert tabs to spaces
 vim.opt.shiftwidth = 2                          -- the number of spaces inserted for each indentation
 vim.opt.tabstop = 2                             -- insert 2 spaces for a tab
 vim.opt.cursorline = true                       -- highlight the current line
+
+local group = vim.api.nvim_create_augroup("CursorLineControl", { clear = true })
+local set_cursorline = function(event, value, pattern)
+  vim.api.nvim_create_autocmd(event, {
+    group = group,
+    pattern = pattern,
+    callback = function()
+      vim.opt_local.cursorline = value
+    end,
+  })
+end
+set_cursorline("WinLeave", false)
+set_cursorline("WinEnter", true)
+set_cursorline("FileType", false, "TelescopePrompt")
+
 vim.opt.number = true                           -- set numbered lines
 vim.opt.laststatus = 3
 vim.opt.showcmd = false
@@ -41,3 +56,11 @@ vim.opt.iskeyword:append("-")
 vim.opt.relativenumber = true                  -- set relative numbered lines
  -- colorcolumn = "80"
  -- colorcolumn = "120"
+
+-- opt.shada = { "!", "'1000", "<50", "s10", "h" }
+-- opt.breakindent = true
+-- opt.showbreak = string.rep(" ", 3) -- Make it so that long lines wrap smartly
+-- opt.linebreak = true
+--
+-- opt.foldmethod = "marker"
+-- opt.foldlevel = 0
