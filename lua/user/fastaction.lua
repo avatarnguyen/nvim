@@ -9,7 +9,7 @@ fastaction.setup({
     --- action for filetype dart
     ['dart'] = {
       -- pattern is a lua regex with lower case
-      { pattern = "import library 'package:", key = 'i', order = 1 },
+      { pattern = "import library", key = 'i', order = 1 },
       { pattern = 'wrap with widget', key = 'a', order = 2 },
       { pattern = 'wrap with column', key = 'c', order = 3 },
       { pattern = 'wrap with row', key = 'r', order = 3 },
