@@ -79,8 +79,8 @@ local opts = {
 }
 
 local mappings = {
-  ["q"] = { " <Cmd>lua require('telescope.builtin').current_buffer_fuzzy_find(require('telescope.themes').get_dropdown{})<CR>",
-    "Find in Buffer", },
+  -- ["q"] = { " <Cmd>lua require('telescope.builtin').current_buffer_fuzzy_find(require('telescope.themes').get_dropdown{})<CR>",
+  --   "Find in Buffer", },
   ["e"] = { "<cmd>NvimTreeToggle<cr>", "Explorer" },
   -- ["E"] = { "<cmd>NvimTreeFocus<cr>", "Explorer" },
   ["A"] = { "<cmd>wa<CR>", "Save All" },
@@ -124,12 +124,16 @@ local mappings = {
       "Find Text" },
     c = { "<cmd>lua require('telescope').extensions.neoclip.default(require('telescope.themes').get_dropdown{})<CR>",
       "Clipboard" },
+    b = { " <Cmd>lua require('telescope.builtin').current_buffer_fuzzy_find(require('telescope.themes').get_dropdown{})<CR>",
+      "Find in Buffer" },
+
   },
 
   o = {
     name = "Outlines",
     o = { "<cmd>lua require('flutter-tools.outline').toggle()<cr>", "Flutter Outlines" },
-    n = { "<cmd>lua require('telescope.builtin').lsp_document_symbols(require('telescope.themes').get_dropdown{})<cr>", "Document Symbols" },
+    n = { "<cmd>lua require('telescope.builtin').lsp_document_symbols(require('telescope.themes').get_dropdown{})<cr>",
+      "Document Symbols" },
     w = {
       "<cmd>lua require('telescope.builtin').lsp_dynamic_workspace_symbols(require('telescope.themes').get_dropdown{ debounce = 200 })<cr>",
       "Workspace Symbols",
@@ -181,7 +185,7 @@ local mappings = {
       "Workspace Diagnostics Popup",
     },
     W = { "<cmd>Trouble workspace_diagnostics<cr>", "Workspace Diagnostics" },
-    f = { "<cmd>lua vim.lsp.buf.format{ async = true }<cr>", "Format" },
+    f = { "<cmd>lua vim.lsp.buf.format({ async = true })<cr>", "Format" },
     i = { "<cmd>LspInfo<cr>", "Info" },
     I = { "<cmd>LspInstallInfo<cr>", "Installer Info" },
     l = { "<cmd>lua vim.lsp.codelens.run()<cr>", "CodeLens Action" },
