@@ -61,8 +61,8 @@ keymap("n", "<leader>a", "<cmd>lua require('lsp-fastaction').code_action()<CR>",
 
 
 keymap("v", "<leader>lr", "<Cmd>lua require('renamer').rename()<CR>", opts) -- in whickkeys
--- keymap("n", "K", "<Cmd>lua vim.lsp.buf.hover({ border = 'rounded' })<CR>", opts)
-keymap("n", "K", "<Cmd>lua require('lspsaga.hover').render_hover_doc()<CR>", opts)
+keymap("n", "K", "<Cmd>lua vim.lsp.buf.hover()<CR>", opts)
+-- keymap("n", "K", "<Cmd>lua require('lspsaga.hover').render_hover_doc()<CR>", opts)
 keymap('n', 'gD', '<cmd>lua vim.lsp.buf.declaration()<CR>', opts)
 keymap("n", "gd", "<cmd>lua require('telescope.builtin').lsp_definitions()<cr>", opts)
 keymap("n", "gE", '<cmd>lua vim.diagnostic.goto_prev({ border = "rounded" })<CR>', opts)
