@@ -70,7 +70,7 @@ return packer.startup(function(use)
   use({ "hrsh7th/cmp-nvim-lsp" })
   use({ "hrsh7th/cmp-nvim-lua" })
   use({ "folke/trouble.nvim", cmd = "TroubleToggle" })
-  use("filipdutescu/renamer.nvim")
+  -- use("filipdutescu/renamer.nvim")
 
   -- snippets
   use({ "L3MON4D3/LuaSnip" }) --snippet engine
@@ -152,11 +152,12 @@ return packer.startup(function(use)
     end,
   })
   use "rcarriga/nvim-notify"
+  use { "christianchiarulli/nvim-gps", branch = "text_hl" }
 
   -- UML
-  use "aklt/plantuml-syntax"
-  use { "weirongxu/plantuml-previewer.vim" }
-  use { "tyru/open-browser.vim" } --  opt = true
+  -- use "aklt/plantuml-syntax"
+  -- use { "weirongxu/plantuml-previewer.vim" }
+  -- use { "tyru/open-browser.vim" } --  opt = true
 
   -- Automatically set up your configuration after cloning packer.nvim
   -- Put this at the end after all plugins
