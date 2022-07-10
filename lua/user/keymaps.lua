@@ -77,6 +77,8 @@ keymap(
   "n", "gl",
   '<cmd>lua vim.lsp.diagnostic.show_line_diagnostics({ border = "rounded" })<CR>', opts)
 
+keymap('n', 'gt', '<Cmd>Neotree float reveal_file=<cfile> reveal_force_cwd<cr>', opts)
+
 -- Hop ---
 -- place this in one of your configuration file(s)
 keymap('n', "<leader>nl", "<cmd>lua require'hop'.hint_lines({ multi_windows = true })<cr>", opts)
