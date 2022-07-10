@@ -1,6 +1,6 @@
 local opts = { noremap = true, silent = true }
 
-local term_opts = { silent = true }
+-- local term_opts = { silent = true }
 
 -- Shorten function name
 local keymap = vim.keymap.set
@@ -35,8 +35,8 @@ keymap("n", "<Enter>", "<cmd>w!<CR>", opts)
 keymap("n", "ga", "<cmd>!tmux send-keys -t flutter 'r'<CR><CR>", opts)
 keymap("n", "gA", "<cmd>!tmux send-keys -t flutter 'R'<CR><CR>", opts)
 -- NvimTree
-keymap("n", "<leader>E", "<cmd>NvimTreeFocus<CR>", opts)
-keymap("x", "<leader>E", "<cmd>NvimTreeFocus<CR>", opts)
+-- keymap("n", "<leader>E", "<cmd>NvimTreeFocus<CR>", opts)
+-- keymap("x", "<leader>E", "<cmd>NvimTreeFocus<CR>", opts)
 
 
 -- Telescope

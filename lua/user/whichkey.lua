@@ -81,8 +81,11 @@ local opts = {
 local mappings = {
   -- ["q"] = { " <Cmd>lua require('telescope.builtin').current_buffer_fuzzy_find(require('telescope.themes').get_dropdown{})<CR>",
   --   "Find in Buffer", },
-  ["e"] = { "<cmd>NvimTreeToggle<cr>", "Explorer" },
+  -- ["e"] = { "<cmd>NvimTreeToggle<cr>", "Explorer" },
   -- ["E"] = { "<cmd>NvimTreeFocus<cr>", "Explorer" },
+
+  ["E"] = { "<cmd>Neotree reveal left<cr>", "Explorer" },
+  ["e"] = { "<cmd>Neotree toggle reveal left<cr>", "Explorer" },
   ["A"] = { "<cmd>wa<CR>", "Save All" },
   ["Q"] = { "<cmd>q<CR>", "Quit" },
   ["c"] = { "<cmd>Bdelete!<CR>", "Close Buffer" },
@@ -110,10 +113,11 @@ local mappings = {
       "<cmd>lua require('telescope.builtin').find_files({search_dirs = { '~/Developer/app-flutter/lib/constants/' }})<cr>",
       "Find App Constants",
     },
-    e = {
-      "<cmd>lua require('telescope').extensions.file_browser.file_browser()<cr>",
-      "File Browser",
-    },
+    -- e = {
+    --   "<cmd>lua require('telescope').extensions.file_browser.file_browser()<cr>",
+    --   "File Browser",
+    -- },
+    e = { "<cmd>Neotree reveal float<cr>", "Float Explorer" },
     f = {
       "<cmd>lua require('telescope.builtin').find_files(require('telescope.themes').get_dropdown{search_dirs = { '~/Developer/app-flutter/lib/' }, file_ignore_patterns = {'l10n/'}})<cr>",
       "Find files in lib",

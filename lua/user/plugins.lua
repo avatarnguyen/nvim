@@ -62,6 +62,15 @@ return packer.startup(function(use)
   use("bluz71/vim-nightfly-guicolors")
   use("rebelot/kanagawa.nvim")
 
+  use {
+    "nvim-neo-tree/neo-tree.nvim",
+    branch = "v2.x",
+    requires = {
+      "nvim-lua/plenary.nvim",
+      "kyazdani42/nvim-web-devicons", -- not strictly required, but recommended
+      "MunifTanjim/nui.nvim",
+    }
+  }
   -- cmp plugins
   use({ "hrsh7th/nvim-cmp" }) -- The completion plugin
   use({ "hrsh7th/cmp-buffer" }) -- buffer completions
@@ -98,7 +107,7 @@ return packer.startup(function(use)
   use { 'nvim-telescope/telescope-fzf-native.nvim',
     run = 'cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build' }
   use("nvim-telescope/telescope-ui-select.nvim")
-  use "nvim-telescope/telescope-file-browser.nvim"
+  -- use "nvim-telescope/telescope-file-browser.nvim"
   -- use "tom-anders/telescope-vim-bookmarks.nvim"
 
   use({
