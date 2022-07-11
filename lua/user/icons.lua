@@ -2,8 +2,8 @@
 -- go to the above and then enter <c-v>u<unicode> and the symbold should appear
 -- or go here and upload the font file: https://mathew-kurian.github.io/CharacterMap/
 -- find more here: https://www.nerdfonts.com/cheat-sheet
-vim.g.use_nerd_icons = false
-if vim.fn.has "mac" == 1 or vim.g.use_nerd_icons then
+vim.g.use_nerd_icons = true
+if vim.fn.has("macunix") == 1 or vim.g.use_nerd_icons then
   -- elseif vim.fn.has "mac" == 1 then
   return {
     kind = {
@@ -211,4 +211,4 @@ else
       Watch = " ",
     },
   }
-end  
+end

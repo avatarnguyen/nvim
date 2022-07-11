@@ -23,8 +23,6 @@ saga.init_lsp_saga {
     sign_priority = 20,
     virtual_text = true,
   },
-  -- finder_definition_icon = '  ',
-  -- finder_reference_icon = '  ',
   -- preview lines of lsp_finder and definition preview
   max_preview_lines = 15,
   finder_action_keys = {
@@ -45,6 +43,12 @@ saga.init_lsp_saga {
   -- the related filetypes into this table
   -- like server_filetype_map = {metals = {'sbt', 'scala'}}
   -- server_filetype_map = {},
+  symbol_in_winbar = {
+    in_custom = true,
+    enable = true,
+    separator = ' ',
+    show_file = true,
+  },
 }
 local action = require("lspsaga.action")
 -- scroll down hover doc or scroll in definition preview
@@ -55,3 +59,29 @@ end, { silent = true })
 vim.keymap.set("n", "<C-k>", function()
   action.smart_scroll_with_saga(-1)
 end, { silent = true })
+
+-- local ns_prefix = '%#MyWinbar#test%*'
+--
+-- local function config_winbar()
+--   local ok,lspsaga = pcall(require,'lspsaga.symbolwinbar')
+--   local sym
+--   if ok then
+--     sym = lspsaga.get_symbol_node()
+--   end
+--   local win_val = ''
+--   win_val = ns_prefix
+--   if sym ~= nil then
+--     win_val = win_val .. sym
+--   end
+--   vim.api.nvim_win_set_option(0,'winbar',win_val)
+-- end
+--
+-- vim.api.nvim_create_autocmd({'BufEnter','BufWinEnter','CursorMoved'},{
+--   pattern = '*.dart',
+--   callback = config_winbar
+-- })
+--
+-- vim.api.nvim_create_autocmd({'BufEnter','BufWinEnter','CursorMoved'},{
+--   pattern = '*.lua',
+--   callback = config_winbar
+-- })
