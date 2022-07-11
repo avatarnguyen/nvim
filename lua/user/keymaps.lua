@@ -33,7 +33,7 @@ keymap("n", "<Enter>", "<cmd>w!<CR>", opts)
 
 -- TMUX Flutter
 keymap("n", "ga", "<cmd>!tmux send-keys -t flutter 'r'<CR><CR>", opts)
-keymap("n", "gA", "<cmd>!tmux send-keys -t flutter 'R'<CR><CR>", opts)
+keymap("n", "gs", "<cmd>!tmux send-keys -t flutter 'R'<CR><CR>", opts)
 -- NvimTree
 keymap("n", "<leader>E", "<cmd>NvimTreeFocus<CR>", opts)
 keymap("x", "<leader>E", "<cmd>NvimTreeFocus<CR>", opts)
@@ -60,8 +60,8 @@ keymap("v", "<leader>a", "<esc><cmd>lua require('lsp-fastaction').range_code_act
 keymap("n", "<leader>a", "<cmd>lua require('lsp-fastaction').code_action()<CR>", opts)
 
 
-keymap("n", "K", "<Cmd>lua vim.lsp.buf.hover()<CR>", opts)
--- keymap("n", "K", "<Cmd>lua require('lspsaga.hover').render_hover_doc()<CR>", opts)
+-- keymap("n", "K", "<Cmd>lua vim.lsp.buf.hover()<CR>", opts)
+keymap("n", "K", "<Cmd>lua require('lspsaga.hover').render_hover_doc()<CR>", opts)
 keymap('n', 'gD', '<cmd>lua vim.lsp.buf.declaration()<CR>', opts)
 keymap("n", "gd", "<cmd>lua require('telescope.builtin').lsp_definitions()<cr>", opts)
 keymap("n", "gE", '<cmd>lua vim.diagnostic.goto_prev({ border = "rounded" })<CR>', opts)
