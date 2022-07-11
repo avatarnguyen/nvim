@@ -38,6 +38,9 @@ keymap("n", "gA", "<cmd>!tmux send-keys -t flutter 'R'<CR><CR>", opts)
 -- keymap("n", "<leader>E", "<cmd>NvimTreeFocus<CR>", opts)
 -- keymap("x", "<leader>E", "<cmd>NvimTreeFocus<CR>", opts)
 
+-- window picker
+-- local picked_window_id = require('window-picker').pick_window()
+-- keymap("n", "<leader>j", "<cmd>lua require('window-picker').pick_window()<cr>", opts)
 
 -- Telescope
 keymap("n", "<leader>b", "<cmd>lua require('telescope.builtin').buffers(require('telescope.themes').get_dropdown{previewer = false})<cr>", opts)
