@@ -65,8 +65,8 @@ lualine.setup {
   sections = {
     lualine_a = { branch, diff },
     lualine_b = { filepath },
-    lualine_c = { diagnostics },
-    lualine_x = { spaces, filetype },
+    lualine_c = { },
+    lualine_x = { diagnostics, spaces, filetype },
     lualine_y = { location },
     lualine_z = { "progress" },
   },
