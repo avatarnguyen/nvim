@@ -74,9 +74,17 @@ M.on_attach = function(client, bufnr)
     client.server_capabilities.document_formatting = false
   end
 
-  -- if client.name == "sumneko_lua" then
-  --   client.server_capabilities.document_formatting = false
-  -- end
+  if client.name == "jsonls" then
+    client.server_capabilities.document_highlight = false
+  end
+
+  if client.name == "dartls" then
+    client.server_capabilities.document_formatting = false
+  end
+
+  if client.name == "sumneko_lua" then
+    client.server_capabilities.document_formatting = false
+  end
 
   M.capabilities.textDocument.completion.completionItem.snippetSupport = true
   M.capabilities = cmp_nvim_lsp.update_capabilities(M.capabilities)

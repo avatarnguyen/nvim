@@ -5,11 +5,11 @@ end
 
 local servers = {
   "cssls",
-  "cssmodules_ls",
+  -- "cssmodules_ls",
   "html",
   "jsonls",
   "sumneko_lua",
-  "tsserver",
+  -- "tsserver",
   "yamlls",
   "bashls",
 }
