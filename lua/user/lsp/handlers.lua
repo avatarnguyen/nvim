@@ -74,8 +74,16 @@ M.on_attach = function(client, bufnr)
     client.server_capabilities.document_formatting = false
   end
 
-  if client.name == "jsonls" then
+  if client.name == "jsonls" or client.name == "json" then
     client.server_capabilities.document_highlight = false
+    client.server_capabilities.document_formatting = false
+    client.server_capabilities.document_range_formatting = false
+    client.server_capabilities.document_symbol = false
+    client.server_capabilities.workspace_symbol = false
+    client.server_capabilities.rename = false
+    client.server_capabilities.hover = false
+    client.server_capabilities.completion = false
+    client.server_capabilities.code_action = false
   end
 
   if client.name == "dartls" then
