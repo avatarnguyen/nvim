@@ -41,7 +41,7 @@ set_cursorline("FileType", false, "TelescopePrompt")
 
 vim.opt.number = true -- set numbered lines
 vim.opt.laststatus = 3
-vim.opt.showcmd = false
+vim.opt.showcmd = true
 vim.opt.ruler = false
 vim.opt.numberwidth = 4 -- set number column width to 2 {default 4}
 vim.opt.signcolumn = "yes" -- always show the sign column, otherwise it would shift the text each time
@@ -62,5 +62,5 @@ vim.opt.relativenumber = true -- set relative numbered lines
 -- opt.showbreak = string.rep(" ", 3) -- Make it so that long lines wrap smartly
 -- opt.linebreak = true
 --
--- opt.foldmethod = "marker"
+vim.opt.foldmethod = "marker"
 -- opt.foldlevel = 0
