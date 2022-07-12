@@ -71,6 +71,13 @@ return packer.startup(function(use)
       "MunifTanjim/nui.nvim",
     }
   }
+  use {
+    's1n7ax/nvim-window-picker',
+    tag = 'v1.*',
+    config = function()
+      require 'window-picker'.setup()
+    end,
+  }
   -- cmp plugins
   use({ "hrsh7th/nvim-cmp" }) -- The completion plugin
   use({ "hrsh7th/cmp-buffer" }) -- buffer completions
