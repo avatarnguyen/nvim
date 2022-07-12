@@ -74,9 +74,6 @@ return packer.startup(function(use)
   use {
     's1n7ax/nvim-window-picker',
     tag = 'v1.*',
-    config = function()
-      require 'window-picker'.setup()
-    end,
   }
   -- cmp plugins
   use({ "hrsh7th/nvim-cmp" }) -- The completion plugin
@@ -169,6 +166,7 @@ return packer.startup(function(use)
   })
   use "rcarriga/nvim-notify"
   use { "christianchiarulli/nvim-gps", branch = "text_hl" }
+  use "dstein64/vim-startuptime"
 
   -- UML
   -- use "aklt/plantuml-syntax"
