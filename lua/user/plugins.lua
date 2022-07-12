@@ -86,7 +86,7 @@ return packer.startup(function(use)
   use({ "hrsh7th/cmp-nvim-lsp" })
   use({ "hrsh7th/cmp-nvim-lua" })
   use({ "folke/trouble.nvim", cmd = "TroubleToggle" })
-  -- use("filipdutescu/renamer.nvim")
+  use("filipdutescu/renamer.nvim")
 
   -- snippets
   use({ "L3MON4D3/LuaSnip" }) --snippet engine
@@ -101,7 +101,7 @@ return packer.startup(function(use)
     "rmagatti/goto-preview",
   })
   use("j-hui/fidget.nvim")
-  use("glepnir/lspsaga.nvim")
+  -- use("glepnir/lspsaga.nvim")
 
   -- Flutter
   use({ "akinsho/flutter-tools.nvim", requires = "nvim-lua/plenary.nvim",
