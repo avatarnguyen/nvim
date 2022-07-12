@@ -19,7 +19,7 @@ local diagnostics = {
 
 local diff = {
   "diff",
-  colored = true,
+  colored = false,
   symbols = { added = " ", modified = " ", removed = " " }, -- changes diff symbols
   cond = hide_in_width,
 }
@@ -44,7 +44,8 @@ local location = {
 local filepath = {
   'filename',
   file_status = true, -- displays file status (readonly status, modified status)
-  path = 1 -- 0 = just filename, 1 = relative path, 2 = absolute path
+  path = 1, -- 0 = just filename, 1 = relative path, 2 = absolute path
+  shorting_target = 40,
 }
 
 local spaces = function()
@@ -62,10 +63,10 @@ lualine.setup {
     always_divide_middle = true,
   },
   sections = {
-    lualine_a = { branch },
+    lualine_a = { branch, diff },
     lualine_b = { filepath },
-    lualine_c = { diagnostics },
-    lualine_x = { diff, spaces, "encoding", filetype },
+    lualine_c = { },
+    lualine_x = { diagnostics, spaces, filetype },
     lualine_y = { location },
     lualine_z = { "progress" },
   },

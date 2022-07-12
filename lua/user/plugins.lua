@@ -83,7 +83,7 @@ return packer.startup(function(use)
   use({ "hrsh7th/cmp-nvim-lsp" })
   use({ "hrsh7th/cmp-nvim-lua" })
   use({ "folke/trouble.nvim", cmd = "TroubleToggle" })
-  -- use("filipdutescu/renamer.nvim")
+  use("filipdutescu/renamer.nvim")
 
   -- snippets
   use({ "L3MON4D3/LuaSnip" }) --snippet engine
@@ -98,13 +98,15 @@ return packer.startup(function(use)
     "rmagatti/goto-preview",
   })
   use("j-hui/fidget.nvim")
-  use("glepnir/lspsaga.nvim")
+  -- use("glepnir/lspsaga.nvim")
 
   -- Flutter
-  use({ "akinsho/flutter-tools.nvim", requires = "nvim-lua/plenary.nvim" })
+  use({ "akinsho/flutter-tools.nvim", requires = "nvim-lua/plenary.nvim",
+    commit = "3c2b196de3a7f62247d50fe63e596b0884d6156a" })
   use("dart-lang/dart-vim-plugin")
-  use("avatarnguyen/lsp-fastaction.nvim")
-  use({ "chrisbra/Colorizer", as = "ansicolor" })
+  -- use("avatarnguyen/lsp-fastaction.nvim")
+  use "sidlatau/lsp-fastaction.nvim"
+  -- use({ "chrisbra/Colorizer", as = "ansicolor" })
 
   -- Telescope
   use({ "nvim-telescope/telescope.nvim" })
@@ -122,7 +124,6 @@ return packer.startup(function(use)
   })
 
   -- Treesitter
-  -- use("nvim-treesitter/nvim-treesitter")
   use { 'nvim-treesitter/nvim-treesitter', run = ':TSUpdate' }
 
   use("nvim-treesitter/nvim-treesitter-context")
@@ -168,6 +169,8 @@ return packer.startup(function(use)
   use { "christianchiarulli/nvim-gps", branch = "text_hl" }
   use "dstein64/vim-startuptime"
 
+
+  use 'kazhala/close-buffers.nvim'
   -- UML
   -- use "aklt/plantuml-syntax"
   -- use { "weirongxu/plantuml-previewer.vim" }

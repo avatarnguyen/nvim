@@ -1,5 +1,5 @@
--- local colorscheme = "kanagawa"
-local colorscheme = "tokyonight"
+local colorscheme = "kanagawa"
+-- local colorscheme = "tokyonight"
 
 -- nightfly
 -- vim.g.nightflyTransparent = 0
@@ -29,13 +29,13 @@ require('kanagawa').setup({
 })
 
 -- Tokyonight Storm Colorscheme
--- vim.g.tokyonight_style = "storm"
 -- vim.g.tokyonight_sidebars = [ "qf", "vista_kind", "terminal", "packer" ]
 -- vim.g.tokyonight_colors = { hint = "orange", error = "#ff0000" }
 -- vim.g.tokyonight_transparent_sidebar = 0
 
 -- Current Use Option
-vim.g.tokyonight_style = "night"
+-- vim.g.tokyonight_style = "night"
+-- vim.g.tokyonight_style = "storm"
 vim.g.tokyonight_italic_variables = 1
 vim.g.tokyonight_italic_keywords = 1
 vim.g.tokyonight_lualine_bold = 1

@@ -37,6 +37,8 @@ M.setup = function()
 
   vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, {
     border = "rounded",
+    -- width = 120,
+    height = 24,
   })
 
   vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers.signature_help, {
@@ -74,9 +76,25 @@ M.on_attach = function(client, bufnr)
     client.server_capabilities.document_formatting = false
   end
 
-  -- if client.name == "sumneko_lua" then
-  --   client.server_capabilities.document_formatting = false
-  -- end
+  if client.name == "jsonls" or client.name == "json" then
+    client.server_capabilities.document_highlight = false
+    client.server_capabilities.document_formatting = false
+    client.server_capabilities.document_range_formatting = false
+    client.server_capabilities.document_symbol = false
+    client.server_capabilities.workspace_symbol = false
+    client.server_capabilities.rename = false
+    client.server_capabilities.hover = false
+    client.server_capabilities.completion = false
+    client.server_capabilities.code_action = false
+  end
+
+  if client.name == "dartls" then
+    client.server_capabilities.document_formatting = false
+  end
+
+  if client.name == "sumneko_lua" then
+    client.server_capabilities.document_formatting = false
+  end
 
   M.capabilities.textDocument.completion.completionItem.snippetSupport = true
   M.capabilities = cmp_nvim_lsp.update_capabilities(M.capabilities)

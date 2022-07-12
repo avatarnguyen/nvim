@@ -33,7 +33,8 @@ keymap("n", "<Enter>", "<cmd>w!<CR>", opts)
 
 -- TMUX Flutter
 keymap("n", "ga", "<cmd>!tmux send-keys -t flutter 'r'<CR><CR>", opts)
-keymap("n", "gA", "<cmd>!tmux send-keys -t flutter 'R'<CR><CR>", opts)
+keymap("n", "gs", "<cmd>!tmux send-keys -t flutter 'R'<CR><CR>", opts)
+-- keymap("n", "gt", ":!tmux send-keys -t flutter 'fte'", opts)
 -- NvimTree
 -- keymap("n", "<leader>E", "<cmd>NvimTreeFocus<CR>", opts)
 -- keymap("x", "<leader>E", "<cmd>NvimTreeFocus<CR>", opts)
@@ -61,9 +62,10 @@ keymap("v", "<leader>la", ":<C-U>lua vim.lsp.buf.range_code_action()<CR>", opts)
 -- fastaction
 keymap("v", "<leader>a", "<esc><cmd>lua require('lsp-fastaction').range_code_action()<CR>", opts)
 keymap("n", "<leader>a", "<cmd>lua require('lsp-fastaction').code_action()<CR>", opts)
+-- lsp saga
+-- keymap("n", "<leader>a", "<cmd>Lspsaga code_action<CR>", opts)
 
 
-keymap("v", "<leader>lr", "<Cmd>lua require('renamer').rename()<CR>", opts) -- in whickkeys
 keymap("n", "K", "<Cmd>lua vim.lsp.buf.hover()<CR>", opts)
 -- keymap("n", "K", "<Cmd>lua require('lspsaga.hover').render_hover_doc()<CR>", opts)
 keymap('n', 'gD', '<cmd>lua vim.lsp.buf.declaration()<CR>', opts)
@@ -80,7 +82,7 @@ keymap(
   "n", "gl",
   '<cmd>lua vim.lsp.diagnostic.show_line_diagnostics({ border = "rounded" })<CR>', opts)
 
-keymap('n', 'gt', '<Cmd>Neotree float reveal_file=<cfile> reveal_force_cwd<cr>', opts)
+keymap('n', 'go', '<Cmd>Neotree float reveal_file=<cfile> reveal_force_cwd<cr>', opts)
 
 -- Hop ---
 -- place this in one of your configuration file(s)

@@ -99,7 +99,6 @@ neotree.setup({
       ["S"] = "open_split",
       ["s"] = "open_vsplit",
       -- ["S"] = "split_with_window_picker",
-      -- ["s"] = "vsplit_with_window_picker",
       ["t"] = "open_tabnew",
       ["w"] = "vsplit_with_window_picker",
       ["C"] = "close_node",
@@ -125,7 +124,12 @@ neotree.setup({
       --    show_path = "none" -- "none", "relative", "absolute"
       --  }
       --}
-      ["m"] = "move", -- takes text input for destination, also accepts the optional config.show_path option like "add".
+      ["m"] = {
+        "move",
+        config = {
+          show_path = "relative" -- "none", "relative", "absolute"
+        }
+      }, -- takes text input for destination, also accepts the optional config.show_path option like "add".
       ["q"] = "close_window",
       ["R"] = "refresh",
       ["?"] = "show_help",
@@ -157,7 +161,7 @@ neotree.setup({
     -- "open_current",  -- netrw disabled, opening a directory opens within the
     -- window like netrw would, regardless of window.position
     -- "disabled",    -- netrw left alone, neo-tree does not handle opening dirs
-    use_libuv_file_watcher = false, -- This will use the OS level file watchers to detect changes
+    use_libuv_file_watcher = true, -- This will use the OS level file watchers to detect changes
     -- instead of relying on nvim autocmd events.
     window = {
       mappings = {

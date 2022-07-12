@@ -44,6 +44,7 @@ telescope.setup {
         ["<C-p>"] = actions.cycle_history_prev,
 
         ["<C-c>"] = actions.close,
+        -- ["<Esc>"] = actions.close,
 
         ["<Down>"] = actions.move_selection_next,
         ["<Up>"] = actions.move_selection_previous,
@@ -123,9 +124,7 @@ telescope.setup {
   },
 }
 
--- telescope.load_extension('fzf_writer')
 telescope.load_extension("ui-select")
 telescope.load_extension('fzf')
 telescope.load_extension("git_worktree")
 telescope.load_extension('harpoon')
--- telescope.load_extension("file_browser")
