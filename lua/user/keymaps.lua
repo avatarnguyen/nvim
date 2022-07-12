@@ -61,10 +61,12 @@ keymap("v", "<leader>la", ":<C-U>lua vim.lsp.buf.range_code_action()<CR>", opts)
 -- fastaction
 keymap("v", "<leader>a", "<esc><cmd>lua require('lsp-fastaction').range_code_action()<CR>", opts)
 keymap("n", "<leader>a", "<cmd>lua require('lsp-fastaction').code_action()<CR>", opts)
+-- lsp saga
+-- keymap("n", "<leader>a", "<cmd>Lspsaga code_action<CR>", opts)
 
 
-keymap("n", "K", "<Cmd>lua vim.lsp.buf.hover()<CR>", opts)
--- keymap("n", "K", "<Cmd>lua require('lspsaga.hover').render_hover_doc()<CR>", opts)
+keymap("n", "<leader>k", "<Cmd>lua vim.lsp.buf.hover()<CR>", opts)
+keymap("n", "K", "<Cmd>lua require('lspsaga.hover').render_hover_doc()<CR>", opts)
 keymap('n', 'gD', '<cmd>lua vim.lsp.buf.declaration()<CR>', opts)
 keymap("n", "gd", "<cmd>lua require('telescope.builtin').lsp_definitions()<cr>", opts)
 keymap("n", "gE", '<cmd>lua vim.diagnostic.goto_prev({ border = "rounded" })<CR>', opts)
