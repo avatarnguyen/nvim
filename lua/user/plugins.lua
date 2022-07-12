@@ -74,7 +74,11 @@ return packer.startup(function(use)
   use {
     's1n7ax/nvim-window-picker',
     tag = 'v1.*',
+    config = function()
+      require 'window-picker'.setup()
+    end,
   }
+
   -- cmp plugins
   use({ "hrsh7th/nvim-cmp" }) -- The completion plugin
   use({ "hrsh7th/cmp-buffer" }) -- buffer completions
@@ -113,7 +117,6 @@ return packer.startup(function(use)
   use { 'nvim-telescope/telescope-fzf-native.nvim',
     run = 'cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build' }
   use("nvim-telescope/telescope-ui-select.nvim")
-  -- use "nvim-telescope/telescope-file-browser.nvim"
   -- use "tom-anders/telescope-vim-bookmarks.nvim"
 
   use({
