@@ -97,7 +97,7 @@ return packer.startup(function(use)
   use("glepnir/lspsaga.nvim")
 
   -- Flutter
-  use({ "akinsho/flutter-tools.nvim", requires = "nvim-lua/plenary.nvim" })
+  use({ "akinsho/flutter-tools.nvim", requires = "nvim-lua/plenary.nvim", commit = "3c2b196de3a7f62247d50fe63e596b0884d6156a" })
   use("dart-lang/dart-vim-plugin")
   use("avatarnguyen/lsp-fastaction.nvim")
   use({ "chrisbra/Colorizer", as = "ansicolor" })
@@ -118,7 +118,6 @@ return packer.startup(function(use)
   })
 
   -- Treesitter
-  -- use("nvim-treesitter/nvim-treesitter")
   use { 'nvim-treesitter/nvim-treesitter', run = ':TSUpdate' }
 
   use("nvim-treesitter/nvim-treesitter-context")
@@ -162,7 +161,7 @@ return packer.startup(function(use)
   })
   use "rcarriga/nvim-notify"
   use { "christianchiarulli/nvim-gps", branch = "text_hl" }
-
+  use 'kazhala/close-buffers.nvim'
   -- UML
   -- use "aklt/plantuml-syntax"
   -- use { "weirongxu/plantuml-previewer.vim" }
