@@ -119,7 +119,7 @@ local mappings = {
     -- },
     e = { "<cmd>Neotree reveal float<cr>", "Float Explorer" },
     f = {
-      "<cmd>lua require('telescope.builtin').find_files(require('telescope.themes').get_dropdown{search_dirs = { '~/Developer/app-flutter/lib/' }, file_ignore_patterns = {'l10n/'}})<cr>",
+      "<cmd>lua require('telescope.builtin').find_files(require('telescope.themes').get_dropdown{debounce = 150, search_dirs = { '~/Developer/app-flutter/lib/' }, file_ignore_patterns = {'l10n/'}})<cr>",
       "Find files in lib",
     },
     l = { "<cmd>lua require('telescope.builtin').live_grep({ search_dirs = { '~/Developer/app-flutter/lib/' }, file_ignore_patterns = {'l10n/'} })<cr>",

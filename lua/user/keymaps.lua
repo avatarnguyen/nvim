@@ -60,7 +60,6 @@ keymap("v", "<leader>a", "<esc><cmd>lua require('lsp-fastaction').range_code_act
 keymap("n", "<leader>a", "<cmd>lua require('lsp-fastaction').code_action()<CR>", opts)
 
 
-keymap("v", "<leader>lr", "<Cmd>lua require('renamer').rename()<CR>", opts) -- in whickkeys
 keymap("n", "K", "<Cmd>lua vim.lsp.buf.hover()<CR>", opts)
 -- keymap("n", "K", "<Cmd>lua require('lspsaga.hover').render_hover_doc()<CR>", opts)
 keymap('n', 'gD', '<cmd>lua vim.lsp.buf.declaration()<CR>', opts)
