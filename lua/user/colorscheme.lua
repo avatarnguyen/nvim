@@ -1,5 +1,5 @@
--- local colorscheme = "kanagawa"
-local colorscheme = "tokyonight"
+local colorscheme = "kanagawa"
+-- local colorscheme = "tokyonight"
 
 -- nightfly
 -- vim.g.nightflyTransparent = 0
