@@ -117,10 +117,6 @@ local mappings = {
       "<cmd>lua require('telescope.builtin').find_files({search_dirs = { '~/Developer/app-flutter/lib/constants/app_theme.dart' }})<cr>",
       "Find App Theme",
     },
-    -- e = {
-    --   "<cmd>lua require('telescope').extensions.file_browser.file_browser()<cr>",
-    --   "File Browser",
-    -- },
     e = { "<cmd>Neotree reveal float<cr>", "Float Explorer" },
     f = {
       "<cmd>lua require('telescope.builtin').find_files(require('telescope.themes').get_dropdown{debounce = 150, search_dirs = { '~/Developer/app-flutter/lib/' }, file_ignore_patterns = {'l10n/'}})<cr>",
@@ -196,15 +192,8 @@ local mappings = {
     I = { "<cmd>LspInstallInfo<cr>", "Installer Info" },
     l = { "<cmd>lua vim.lsp.codelens.run()<cr>", "CodeLens Action" },
     q = { "<cmd>lua vim.lsp.diagnostic.set_loclist()<cr>", "Quickfix" },
-    -- r = { "<cmd>Lspsaga rename<cr>", "Rename" },
     r = { "<cmd>lua require('renamer').rename()<cr>", "Rename" },
     R = { "<cmd>Trouble lsp_references<cr>", "References" },
-    -- S = { "<cmd>lua require('telescope.builtin').lsp_document_symbols(require('telescope.themes').get_dropdown{})<cr>",
-    --   "Document Symbols" },
-    -- s = {
-    --   "<cmd>lua require('telescope.builtin').lsp_dynamic_workspace_symbols(require('telescope.themes').get_dropdown{ debounce = 200 })<cr>",
-    --   "Workspace Symbols",
-    -- },
   },
 
   t = {
