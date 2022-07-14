@@ -4,7 +4,7 @@ if not status_ok then
 end
 
 local servers = {
-  "cssls",
+  -- "cssls",
   -- "cssmodules_ls",
   "html",
   -- "jsonls",
