@@ -61,6 +61,7 @@ return packer.startup(function(use)
   use({ "folke/tokyonight.nvim" })
   use("bluz71/vim-nightfly-guicolors")
   use("rebelot/kanagawa.nvim")
+  use { 'lalitmee/cobalt2.nvim', requires = 'tjdevries/colorbuddy.nvim' }
 
   use {
     "nvim-neo-tree/neo-tree.nvim",
@@ -105,8 +106,9 @@ return packer.startup(function(use)
   -- use("glepnir/lspsaga.nvim")
 
   -- Flutter
-  use({ "akinsho/flutter-tools.nvim", requires = "nvim-lua/plenary.nvim",
-    commit = "3c2b196de3a7f62247d50fe63e596b0884d6156a" })
+  -- use({ "akinsho/flutter-tools.nvim", requires = "nvim-lua/plenary.nvim",
+  --   commit = "3c2b196de3a7f62247d50fe63e596b0884d6156a" })
+  use({ "akinsho/flutter-tools.nvim", requires = "nvim-lua/plenary.nvim" })
   use("dart-lang/dart-vim-plugin")
   -- use("avatarnguyen/lsp-fastaction.nvim")
   use "sidlatau/lsp-fastaction.nvim"
