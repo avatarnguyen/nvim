@@ -60,6 +60,7 @@ ls.add_snippets(nil, {
     ls.parser.parse_snippet("th", "final theme = AppTheme.of(context);"),
     ls.parser.parse_snippet("loc", "final localizations = context.localizations;"),
     ls.parser.parse_snippet("si", "final screenSize = MediaQuery.of(context).size;"),
+    ls.parser.parse_snippet("tor", "//TODO: (@anh): remove before push"),
     snip("csl", fmta("class <> extends ConsumerWidget {\n\tconst <>({super.key});\n\t@override\tWidget build(BuildContext context, WidgetRef ref) {\n\t\treturn Container();\n\t}\n}", { insert(1, "NameWidget"), rep(1)})),
     snip("cpn", fmta("context.pushPageNamed(Routes.<>)", { insert(1, "page")})),
   },

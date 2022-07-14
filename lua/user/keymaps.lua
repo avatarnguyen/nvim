@@ -39,10 +39,6 @@ keymap("n", "gs", "<cmd>!tmux send-keys -t flutter 'R'<CR><CR>", opts)
 -- keymap("n", "<leader>E", "<cmd>NvimTreeFocus<CR>", opts)
 -- keymap("x", "<leader>E", "<cmd>NvimTreeFocus<CR>", opts)
 
--- window picker
--- local picked_window_id = require('window-picker').pick_window()
--- keymap("n", "<leader>j", "<cmd>lua require('window-picker').pick_window()<cr>", opts)
-
 -- Telescope
 keymap("n", "<leader>b", "<cmd>lua require('telescope.builtin').buffers(require('telescope.themes').get_dropdown{previewer = false})<cr>", opts)
 
@@ -157,6 +153,8 @@ keymap("n", "<leader>4", "<Cmd>BufferLineGoToBuffer 4<CR>", opts)
 keymap("n", "<leader>5", "<Cmd>BufferLineGoToBuffer 5<CR>", opts)
 keymap("n", "<leader>6", "<Cmd>BufferLineGoToBuffer 6<CR>", opts)
 keymap("n", "<leader>7", "<Cmd>BufferLineGoToBuffer 7<CR>", opts)
+keymap("n", "<leader>8", "<Cmd>BufferLineGoToBuffer 8<CR>", opts)
+keymap("n", "<leader>9", "<Cmd>BufferLineGoToBuffer 9<CR>", opts)
 
 -- Terminal --
 -- Better terminal navigation

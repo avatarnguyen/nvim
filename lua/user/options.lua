@@ -62,5 +62,5 @@ vim.opt.relativenumber = true -- set relative numbered lines
 -- opt.showbreak = string.rep(" ", 3) -- Make it so that long lines wrap smartly
 -- opt.linebreak = true
 --
-vim.opt.foldmethod = "marker"
+-- vim.opt.foldmethod = "marker"
 -- opt.foldlevel = 0

@@ -36,6 +36,10 @@ telescope.setup {
     path_display = { "smart" },
     file_ignore_patterns = { ".git/", "node_modules", "gen_l10n/", "analytics" },
 
+    layout_config = {
+      prompt_position = "top"
+    },
+
     buffer_previewer_maker = new_maker,
 
     mappings = {
