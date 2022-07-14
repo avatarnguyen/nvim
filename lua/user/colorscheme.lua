@@ -1,14 +1,23 @@
-local colorscheme = "kanagawa"
+-- local colorscheme = "kanagawa"
 -- local colorscheme = "tokyonight"
+local colorscheme = "cobalt2"
 
 -- nightfly
--- vim.g.nightflyTransparent = 0
--- vim.g.nightflyItalics = 1
--- vim.g.nightflyNormalFloat = 1
--- vim.g.nightflyCursorColor = 1
--- vim.g.nightflyUnderlineMatchParen = 1
+if colorscheme == "nightfly" then
+ vim.g.nightflyTransparent = 0
+ vim.g.nightflyItalics = 1
+ vim.g.nightflyNormalFloat = 1
+ vim.g.nightflyCursorColor = 1
+ vim.g.nightflyUnderlineMatchParen = 1
 --   " Vimscript initialization file
 --   " set fillchars=horiz:━,horizup:┻,horizdown:┳,vert:┃,vertleft:┨,vertright:┣,verthoriz:╋
+end
+
+if colorscheme == "cobalt2" then
+  -- require('colorbuddy').setup()
+  require('colorbuddy').colorscheme('cobalt2')
+  -- Group.new('italicBoldFunction', colors.green, groups.Function, styles.bold + styles.italic)
+end
 
 -- Kanagawa Colorscheme:
 if colorscheme == "kanagawa" then
