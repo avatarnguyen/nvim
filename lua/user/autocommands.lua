@@ -13,7 +13,7 @@ vim.api.nvim_create_autocmd({ "BufWinEnter", "FileType" }, {
   pattern = { "arb", "*.arb" },
   callback = function()
     vim.cmd [[
-      set filetype=json
+      set filetype=ruby
     ]]
   end,
 })
@@ -38,7 +38,7 @@ vim.api.nvim_create_autocmd({ "FileType" }, {
   end,
 })
 
-vim.cmd "autocmd BufEnter * ++nested if winnr('$') == 1 && bufname() == 'NvimTree_' . tabpagenr() | quit | endif"
+-- vim.cmd "autocmd BufEnter * ++nested if winnr('$') == 1 && bufname() == 'NvimTree_' . tabpagenr() | quit | endif"
 
 -- Fixes Autocomment
 vim.api.nvim_create_autocmd({ "BufWinEnter" }, {
