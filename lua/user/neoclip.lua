@@ -5,7 +5,7 @@ end
 
 neoclip.setup({
   history = 100,
-  enable_persistent_history = false,
+  enable_persistent_history = true,
   continious_sync = false,
   db_path = vim.fn.stdpath("data") .. "/databases/neoclip.sqlite3",
   filter = nil,
