@@ -82,7 +82,7 @@ neotree.setup({
     },
   },
   window = {
-    position = "left",
+    position = "right",
     width = 40,
     mapping_options = {
       noremap = true,
@@ -161,7 +161,7 @@ neotree.setup({
     -- "open_current",  -- netrw disabled, opening a directory opens within the
     -- window like netrw would, regardless of window.position
     -- "disabled",    -- netrw left alone, neo-tree does not handle opening dirs
-    use_libuv_file_watcher = false, -- This will use the OS level file watchers to detect changes
+    use_libuv_file_watcher = true, -- This will use the OS level file watchers to detect changes
     -- instead of relying on nvim autocmd events.
     window = {
       mappings = {
@@ -183,7 +183,7 @@ neotree.setup({
         local succuss, index = pcall(Marked.get_index_of, path)
         if succuss and index and index > 0 then
           return {
-            text = string.format(" ⥤ %d", index), -- <-- Add your favorite harpoon like arrow here
+            text = string.format(" ⥤  %d", index), -- <-- Add your favorite harpoon like arrow here
             highlight = config.highlight or "NeoTreeDirectoryIcon",
           }
         else
@@ -229,5 +229,3 @@ neotree.setup({
     }
   }
 })
-
--- vim.cmd([[nnoremap \ :Neotree reveal<cr>]])
