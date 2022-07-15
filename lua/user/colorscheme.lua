@@ -1,6 +1,10 @@
 -- local colorscheme = "kanagawa"
 -- local colorscheme = "tokyonight"
-local colorscheme = "cobalt2"
+-- local colorscheme = "cobalt2"
+local colorscheme = "nightfly"
+-- local colorscheme = "night-owl"
+
+-- require('night-owl')
 
 -- nightfly
 if colorscheme == "nightfly" then
@@ -9,6 +13,8 @@ if colorscheme == "nightfly" then
  vim.g.nightflyNormalFloat = 1
  vim.g.nightflyCursorColor = 1
  vim.g.nightflyUnderlineMatchParen = 1
+ vim.g.nightflyUndercurls = 0
+
 --   " Vimscript initialization file
 --   " set fillchars=horiz:━,horizup:┻,horizdown:┳,vert:┃,vertleft:┨,vertright:┣,verthoriz:╋
 end

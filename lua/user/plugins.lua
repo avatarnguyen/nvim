@@ -62,6 +62,7 @@ return packer.startup(function(use)
   use("bluz71/vim-nightfly-guicolors")
   use("rebelot/kanagawa.nvim")
   use { 'lalitmee/cobalt2.nvim', requires = 'tjdevries/colorbuddy.nvim' }
+  use "Julpikar/night-owl.nvim"
 
   use {
     "nvim-neo-tree/neo-tree.nvim",
