@@ -82,6 +82,7 @@ return packer.startup(function(use)
 
   -- cmp plugins
   use({ "hrsh7th/nvim-cmp" }) -- The completion plugin
+  use({ 'tzachar/cmp-tabnine', run = './install.sh', requires = 'hrsh7th/nvim-cmp' })
   use({ "hrsh7th/cmp-buffer" }) -- buffer completions
   use({ "hrsh7th/cmp-path" }) -- path completions
   use({ "saadparwaiz1/cmp_luasnip" }) -- snippet completions
@@ -97,11 +98,9 @@ return packer.startup(function(use)
   -- LSP
   use({ "neovim/nvim-lspconfig" }) -- enable LSP
   use({ "williamboman/nvim-lsp-installer" }) -- simple to use language server installer
-  use({ "jose-elias-alvarez/null-ls.nvim" }) -- for formatters and linters
+  -- use({ "jose-elias-alvarez/null-ls.nvim" }) -- for formatters and linters
   use({ "RRethy/vim-illuminate" })
-  use({
-    "rmagatti/goto-preview",
-  })
+  use({ "rmagatti/goto-preview" })
   use("j-hui/fidget.nvim")
   -- use("glepnir/lspsaga.nvim")
 
@@ -140,8 +139,8 @@ return packer.startup(function(use)
 
   -- DAP
   use({ "mfussenegger/nvim-dap" })
-  use({ "rcarriga/nvim-dap-ui" })
-  use({ "ravenxrz/DAPInstall.nvim" })
+  -- use({ "rcarriga/nvim-dap-ui" })
+  -- use({ "ravenxrz/DAPInstall.nvim" })
 
   -- Editing
   use({
@@ -156,7 +155,7 @@ return packer.startup(function(use)
   use("tpope/vim-repeat")
 
   -- Misc
-  use("abecodes/tabout.nvim")
+  -- use("abecodes/tabout.nvim")
   use("folke/which-key.nvim")
   use("karb94/neoscroll.nvim")
   use("p00f/nvim-ts-rainbow")
@@ -176,6 +175,13 @@ return packer.startup(function(use)
 
 
   use 'kazhala/close-buffers.nvim'
+
+  use {
+    'tanvirtin/vgit.nvim',
+    requires = {
+      'nvim-lua/plenary.nvim'
+    }
+  }
   -- UML
   -- use "aklt/plantuml-syntax"
   -- use { "weirongxu/plantuml-previewer.vim" }

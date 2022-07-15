@@ -106,13 +106,13 @@ cmp.setup {
     format = function(entry, vim_item)
       vim_item.kind = string.format("%s", kind_icons[vim_item.kind])
       vim_item.menu = ({
-
         nvim_lsp = "",
         nvim_lua = "",
         luasnip = "",
         buffer = "",
         path = "",
         emoji = "",
+        cmp_tabnine = "[Tab9]",
       })[entry.source.name]
       return vim_item
     end,
@@ -122,6 +122,7 @@ cmp.setup {
     { name = "nvim_lua" },
     { name = "luasnip" },
     { name = "buffer" },
+    { name = 'cmp_tabnine' },
     { name = "path" },
   },
   confirm_opts = {

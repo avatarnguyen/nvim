@@ -114,7 +114,7 @@ local mappings = {
       "Find App Constants",
     },
     t = {
-      "<cmd>lua require('telescope.builtin').find_files({search_dirs = { '~/Developer/app-flutter/lib/constants/app_theme.dart' }})<cr>",
+      "<cmd>lua require('telescope.builtin').find_files({ search_dirs = { '~/Developer/app-flutter/lib/constants/app_theme.dart' }})<cr>",
       "Find App Theme",
     },
     e = { "<cmd>Neotree reveal float<cr>", "Float Explorer" },
@@ -137,7 +137,7 @@ local mappings = {
     n = { "<cmd>lua require('telescope.builtin').lsp_document_symbols(require('telescope.themes').get_dropdown{})<cr>",
       "Document Symbols" },
     w = {
-      "<cmd>lua require('telescope.builtin').lsp_dynamic_workspace_symbols(require('telescope.themes').get_dropdown{ debounce = 200 })<cr>",
+      "<cmd>lua require('telescope.builtin').lsp_dynamic_workspace_symbols({ debounce = 200 })<cr>",
       "Workspace Symbols",
     },
   },

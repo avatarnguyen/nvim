@@ -15,4 +15,5 @@ tabnine:setup({
 		lua = true,
     log = true,
 	};
+	show_prediction_strength = false;
 })

@@ -39,6 +39,7 @@ if vim.fn.has("macunix") == 1 or vim.g.use_nerd_icons then
       Event = "",
       Operator = "",
       TypeParameter = "",
+      Tab9 = "ﮧ",
     },
     type = {
       Array = "",

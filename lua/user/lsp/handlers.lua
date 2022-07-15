@@ -37,6 +37,7 @@ M.setup = function()
 
   vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, {
     border = "rounded",
+    style = "minimal",
     width = 110,
     height = 24,
   })
