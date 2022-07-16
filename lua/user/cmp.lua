@@ -106,10 +106,10 @@ cmp.setup {
     format = function(entry, vim_item)
       vim_item.kind = string.format("%s", kind_icons[vim_item.kind])
       vim_item.menu = ({
-        nvim_lsp = "",
+        nvim_lsp = "LSP",
         nvim_lua = "",
-        luasnip = "",
-        buffer = "",
+        luasnip = "SNIP",
+        buffer = "BUF",
         path = "",
         emoji = "",
         cmp_tabnine = "[Tab9]",
