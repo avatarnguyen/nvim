@@ -47,7 +47,7 @@ return packer.startup(function(use)
   use({ "numToStr/Comment.nvim" })
   use({ "JoosepAlviste/nvim-ts-context-commentstring" })
   use({ "kyazdani42/nvim-web-devicons" })
-  use({ "kyazdani42/nvim-tree.lua" })
+  -- use({ "kyazdani42/nvim-tree.lua" })
   use({ "akinsho/bufferline.nvim" })
   use({ "moll/vim-bbye" })
   use({ "nvim-lualine/lualine.nvim" })
@@ -176,13 +176,22 @@ return packer.startup(function(use)
 
 
   use 'kazhala/close-buffers.nvim'
-
   use {
-    'tanvirtin/vgit.nvim',
-    requires = {
-      'nvim-lua/plenary.nvim'
-    }
+      'jedrzejboczar/toggletasks.nvim',
+      requires = {
+          'nvim-lua/plenary.nvim',
+          'akinsho/toggleterm.nvim',
+          'nvim-telescope/telescope.nvim/',
+      },
+      -- To enable YAML config support
+      -- rocks = 'lyaml',
   }
+  -- use {
+  --   'tanvirtin/vgit.nvim',
+  --   requires = {
+  --     'nvim-lua/plenary.nvim'
+  --   }
+  -- }
   -- UML
   -- use "aklt/plantuml-syntax"
   -- use { "weirongxu/plantuml-previewer.vim" }
