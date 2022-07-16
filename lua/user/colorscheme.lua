@@ -8,15 +8,12 @@ local colorscheme = "nightfly"
 
 -- nightfly
 if colorscheme == "nightfly" then
- vim.g.nightflyTransparent = 0
+ vim.g.nightflyTransparent = 1
  vim.g.nightflyItalics = 1
  vim.g.nightflyNormalFloat = 1
- vim.g.nightflyCursorColor = 1
+ vim.g.nightflyCursorColor = 0
  vim.g.nightflyUnderlineMatchParen = 1
- vim.g.nightflyUndercurls = 0
-
---   " Vimscript initialization file
---   " set fillchars=horiz:━,horizup:┻,horizdown:┳,vert:┃,vertleft:┨,vertright:┣,verthoriz:╋
+ vim.g.nightflyUndercurls = 1
 end
 
 if colorscheme == "cobalt2" then
