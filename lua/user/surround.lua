@@ -1,6 +1,6 @@
 local status_ok, surround = pcall(require, "surround")
-  if not status_ok then
-    return
+if not status_ok then
+  return
 end
 
 surround.setup {
@@ -8,11 +8,11 @@ surround.setup {
   load_autogroups = false,
   mappings_style = "surround",
   map_insert_mode = true,
-  quotes = {"'", '"'},
-  brackets = {"(", '{', '['},
+  quotes = { "'", '"' },
+  brackets = { "(", '{', '[' },
   pairs = {
-    nestable = {{"(", ")"}, {"[", "]"}, {"{", "}"}},
-    linear = {{"'", "'"}, {"`", "`"}, {'"', '"'}}
+    nestable = { { "(", ")" }, { "[", "]" }, { "{", "}" } },
+    linear = { { "'", "'" }, { "`", "`" }, { '"', '"' } }
   },
   prefix = "s"
 }

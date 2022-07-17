@@ -36,8 +36,9 @@ telescope.setup {
     path_display = { "smart" },
     file_ignore_patterns = { ".git/", "node_modules", "gen_l10n/", "analytics" },
 
+    sorting_strategy = "ascending",
     layout_config = {
-      prompt_position = "top"
+      prompt_position = "top",
     },
 
     buffer_previewer_maker = new_maker,
@@ -128,8 +129,6 @@ telescope.setup {
   },
 }
 
-telescope.load_extension("ui-select")
-telescope.load_extension('fzf')
 telescope.load_extension("git_worktree")
 telescope.load_extension('harpoon')
 telescope.load_extension('toggletasks')

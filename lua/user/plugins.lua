@@ -62,7 +62,7 @@ return packer.startup(function(use)
   use("bluz71/vim-nightfly-guicolors")
   use("rebelot/kanagawa.nvim")
   use { 'lalitmee/cobalt2.nvim', requires = 'tjdevries/colorbuddy.nvim' }
-  use "Julpikar/night-owl.nvim"
+  use 'marko-cerovac/material.nvim'
 
   use {
     "nvim-neo-tree/neo-tree.nvim",
@@ -115,14 +115,33 @@ return packer.startup(function(use)
   -- use({ "chrisbra/Colorizer", as = "ansicolor" })
 
   -- Telescope
-  use({ "nvim-telescope/telescope.nvim" })
-  use { 'nvim-telescope/telescope-fzf-native.nvim',
-    run = 'cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build' }
-  use("nvim-telescope/telescope-ui-select.nvim")
+  use({
+    "nvim-telescope/telescope.nvim",
+    config = function ()
+      require "user.telescope"
+    end
+  })
+  use {
+    'nvim-telescope/telescope-fzf-native.nvim',
+    after = "telescope.nvim",
+    run = 'cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build',
+    config = function ()
+      require("telescope").load_extension('fzf')
+    end
+  }
+  use({
+    "nvim-telescope/telescope-ui-select.nvim",
+    after = "telescope.nvim",
+    config = function ()
+      -- require("user.telescope").telescope.load_extension('ui-select')
+      require("telescope").load_extension('ui-select')
+    end
+  })
   -- use "tom-anders/telescope-vim-bookmarks.nvim"
 
   use({
     "AckslD/nvim-neoclip.lua",
+    after = "telescope.nvim",
     requires = {
       { "tami5/sqlite.lua", module = "sqlite" },
     },
@@ -139,7 +158,13 @@ return packer.startup(function(use)
   use("ThePrimeagen/git-worktree.nvim")
 
   -- DAP
-  use({ "mfussenegger/nvim-dap" })
+  use({
+    "mfussenegger/nvim-dap",
+    module = "dap",
+    config = function ()
+      require "user.dap"
+    end
+  })
   -- use({ "rcarriga/nvim-dap-ui" })
   -- use({ "ravenxrz/DAPInstall.nvim" })
 
@@ -158,7 +183,7 @@ return packer.startup(function(use)
   -- Misc
   -- use("abecodes/tabout.nvim")
   use("folke/which-key.nvim")
-  use("karb94/neoscroll.nvim")
+  -- use("karb94/neoscroll.nvim")
   use("p00f/nvim-ts-rainbow")
   use("ThePrimeagen/harpoon")
   use "Shatur/neovim-session-manager"
@@ -174,18 +199,20 @@ return packer.startup(function(use)
   use { "christianchiarulli/nvim-gps", branch = "text_hl" }
   use "dstein64/vim-startuptime"
 
-
+  use "Pocco81/AutoSave.nvim"
   use 'kazhala/close-buffers.nvim'
   use {
-      'jedrzejboczar/toggletasks.nvim',
-      requires = {
-          'nvim-lua/plenary.nvim',
-          'akinsho/toggleterm.nvim',
-          'nvim-telescope/telescope.nvim/',
-      },
-      -- To enable YAML config support
-      -- rocks = 'lyaml',
+    'jedrzejboczar/toggletasks.nvim',
+    requires = {
+      'nvim-lua/plenary.nvim',
+      'akinsho/toggleterm.nvim',
+      'nvim-telescope/telescope.nvim/',
+    },
+    -- To enable YAML config support
+    -- rocks = 'lyaml',
   }
+  -- use { 'camspiers/snap', rocks = {'fzy'}}
+  use { 'camspiers/snap' }
   -- use {
   --   'tanvirtin/vgit.nvim',
   --   requires = {
