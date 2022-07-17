@@ -108,8 +108,8 @@ cmp.setup {
       vim_item.menu = ({
         nvim_lsp = "LSP",
         nvim_lua = "",
-        luasnip = "SNIP",
-        buffer = "BUF",
+        luasnip = "",
+        buffer = "",
         path = "",
         emoji = "",
         cmp_tabnine = "[Tab9]",
