@@ -134,7 +134,7 @@ local mappings = {
   o = {
     name = "Outlines",
     o = { "<cmd>lua require('flutter-tools.outline').toggle()<cr>", "Flutter Outlines" },
-    n = { "<cmd>lua require('telescope.builtin').lsp_document_symbols(require('telescope.themes').get_dropdown{})<cr>",
+    d = { "<cmd>lua require('telescope.builtin').lsp_document_symbols(require('telescope.themes').get_dropdown{})<cr>",
       "Document Symbols" },
     w = {
       "<cmd>lua require('telescope.builtin').lsp_dynamic_workspace_symbols({ debounce = 150 })<cr>",
