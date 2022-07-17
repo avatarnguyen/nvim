@@ -1,10 +1,8 @@
 -- local colorscheme = "kanagawa"
 -- local colorscheme = "tokyonight"
--- local colorscheme = "cobalt2"
+local colorscheme = "cobalt2"
 -- local colorscheme = "material"
-local colorscheme = "nightfly"
-
--- require('night-owl')
+-- local colorscheme = "nightfly"
 
 -- nightfly
 if colorscheme == "nightfly" then

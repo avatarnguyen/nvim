@@ -11,7 +11,7 @@ flutter.setup({
     open_cmd = "tabedit",
   },
   widget_guides = {
-    enabled = false,
+    enabled = true,
   },
   closing_tags = {
     enabled = true, -- set to false to disable
@@ -27,7 +27,7 @@ flutter.setup({
     },
   },
   debugger = { -- integrate with nvim dap + install dart code debugger
-    enabled = true,
+    enabled = false,
     run_via_dap = false, -- use dap instead of a plenary job to run flutter apps
     -- register_configurations = function(_)
     -- require("dap").configurations.dart = {
@@ -56,7 +56,6 @@ flutter.setup({
     -- capabilities = my_custom_capabilities -- e.g. lsp_status capabilities
     --- OR you can specify a function to deactivate or change or control how the config is created
     capabilities = function(config)
-      -- config.flags.debounce_did_change_notify = 250
       return config
     end,
     settings = {

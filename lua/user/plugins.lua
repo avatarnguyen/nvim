@@ -125,17 +125,10 @@ return packer.startup(function(use)
     'nvim-telescope/telescope-fzf-native.nvim',
     after = "telescope.nvim",
     run = 'cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build',
-    config = function ()
-      require("telescope").load_extension('fzf')
-    end
   }
   use({
     "nvim-telescope/telescope-ui-select.nvim",
     after = "telescope.nvim",
-    config = function ()
-      -- require("user.telescope").telescope.load_extension('ui-select')
-      require("telescope").load_extension('ui-select')
-    end
   })
   -- use "tom-anders/telescope-vim-bookmarks.nvim"
 
@@ -213,12 +206,7 @@ return packer.startup(function(use)
   }
   -- use { 'camspiers/snap', rocks = {'fzy'}}
   use { 'camspiers/snap' }
-  -- use {
-  --   'tanvirtin/vgit.nvim',
-  --   requires = {
-  --     'nvim-lua/plenary.nvim'
-  --   }
-  -- }
+
   -- UML
   -- use "aklt/plantuml-syntax"
   -- use { "weirongxu/plantuml-previewer.vim" }
