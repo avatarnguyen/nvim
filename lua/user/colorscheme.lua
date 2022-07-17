@@ -47,7 +47,7 @@ if colorscheme == "tokyonight" then
   -- vim.g.tokyonight_transparent_sidebar = 0
 
   -- Current Use Option
-  -- vim.g.tokyonight_style = "night"
+  vim.g.tokyonight_style = "night"
   -- vim.g.tokyonight_style = "storm"
   vim.g.tokyonight_italic_variables = 1
   vim.g.tokyonight_italic_keywords = 1
