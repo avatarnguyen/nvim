@@ -90,7 +90,7 @@ local mappings = {
   ["Q"] = { "<cmd>q<CR>", "Quit" },
   ["c"] = { "<cmd>Bdelete!<CR>", "Close Buffer" },
   ["f"] = {
-    "<cmd>lua require('telescope.builtin').find_files(require('telescope.themes').get_dropdown{ debounce = 200, file_ignore_patterns = {'ios/', 'android/', 'fonts/', 'assets/', 'packages/', 'doc/'}})<cr>",
+    "<cmd>lua require('telescope.builtin').find_files(require('telescope.themes').get_dropdown{ debounce = 150, file_ignore_patterns = {'ios/', 'android/', 'fonts/', 'assets/', 'packages/', 'doc/'}})<cr>",
     "Find files",
   },
   ["w"] = { "<cmd>lua require('telescope.builtin').grep_string({file_ignore_patterns = {'ios/', 'android/', 'assets/', 'fonts/', 'packages/', 'doc/'}})<cr>",
@@ -118,17 +118,17 @@ local mappings = {
       "Find App Theme",
     },
     e = { "<cmd>Neotree reveal float<cr>", "Float Explorer" },
-    f = {
-      "<cmd>lua require('telescope.builtin').find_files(require('telescope.themes').get_dropdown{debounce = 150, search_dirs = { '~/Developer/app-flutter/lib/' }, file_ignore_patterns = {'l10n/'}})<cr>",
-      "Find files in lib",
-    },
-    l = { "<cmd>lua require('telescope.builtin').live_grep({ debounce = 300, file_ignore_patterns = {'ios/', 'android/', 'assets/', 'fonts/', 'packages/', 'doc/', 'l10n/'} })<cr>",
-      "Find Text" },
+    -- o, f, g occupied by snap
+    -- f = {
+    --   "<cmd>lua require('telescope.builtin').find_files(require('telescope.themes').get_dropdown{debounce = 150, search_dirs = { '~/Developer/app-flutter/lib/' }, file_ignore_patterns = {'l10n/'}})<cr>",
+    --   "Find files in lib",
+    -- },
+    -- l = { "<cmd>lua require('telescope.builtin').live_grep({ debounce = 300, file_ignore_patterns = {'ios/', 'android/', 'assets/', 'fonts/', 'packages/', 'doc/', 'l10n/'} })<cr>",
+    --   "Find Text" },
     c = { "<cmd>lua require('telescope').extensions.neoclip.default(require('telescope.themes').get_dropdown{})<CR>",
       "Clipboard" },
     b = { " <Cmd>lua require('telescope.builtin').current_buffer_fuzzy_find(require('telescope.themes').get_dropdown{})<CR>",
       "Find in Buffer" },
-
   },
 
   o = {
@@ -137,7 +137,7 @@ local mappings = {
     n = { "<cmd>lua require('telescope.builtin').lsp_document_symbols(require('telescope.themes').get_dropdown{})<cr>",
       "Document Symbols" },
     w = {
-      "<cmd>lua require('telescope.builtin').lsp_dynamic_workspace_symbols({ debounce = 200 })<cr>",
+      "<cmd>lua require('telescope.builtin').lsp_dynamic_workspace_symbols({ debounce = 150 })<cr>",
       "Workspace Symbols",
     },
   },
@@ -165,7 +165,7 @@ local mappings = {
       "<cmd>lua require 'gitsigns'.undo_stage_hunk()<cr>",
       "Undo Stage Hunk",
     },
-    f = { "<cmd>Neotree left git_status<cr>", "Git Status Tree" },
+    e = { "<cmd>Neotree left git_status<cr>", "Git Status Tree" },
     o = { "<cmd>Telescope git_status<cr>", "Open changed file" },
     b = { "<cmd>Telescope git_branches<cr>", "Checkout branch" },
     c = { "<cmd>Telescope git_commits<cr>", "Checkout commit" },
@@ -189,7 +189,7 @@ local mappings = {
       "Workspace Diagnostics Popup",
     },
     W = { "<cmd>Trouble workspace_diagnostics<cr>", "Workspace Diagnostics" },
-    f = { "<cmd>lua vim.lsp.buf.format({ async = true })<cr>", "Format" },
+    f = { "<cmd>lua vim.lsp.buf.format()<cr>", "Format" },
     i = { "<cmd>LspInfo<cr>", "Info" },
     I = { "<cmd>LspInstallInfo<cr>", "Installer Info" },
     l = { "<cmd>lua vim.lsp.codelens.run()<cr>", "CodeLens Action" },
