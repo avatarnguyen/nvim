@@ -7,6 +7,9 @@ local snap = require'snap'
 --   views = {snap.get'preview.file'}
 -- }
 
+vim.cmd [[
+  highlight! link SnapSelect DiagnosticSignWarn 
+]]
 snap.maps {
   -- {"<Leader>ff", snap.config.file {producer = "ripgrep.file"}},
   {"<Leader>k", snap.config.file {
