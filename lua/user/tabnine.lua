@@ -14,6 +14,13 @@ tabnine:setup({
     yaml = true,
 		lua = true,
     log = true,
+    TelescopePrompt = true,
+    RenamePrompt = true,
+    RenamerPrompt = true,
+    renamer = true,
+    Renamer = true,
+    Rename = true,
+    prompt = true,
 	};
 	show_prediction_strength = false;
 })
