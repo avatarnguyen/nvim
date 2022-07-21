@@ -114,8 +114,16 @@ local mappings = {
       "Find App Constants",
     },
     t = {
-      "<cmd>lua require('telescope.builtin').find_files({ search_dirs = { '~/Developer/app-flutter/lib/constants/app_theme.dart' }})<cr>",
+      "<cmd>lua require('telescope.builtin').live_grep({ search_dirs = { '~/Developer/app-flutter/lib/constants/app_theme.dart' }})<cr>",
       "Find App Theme",
+    },
+    n = {
+      "<cmd>lua require('telescope.builtin').live_grep({ search_dirs = { '~/Developer/app-flutter/lib/interfaces/analytics_event.dart' }})<cr>",
+      "Find Analytics",
+    },
+    y = {
+      "<cmd>lua require('telescope.builtin').live_grep({ search_dirs = { '~/Developer/app-flutter/lib/l10n/app_en_GB.arb' }})<cr>",
+      "Find Translation Key",
     },
     e = { "<cmd>Neotree reveal float<cr>", "Float Explorer" },
     -- o, f, g occupied by snap
@@ -123,8 +131,8 @@ local mappings = {
     --   "<cmd>lua require('telescope.builtin').find_files(require('telescope.themes').get_dropdown{debounce = 150, search_dirs = { '~/Developer/app-flutter/lib/' }, file_ignore_patterns = {'l10n/'}})<cr>",
     --   "Find files in lib",
     -- },
-    -- l = { "<cmd>lua require('telescope.builtin').live_grep({ debounce = 300, file_ignore_patterns = {'ios/', 'android/', 'assets/', 'fonts/', 'packages/', 'doc/', 'l10n/'} })<cr>",
-    --   "Find Text" },
+    m = { "<cmd>lua require('telescope.builtin').live_grep({ debounce = 200, file_ignore_patterns = {'ios/', 'android/', 'assets/', 'fonts/', 'packages/', 'doc/', 'l10n/'} })<cr>",
+      "Find Text" },
     c = { "<cmd>lua require('telescope').extensions.neoclip.default(require('telescope.themes').get_dropdown{})<CR>",
       "Clipboard" },
     b = { " <Cmd>lua require('telescope.builtin').current_buffer_fuzzy_find(require('telescope.themes').get_dropdown{})<CR>",
@@ -194,7 +202,8 @@ local mappings = {
     I = { "<cmd>LspInstallInfo<cr>", "Installer Info" },
     l = { "<cmd>lua vim.lsp.codelens.run()<cr>", "CodeLens Action" },
     q = { "<cmd>lua vim.lsp.diagnostic.set_loclist()<cr>", "Quickfix" },
-    r = { "<cmd>lua require('renamer').rename()<cr>", "Rename" },
+    -- r = { "<cmd>lua require('renamer').rename()<cr>", "Rename" }, -- not working well with cmp-tabnine
+    r = { "<cmd>lua vim.lsp.buf.rename()<cr>", "Rename" },
     R = { "<cmd>Trouble lsp_references<cr>", "References" },
   },
 
