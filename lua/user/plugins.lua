@@ -69,6 +69,7 @@ return packer.startup(function(use)
 
   use {
     "nvim-neo-tree/neo-tree.nvim",
+    as = "neotree",
     branch = "v2.x",
     requires = {
       "nvim-lua/plenary.nvim",
@@ -79,6 +80,7 @@ return packer.startup(function(use)
   use {
     's1n7ax/nvim-window-picker',
     tag = 'v1.*',
+    after = 'neotree',
     config = function()
       require 'window-picker'.setup()
     end,
@@ -117,6 +119,8 @@ return packer.startup(function(use)
   use "sidlatau/lsp-fastaction.nvim"
   -- use({ "chrisbra/Colorizer", as = "ansicolor" })
 
+  -- use { 'camspiers/snap', rocks = {'fzy'}}
+  use { 'camspiers/snap' }
   -- Telescope
   use({
     "nvim-telescope/telescope.nvim",
@@ -131,13 +135,11 @@ return packer.startup(function(use)
   }
   use({
     "nvim-telescope/telescope-ui-select.nvim",
-    after = "telescope.nvim",
   })
   -- use "tom-anders/telescope-vim-bookmarks.nvim"
 
   use({
     "AckslD/nvim-neoclip.lua",
-    after = "telescope.nvim",
     requires = {
       { "tami5/sqlite.lua", module = "sqlite" },
     },
@@ -195,7 +197,7 @@ return packer.startup(function(use)
   use { "christianchiarulli/nvim-gps", branch = "text_hl" }
   use "dstein64/vim-startuptime"
 
-  use "Pocco81/AutoSave.nvim"
+  -- use "Pocco81/AutoSave.nvim"
   use 'kazhala/close-buffers.nvim'
   use {
     'jedrzejboczar/toggletasks.nvim',
@@ -207,9 +209,9 @@ return packer.startup(function(use)
     -- To enable YAML config support
     -- rocks = 'lyaml',
   }
-  -- use { 'camspiers/snap', rocks = {'fzy'}}
-  use { 'camspiers/snap' }
 
+  -- use "lervag/vimtex"
+  -- use 'xuhdev/vim-latex-live-preview'
   -- UML
   -- use "aklt/plantuml-syntax"
   -- use { "weirongxu/plantuml-previewer.vim" }
