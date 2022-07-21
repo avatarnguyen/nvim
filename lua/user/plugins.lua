@@ -62,7 +62,10 @@ return packer.startup(function(use)
   use("bluz71/vim-nightfly-guicolors")
   use("rebelot/kanagawa.nvim")
   use { 'lalitmee/cobalt2.nvim', requires = 'tjdevries/colorbuddy.nvim' }
-  use 'marko-cerovac/material.nvim'
+  use({
+    "catppuccin/nvim",
+    as = "catppuccin"
+  })
 
   use {
     "nvim-neo-tree/neo-tree.nvim",
@@ -90,7 +93,7 @@ return packer.startup(function(use)
   use({ "hrsh7th/cmp-nvim-lsp" })
   use({ "hrsh7th/cmp-nvim-lua" })
   use({ "folke/trouble.nvim", cmd = "TroubleToggle" })
-  use("filipdutescu/renamer.nvim")
+  -- use("filipdutescu/renamer.nvim")
 
   -- snippets
   use({ "L3MON4D3/LuaSnip" }) --snippet engine
@@ -147,7 +150,7 @@ return packer.startup(function(use)
 
   -- Git
   use({ "lewis6991/gitsigns.nvim" })
-  use({ "sindrets/diffview.nvim", requires = "nvim-lua/plenary.nvim" })
+  -- use({ "sindrets/diffview.nvim", requires = "nvim-lua/plenary.nvim" })
   use("ThePrimeagen/git-worktree.nvim")
 
   -- DAP
