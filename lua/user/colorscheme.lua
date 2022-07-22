@@ -8,6 +8,7 @@ local colorscheme = "catppuccin"
 -- catppuccin
 if colorscheme == "catppuccin" then
   vim.g.catppuccin_flavour = "macchiato" -- latte, frappe, macchiato, mocha
+  -- vim.g.catppuccin_flavour = "mocha" -- darker theme
 
   require("catppuccin").setup({
     -- dim_inactive = {
