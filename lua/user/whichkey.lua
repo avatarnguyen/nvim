@@ -126,12 +126,13 @@ local mappings = {
       "Find Translation Key",
     },
     e = { "<cmd>Neotree reveal float<cr>", "Float Explorer" },
+    j = { "<cmd>Neotree buffers<cr>", "Show Buffer Explorer" },
     -- o, f, g occupied by snap
     -- f = {
     --   "<cmd>lua require('telescope.builtin').find_files(require('telescope.themes').get_dropdown{debounce = 150, search_dirs = { '~/Developer/app-flutter/lib/' }, file_ignore_patterns = {'l10n/'}})<cr>",
     --   "Find files in lib",
     -- },
-    m = { "<cmd>lua require('telescope.builtin').live_grep({ debounce = 200, file_ignore_patterns = {'ios/', 'android/', 'assets/', 'fonts/', 'packages/', 'doc/', 'l10n/'} })<cr>",
+    l = { "<cmd>lua require('telescope.builtin').live_grep({ debounce = 200, file_ignore_patterns = {'ios/', 'android/', 'assets/', 'fonts/', 'packages/', 'doc/', 'l10n/'} })<cr>",
       "Find Text" },
     c = { "<cmd>lua require('telescope').extensions.neoclip.default(require('telescope.themes').get_dropdown{})<CR>",
       "Clipboard" },

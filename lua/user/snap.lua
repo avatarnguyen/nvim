@@ -19,5 +19,5 @@ snap.maps {
     }
   },
   {"<Leader>so", snap.config.file {producer = "vim.oldfile"}},
-  {"<Leader>sl", snap.config.vimgrep {}},
+  {"<Leader>sm", snap.config.vimgrep {}},
 }
