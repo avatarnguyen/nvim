@@ -12,7 +12,7 @@
       },
       {
         "language": "dart",
-        "path": "./freezed_bloc.json"
+        "path": "./snippets.json"
       }
     ]
   }
