@@ -199,7 +199,7 @@ local mappings = {
     },
     W = { "<cmd>Trouble workspace_diagnostics<cr>", "Workspace Diagnostics" },
     f = { "<cmd>lua vim.lsp.buf.format()<cr>", "Format" },
-    i = { "<cmd>LspInfo<cr>", "Info" },
+    -- i = { "<cmd>LspInfo<cr>", "Info" },
     I = { "<cmd>LspInstallInfo<cr>", "Installer Info" },
     l = { "<cmd>lua vim.lsp.codelens.run()<cr>", "CodeLens Action" },
     q = { "<cmd>lua vim.lsp.diagnostic.set_loclist()<cr>", "Quickfix" },
