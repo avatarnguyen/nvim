@@ -57,9 +57,10 @@ return packer.startup(function(use)
   use({ "lukas-reineke/indent-blankline.nvim" })
   use({ "goolord/alpha-nvim" })
   use "b0o/schemastore.nvim"
+
   -- Colorschemes
-  use({ "folke/tokyonight.nvim" })
-  use("bluz71/vim-nightfly-guicolors")
+  -- use({ "folke/tokyonight.nvim" })
+  -- use("bluz71/vim-nightfly-guicolors")
   use("rebelot/kanagawa.nvim")
   use { 'lalitmee/cobalt2.nvim', requires = 'tjdevries/colorbuddy.nvim' }
   use({
@@ -95,11 +96,10 @@ return packer.startup(function(use)
   use({ "hrsh7th/cmp-nvim-lsp" })
   use({ "hrsh7th/cmp-nvim-lua" })
   use({ "folke/trouble.nvim", cmd = "TroubleToggle" })
-  -- use("filipdutescu/renamer.nvim")
 
   -- snippets
   use({ "L3MON4D3/LuaSnip" }) --snippet engine
-  use({ "rafamadriz/friendly-snippets" }) -- a bunch of snippets to use
+  -- use({ "rafamadriz/friendly-snippets" }) -- a bunch of snippets to use
 
   -- LSP
   use({ "neovim/nvim-lspconfig" }) -- enable LSP
@@ -109,6 +109,7 @@ return packer.startup(function(use)
   use({ "rmagatti/goto-preview" })
   use("j-hui/fidget.nvim")
   -- use("glepnir/lspsaga.nvim")
+  -- use("filipdutescu/renamer.nvim")
 
   -- Flutter
   -- use({ "akinsho/flutter-tools.nvim", requires = "nvim-lua/plenary.nvim",
@@ -154,6 +155,8 @@ return packer.startup(function(use)
   use({ "lewis6991/gitsigns.nvim" })
   -- use({ "sindrets/diffview.nvim", requires = "nvim-lua/plenary.nvim" })
   use("ThePrimeagen/git-worktree.nvim")
+  use 'tpope/vim-fugitive'
+  use 'shumphrey/fugitive-gitlab.vim'
 
   -- DAP
   use({
@@ -200,14 +203,8 @@ return packer.startup(function(use)
   -- use "Pocco81/AutoSave.nvim"
   use 'kazhala/close-buffers.nvim'
   use {
-    'jedrzejboczar/toggletasks.nvim',
-    requires = {
-      'nvim-lua/plenary.nvim',
-      'akinsho/toggleterm.nvim',
-      'nvim-telescope/telescope.nvim/',
-    },
-    -- To enable YAML config support
-    -- rocks = 'lyaml',
+    'pianocomposer321/yabs.nvim',
+    requires = { 'nvim-lua/plenary.nvim' }
   }
 
   -- use "lervag/vimtex"

@@ -83,6 +83,8 @@ keymap('v', "<leader>nl", "<cmd>lua require'hop'.hint_lines()<cr>", opts)
 keymap('x', "<leader>nl", "<cmd>lua require'hop'.hint_lines()<cr>", opts)
 keymap('n', "<leader>nw", "<cmd>lua require'hop'.hint_words()<cr>", opts)
 keymap('v', "<leader>nw", "<cmd>lua require'hop'.hint_words()<cr>", opts)
+keymap('n', "<leader>na", "<cmd>HopPattern<cr>", opts)
+keymap('v', "<leader>na", "<cmd>HopPattern<cr>", opts)
 
 keymap('n', 'f', "<cmd>lua require'hop'.hint_char1({ direction = require'hop.hint'.HintDirection.AFTER_CURSOR, current_line_only = false })<cr>", {})
 keymap('n', 'F', "<cmd>lua require'hop'.hint_char1({ direction = require'hop.hint'.HintDirection.BEFORE_CURSOR, current_line_only = false })<cr>", {})
@@ -99,10 +101,9 @@ keymap("n", "<S-s>", "<cmd>lua require('substitute').eol()<cr>", { noremap = tru
 keymap("n", "<C-s>", "<cmd>lua require('substitute.range').operator()<cr>", { noremap = true })
 keymap("x", "<C-s>", "<cmd>lua require('substitute.range').visual()<cr>", {})
 keymap("n", "<leader><leader>s", "<cmd>lua require('substitute.range').word()<cr>", {})
-keymap("n", "<leader><leader>s", "<cmd>lua require('substitute.range').word()<cr>", {})
 
-keymap("n", "<leader>r", ":%s///g<Left><Left>", {})
-keymap("x", "<leader>r", ":s///g<Left><Left>", opts)
+-- keymap("n", "<leader>r", ":%s///g<Left><Left>", {})
+-- keymap("x", "<leader>r", ":s///g<Left><Left>", opts)
 
 -- Resize with arrows
 keymap("n", "<A-Up>", ":resize -2<CR>", opts)
