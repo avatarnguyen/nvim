@@ -197,7 +197,6 @@ return packer.startup(function(use)
     end,
   })
   use "rcarriga/nvim-notify"
-  use { "christianchiarulli/nvim-gps", branch = "text_hl" }
   use "dstein64/vim-startuptime"
 
   -- use "Pocco81/AutoSave.nvim"

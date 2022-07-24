@@ -93,7 +93,7 @@ keymap('o', 'F', "<cmd>lua require'hop'.hint_char1({ direction = require'hop.hin
 keymap('', 't', "<cmd>lua require'hop'.hint_char1({ direction = require'hop.hint'.HintDirection.AFTER_CURSOR, current_line_only = true })<cr>", {})
 keymap('', 'T', "<cmd>lua require'hop'.hint_char1({ direction = require'hop.hint'.HintDirection.BEFORE_CURSOR, current_line_only = true })<cr>", {})
 
--- SUBSTITUTE plugin
+-- SUBSTITUTE plugin  {{{
 -- keymap("x", "s", "<cmd>lua require('substitute').visual()<cr>", { noremap = true })
 keymap("n", "s", "<cmd>lua require('substitute').operator()<cr>", { noremap = true })
 keymap("n", "ss", "<cmd>lua require('substitute').line()<cr>", { noremap = true })
@@ -101,6 +101,7 @@ keymap("n", "<S-s>", "<cmd>lua require('substitute').eol()<cr>", { noremap = tru
 keymap("n", "<C-s>", "<cmd>lua require('substitute.range').operator()<cr>", { noremap = true })
 keymap("x", "<C-s>", "<cmd>lua require('substitute.range').visual()<cr>", {})
 keymap("n", "<leader><leader>s", "<cmd>lua require('substitute.range').word()<cr>", {})
+--}}}
 
 -- keymap("n", "<leader>r", ":%s///g<Left><Left>", {})
 -- keymap("x", "<leader>r", ":s///g<Left><Left>", opts)

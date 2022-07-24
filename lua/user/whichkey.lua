@@ -136,6 +136,8 @@ local mappings = {
       "Find Text" },
     c = { "<cmd>lua require('telescope').extensions.neoclip.default(require('telescope.themes').get_dropdown{})<CR>",
       "Clipboard" },
+    m = { "<cmd>lua require('telescope').extensions.macroscope.default(require('telescope.themes').get_dropdown{})<CR>",
+      "Clipboard" },
     b = { " <Cmd>lua require('telescope.builtin').current_buffer_fuzzy_find(require('telescope.themes').get_dropdown{})<CR>",
       "Find in Buffer" },
   },
@@ -145,7 +147,7 @@ local mappings = {
     o = { "<cmd>lua require('flutter-tools.outline').toggle()<cr>", "Flutter Outlines" },
     d = { "<cmd>lua require('telescope.builtin').lsp_document_symbols(require('telescope.themes').get_dropdown{})<cr>",
       "Document Symbols" },
-    w = {
+    s = {
       "<cmd>lua require('telescope.builtin').lsp_dynamic_workspace_symbols({ debounce = 150 })<cr>",
       "Workspace Symbols",
     },
