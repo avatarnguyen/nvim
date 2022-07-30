@@ -81,11 +81,11 @@ local opts = {
 local mappings = {
   -- ["q"] = { " <Cmd>lua require('telescope.builtin').current_buffer_fuzzy_find(require('telescope.themes').get_dropdown{})<CR>",
   --   "Find in Buffer", },
-  -- ["e"] = { "<cmd>NvimTreeToggle<cr>", "Explorer" },
-  -- ["E"] = { "<cmd>NvimTreeFocus<cr>", "Explorer" },
+  ["e"] = { "<cmd>NvimTreeToggle<cr>", "Explorer" },
+  ["E"] = { "<cmd>NvimTreeFocus<cr>", "Explorer" },
 
-  ["E"] = { "<cmd>Neotree reveal left<cr>", "Explorer" },
-  ["e"] = { "<cmd>Neotree toggle reveal left<cr>", "Explorer" },
+  -- ["E"] = { "<cmd>Neotree reveal left<cr>", "Explorer" },
+  -- ["e"] = { "<cmd>Neotree toggle reveal left<cr>", "Explorer" },
   ["A"] = { "<cmd>wa<CR>", "Save All" },
   ["Q"] = { "<cmd>q<CR>", "Quit" },
   ["c"] = { "<cmd>Bdelete!<CR>", "Close Buffer" },
@@ -93,8 +93,8 @@ local mappings = {
     "<cmd>lua require('telescope.builtin').find_files(require('telescope.themes').get_dropdown{ debounce = 150, file_ignore_patterns = {'ios/', 'android/', 'fonts/', 'assets/', 'packages/', 'doc/'}})<cr>",
     "Find files",
   },
-  ["w"] = { "<cmd>lua require('telescope.builtin').grep_string({file_ignore_patterns = {'ios/', 'android/', 'assets/', 'fonts/', 'packages/', 'doc/'}})<cr>",
-    "Find String" },
+  -- ["w"] = { "<cmd>lua require('telescope.builtin').grep_string({file_ignore_patterns = {'ios/', 'android/', 'assets/', 'fonts/', 'packages/', 'doc/'}})<cr>",
+  --   "Find String" },
   ["P"] = { "<cmd>Telescope projects<cr>", "Projects" },
   ["p"] = { "<cmd>:lua require('telescope').extensions.neoclip.default(require('telescope.themes').get_dropdown{})<CR>",
     "Clipboard" },
@@ -102,9 +102,26 @@ local mappings = {
 
   ["M"] = { "<cmd>:lua require('telescope').extensions.macroscope.default()<CR>", "Macros" },
 
+  n = {
+    name = "Hop",
+    l = {
+      "<cmd>lua require'hop'.hint_lines({ multi_windows = true })<cr>",
+      "Hop Lines",
+    },
+    w = {
+      "<cmd>lua require'hop'.hint_words()<cr>",
+      "Hop Words",
+    },
+    a = {
+      "<cmd>HopPattern<cr>",
+      "Hop Pattern",
+    },
+  },
 
   s = {
     name = "pickers",
+    s = { "<cmd>lua require('telescope.builtin').grep_string({file_ignore_patterns = {'ios/', 'android/', 'assets/', 'fonts/', 'packages/', 'doc/'}})<cr>",
+    "Find String" },
     a = {
       "<cmd>lua require('telescope.builtin').find_files(require('telescope.themes').get_dropdown{search_dirs = { '~/Developer/app-flutter/assets/' }})<cr>",
       "Find Assets",

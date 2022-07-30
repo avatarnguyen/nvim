@@ -17,6 +17,16 @@ local diagnostics = {
   always_visible = false,
 }
 
+local minimal_diagnostic = {
+  "diagnostics",
+  sources = { "nvim_diagnostic" },
+  sections = { "error", "warn", 'info' },
+  symbols = { error = " ", warn = " ", info = " " },
+  colored = false,
+  update_in_insert = false,
+  always_visible = false,
+}
+
 local diff = {
   "diff",
   colored = false,
@@ -34,6 +44,7 @@ local branch = {
   "branch",
   icons_enabled = true,
   icon = "",
+  separator = { left = "" }
 }
 
 local location = {
@@ -45,30 +56,96 @@ local filepath = {
   'filename',
   file_status = true, -- displays file status (readonly status, modified status)
   path = 1, -- 0 = just filename, 1 = relative path, 2 = absolute path
-  shorting_target = 40,
+  shorting_target = 24,
+}
+
+local filename = {
+  'filename',
+  file_status = true, -- displays file status (readonly status, modified status)
+  path = 0, -- 0 = just filename, 1 = relative path, 2 = absolute path
+  shorting_target = 30,
 }
 
 local spaces = function()
   return "spaces: " .. vim.api.nvim_buf_get_option(0, "shiftwidth")
 end
 
+-- local nvim_tree_shift =  {
+--   function ()
+--     return string.rep(' ',
+--                       vim.api.nvim_win_get_width(require'nvim-tree.view'.get_winnr()) - 1)
+--   end,
+--   cond = require('nvim-tree.view').is_visible,
+--   color = 'NvimTreeNormal'
+-- }
+
 lualine.setup {
   options = {
     globalstatus = true,
     icons_enabled = true,
     theme = "auto",
-    section_separators = { left = '', right = '' },
-    component_separators = { left = "", right = "" },
+    -- section_separators = { left = '', right = '' },
+ 		section_separators = { left = "", right = "" },
     -- section_separators = { left = "", right = "" },
-    disabled_filetypes = { "alpha", "dashboard" },
-    always_divide_middle = true,
+    -- component_separators = { left = "", right = "" },
+ 		component_separators = "|",
+    disabled_filetypes = {
+      statusline = { "alpha", "dashboard" },
+      winbar = { "alpha", "dashboard", "neotree", "neo-tree", "NvimTree", "Telescope", "StartupTime" },
+      tabline = { "alpha", "dashboard", "neotree", "neo-tree", "NvimTree", "NvimTree_1", "Telescope", "nvim_lsp", "fidget", "No name", "No Name" },
+    },
+    always_divide_middle = false,
+  refresh = {
+    statusline = 1000,
+    tabline = 800,
+    winbar = 1000,
+  },
   },
   sections = {
     lualine_a = { branch, diff },
     lualine_b = { filepath },
-    lualine_c = { },
-    lualine_x = { diagnostics, spaces, filetype },
+    lualine_c = { diagnostics },
+    lualine_x = { spaces, filetype },
     lualine_y = { location },
-    lualine_z = { "progress" },
+    lualine_z = { { "progress", separator = { right = "" }, } },
+  },
+  tabline = {
+		lualine_a = {
+      -- nvim_tree_shift,
+			{
+				"buffers",
+				separator = { left = "", right = "" },
+				right_padding = 2,
+				symbols = { alternate_file = "" },
+        show_filename_only = false,   -- Shows shortened relative path when set to false.
+        hide_filename_extension = true,   -- Hide filename extension when set to true.
+        show_modified_status = true, -- Shows indicator when the buffer is modified.
+        mode = 0, -- 0: Shows buffer name
+                  -- 1: Shows buffer index
+                  -- 2: Shows buffer name + buffer index
+                  -- 3: Shows buffer number
+                  -- 4: Shows buffer name + buffer number
+        -- max_length = vim.o.columns * 2 / 3, -- Maximum width of buffers component,
+                                            -- it can also be a function that returns
+                                            -- the value of `max_length` dynamically.
+			},
+		},
+    lualine_z = {"tabs"}
+	},
+  winbar = {
+    lualine_a = {},
+    lualine_b = {},
+    lualine_c = { filename },
+    lualine_x = { diagnostics },
+    lualine_y = {},
+    lualine_z = {}
+  },
+  inactive_winbar = {
+    lualine_a = {},
+    lualine_b = {},
+    lualine_c = { filename },
+    lualine_x = {},
+    lualine_y = {},
+    lualine_z = {}
   },
 }

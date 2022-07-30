@@ -21,7 +21,7 @@ bufferline.setup {
     tab_size = 24,
     diagnostics = "nvim_lsp", -- false, -- | "nvim_lsp" | "coc",
     diagnostics_update_in_insert = false,
-    offsets = { { filetype = "neo-tree", text = "", padding = 1 } },
+    offsets = { { filetype = "NvimTree", text = "File Explorer", padding = 1 } }, -- "neo-tree"
     show_buffer_icons = true,
     show_buffer_close_icons = false,
     show_close_icon = true,
