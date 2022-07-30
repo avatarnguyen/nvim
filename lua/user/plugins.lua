@@ -47,7 +47,6 @@ return packer.startup(function(use)
   use({ "numToStr/Comment.nvim" })
   use({ "JoosepAlviste/nvim-ts-context-commentstring" })
   use({ "kyazdani42/nvim-web-devicons" })
-  -- use({ "kyazdani42/nvim-tree.lua" })
   use({ "akinsho/bufferline.nvim" })
   use({ "moll/vim-bbye" })
   use({ "nvim-lualine/lualine.nvim" })
@@ -68,6 +67,7 @@ return packer.startup(function(use)
     as = "catppuccin"
   })
 
+  use({ "kyazdani42/nvim-tree.lua" })
   use {
     "nvim-neo-tree/neo-tree.nvim",
     as = "neotree",
@@ -86,6 +86,9 @@ return packer.startup(function(use)
       require 'window-picker'.setup()
     end,
   }
+
+  -- Vim Wiki
+  use "vimwiki/vimwiki"
 
   -- cmp plugins
   use({ "hrsh7th/nvim-cmp" }) -- The completion plugin
@@ -115,7 +118,7 @@ return packer.startup(function(use)
   -- use({ "akinsho/flutter-tools.nvim", requires = "nvim-lua/plenary.nvim",
   --   commit = "3c2b196de3a7f62247d50fe63e596b0884d6156a" })
   use({ "akinsho/flutter-tools.nvim", requires = "nvim-lua/plenary.nvim" })
-  use("dart-lang/dart-vim-plugin")
+  -- use("dart-lang/dart-vim-plugin")
   -- use("avatarnguyen/lsp-fastaction.nvim")
   use "sidlatau/lsp-fastaction.nvim"
   -- use({ "chrisbra/Colorizer", as = "ansicolor" })
@@ -126,7 +129,8 @@ return packer.startup(function(use)
   use({
     "nvim-telescope/telescope.nvim",
     config = function ()
-      require "user.telescope"
+      -- require "user.telescope"
+      require("telescope").setup()
     end
   })
   use {
@@ -153,10 +157,10 @@ return packer.startup(function(use)
 
   -- Git
   use({ "lewis6991/gitsigns.nvim" })
-  -- use({ "sindrets/diffview.nvim", requires = "nvim-lua/plenary.nvim" })
+  use({ "sindrets/diffview.nvim", requires = "nvim-lua/plenary.nvim" })
   use("ThePrimeagen/git-worktree.nvim")
-  use 'tpope/vim-fugitive'
-  use 'shumphrey/fugitive-gitlab.vim'
+  -- use 'tpope/vim-fugitive'
+  -- use 'shumphrey/fugitive-gitlab.vim'
 
   -- DAP
   use({
@@ -197,7 +201,7 @@ return packer.startup(function(use)
     end,
   })
   use "rcarriga/nvim-notify"
-  use "dstein64/vim-startuptime"
+  use { "dstein64/vim-startuptime" }
 
   -- use "Pocco81/AutoSave.nvim"
   use 'kazhala/close-buffers.nvim'
