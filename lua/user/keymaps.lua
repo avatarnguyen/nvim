@@ -26,6 +26,11 @@ keymap("n", "<Up>", "<C-w>k", opts)
 keymap("n", "<Right>", "<C-w>l", opts)
 
 -- Save
+-- vim.api.nvim_create_autocmd("FileType", { pattern = "md",
+--     callback = function()
+--         vim.api.nvim_buf_set_keymap(0,"n","<C-c>",":split<CR>:te g++ -std=c++14 -Wshadow -Wall -o %:t:r % -g -fsanitize=address -fsanitize=undefined -D_GLIBCXX_DEBUG && ./%:t:r<CR>i",opts)
+--     end})
+
 keymap("n", "<Enter>", "<cmd>w!<CR>", opts)
 -- keymap("n", "<C-s>", "<cmd>w!<CR>", opts)
 -- keymap("i", "<C-s>", "<ESC><cmd>w!<CR>", opts)
@@ -78,12 +83,9 @@ keymap('n', 'go', '<Cmd>Neotree float reveal_file=<cfile> reveal_force_cwd<cr>',
 
 -- Hop ---
 -- place this in one of your configuration file(s)
-keymap('n', "<leader>nl", "<cmd>lua require'hop'.hint_lines({ multi_windows = true })<cr>", opts)
 keymap('v', "<leader>nl", "<cmd>lua require'hop'.hint_lines()<cr>", opts)
 keymap('x', "<leader>nl", "<cmd>lua require'hop'.hint_lines()<cr>", opts)
-keymap('n', "<leader>nw", "<cmd>lua require'hop'.hint_words()<cr>", opts)
 keymap('v', "<leader>nw", "<cmd>lua require'hop'.hint_words()<cr>", opts)
-keymap('n', "<leader>na", "<cmd>HopPattern<cr>", opts)
 keymap('v', "<leader>na", "<cmd>HopPattern<cr>", opts)
 
 keymap('n', 'f', "<cmd>lua require'hop'.hint_char1({ direction = require'hop.hint'.HintDirection.AFTER_CURSOR, current_line_only = false })<cr>", {})
@@ -143,15 +145,22 @@ keymap("x", "K", ":move '<-2<CR>gv-gv", opts)
 keymap("i", "jk", "<ESC>", opts)
 
 -- Bufferline
-keymap("n", "<leader>1", "<Cmd>BufferLineGoToBuffer 1<CR>", opts)
-keymap("n", "<leader>2", "<Cmd>BufferLineGoToBuffer 2<CR>", opts)
-keymap("n", "<leader>3", "<Cmd>BufferLineGoToBuffer 3<CR>", opts)
-keymap("n", "<leader>4", "<Cmd>BufferLineGoToBuffer 4<CR>", opts)
-keymap("n", "<leader>5", "<Cmd>BufferLineGoToBuffer 5<CR>", opts)
-keymap("n", "<leader>6", "<Cmd>BufferLineGoToBuffer 6<CR>", opts)
-keymap("n", "<leader>7", "<Cmd>BufferLineGoToBuffer 7<CR>", opts)
-keymap("n", "<leader>8", "<Cmd>BufferLineGoToBuffer 8<CR>", opts)
-keymap("n", "<leader>9", "<Cmd>BufferLineGoToBuffer 9<CR>", opts)
+-- keymap("n", "<leader>1", "<Cmd>BufferLineGoToBuffer 1<CR>", opts)
+-- keymap("n", "<leader>2", "<Cmd>BufferLineGoToBuffer 2<CR>", opts)
+-- keymap("n", "<leader>3", "<Cmd>BufferLineGoToBuffer 3<CR>", opts)
+-- keymap("n", "<leader>4", "<Cmd>BufferLineGoToBuffer 4<CR>", opts)
+-- keymap("n", "<leader>5", "<Cmd>BufferLineGoToBuffer 5<CR>", opts)
+-- keymap("n", "<leader>6", "<Cmd>BufferLineGoToBuffer 6<CR>", opts)
+-- keymap("n", "<leader>7", "<Cmd>BufferLineGoToBuffer 7<CR>", opts)
+
+-- Lualine Tabline
+keymap("n", "<leader>1", "<Cmd>LualineBuffersJump 1<CR>", opts)
+keymap("n", "<leader>2", "<Cmd>LualineBuffersJump 2<CR>", opts)
+keymap("n", "<leader>3", "<Cmd>LualineBuffersJump 3<CR>", opts)
+keymap("n", "<leader>4", "<Cmd>LualineBuffersJump 4<CR>", opts)
+keymap("n", "<leader>5", "<Cmd>LualineBuffersJump 5<CR>", opts)
+keymap("n", "<leader>6", "<Cmd>LualineBuffersJump 6<CR>", opts)
+keymap("n", "<leader>7", "<Cmd>LualineBuffersJump 7<CR>", opts)
 
 -- Terminal --
 -- Better terminal navigation
