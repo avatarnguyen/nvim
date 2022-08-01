@@ -49,12 +49,17 @@ local filepath = {
   shorting_target = 24,
 }
 
-local filename = {
-  'filename',
-  file_status = true, -- displays file status (readonly status, modified status)
-  path = 0, -- 0 = just filename, 1 = relative path, 2 = absolute path
-  shorting_target = 30,
+local tabs = {
+  "tabs",
+  mode = 1,
 }
+
+-- local filename = {
+--   'filename',
+--   file_status = true, -- displays file status (readonly status, modified status)
+--   path = 0, -- 0 = just filename, 1 = relative path, 2 = absolute path
+--   shorting_target = 30,
+-- }
 
 local spaces = function()
   return "spaces: " .. vim.api.nvim_buf_get_option(0, "shiftwidth")
@@ -94,7 +99,7 @@ local config = {
   },
   sections = {
     lualine_a = { branch, diff },
-    lualine_b = { filepath },
+    lualine_b = { tabs },
     lualine_c = { diagnostics },
     lualine_x = { spaces, filetype },
     lualine_y = { location },
@@ -110,7 +115,7 @@ local config = {
         separator = { left = "", right = "" },
         right_padding = 2,
         symbols = { alternate_file = "" },
-        show_filename_only = false, -- Shows shortened relative path when set to false.
+        show_filename_only = true, -- Shows shortened relative path when set to false.
         hide_filename_extension = true, -- Hide filename extension when set to true.
         show_modified_status = true, -- Shows indicator when the buffer is modified.
         mode = 0, -- 0: Shows buffer name
@@ -124,7 +129,6 @@ local config = {
       },
     },
     lualine_x = { 'lsp_progress' },
-    lualine_z = { "tabs" }
   },
   -- winbar = {
   --   lualine_a = {},
