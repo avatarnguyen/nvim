@@ -9,14 +9,14 @@ vim.api.nvim_create_autocmd({ "FileType" }, {
   end,
 })
 
-vim.api.nvim_create_autocmd({ "BufWinEnter", "FileType" }, {
-  pattern = { "arb", "*.arb" },
-  callback = function()
-    vim.cmd [[
-      set filetype=ruby
-    ]]
-  end,
-})
+-- vim.api.nvim_create_autocmd({ "BufWinEnter", "FileType" }, {
+--   pattern = { "arb", "*.arb" },
+--   callback = function()
+--     vim.cmd [[
+--       set filetype=ruby
+--     ]]
+--   end,
+-- })
 
 -- Remove statusline and tabline when in Alpha
 vim.api.nvim_create_autocmd({ "User" }, {
