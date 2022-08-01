@@ -11,7 +11,7 @@ flutter.setup({
     open_cmd = "tabedit",
   },
   widget_guides = {
-    enabled = false,
+    enabled = true,
   },
   closing_tags = {
     enabled = true, -- set to false to disable
@@ -45,13 +45,8 @@ flutter.setup({
       virtual_text_str = "■", -- the virtual text character to highlight
     },
     on_attach = function(client, bufnr)
-      -- vim.g.dart_style_guide = 2
-      -- vim.g.dart_format_on_save = 1
-      local istatus_ok, illuminate = pcall(require, "illuminate")
-      if not istatus_ok then
-        return
-      end
-      illuminate.on_attach(client)
+      require("user.lsp.handlers").on_attach(client, bufnr)
+      vim.cmd "highlight FlutterWidgetGuides ctermfg=9 guifg=grey"
     end,
     -- capabilities = my_custom_capabilities -- e.g. lsp_status capabilities
     --- OR you can specify a function to deactivate or change or control how the config is created
@@ -62,6 +57,7 @@ flutter.setup({
       showTodos = true,
       completeFunctionCalls = true,
       analysisExcludedFolders = {
+        ".dart_tool",
         vim.fn.expand("$HOME/flutter/.pub-cache"),
         vim.fn.expand("$HOME/fvm"),
         vim.fn.expand("$HOME/flutter/packages"),
