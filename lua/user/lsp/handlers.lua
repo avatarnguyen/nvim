@@ -57,15 +57,16 @@ local function lsp_keymaps(bufnr)
   keymap(bufnr, 'n', 'gk', '<cmd>lua vim.lsp.buf.declaration()<CR>', opts) -- does not seems to work
   -- keymap(bufnr, "n", "gr", "<cmd>lua vim.lsp.buf.references()<CR>", opts)
   keymap(bufnr, "n", "gr", "<cmd>lua require('telescope.builtin').lsp_references()<cr>", opts)
-  keymap(bufnr, "n", "gL", "<cmd>lua vim.diagnostic.open_float()<CR>", opts)
+  keymap(bufnr, "n", "gl", "<cmd>lua vim.diagnostic.open_float()<CR>", opts)
   keymap(
-  bufnr, "n", "gl",
-  '<cmd>lua vim.lsp.diagnostic.show_line_diagnostics({ border = "rounded" })<CR>', opts)
-  keymap(bufnr, "n", "gE", '<cmd>lua vim.diagnostic.goto_prev({ border = "rounded" })<CR>', opts)
+    bufnr, "n", "gL",
+    '<cmd>lua vim.lsp.diagnostic.show_line_diagnostics({ border = "rounded" })<CR>', opts)
   keymap(bufnr, "n", "ge", '<cmd>lua vim.diagnostic.goto_next({ border = "rounded" })<CR>', opts)
+  keymap(bufnr, "n", "gE", '<cmd>lua vim.diagnostic.goto_prev({ border = "rounded" })<CR>', opts)
   keymap(bufnr, 'n', '<C-space>', '<cmd>lua vim.lsp.buf.signature_help()<CR>', opts)
   keymap(bufnr, 'n', 'gy', '<cmd>lua vim.lsp.buf.type_definition()<CR>', opts)
 
+  keymap(bufnr, "n", "<leader>q", '<cmd>vim.diagnostic.setloclist()<CR>', opts)
   -- keymap(bufnr, "n", "<leader>lf", "<cmd>lua vim.lsp.buf.formatting()<cr>", opts)
   -- keymap(bufnr, "n", "<leader>li", "<cmd>LspInfo<cr>", opts)
   -- keymap(bufnr, "n", "<leader>lI", "<cmd>LspInstallInfo<cr>", opts)
@@ -99,18 +100,16 @@ M.on_attach = function(client, bufnr)
     client.server_capabilities.code_action = false
   end
 
-  -- if client.name == "dartls" then
-  --   client.server_capabilities.document_formatting = false
-  -- end
+  if client.name == "dartls" then
+    client.server_capabilities.document_formatting = false
+  end
 
   if client.name == "sumneko_lua" then
     client.server_capabilities.document_formatting = false
   end
 
-  M.capabilities.textDocument.completion.completionItem.snippetSupport = true
-  M.capabilities = cmp_nvim_lsp.update_capabilities(M.capabilities)
-
   lsp_keymaps(bufnr)
+
   local status_ok, illuminate = pcall(require, "illuminate")
   if not status_ok then
     return
@@ -118,9 +117,14 @@ M.on_attach = function(client, bufnr)
   illuminate.on_attach(client)
 
   local ok, lsp_format = pcall(require, "lsp-format")
-   if ok then
-     lsp_format.on_attach(client)
+  if ok then
+    lsp_format.on_attach(client)
+  else
+    vim.api.nvim_err_writeln "Failed to load lsp format on on_attach"
   end
+
+  M.capabilities.textDocument.completion.completionItem.snippetSupport = true
+  M.capabilities = cmp_nvim_lsp.update_capabilities(M.capabilities)
 end
 
 -- possible config: need to investigate
