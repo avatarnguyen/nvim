@@ -64,22 +64,22 @@ keymap("v", "<leader>la", ":<C-U>lua vim.lsp.buf.range_code_action()<CR>", opts)
 keymap("v", "<leader>a", "<esc><cmd>lua require('lsp-fastaction').range_code_action()<CR>", opts)
 keymap("n", "<leader>a", "<cmd>lua require('lsp-fastaction').code_action()<CR>", opts)
 
-keymap("n", "K", "<Cmd>lua vim.lsp.buf.hover()<CR>", opts)
-keymap('n', 'gk', '<cmd>lua vim.lsp.buf.declaration()<CR>', opts) -- does not seems to work
-keymap('n', 'gD', '<cmd>:vsp<cr>:lua vim.lsp.buf.definition()<cr><CR>', opts)
-keymap("n", "gd", "<cmd>lua require('telescope.builtin').lsp_definitions()<cr>", opts)
-keymap("n", "gE", '<cmd>lua vim.diagnostic.goto_prev({ border = "rounded" })<CR>', opts)
-keymap("n", "ge", '<cmd>lua vim.diagnostic.goto_next({ border = "rounded" })<CR>', opts)
-keymap("n", "gm", "<cmd>lua vim.lsp.buf.implementation()<CR>", opts)
-keymap('n', '<C-space>', '<cmd>lua vim.lsp.buf.signature_help()<CR>', opts)
-keymap('n', 'gy', '<cmd>lua vim.lsp.buf.type_definition()<CR>', opts)
-keymap("n", "gr", "<cmd>lua require('telescope.builtin').lsp_references()<cr>", opts)
-keymap('n', 'E', '<Cmd>lua vim.diagnostic.open_float()<CR>', opts)
-keymap(
-  "n", "gl",
-  '<cmd>lua vim.lsp.diagnostic.show_line_diagnostics({ border = "rounded" })<CR>', opts)
+-- keymap("n", "K", "<Cmd>lua vim.lsp.buf.hover()<CR>", opts)
+-- keymap('n', 'gk', '<cmd>lua vim.lsp.buf.declaration()<CR>', opts) -- does not seems to work
+-- keymap('n', 'gD', '<cmd>:vsp<cr>:lua vim.lsp.buf.definition()<cr><CR>', opts)
+-- keymap("n", "gd", "<cmd>lua require('telescope.builtin').lsp_definitions()<cr>", opts)
+-- keymap("n", "gE", '<cmd>lua vim.diagnostic.goto_prev({ border = "rounded" })<CR>', opts)
+-- keymap("n", "ge", '<cmd>lua vim.diagnostic.goto_next({ border = "rounded" })<CR>', opts)
+-- keymap("n", "gm", "<cmd>lua vim.lsp.buf.implementation()<CR>", opts)
+-- keymap('n', '<C-space>', '<cmd>lua vim.lsp.buf.signature_help()<CR>', opts)
+-- keymap('n', 'gy', '<cmd>lua vim.lsp.buf.type_definition()<CR>', opts)
+-- keymap("n", "gr", "<cmd>lua require('telescope.builtin').lsp_references()<cr>", opts)
+-- keymap('n', 'E', '<Cmd>lua vim.diagnostic.open_float()<CR>', opts)
+-- keymap(
+--   "n", "gl",
+--   '<cmd>lua vim.lsp.diagnostic.show_line_diagnostics({ border = "rounded" })<CR>', opts)
 
-keymap('n', 'go', '<Cmd>Neotree float reveal_file=<cfile> reveal_force_cwd<cr>', opts)
+-- keymap('n', 'go', '<Cmd>Neotree float reveal_file=<cfile> reveal_force_cwd<cr>', opts)
 
 -- Hop ---
 -- place this in one of your configuration file(s)
