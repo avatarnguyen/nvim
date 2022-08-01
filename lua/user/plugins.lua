@@ -70,10 +70,10 @@ return packer.startup(function(use)
 
   use { 'fgheng/winbar.nvim' }
   -- use { 'avatarnguyen/winbar.nvim' }
-  use {
-    "SmiteshP/nvim-navic",
-    requires = "neovim/nvim-lspconfig"
-  }
+  -- use {
+  --   "SmiteshP/nvim-navic",
+  --   requires = "neovim/nvim-lspconfig"
+  -- }
   use({ "kyazdani42/nvim-tree.lua" })
   -- use {
   --   "nvim-neo-tree/neo-tree.nvim",
@@ -99,7 +99,7 @@ return packer.startup(function(use)
 
   -- cmp plugins
   use({ "hrsh7th/nvim-cmp" }) -- The completion plugin
-  use({ 'tzachar/cmp-tabnine', run = './install.sh', requires = 'hrsh7th/nvim-cmp' })
+  -- use({ 'tzachar/cmp-tabnine', run = './install.sh', requires = 'hrsh7th/nvim-cmp' })
   use({ "hrsh7th/cmp-buffer" }) -- buffer completions
   use({ "hrsh7th/cmp-path" }) -- path completions
   use({ "saadparwaiz1/cmp_luasnip" }) -- snippet completions
@@ -116,7 +116,7 @@ return packer.startup(function(use)
   -- use({ "jose-elias-alvarez/null-ls.nvim" }) -- for formatters and linters
   use({ "RRethy/vim-illuminate" })
   use({ "rmagatti/goto-preview" })
-  use("j-hui/fidget.nvim")
+  -- use("j-hui/fidget.nvim")
   use {
     "lukas-reineke/lsp-format.nvim",
     config = function()
@@ -132,6 +132,24 @@ return packer.startup(function(use)
   use({ "akinsho/flutter-tools.nvim", requires = "nvim-lua/plenary.nvim" })
   use "sidlatau/lsp-fastaction.nvim"
   -- use({ "chrisbra/Colorizer", as = "ansicolor" })
+  use {
+    "nvim-neotest/neotest",
+    requires = {
+      "nvim-lua/plenary.nvim",
+      "nvim-treesitter/nvim-treesitter",
+      "antoinemadec/FixCursorHold.nvim",
+      "sidlatau/neotest-dart",
+    },
+    config = function()
+      require('neotest').setup({
+        adapters = {
+          require('neotest-dart') {
+            command = 'flutter',
+          },
+        }
+      })
+    end
+  }
 
   -- use { 'camspiers/snap', rocks = {'fzy'}}
   use { 'camspiers/snap' }
@@ -139,8 +157,8 @@ return packer.startup(function(use)
   use({
     "nvim-telescope/telescope.nvim",
     config = function()
-      -- require "user.telescope"
-      require("telescope").setup()
+      require "user.telescope"
+      -- require("telescope").setup()
     end
   })
   use {
@@ -216,7 +234,7 @@ return packer.startup(function(use)
     end,
   })
   use "rcarriga/nvim-notify"
-  use { "dstein64/vim-startuptime" }
+  -- use { "dstein64/vim-startuptime" }
 
   -- use "Pocco81/AutoSave.nvim"
   use 'kazhala/close-buffers.nvim'

@@ -89,15 +89,19 @@ local mappings = {
   ["A"] = { "<cmd>wa<CR>", "Save All" },
   ["Q"] = { "<cmd>q<CR>", "Quit" },
   ["c"] = { "<cmd>Bdelete!<CR>", "Close Buffer" },
+  -- ["f"] = {
+  --   "<cmd>lua require('telescope.builtin').find_files(require('telescope.themes').get_dropdown{ debounce = 150, file_ignore_patterns = {'ios/', 'android/', 'fonts/', 'assets/', 'packages/', 'doc/'}})<cr>",
+  --   "Find files",
+  -- },
   ["f"] = {
-    "<cmd>lua require('telescope.builtin').find_files(require('telescope.themes').get_dropdown{ debounce = 150, file_ignore_patterns = {'ios/', 'android/', 'fonts/', 'assets/', 'packages/', 'doc/'}})<cr>",
+    "<cmd>lua require('telescope.builtin').find_files({ debounce = 150, file_ignore_patterns = {'ios/', 'android/', 'fonts/', 'assets/', 'packages/', 'doc/'}})<cr>",
     "Find files",
   },
   -- ["w"] = { "<cmd>lua require('telescope.builtin').grep_string({file_ignore_patterns = {'ios/', 'android/', 'assets/', 'fonts/', 'packages/', 'doc/'}})<cr>",
   --   "Find String" },
   ["P"] = { "<cmd>Telescope projects<cr>", "Projects" },
-  ["p"] = { "<cmd>:lua require('telescope').extensions.neoclip.default(require('telescope.themes').get_dropdown{})<CR>",
-    "Clipboard" },
+  -- ["p"] = { "<cmd>:lua require('telescope').extensions.neoclip.default(require('telescope.themes').get_dropdown{})<CR>",
+  --   "Clipboard" },
   ["D"] = { "<cmd>:lua require('telescope').extensions.flutter.commands()<CR>", "Flutter Commands" },
 
   ["M"] = { "<cmd>:lua require('telescope').extensions.macroscope.default()<CR>", "Macros" },
@@ -217,8 +221,8 @@ local mappings = {
       "Workspace Diagnostics Popup",
     },
     W = { "<cmd>Trouble workspace_diagnostics<cr>", "Workspace Diagnostics" },
-    f = { "<cmd>Format<cr>", "Format" },
-    -- f = { "<cmd>lua vim.lsp.buf.format()<cr>", "Format" },
+    -- f = { "<cmd>Format<cr>", "Format" },
+    f = { "<cmd>lua vim.lsp.buf.format()<cr>", "Format" },
     -- i = { "<cmd>LspInfo<cr>", "Info" },
     I = { "<cmd>LspInstallInfo<cr>", "Installer Info" },
     l = { "<cmd>lua vim.lsp.codelens.run()<cr>", "CodeLens Action" },
@@ -228,18 +232,17 @@ local mappings = {
     R = { "<cmd>Trouble lsp_references<cr>", "References" },
   },
 
-  t = {
+  r = {
     name = "Run Test",
-    r = { "<cmd>TestNearest<cr>", "Test Nearest" },
-    f = { "<cmd>TestFile<cr>", "Test File" },
-    s = { "<cmd>TestSuite<cr>", "Test Suite" },
-    l = { "<cmd>TestLast<cr>", "Rerun Last Test" },
-    v = { "<cmd>TestVisit<cr>", "Test Visit" },
-    u = { "<cmd>Ultest<cr>", "Run Ultest" },
-    o = { "<cmd>UltestSummary<cr>", "Toggle Summary" },
-    n = { "<cmd>UltestNearest<cr>", "Run Ultest Nearest" },
+    r = { "<cmd>lua require('neotest').run.run()<cr>", "Test Nearest" },
+    f = { "<cmd>require('neotest').run.run(vim.fn.expand('%'))<cr>", "Test File" },
+    s = { "<cmd>require('neotest').run.stop()<cr>", "Stop Nearest Test" },
+    a = { "<cmd>require('neotest').run.attach()<cr>", "Attach Nearest Test" },
+    l = { "<cmd>require('neotest').run.run_last()<cr>", "Run Last Test" },
+    j = { "<cmd>lua require('neotest').output.open({ enter = true })<cr>", "Open Output" },
+    o = { "<cmd>lua require('neotest').summary.open()<cr>", "Open Summary" },
+    e = { "<cmd>lua require('neotest').summary.toggle()<cr>", "Toggle Summary" },
   },
-
   S = {
     name = "Search",
     d = { "<cmd>lua require('telescope.builtin').reloader()<cr>", "Reloader", },
@@ -253,7 +256,7 @@ local mappings = {
     C = { "<cmd>Telescope commands<cr>", "Commands" },
   },
 
-  T = {
+  t = {
     name = "Terminal",
     t = { "<cmd>lua _HTOP_TOGGLE()<cr>", "Htop" },
     f = { "<cmd>ToggleTerm direction=float<cr>", "Float" },
