@@ -112,7 +112,7 @@ cmp.setup {
         buffer = "",
         path = "",
         emoji = "",
-        cmp_tabnine = "[Tab9]",
+        -- cmp_tabnine = "[Tab9]",
       })[entry.source.name]
       return vim_item
     end,
@@ -122,7 +122,7 @@ cmp.setup {
     { name = "nvim_lua" },
     { name = "luasnip" },
     { name = "buffer" },
-    { name = 'cmp_tabnine' },
+    -- { name = 'cmp_tabnine' },
     { name = "path" },
   },
   confirm_opts = {
