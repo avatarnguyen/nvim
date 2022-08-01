@@ -61,7 +61,7 @@ return packer.startup(function(use)
   -- Colorschemes
   -- use({ "folke/tokyonight.nvim" })
   -- use("bluz71/vim-nightfly-guicolors")
-  use("rebelot/kanagawa.nvim")
+  -- use("rebelot/kanagawa.nvim")
   -- use { 'lalitmee/cobalt2.nvim', requires = 'tjdevries/colorbuddy.nvim' }
   use({
     "catppuccin/nvim",
