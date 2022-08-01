@@ -1,4 +1,4 @@
-local snap = require'snap'
+local snap = require 'snap'
 
 -- snap.run {
 --   producer = snap.get'consumer.fzf'(snap.get'producer.ripgrep.file'),
@@ -8,14 +8,13 @@ local snap = require'snap'
 -- }
 
 snap.maps {
-  -- {"<Leader>ff", snap.config.file {producer = "ripgrep.file"}},
-  {"<Leader>k", snap.config.file {
-      producer = snap.get'consumer.fzf'(snap.get'producer.ripgrep.file'),
-      select = snap.get'select.file'.select,
-    }
+  { "<Leader>j", snap.config.file { producer = "ripgrep.file" } },
+  { "<Leader>k", snap.config.file {
+    producer = snap.get 'consumer.fzf' (snap.get 'producer.ripgrep.file'),
+  }
   },
-  {"<Leader>so", snap.config.file {producer = "vim.oldfile"}},
-  {"<Leader>sm", snap.config.vimgrep {}},
+  { "<Leader>so", snap.config.file { producer = "vim.oldfile" } },
+  { "<Leader>sm", snap.config.vimgrep {} },
 }
 
 -- Possible color config
