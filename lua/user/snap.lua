@@ -7,17 +7,21 @@ local snap = require'snap'
 --   views = {snap.get'preview.file'}
 -- }
 
-vim.cmd [[
-  highlight! link SnapSelect DiagnosticSignWarn 
-]]
 snap.maps {
   -- {"<Leader>ff", snap.config.file {producer = "ripgrep.file"}},
   {"<Leader>k", snap.config.file {
       producer = snap.get'consumer.fzf'(snap.get'producer.ripgrep.file'),
       select = snap.get'select.file'.select,
-      -- multiselect = snap.get'select.file'.multiselect,
     }
   },
   {"<Leader>so", snap.config.file {producer = "vim.oldfile"}},
   {"<Leader>sm", snap.config.vimgrep {}},
 }
+
+-- Possible color config
+-- highlight! link SnapSelect GruvboxBlue
+-- highlight! link SnapMultiSelect GruvboxGray
+-- highlight! link SnapNormal GruvboxFg1
+-- highlight! link SnapBorder SnapNormal
+-- highlight! link SnapPrompt GruvboxOrangeBold
+-- highlight! link SnapPosition GruvboxOrangeBold

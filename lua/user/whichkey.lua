@@ -121,7 +121,7 @@ local mappings = {
   s = {
     name = "pickers",
     s = { "<cmd>lua require('telescope.builtin').grep_string({file_ignore_patterns = {'ios/', 'android/', 'assets/', 'fonts/', 'packages/', 'doc/'}})<cr>",
-    "Find String" },
+      "Find String" },
     a = {
       "<cmd>lua require('telescope.builtin').find_files(require('telescope.themes').get_dropdown{search_dirs = { '~/Developer/app-flutter/assets/' }})<cr>",
       "Find Assets",
@@ -142,8 +142,8 @@ local mappings = {
       "<cmd>lua require('telescope.builtin').live_grep({ search_dirs = { '~/Developer/app-flutter/lib/l10n/app_en_GB.arb' }})<cr>",
       "Find Translation Key",
     },
-    e = { "<cmd>Neotree reveal float<cr>", "Float Explorer" },
-    j = { "<cmd>Neotree buffers<cr>", "Show Buffer Explorer" },
+    -- e = { "<cmd>Neotree reveal float<cr>", "Float Explorer" },
+    -- j = { "<cmd>Neotree buffers<cr>", "Show Buffer Explorer" },
     -- o, f, g occupied by snap
     -- f = {
     --   "<cmd>lua require('telescope.builtin').find_files(require('telescope.themes').get_dropdown{debounce = 150, search_dirs = { '~/Developer/app-flutter/lib/' }, file_ignore_patterns = {'l10n/'}})<cr>",
@@ -193,7 +193,7 @@ local mappings = {
       "<cmd>lua require 'gitsigns'.undo_stage_hunk()<cr>",
       "Undo Stage Hunk",
     },
-    e = { "<cmd>Neotree left git_status<cr>", "Git Status Tree" },
+    -- e = { "<cmd>Neotree left git_status<cr>", "Git Status Tree" },
     o = { "<cmd>Telescope git_status<cr>", "Open changed file" },
     b = { "<cmd>Telescope git_branches<cr>", "Checkout branch" },
     c = { "<cmd>Telescope git_commits<cr>", "Checkout commit" },
@@ -217,7 +217,8 @@ local mappings = {
       "Workspace Diagnostics Popup",
     },
     W = { "<cmd>Trouble workspace_diagnostics<cr>", "Workspace Diagnostics" },
-    f = { "<cmd>lua vim.lsp.buf.format()<cr>", "Format" },
+    f = { "<cmd>Format<cr>", "Format" },
+    -- f = { "<cmd>lua vim.lsp.buf.format()<cr>", "Format" },
     -- i = { "<cmd>LspInfo<cr>", "Info" },
     I = { "<cmd>LspInstallInfo<cr>", "Installer Info" },
     l = { "<cmd>lua vim.lsp.codelens.run()<cr>", "CodeLens Action" },

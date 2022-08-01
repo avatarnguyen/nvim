@@ -28,35 +28,6 @@ vim.opt.cursorline = true -- highlight the current line
 
 vim.opt.lazyredraw = true
 
--- Vim Wiki settings
-vim.opt.compatible = false
--- vim.opt.syntax = true
-vim.cmd[[
- filetype plugin on
- syntax on
-]]
-
-vim.g.vimwiki_list = {{path = '~/Documents/vimwiki', syntax = 'markdown', ext = '.md'}}
-vim.g.vimwiki_markdown_link_ext = 1
-vim.g.markdown_folding = 1
-
--- vim.g.vimwiki_ext2syntax = {'.md': 'markdown', '.markdown': 'markdown', '.mdown': 'markdown'}
-
--- remove cursorline on inactive window
-local group = vim.api.nvim_create_augroup("CursorLineControl", { clear = true })
-local set_cursorline = function(event, value, pattern)
-  vim.api.nvim_create_autocmd(event, {
-    group = group,
-    pattern = pattern,
-    callback = function()
-      vim.opt_local.cursorline = value
-    end,
-  })
-end
-set_cursorline("WinLeave", false)
-set_cursorline("WinEnter", true)
-set_cursorline("FileType", false, "TelescopePrompt")
-
 vim.opt.number = true -- set numbered lines
 vim.opt.laststatus = 3
 vim.opt.showcmd = true
@@ -72,9 +43,43 @@ vim.opt.shortmess:append "c"
 vim.opt.whichwrap:append("<,>,[,],h,l")
 vim.opt.iskeyword:append("-")
 vim.opt.relativenumber = true -- set relative numbered lines
+
 -- colorcolumn = "80"
 -- colorcolumn = "120"
+-- Vim Wiki settings
+vim.opt.compatible = false
+-- vim.opt.syntax = true
+vim.cmd [[
+ filetype plugin on
+ syntax on
+]]
 
+vim.g.vimwiki_list = { { path = '~/Documents/vimwiki', syntax = 'markdown', ext = '.md' } }
+vim.g.vimwiki_markdown_link_ext = 1
+vim.g.markdown_folding = 1
+
+-- vim.g.vimwiki_ext2syntax = {'.md': 'markdown', '.markdown': 'markdown', '.mdown': 'markdown'}
+
+
+-- remove cursorline on inactive window
+local group = vim.api.nvim_create_augroup("CursorLineControl", { clear = true })
+local set_cursorline = function(event, value, pattern)
+  vim.api.nvim_create_autocmd(event, {
+    group = group,
+    pattern = pattern,
+    callback = function()
+      vim.opt_local.cursorline = value
+    end,
+  })
+end
+set_cursorline("WinLeave", false, "*.dart")
+set_cursorline("WinEnter", true, "*.dart")
+set_cursorline("WinLeave", false, "*.lua")
+set_cursorline("WinEnter", true, "*.lua")
+
+set_cursorline("FileType", false, "TelescopePrompt")
+set_cursorline("FileType", false, "log")
+set_cursorline("FileType", false, "No Name")
 -- opt.shada = { "!", "'1000", "<50", "s10", "h" }
 -- opt.breakindent = true
 -- opt.showbreak = string.rep(" ", 3) -- Make it so that long lines wrap smartly

@@ -50,6 +50,7 @@ return packer.startup(function(use)
   use({ "akinsho/bufferline.nvim" })
   use({ "moll/vim-bbye" })
   use({ "nvim-lualine/lualine.nvim" })
+  use({ 'arkav/lualine-lsp-progress' })
   use { "akinsho/toggleterm.nvim" }
   use({ "ahmedkhalf/project.nvim" })
   use({ "lewis6991/impatient.nvim" })
@@ -61,31 +62,37 @@ return packer.startup(function(use)
   -- use({ "folke/tokyonight.nvim" })
   -- use("bluz71/vim-nightfly-guicolors")
   use("rebelot/kanagawa.nvim")
-  use { 'lalitmee/cobalt2.nvim', requires = 'tjdevries/colorbuddy.nvim' }
+  -- use { 'lalitmee/cobalt2.nvim', requires = 'tjdevries/colorbuddy.nvim' }
   use({
     "catppuccin/nvim",
     as = "catppuccin"
   })
 
+  use { 'fgheng/winbar.nvim' }
+  -- use { 'avatarnguyen/winbar.nvim' }
+  use {
+    "SmiteshP/nvim-navic",
+    requires = "neovim/nvim-lspconfig"
+  }
   use({ "kyazdani42/nvim-tree.lua" })
-  use {
-    "nvim-neo-tree/neo-tree.nvim",
-    as = "neotree",
-    branch = "v2.x",
-    requires = {
-      "nvim-lua/plenary.nvim",
-      "kyazdani42/nvim-web-devicons", -- not strictly required, but recommended
-      "MunifTanjim/nui.nvim",
-    }
-  }
-  use {
-    's1n7ax/nvim-window-picker',
-    tag = 'v1.*',
-    after = 'neotree',
-    config = function()
-      require 'window-picker'.setup()
-    end,
-  }
+  -- use {
+  --   "nvim-neo-tree/neo-tree.nvim",
+  --   as = "neotree",
+  --   branch = "v2.x",
+  --   requires = {
+  --     "nvim-lua/plenary.nvim",
+  --     "kyazdani42/nvim-web-devicons", -- not strictly required, but recommended
+  --     "MunifTanjim/nui.nvim",
+  --   }
+  -- }
+  -- use {
+  --   's1n7ax/nvim-window-picker',
+  --   tag = 'v1.*',
+  --   after = 'neotree',
+  --   config = function()
+  --     require 'window-picker'.setup()
+  --   end,
+  -- }
 
   -- Vim Wiki
   use "vimwiki/vimwiki"
@@ -99,7 +106,6 @@ return packer.startup(function(use)
   use({ "hrsh7th/cmp-nvim-lsp" })
   use({ "hrsh7th/cmp-nvim-lua" })
   use({ "folke/trouble.nvim", cmd = "TroubleToggle" })
-
   -- snippets
   use({ "L3MON4D3/LuaSnip" }) --snippet engine
   -- use({ "rafamadriz/friendly-snippets" }) -- a bunch of snippets to use
@@ -111,6 +117,12 @@ return packer.startup(function(use)
   use({ "RRethy/vim-illuminate" })
   use({ "rmagatti/goto-preview" })
   use("j-hui/fidget.nvim")
+  use {
+    "lukas-reineke/lsp-format.nvim",
+    config = function()
+      require("lsp-format").setup {}
+    end,
+  }
   -- use("glepnir/lspsaga.nvim")
   -- use("filipdutescu/renamer.nvim")
 
@@ -118,8 +130,6 @@ return packer.startup(function(use)
   -- use({ "akinsho/flutter-tools.nvim", requires = "nvim-lua/plenary.nvim",
   --   commit = "3c2b196de3a7f62247d50fe63e596b0884d6156a" })
   use({ "akinsho/flutter-tools.nvim", requires = "nvim-lua/plenary.nvim" })
-  -- use("dart-lang/dart-vim-plugin")
-  -- use("avatarnguyen/lsp-fastaction.nvim")
   use "sidlatau/lsp-fastaction.nvim"
   -- use({ "chrisbra/Colorizer", as = "ansicolor" })
 
@@ -128,7 +138,7 @@ return packer.startup(function(use)
   -- Telescope
   use({
     "nvim-telescope/telescope.nvim",
-    config = function ()
+    config = function()
       -- require "user.telescope"
       require("telescope").setup()
     end
@@ -159,21 +169,25 @@ return packer.startup(function(use)
   use({ "lewis6991/gitsigns.nvim" })
   use({ "sindrets/diffview.nvim", requires = "nvim-lua/plenary.nvim" })
   use("ThePrimeagen/git-worktree.nvim")
-  -- use 'tpope/vim-fugitive'
-  -- use 'shumphrey/fugitive-gitlab.vim'
 
   -- DAP
   use({
     "mfussenegger/nvim-dap",
     module = "dap",
-    config = function ()
+    config = function()
       require "user.dap"
     end
   })
   -- use({ "rcarriga/nvim-dap-ui" })
   -- use({ "ravenxrz/DAPInstall.nvim" })
 
-  -- Editing
+  -- Editing {{{
+  use {
+    "bkad/camelcasemotion",
+    config = function()
+      vim.g["camelcasemotion_key"] = "\\"
+    end,
+  }
   use({
     "phaazon/hop.nvim",
     branch = "v1", -- optional but strongly recommended
@@ -184,6 +198,7 @@ return packer.startup(function(use)
   })
   use("Mephistophiles/surround.nvim")
   use("tpope/vim-repeat")
+  -- }}}
 
   -- Misc
   -- use("abecodes/tabout.nvim")
