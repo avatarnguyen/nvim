@@ -109,7 +109,7 @@ cmp.setup {
         nvim_lsp = "LSP",
         nvim_lua = "",
         luasnip = "",
-        buffer = "",
+        buffer = "BUF",
         path = "",
         emoji = "",
         -- cmp_tabnine = "[Tab9]",

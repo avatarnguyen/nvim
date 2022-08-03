@@ -46,6 +46,8 @@ flutter.setup({
     },
     on_attach = function(client, bufnr)
       require("user.lsp.handlers").on_attach(client, bufnr)
+      vim.g.dart_style_guide = 2
+      vim.g.dart_format_on_save = 1
       vim.cmd "highlight FlutterWidgetGuides ctermfg=9 guifg=grey"
     end,
     -- capabilities = my_custom_capabilities -- e.g. lsp_status capabilities

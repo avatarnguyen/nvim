@@ -117,12 +117,12 @@ return packer.startup(function(use)
   use({ "RRethy/vim-illuminate" })
   use({ "rmagatti/goto-preview" })
   -- use("j-hui/fidget.nvim")
-  use {
-    "lukas-reineke/lsp-format.nvim",
-    config = function()
-      require("lsp-format").setup {}
-    end,
-  }
+  -- use {
+  --   "lukas-reineke/lsp-format.nvim",
+  --   config = function()
+  --     require("lsp-format").setup {}
+  --   end,
+  -- }
   -- use("glepnir/lspsaga.nvim")
   -- use("filipdutescu/renamer.nvim")
 
@@ -131,6 +131,7 @@ return packer.startup(function(use)
   --   commit = "3c2b196de3a7f62247d50fe63e596b0884d6156a" })
   use({ "akinsho/flutter-tools.nvim", requires = "nvim-lua/plenary.nvim" })
   use "sidlatau/lsp-fastaction.nvim"
+  use "dart-lang/dart-vim-plugin"
   -- use({ "chrisbra/Colorizer", as = "ansicolor" })
   use {
     "nvim-neotest/neotest",
