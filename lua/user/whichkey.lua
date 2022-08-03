@@ -217,11 +217,10 @@ local mappings = {
     d = { "<cmd>Trouble document_diagnostics<cr>", "Document Diagnostics" },
     e = { "<cmd>lua vim.diagnostic.open_float()<cr>", "Diagnostics Float" },
     w = {
-      "<cmd>Telescope diagnostics<cr>",
+      "<cmd>lua require('telescope.builtin').diagnostics({file_ignore_patterns = {'packages/'}})<cr>",
       "Workspace Diagnostics Popup",
     },
     W = { "<cmd>Trouble workspace_diagnostics<cr>", "Workspace Diagnostics" },
-    -- f = { "<cmd>Format<cr>", "Format" },
     f = { "<cmd>lua vim.lsp.buf.format()<cr>", "Format" },
     -- i = { "<cmd>LspInfo<cr>", "Info" },
     I = { "<cmd>LspInstallInfo<cr>", "Installer Info" },
