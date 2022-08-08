@@ -45,6 +45,15 @@ vim.api.nvim_create_autocmd({ "TextYankPost" }, {
   end,
 })
 
+vim.api.nvim_create_autocmd({ "BufWinEnter", "FileType" }, {
+  pattern = { "arb", "*.arb" },
+  callback = function()
+    vim.cmd [[
+      set filetype=json
+    ]]
+  end,
+})
+
 -- vim.api.nvim_create_autocmd({ "BufWritePre" }, {
 --   pattern = "*.dart",
 --   callback = function()
