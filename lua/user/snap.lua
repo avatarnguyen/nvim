@@ -8,7 +8,7 @@ local snap = require 'snap'
 -- }
 
 snap.maps {
-  { "<Leader>j", snap.config.file { producer = "ripgrep.file" } },
+  -- { "<Leader>j", snap.config.file { producer = "ripgrep.file" } },
   { "<Leader>k", snap.config.file {
     producer = snap.get 'consumer.fzf' (snap.get 'producer.ripgrep.file'),
   }

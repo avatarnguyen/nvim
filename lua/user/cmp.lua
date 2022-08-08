@@ -11,8 +11,8 @@ if not snip_status_ok then
 end
 
 
--- luasnip.filetype_extend("dart", {"flutter"})
--- require("luasnip/loaders/from_vscode").load()
+luasnip.filetype_extend("dart", {"flutter"})
+require("luasnip/loaders/from_vscode").load()
 require("luasnip/loaders/from_vscode").lazy_load({ paths = { "~/.config/nvim/vscodesnips" } })
 
 local check_backspace = function()
@@ -23,34 +23,6 @@ end
 local icons = require "user.icons"
 
 local kind_icons = icons.kind
-
--- local kind_icons = {
---   Text = "",
---   Method = "",
---   Function = "",
---   Constructor = "",
---   Field = "",
---   Variable = "",
---   Class = "",
---   Interface = "",
---   Module = "",
---   Property = "",
---   Unit = "",
---   Value = "",
---   Enum = "",
---   Keyword = "",
---   Snippet = "",
---   Color = "",
---   File = "",
---   Reference = "",
---   Folder = "",
---   EnumMember = "",
---   Constant = "",
---   Struct = "",
---   Event = "",
---   Operator = "",
---   TypeParameter = "",
--- }
 
 cmp.setup {
   snippet = {
@@ -106,13 +78,13 @@ cmp.setup {
     format = function(entry, vim_item)
       vim_item.kind = string.format("%s", kind_icons[vim_item.kind])
       vim_item.menu = ({
-        nvim_lsp = "LSP",
+        nvim_lsp = "",
         nvim_lua = "",
         luasnip = "",
         buffer = "",
         path = "",
         emoji = "",
-        -- cmp_tabnine = "[Tab9]",
+        cmp_tabnine = "[T9]",
       })[entry.source.name]
       return vim_item
     end,
@@ -122,7 +94,7 @@ cmp.setup {
     { name = "nvim_lua" },
     { name = "luasnip" },
     { name = "buffer" },
-    -- { name = 'cmp_tabnine' },
+    { name = 'cmp_tabnine' },
     { name = "path" },
   },
   confirm_opts = {

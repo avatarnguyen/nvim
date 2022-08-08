@@ -29,32 +29,32 @@ ls.config.set_config {
   ext_opts = {
     [types.choiceNode] = {
       active = {
-        virt_text = { { "<-", "Error"} },
+        virt_text = { { "<-", "Error" } },
       }
     }
   }
 }
 
-local date = function() return {os.date('%Y-%m-%d')} end
+local date = function() return { os.date('%Y-%m-%d') } end
 
 ls.add_snippets(nil, {
   all = {
     snip({
-        trig = "date",
-        namr = "date",
-        dscr = "date in the form of yyyy-mm-dd",
+      trig = "date",
+      namr = "date",
+      dscr = "date in the form of yyyy-mm-dd",
     }, {
-        func(date, {}),
+      func(date, {}),
     }),
-  --  snip("ncsl", {
-  --     text("class "),
-  --     insert(1, "WidgetName"),
-  --     text(" extends ConsumerWidget {"),
-  --     text("const "),
-  --     insert(rep(1), "WidgetName"),
-  --     text("({super.key}); "),
-  --     text("}"),
-  --   }, ""),
+    --  snip("ncsl", {
+    --     text("class "),
+    --     insert(1, "WidgetName"),
+    --     text(" extends ConsumerWidget {"),
+    --     text("const "),
+    --     insert(rep(1), "WidgetName"),
+    --     text("({super.key}); "),
+    --     text("}"),
+    --   }, ""),
   },
   dart = {
     ls.parser.parse_snippet("th", "final theme = AppTheme.of(context);"),
@@ -63,9 +63,11 @@ ls.add_snippets(nil, {
     ls.parser.parse_snippet("tor", "//TODO: (@anh): remove before push"),
     ls.parser.parse_snippet("ton", "//TODO: (@anh): implement on next ticket"),
     ls.parser.parse_snippet("rcon", "Container(color: Colors.red,);"),
-    snip("csl", fmta("class <> extends ConsumerWidget {\n\tconst <>({super.key});\n\t@override\tWidget build(BuildContext context, WidgetRef ref) {\n\t\treturn Container();\n\t}\n}", { insert(1, "NameWidget"), rep(1)})),
-    snip("cpn", fmta("context.pushPageNamed(Routes.<>)", { insert(1, "page")})),
-    snip("cl", fmta("context.localizations.<>", { insert(1, "key")})),
+    snip("csl",
+      fmta("class <> extends ConsumerWidget {\n\tconst <>({super.key});\n\t@override\tWidget build(BuildContext context, WidgetRef ref) {\n\t\treturn Container();\n\t}\n}"
+        , { insert(1, "NameWidget"), rep(1) })),
+    snip("cpn", fmta("context.pushPageNamed(Routes.<>)", { insert(1, "page") })),
+    snip("cloc", fmta("context.loc.<>", { insert(1, "key") })),
   },
 })
 
@@ -105,4 +107,4 @@ ls.add_snippets(nil, {
 -- }
 
 -- Reload Snippet
-vim.keymap.set( "n", "<leader><leader>l", "<cmd>source ~/.config/nvim/lua/user/lualine.lua<CR>", { silent = true })
+vim.keymap.set("n", "<leader><leader>l", "<cmd>source ~/.config/nvim/lua/user/lualine.lua<CR>", { silent = true })
