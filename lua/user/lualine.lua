@@ -54,10 +54,10 @@ local tabs = {
   mode = 1,
 }
 
--- local filename = {
+-- local filename2 = {
 --   'filename',
 --   file_status = true, -- displays file status (readonly status, modified status)
---   path = 0, -- 0 = just filename, 1 = relative path, 2 = absolute path
+--   path = 1, -- 0 = just filename, 1 = relative path, 2 = absolute path
 --   shorting_target = 30,
 -- }
 
@@ -130,22 +130,22 @@ local config = {
     },
     lualine_x = { 'lsp_progress' },
   },
-  -- winbar = {
-  --   lualine_a = {},
-  --   lualine_b = {},
-  --   lualine_c = { filename },
-  --   lualine_x = { diagnostics },
-  --   lualine_y = {},
-  --   lualine_z = {}
-  -- },
-  -- inactive_winbar = {
-  --   lualine_a = {},
-  --   lualine_b = {},
-  --   lualine_c = { 'filename' },
-  --   lualine_x = {},
-  --   lualine_y = {},
-  --   lualine_z = {}
-  -- },
+  winbar = {
+    lualine_a = {},
+    lualine_b = {},
+    lualine_c = { filepath },
+    lualine_x = { diagnostics },
+    lualine_y = {},
+    lualine_z = {}
+  },
+  inactive_winbar = {
+    lualine_a = {},
+    lualine_b = {},
+    lualine_c = { filepath },
+    lualine_x = {},
+    lualine_y = {},
+    lualine_z = {}
+  },
   extensions = { 'nvim-tree', 'toggleterm' }
 }
 -- Color for highlights

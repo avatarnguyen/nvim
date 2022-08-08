@@ -47,7 +47,7 @@ return packer.startup(function(use)
   use({ "numToStr/Comment.nvim" })
   use({ "JoosepAlviste/nvim-ts-context-commentstring" })
   use({ "kyazdani42/nvim-web-devicons" })
-  use({ "akinsho/bufferline.nvim" })
+  -- use({ "akinsho/bufferline.nvim" })
   use({ "moll/vim-bbye" })
   use({ "nvim-lualine/lualine.nvim" })
   use({ 'arkav/lualine-lsp-progress' })
@@ -61,14 +61,14 @@ return packer.startup(function(use)
   -- Colorschemes
   -- use({ "folke/tokyonight.nvim" })
   -- use("bluz71/vim-nightfly-guicolors")
-  use("rebelot/kanagawa.nvim")
+  -- use("rebelot/kanagawa.nvim")
   -- use { 'lalitmee/cobalt2.nvim', requires = 'tjdevries/colorbuddy.nvim' }
   use({
     "catppuccin/nvim",
     as = "catppuccin"
   })
 
-  use { 'fgheng/winbar.nvim' }
+  -- use { 'fgheng/winbar.nvim' }
   -- use { 'avatarnguyen/winbar.nvim' }
   -- use {
   --   "SmiteshP/nvim-navic",
@@ -99,7 +99,7 @@ return packer.startup(function(use)
 
   -- cmp plugins
   use({ "hrsh7th/nvim-cmp" }) -- The completion plugin
-  -- use({ 'tzachar/cmp-tabnine', run = './install.sh', requires = 'hrsh7th/nvim-cmp' })
+  use({ 'tzachar/cmp-tabnine', run = './install.sh', requires = 'hrsh7th/nvim-cmp' })
   use({ "hrsh7th/cmp-buffer" }) -- buffer completions
   use({ "hrsh7th/cmp-path" }) -- path completions
   use({ "saadparwaiz1/cmp_luasnip" }) -- snippet completions
@@ -108,7 +108,7 @@ return packer.startup(function(use)
   use({ "folke/trouble.nvim", cmd = "TroubleToggle" })
   -- snippets
   use({ "L3MON4D3/LuaSnip" }) --snippet engine
-  -- use({ "rafamadriz/friendly-snippets" }) -- a bunch of snippets to use
+  use({ "rafamadriz/friendly-snippets" }) -- a bunch of snippets to use
 
   -- LSP
   use({ "neovim/nvim-lspconfig" }) -- enable LSP
@@ -167,9 +167,9 @@ return packer.startup(function(use)
     after = "telescope.nvim",
     run = 'cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build',
   }
-  use({
-    "nvim-telescope/telescope-ui-select.nvim",
-  })
+  -- use({
+  --   "nvim-telescope/telescope-ui-select.nvim",
+  -- })
   -- use "tom-anders/telescope-vim-bookmarks.nvim"
 
   use({

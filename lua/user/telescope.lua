@@ -13,7 +13,15 @@ local new_maker = function(filepath, bufnr, opts)
     on_exit = function(j)
       local mime_type = vim.split(j:result()[1], "/")[1]
       if mime_type == "text" then
-        previewers.buffer_previewer_maker(filepath, bufnr, opts)
+        vim.loop.fs_stat(filepath, function(_, stat)
+          if not stat then return end
+          if stat.size > 10000 then
+            return
+          else
+            previewers.buffer_previewer_maker(filepath, bufnr, opts)
+          end
+        end)
+        -- previewers.buffer_previewer_maker(filepath, bufnr, opts)
       else
         -- maybe we want to write something to the buffer here
         vim.schedule(function()

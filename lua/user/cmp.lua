@@ -11,7 +11,7 @@ if not snip_status_ok then
 end
 
 
--- luasnip.filetype_extend("dart", {"flutter"})
+luasnip.filetype_extend("dart", {"flutter"})
 -- require("luasnip/loaders/from_vscode").load()
 require("luasnip/loaders/from_vscode").lazy_load({ paths = { "~/.config/nvim/vscodesnips" } })
 
@@ -23,34 +23,6 @@ end
 local icons = require "user.icons"
 
 local kind_icons = icons.kind
-
--- local kind_icons = {
---   Text = "",
---   Method = "",
---   Function = "",
---   Constructor = "",
---   Field = "",
---   Variable = "",
---   Class = "",
---   Interface = "",
---   Module = "",
---   Property = "",
---   Unit = "",
---   Value = "",
---   Enum = "",
---   Keyword = "",
---   Snippet = "",
---   Color = "",
---   File = "",
---   Reference = "",
---   Folder = "",
---   EnumMember = "",
---   Constant = "",
---   Struct = "",
---   Event = "",
---   Operator = "",
---   TypeParameter = "",
--- }
 
 cmp.setup {
   snippet = {
