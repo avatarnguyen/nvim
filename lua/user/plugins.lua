@@ -68,12 +68,6 @@ return packer.startup(function(use)
     as = "catppuccin"
   })
 
-  -- use { 'fgheng/winbar.nvim' }
-  -- use { 'avatarnguyen/winbar.nvim' }
-  -- use {
-  --   "SmiteshP/nvim-navic",
-  --   requires = "neovim/nvim-lspconfig"
-  -- }
   use({ "kyazdani42/nvim-tree.lua" })
   -- use {
   --   "nvim-neo-tree/neo-tree.nvim",
@@ -113,18 +107,9 @@ return packer.startup(function(use)
   -- LSP
   use({ "neovim/nvim-lspconfig" }) -- enable LSP
   use({ "williamboman/nvim-lsp-installer" }) -- simple to use language server installer
-  -- use({ "jose-elias-alvarez/null-ls.nvim" }) -- for formatters and linters
   use({ "RRethy/vim-illuminate" })
   use({ "rmagatti/goto-preview" })
-  -- use("j-hui/fidget.nvim")
-  -- use {
-  --   "lukas-reineke/lsp-format.nvim",
-  --   config = function()
-  --     require("lsp-format").setup {}
-  --   end,
-  -- }
   -- use("glepnir/lspsaga.nvim")
-  -- use("filipdutescu/renamer.nvim")
 
   -- Flutter
   -- use({ "akinsho/flutter-tools.nvim", requires = "nvim-lua/plenary.nvim",
@@ -159,7 +144,6 @@ return packer.startup(function(use)
     "nvim-telescope/telescope.nvim",
     config = function()
       require "user.telescope"
-      -- require("telescope").setup()
     end
   })
   use {
@@ -167,10 +151,6 @@ return packer.startup(function(use)
     after = "telescope.nvim",
     run = 'cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build',
   }
-  -- use({
-  --   "nvim-telescope/telescope-ui-select.nvim",
-  -- })
-  -- use "tom-anders/telescope-vim-bookmarks.nvim"
 
   use({
     "AckslD/nvim-neoclip.lua",
@@ -220,9 +200,7 @@ return packer.startup(function(use)
   -- }}}
 
   -- Misc
-  -- use("abecodes/tabout.nvim")
   use("folke/which-key.nvim")
-  -- use("karb94/neoscroll.nvim")
   use("p00f/nvim-ts-rainbow")
   use("ThePrimeagen/harpoon")
   use "Shatur/neovim-session-manager"
@@ -237,19 +215,11 @@ return packer.startup(function(use)
   use "rcarriga/nvim-notify"
   -- use { "dstein64/vim-startuptime" }
 
-  -- use "Pocco81/AutoSave.nvim"
   use 'kazhala/close-buffers.nvim'
   use {
     'pianocomposer321/yabs.nvim',
     requires = { 'nvim-lua/plenary.nvim' }
   }
-
-  -- use "lervag/vimtex"
-  -- use 'xuhdev/vim-latex-live-preview'
-  -- UML
-  -- use "aklt/plantuml-syntax"
-  -- use { "weirongxu/plantuml-previewer.vim" }
-  -- use { "tyru/open-browser.vim" } --  opt = true
 
   -- Automatically set up your configuration after cloning packer.nvim
   -- Put this at the end after all plugins
