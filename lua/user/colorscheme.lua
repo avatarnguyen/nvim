@@ -3,7 +3,17 @@
 -- local colorscheme = "cobalt2"
 -- local colorscheme = "material"
 -- local colorscheme = "nightfly"
-local colorscheme = "catppuccin"
+-- local colorscheme = "catppuccin"
+local colorscheme = "NeoSolarized"
+
+-- NeoSolarized
+if colorscheme == "NeoSolarized" then
+  vim.g.NeoSolarized_italics = 1 -- 0 or 1
+  vim.g.NeoSolarized_visibility = 'normal' -- low, normal, high
+  vim.g.NeoSolarized_diffmode = 'normal' -- low, normal, high
+  vim.g.NeoSolarized_termtrans = 1 -- 0(default) or 1 -> Transparency
+  vim.g.NeoSolarized_lineNr = 0 -- 0 or 1 (default) -> To Show backgroung in LineNr
+end
 
 -- catppuccin
 if colorscheme == "catppuccin" then
@@ -248,4 +258,13 @@ end
 local status_ok, _ = pcall(vim.cmd, "colorscheme " .. colorscheme)
 if not status_ok then
   return
+end
+
+if colorscheme == "NeoSolarized" then
+  vim.cmd [[
+      highlight FloatBorder guibg=NONE ctermbg=NONE  " Removes the border of float menu (LSP and Autocompletion uses it)
+      highlight link NormalFloat Normal 
+      highlight NormalFloat ctermbg=NONE ctermfg=NONE guibg=NONE guifg=NONE 
+      highlight Pmenu ctermbg=NONE guibg=NONE 
+  ]]
 end
