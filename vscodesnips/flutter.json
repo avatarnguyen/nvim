@@ -50,10 +50,6 @@
       ");"
     ]
   },
-  "define_logger": {
-    "prefix": "logger",
-    "body": ["final log = logger($1);"]
-  },
     "Consumer Stateless": {
     "scope": "dart",
     "prefix": "stlessConsumer",

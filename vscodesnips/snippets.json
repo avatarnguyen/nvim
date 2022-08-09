@@ -1,6 +1,6 @@
 {
     "Stateless Widget": {
-        "prefix": "statelessW",
+        "prefix": "stlessW",
         "body": [
             "class ${1:name} extends StatelessWidget {",
             "\tconst $1({super.key});\n",
@@ -13,7 +13,7 @@
         "description": "Create a Stateless widget"
     },
     "Stateful Widget": {
-        "prefix": "statefulW",
+        "prefix": "stfulW",
         "body": [
             "class ${1:name} extends StatefulWidget {",
             "\tconst $1({super.key});\n",
