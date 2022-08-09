@@ -34,7 +34,7 @@ local branch = {
   "branch",
   icons_enabled = true,
   icon = "",
-  separator = { left = "" }
+  -- separator = { left = "" }
 }
 
 local location = {
@@ -79,11 +79,13 @@ local config = {
     globalstatus = true,
     icons_enabled = true,
     theme = "auto",
+    section_separators = { left = '', right = '' },
+    component_separators = { left = '', right = '' },
     -- section_separators = { left = '', right = '' },
-    section_separators = { left = "", right = "" },
+    -- section_separators = { left = "", right = "" },
     -- section_separators = { left = "", right = "" },
     -- component_separators = { left = "", right = "" },
-    component_separators = "|",
+    -- component_separators = "|",
     disabled_filetypes = {
       statusline = { "alpha", "dashboard" },
       -- winbar = { "alpha", "dashboard", "neotree", "neo-tree", "NvimTree", "Telescope", "StartupTime" },
@@ -103,7 +105,8 @@ local config = {
     lualine_c = { diagnostics },
     lualine_x = { spaces, filetype },
     lualine_y = { location },
-    lualine_z = { { "progress", separator = { right = "" }, } },
+    -- lualine_z = { { "progress", separator = { right = "" }, } },
+    lualine_z = { "progress" },
   },
   tabline = {
     -- lualine_a = {
@@ -112,7 +115,8 @@ local config = {
     lualine_a = {
       {
         "buffers",
-        separator = { left = "", right = "" },
+        -- separator = { left = "", right = "" },
+        separator = {  right = '' },
         right_padding = 2,
         symbols = { alternate_file = "" },
         show_filename_only = true, -- Shows shortened relative path when set to false.
