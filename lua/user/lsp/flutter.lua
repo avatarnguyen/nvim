@@ -8,7 +8,12 @@ flutter.setup({
   -- flutter_path = "$HOME/flutter/bin/flutter/", -- <-- this takes priority over the lookup
   fvm = false, -- takes priority over path, uses <workspace>/.fvm/flutter_sdk if enabled
   dev_log = {
+    enabled = false,
     open_cmd = "tabedit",
+  },
+  dev_tools = {
+    autostart = true, -- autostart devtools server if not detected
+    auto_open_browser = true, -- Automatically opens devtools in the browser
   },
   widget_guides = {
     enabled = true,
@@ -48,7 +53,7 @@ flutter.setup({
       require("user.lsp.handlers").on_attach(client, bufnr)
       vim.g.dart_style_guide = 2
       vim.g.dart_format_on_save = 1
-      vim.cmd "highlight FlutterWidgetGuides ctermfg=9 guifg=grey"
+      vim.cmd "highlight FlutterWidgetGuides ctermfg=9 guifg=green"
     end,
     -- capabilities = my_custom_capabilities -- e.g. lsp_status capabilities
     --- OR you can specify a function to deactivate or change or control how the config is created
