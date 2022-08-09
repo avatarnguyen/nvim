@@ -63,6 +63,7 @@ return packer.startup(function(use)
   -- use("bluz71/vim-nightfly-guicolors")
   -- use("rebelot/kanagawa.nvim")
   -- use { 'lalitmee/cobalt2.nvim', requires = 'tjdevries/colorbuddy.nvim' }
+  use ("Tsuzat/NeoSolarized.nvim")
   use({
     "catppuccin/nvim",
     as = "catppuccin"
@@ -110,6 +111,7 @@ return packer.startup(function(use)
   use({ "RRethy/vim-illuminate" })
   use({ "rmagatti/goto-preview" })
   -- use("glepnir/lspsaga.nvim")
+  use "onsails/lspkind.nvim"
 
   -- Flutter
   -- use({ "akinsho/flutter-tools.nvim", requires = "nvim-lua/plenary.nvim",
@@ -138,7 +140,7 @@ return packer.startup(function(use)
   }
 
   -- use { 'camspiers/snap', rocks = {'fzy'}}
-  use { 'camspiers/snap' }
+  -- use { 'camspiers/snap' }
   -- Telescope
   use({
     "nvim-telescope/telescope.nvim",
@@ -213,12 +215,20 @@ return packer.startup(function(use)
     end,
   })
   use "rcarriga/nvim-notify"
-  -- use { "dstein64/vim-startuptime" }
+  use { "dstein64/vim-startuptime" }
 
   use 'kazhala/close-buffers.nvim'
   use {
     'pianocomposer321/yabs.nvim',
     requires = { 'nvim-lua/plenary.nvim' }
+  }
+  use {
+    'jghauser/kitty-runner.nvim',
+    config = function()
+      require('kitty-runner').setup({
+        use_keymaps = false,
+      })
+    end
   }
 
   -- Automatically set up your configuration after cloning packer.nvim

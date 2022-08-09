@@ -20,9 +20,13 @@ local check_backspace = function()
   return col == 0 or vim.fn.getline("."):sub(col, col):match "%s"
 end
 
-local icons = require "user.icons"
+-- local icons = require "user.icons"
+-- local kind_icons = icons.kind
 
-local kind_icons = icons.kind
+local compare = require('cmp.config.compare')
+local lspkind = require('lspkind')
+local types = require("cmp.types")
+local str = require("cmp.utils.str")
 
 cmp.setup {
   snippet = {
@@ -75,27 +79,83 @@ cmp.setup {
   },
   formatting = {
     fields = { "kind", "abbr", "menu" },
-    format = function(entry, vim_item)
-      vim_item.kind = string.format("%s", kind_icons[vim_item.kind])
-      vim_item.menu = ({
-        nvim_lsp = "",
-        nvim_lua = "",
-        luasnip = "",
-        buffer = "",
-        path = "",
-        emoji = "",
-        cmp_tabnine = "[T9]",
-      })[entry.source.name]
-      return vim_item
-    end,
+    format = lspkind.cmp_format({
+      mode = 'symbol', -- show only symbol annotations
+      maxwidth = 50, -- prevent the popup from showing more than provided characters (e.g 50 will not show more than 50 characters)
+
+      -- The function below will be called before any actual modifications from lspkind
+      -- so that you can provide more controls on popup customization. (See [#30](https://github.com/onsails/lspkind-nvim/pull/30))
+      before = function (entry, vim_item)
+          -- Get the full snippet (and only keep first line)
+          local word = entry:get_insert_text()
+          if entry.completion_item.insertTextFormat == types.lsp.InsertTextFormat.Snippet then
+            word = vim.lsp.util.parse_snippet(word)
+          end
+          word = str.oneline(word)
+
+          -- concatenates the string
+          -- local max = 50
+          -- if string.len(word) >= max then
+          -- 	local before = string.sub(word, 1, math.floor((max - 3) / 2))
+          -- 	word = before .. "..."
+          -- end
+
+          if
+            entry.completion_item.insertTextFormat == types.lsp.InsertTextFormat.Snippet
+            and string.sub(vim_item.abbr, -1, -1) == "~"
+          then
+            word = word .. "~"
+          end
+          vim_item.abbr = word
+        return vim_item
+      end
+    }),
+    -- format = function(entry, vim_item)
+    --   vim_item.kind = string.format("%s", kind_icons[vim_item.kind])
+    --   vim_item.menu = ({
+    --     nvim_lsp = "",
+    --     nvim_lua = "",
+    --     luasnip = "",
+    --     buffer = "",
+    --     path = "",
+    --     emoji = "",
+    --     cmp_tabnine = "[T9]",
+    --   })[entry.source.name]
+    --   return vim_item
+    -- end,
   },
   sources = {
     { name = "nvim_lsp" },
     { name = "nvim_lua" },
     { name = "luasnip" },
-    { name = "buffer" },
+    -- { name = "buffer" },
+    { name = "buffer",
+      options = {
+        get_bufnrs = function()
+          local bufs = {}
+          for _, win in ipairs(vim.api.nvim_list_wins()) do
+            bufs[vim.api.nvim_win_get_buf(win)] = true
+          end
+          return vim.tbl_keys(bufs)
+        end
+      }
+    },
     { name = 'cmp_tabnine' },
     { name = "path" },
+  },
+  sorting = {
+    priority_weight = 2,
+    comparators = {
+      compare.score,
+      compare.kind,
+      compare.offset,
+      compare.recently_used,
+      require('cmp_tabnine.compare'),
+      compare.exact,
+      compare.sort_text,
+      compare.length,
+      compare.order,
+    },
   },
   confirm_opts = {
     behavior = cmp.ConfirmBehavior.Replace,
