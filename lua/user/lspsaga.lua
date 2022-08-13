@@ -32,7 +32,7 @@ saga.init_lsp_saga {
     quit = "q",
     exec = "<CR>",
   },
-  rename_action_quit = "<C-c>",
+  rename_action_quit = "<ESC>",
   --  rename_action_keys = {
   --    quit = '<C-c>', exec = '<CR>' -- quit can be a table
   --  },
@@ -43,45 +43,20 @@ saga.init_lsp_saga {
   -- the related filetypes into this table
   -- like server_filetype_map = {metals = {'sbt', 'scala'}}
   -- server_filetype_map = {},
-  symbol_in_winbar = {
-    in_custom = true,
-    enable = true,
-    separator = ' ',
-    show_file = true,
-  },
+  -- symbol_in_winbar = {
+  --   in_custom = true,
+  --   enable = true,
+  --   separator = ' ',
+  --   show_file = true,
+  -- },
 }
+
 local action = require("lspsaga.action")
 -- scroll down hover doc or scroll in definition preview
-vim.keymap.set("n", "<C-j>", function()
-  action.smart_scroll_with_saga(1)
+vim.keymap.set("n", "<C-f>", function()
+    action.smart_scroll_with_saga(1)
 end, { silent = true })
 -- scroll up hover doc
-vim.keymap.set("n", "<C-k>", function()
-  action.smart_scroll_with_saga(-1)
+vim.keymap.set("n", "<C-b>", function()
+    action.smart_scroll_with_saga(-1)
 end, { silent = true })
-
--- local ns_prefix = '%#MyWinbar#test%*'
---
--- local function config_winbar()
---   local ok,lspsaga = pcall(require,'lspsaga.symbolwinbar')
---   local sym
---   if ok then
---     sym = lspsaga.get_symbol_node()
---   end
---   local win_val = ''
---   win_val = ns_prefix
---   if sym ~= nil then
---     win_val = win_val .. sym
---   end
---   vim.api.nvim_win_set_option(0,'winbar',win_val)
--- end
---
--- vim.api.nvim_create_autocmd({'BufEnter','BufWinEnter','CursorMoved'},{
---   pattern = '*.dart',
---   callback = config_winbar
--- })
---
--- vim.api.nvim_create_autocmd({'BufEnter','BufWinEnter','CursorMoved'},{
---   pattern = '*.lua',
---   callback = config_winbar
--- })

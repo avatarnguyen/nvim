@@ -52,7 +52,10 @@ local function lsp_keymaps(bufnr)
   local keymap = vim.api.nvim_buf_set_keymap
   keymap(bufnr, "n", "gD", "<cmd>lua vim.lsp.buf.declaration()<CR>", opts)
   keymap(bufnr, "n", "gd", "<cmd>lua vim.lsp.buf.definition()<CR>", opts)
+
   keymap(bufnr, "n", "K", "<cmd>lua vim.lsp.buf.hover()<CR>", opts)
+  --[[ keymap(bufnr, "n", "K", "<cmd>Lspsaga hover_doc<CR>", { silent = true }) ]]
+
   keymap(bufnr, "n", "gm", "<cmd>lua vim.lsp.buf.implementation()<CR>", opts)
   keymap(bufnr, 'n', 'gk', '<cmd>lua vim.lsp.buf.declaration()<CR>', opts) -- does not seems to work
   -- keymap(bufnr, "n", "gr", "<cmd>lua vim.lsp.buf.references()<CR>", opts)
@@ -61,12 +64,22 @@ local function lsp_keymaps(bufnr)
   keymap(
     bufnr, "n", "gn",
     '<cmd>lua vim.lsp.diagnostic.show_line_diagnostics({ border = "rounded" })<CR>', opts)
-  keymap(bufnr, "n", "ge", '<cmd>lua vim.diagnostic.goto_next({ border = "rounded" })<CR>', opts)
-  keymap(bufnr, "n", "g[", '<cmd>lua vim.diagnostic.goto_prev({ border = "rounded" })<CR>', opts)
+
+  -- Standard LSP
+  --[[ keymap(bufnr, "n", "ge", '<cmd>lua vim.diagnostic.goto_next({ border = "rounded" })<CR>', opts) ]]
+  --[[ keymap(bufnr, "n", "g[", '<cmd>lua vim.diagnostic.goto_prev({ border = "rounded" })<CR>', opts) ]]
+
   keymap(bufnr, 'n', '<C-space>', '<cmd>lua vim.lsp.buf.signature_help()<CR>', opts)
   keymap(bufnr, 'n', 'gy', '<cmd>lua vim.lsp.buf.type_definition()<CR>', opts)
 
   keymap(bufnr, "n", "<leader>q", '<cmd>vim.diagnostic.setloclist()<CR>', opts)
+
+  -- LSP Saga
+  keymap(bufnr, "n", "ge", "<cmd>Lspsaga diagnostic_jump_next<CR>", opts)
+  keymap(bufnr, "n", ";e", "<cmd>Lspsaga diagnostic_jump_prev<CR>", opts)
+
+ keymap(bufnr, "n", "<leader>lr", "<cmd>Lspsaga rename<CR>", opts)
+
   -- keymap(bufnr, "n", "<leader>lf", "<cmd>lua vim.lsp.buf.formatting()<cr>", opts)
   -- keymap(bufnr, "n", "<leader>li", "<cmd>LspInfo<cr>", opts)
   -- keymap(bufnr, "n", "<leader>lI", "<cmd>LspInstallInfo<cr>", opts)

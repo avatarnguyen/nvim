@@ -227,7 +227,7 @@ local mappings = {
     l = { "<cmd>lua vim.lsp.codelens.run()<cr>", "CodeLens Action" },
     q = { "<cmd>lua vim.lsp.diagnostic.set_loclist()<cr>", "Quickfix" },
     -- r = { "<cmd>lua require('renamer').rename()<cr>", "Rename" }, -- not working well with cmp-tabnine
-    r = { "<cmd>lua vim.lsp.buf.rename()<cr>", "Rename" },
+    --[[ r = { "<cmd>lua vim.lsp.buf.rename()<cr>", "Rename" }, ]]
     R = { "<cmd>Trouble lsp_references<cr>", "References" },
   },
 

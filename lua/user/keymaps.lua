@@ -68,6 +68,17 @@ keymap("v", "<leader>la", ":<C-U>lua vim.lsp.buf.range_code_action()<CR>", opts)
 keymap("v", "<leader>a", "<esc><cmd>lua require('lsp-fastaction').range_code_action()<CR>", opts)
 keymap("n", "<leader>a", "<cmd>lua require('lsp-fastaction').code_action()<CR>", opts)
 
+-- LSP SAGA
+keymap("n", "<C-;>", "<cmd>Lspsaga open_floaterm lazygit<CR>", opts)
+keymap("t", "<C-;>", "<C-\\><C-n><cmd>Lspsaga close_floaterm<CR>", opts)
+
+--local action = require("lspsaga.action")
+--keymap("n", "<leader>a", action.code_action, { silent = true })
+-- vim.keymap.set("v", "<leader>a", function()
+--     vim.fn.feedkeys(vim.api.nvim_replace_termcodes("<C-U>", true, false, true))
+--     action.range_code_action()
+-- end, { silent = true })
+
 -- keymap("n", "K", "<Cmd>lua vim.lsp.buf.hover()<CR>", opts)
 -- keymap('n', 'gk', '<cmd>lua vim.lsp.buf.declaration()<CR>', opts) -- does not seems to work
 -- keymap('n', 'gD', '<cmd>:vsp<cr>:lua vim.lsp.buf.definition()<cr><CR>', opts)
