@@ -63,13 +63,18 @@ return packer.startup(function(use)
   -- use("bluz71/vim-nightfly-guicolors")
   -- use("rebelot/kanagawa.nvim")
   -- use { 'lalitmee/cobalt2.nvim', requires = 'tjdevries/colorbuddy.nvim' }
-  use ("Tsuzat/NeoSolarized.nvim")
+  use("Tsuzat/NeoSolarized.nvim")
   use({
     "catppuccin/nvim",
     as = "catppuccin"
   })
 
-  use({ "kyazdani42/nvim-tree.lua" })
+  use({
+    "kyazdani42/nvim-tree.lua",
+    config = function ()
+      require "user.nvim-tree"
+    end
+  })
   -- use {
   --   "nvim-neo-tree/neo-tree.nvim",
   --   as = "neotree",
@@ -94,7 +99,14 @@ return packer.startup(function(use)
 
   -- cmp plugins
   use({ "hrsh7th/nvim-cmp" }) -- The completion plugin
-  use({ 'tzachar/cmp-tabnine', run = './install.sh', requires = 'hrsh7th/nvim-cmp' })
+  use({
+    'tzachar/cmp-tabnine',
+    run = './install.sh',
+    requires = 'hrsh7th/nvim-cmp',
+    config = function ()
+      require "user.tabnine"
+    end
+  })
   use({ "hrsh7th/cmp-buffer" }) -- buffer completions
   use({ "hrsh7th/cmp-path" }) -- path completions
   use({ "saadparwaiz1/cmp_luasnip" }) -- snippet completions
@@ -109,8 +121,18 @@ return packer.startup(function(use)
   use({ "neovim/nvim-lspconfig" }) -- enable LSP
   use({ "williamboman/nvim-lsp-installer" }) -- simple to use language server installer
   use({ "RRethy/vim-illuminate" })
-  use({ "rmagatti/goto-preview" })
-  -- use("glepnir/lspsaga.nvim")
+  use({
+    "rmagatti/goto-preview",
+    config = function ()
+      require "user.preview"
+    end
+  })
+  use ({
+    "glepnir/lspsaga.nvim",
+    config = function()
+      require "user.lspsaga"
+    end
+  })
   use "onsails/lspkind.nvim"
 
   -- Flutter
@@ -162,9 +184,20 @@ return packer.startup(function(use)
   })
 
   -- Treesitter
-  use { 'nvim-treesitter/nvim-treesitter', run = ':TSUpdate' }
+  use {
+    'nvim-treesitter/nvim-treesitter',
+    run = ':TSUpdate',
+    config = function ()
+      require "user.treesitter"
+    end
+  }
 
-  use("nvim-treesitter/nvim-treesitter-context")
+  use({
+    "nvim-treesitter/nvim-treesitter-context",
+    config = function ()
+      require "user.treesitter-context"
+    end
+  })
 
   -- Git
   use({ "lewis6991/gitsigns.nvim" })
@@ -176,11 +209,11 @@ return packer.startup(function(use)
     "mfussenegger/nvim-dap",
     module = "dap",
     config = function()
-      require "user.dap"
+      require "user.dap-config"
     end
   })
-  -- use({ "rcarriga/nvim-dap-ui" })
-  -- use({ "ravenxrz/DAPInstall.nvim" })
+  use({ "rcarriga/nvim-dap-ui" })
+  use({ "Pocco81/dap-buddy.nvim" })
 
   -- Editing {{{
   use {
@@ -197,7 +230,12 @@ return packer.startup(function(use)
       require("hop").setup({ keys = "etovxqpdygfblzhckisuran" })
     end,
   })
-  use("Mephistophiles/surround.nvim")
+  use({
+    "Mephistophiles/surround.nvim",
+    config = function ()
+      require "user.surround"
+    end
+  })
   use("tpope/vim-repeat")
   -- }}}
 
@@ -205,9 +243,24 @@ return packer.startup(function(use)
   use("folke/which-key.nvim")
   use("p00f/nvim-ts-rainbow")
   use("ThePrimeagen/harpoon")
-  use "Shatur/neovim-session-manager"
-  use("chentoast/marks.nvim")
-  use("norcalli/nvim-colorizer.lua")
+  use ({
+    "Shatur/neovim-session-manager",
+    config = function()
+      require "user.session"
+    end,
+  })
+  use({
+    "chentoast/marks.nvim",
+     config = function()
+       require "user.marks"
+    end,
+  })
+  use({
+    "norcalli/nvim-colorizer.lua",
+    config = function()
+      require "user.colorizer"
+    end,
+  })
   use({
     "gbprod/substitute.nvim",
     config = function()
@@ -217,19 +270,27 @@ return packer.startup(function(use)
   use "rcarriga/nvim-notify"
   use { "dstein64/vim-startuptime" }
 
-  use 'kazhala/close-buffers.nvim'
+  use ({
+    'kazhala/close-buffers.nvim',
+    config = function ()
+      require "user.buffer-close"
+    end
+  })
   use {
     'pianocomposer321/yabs.nvim',
-    requires = { 'nvim-lua/plenary.nvim' }
-  }
-  use {
-    'jghauser/kitty-runner.nvim',
+    requires = { 'nvim-lua/plenary.nvim' },
     config = function()
-      require('kitty-runner').setup({
-        use_keymaps = false,
-      })
+      require "user.yabs"
     end
   }
+  -- use {
+  --   'jghauser/kitty-runner.nvim',
+  --   config = function()
+  --     require('kitty-runner').setup({
+  --       use_keymaps = false,
+  --     })
+  --   end
+  -- }
 
   -- Automatically set up your configuration after cloning packer.nvim
   -- Put this at the end after all plugins
