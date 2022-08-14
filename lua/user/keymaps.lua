@@ -171,6 +171,15 @@ keymap("x", "K", ":move '<-2<CR>gv-gv", opts)
 -- Press jk fast to enter
 keymap("i", "jk", "<ESC>", opts)
 
+
+-- DEBUGGER {{{
+keymap("n", ";b", "<CMD> lua require'dap'.toggle_breakpoint()<CR>", opts)
+keymap("n", ";c", "<CMD> lua require'dap'.continue()<CR>", opts)
+keymap("n", ";a", "<CMD> lua require'dap'.step_into()<CR>", opts)
+keymap("n", ";q", "<CMD> lua require'dap'.step_out()<CR>", opts)
+keymap("n", ";w", "<CMD> lua require'dap'.step_over()<CR>", opts)
+-- }}}
+
 -- Bufferline
 -- keymap("n", "<leader>1", "<Cmd>BufferLineGoToBuffer 1<CR>", opts)
 -- keymap("n", "<leader>2", "<Cmd>BufferLineGoToBuffer 2<CR>", opts)

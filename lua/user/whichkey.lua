@@ -320,11 +320,10 @@ local mappings = {
 
   u = {
     name = "Debugger",
-    a = { "<CMD> lua require'dap'.toggle_breakpoint()<CR>", "Toggle Breadpoint" },
-    c = { "<CMD> lua require'dap'.continue()<CR>", "Continue" },
-    o = { "<CMD> lua require'dap'.step_over()<CR>", "Step Over" },
-    O = { "<CMD> lua require'dap'.step_out()<CR>", "Step Out" },
-    i = { "<CMD> lua require'dap'.step_into()<CR>", "Step Into" },
+    c = { "<CMD> lua require'dap'.continue()<CR>", "Continue or Start" },
+    --[[ o = { "<CMD> lua require'dap'.step_over()<CR>", "Step Over" }, ]]
+    --[[ O = { "<CMD> lua require'dap'.step_out()<CR>", "Step Out" }, ]]
+    --[[ i = { "<CMD> lua require'dap'.step_into()<CR>", "Step Into" }, ]]
     u = { "<CMD> lua require('dapui').toggle()<CR>", "Toggle Dap UI" },
     b = { "<CMD> lua require'dap'.toggle_breakpoint()<CR>", "Toggle Breakpoint" },
     r = { "<cmd>lua require'dap'.repl.toggle()<cr>", "Toggle Repl" },

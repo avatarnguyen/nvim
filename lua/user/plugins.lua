@@ -202,7 +202,12 @@ return packer.startup(function(use)
   -- Git
   use({ "lewis6991/gitsigns.nvim" })
   use({ "sindrets/diffview.nvim", requires = "nvim-lua/plenary.nvim" })
-  use("ThePrimeagen/git-worktree.nvim")
+  use({
+    "ThePrimeagen/git-worktree.nvim",
+    config = function ()
+      require "user.git-worktree"
+    end
+  })
 
   -- DAP
   use({
@@ -213,7 +218,14 @@ return packer.startup(function(use)
     end
   })
   use({ "rcarriga/nvim-dap-ui" })
-  use({ "Pocco81/dap-buddy.nvim" })
+  --[[ use({ "Pocco81/dap-buddy.nvim" }) ]]
+
+  --[[ use ({ ]]
+  --[[   "williamboman/mason.nvim", ]]
+  --[[   config = function () ]]
+  --[[     require("mason").setup() ]]
+  --[[   end ]]
+  --[[ }) ]]
 
   -- Editing {{{
   use {
@@ -242,7 +254,7 @@ return packer.startup(function(use)
   -- Misc
   use("folke/which-key.nvim")
   use("p00f/nvim-ts-rainbow")
-  use("ThePrimeagen/harpoon")
+  use({ "ThePrimeagen/harpoon" })
   use ({
     "Shatur/neovim-session-manager",
     config = function()

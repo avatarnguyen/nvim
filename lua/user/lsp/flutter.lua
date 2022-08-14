@@ -3,17 +3,22 @@ if not status_ok then
   return
 end
 
+local dap_ok, dap = pcall(require, "dap")
+if not dap_ok then
+  return
+end
+
 flutter.setup({
   -- flutter_path = "$HOME/fvm/default", -- <-- this takes priority over the lookup
   -- flutter_path = "$HOME/flutter/bin/flutter/", -- <-- this takes priority over the lookup
   fvm = false, -- takes priority over path, uses <workspace>/.fvm/flutter_sdk if enabled
   dev_log = {
-    enabled = false,
+    enabled = true,
     open_cmd = "tabedit",
   },
   dev_tools = {
     autostart = true, -- autostart devtools server if not detected
-    auto_open_browser = true, -- Automatically opens devtools in the browser
+    auto_open_browser = false, -- Automatically opens devtools in the browser
   },
   widget_guides = {
     enabled = true,
@@ -33,12 +38,25 @@ flutter.setup({
   },
   debugger = { -- integrate with nvim dap + install dart code debugger
     enabled = true,
-    run_via_dap = true, -- use dap instead of a plenary job to run flutter apps
+    run_via_dap = false, -- use dap instead of a plenary job to run flutter apps
     register_configurations = function(_)
-    require("dap").configurations.dart = {
-    -- <put here config that you would find in .vscode/launch.json>
-    }
-    -- require("dap.ext.vscode").load_launchjs()
+      dap.adapters.dart = {
+        type = "executable",
+        command = "node",
+        args = { os.getenv('HOME') .. "/.config/dap/Dart-Code/out/dist/debug.js", "flutter" }
+      }
+      dap.configurations.dart = {
+        {
+          type = "dart",
+          request = "launch",
+          name = "Launch flutter",
+          dartSdkPath = os.getenv('HOME') .. "/flutter/bin/cache/dart-sdk/",
+          flutterSdkPath = os.getenv('HOME') .. "/flutter",
+          program = "${workspaceFolder}/lib/main.dart",
+          cwd = "${workspaceFolder}",
+        }
+      }
+      --[[ require("dap.ext.vscode").load_launchjs() ]]
     end,
   },
   lsp = {
