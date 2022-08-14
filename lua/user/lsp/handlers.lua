@@ -52,7 +52,6 @@ local function lsp_keymaps(bufnr)
   local keymap = vim.api.nvim_buf_set_keymap
   keymap(bufnr, "n", "gD", "<cmd>lua vim.lsp.buf.declaration()<CR>", opts)
   keymap(bufnr, "n", "gd", "<cmd>lua vim.lsp.buf.definition()<CR>", opts)
-
   keymap(bufnr, "n", "K", "<cmd>lua vim.lsp.buf.hover()<CR>", opts)
   --[[ keymap(bufnr, "n", "K", "<cmd>Lspsaga hover_doc<CR>", { silent = true }) ]]
 
@@ -78,7 +77,8 @@ local function lsp_keymaps(bufnr)
   keymap(bufnr, "n", "ge", "<cmd>Lspsaga diagnostic_jump_next<CR>", opts)
   keymap(bufnr, "n", ";e", "<cmd>Lspsaga diagnostic_jump_prev<CR>", opts)
 
- keymap(bufnr, "n", "<leader>lr", "<cmd>Lspsaga rename<CR>", opts)
+  keymap(bufnr, "i", "<C-space>", "<Cmd>Lspsaga signature_help<CR>", { silent = true })
+  keymap(bufnr, "n", "<leader>lr", "<cmd>Lspsaga rename<CR>", opts)
 
   -- keymap(bufnr, "n", "<leader>lf", "<cmd>lua vim.lsp.buf.formatting()<cr>", opts)
   -- keymap(bufnr, "n", "<leader>li", "<cmd>LspInfo<cr>", opts)
