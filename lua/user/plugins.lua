@@ -62,8 +62,14 @@ return packer.startup(function(use)
   -- use({ "folke/tokyonight.nvim" })
   -- use("bluz71/vim-nightfly-guicolors")
   -- use("rebelot/kanagawa.nvim")
-  -- use { 'lalitmee/cobalt2.nvim', requires = 'tjdevries/colorbuddy.nvim' }
-  use("Tsuzat/NeoSolarized.nvim")
+  use {
+    'lalitmee/cobalt2.nvim',
+    requires = 'tjdevries/colorbuddy.nvim',
+    config = function()
+      require('colorbuddy').colorscheme('cobalt2')
+    end
+  }
+  --[[ use("Tsuzat/NeoSolarized.nvim") ]]
   use({
     "catppuccin/nvim",
     as = "catppuccin"
@@ -71,7 +77,7 @@ return packer.startup(function(use)
 
   use({
     "kyazdani42/nvim-tree.lua",
-    config = function ()
+    config = function()
       require "user.nvim-tree"
     end
   })
@@ -103,7 +109,7 @@ return packer.startup(function(use)
     'tzachar/cmp-tabnine',
     run = './install.sh',
     requires = 'hrsh7th/nvim-cmp',
-    config = function ()
+    config = function()
       require "user.tabnine"
     end
   })
@@ -123,15 +129,12 @@ return packer.startup(function(use)
   use({ "RRethy/vim-illuminate" })
   use({
     "rmagatti/goto-preview",
-    config = function ()
+    config = function()
       require "user.preview"
     end
   })
-  use ({
+  use({
     "glepnir/lspsaga.nvim",
-    config = function()
-      require "user.lspsaga"
-    end
   })
   use "onsails/lspkind.nvim"
 
@@ -142,6 +145,8 @@ return packer.startup(function(use)
   use "sidlatau/lsp-fastaction.nvim"
   use "dart-lang/dart-vim-plugin"
   -- use({ "chrisbra/Colorizer", as = "ansicolor" })
+  --[[ use 'MTDL9/vim-log-highlighting' ]]
+
   use {
     "nvim-neotest/neotest",
     requires = {
@@ -160,9 +165,21 @@ return packer.startup(function(use)
       })
     end
   }
-
-  -- use { 'camspiers/snap', rocks = {'fzy'}}
-  -- use { 'camspiers/snap' }
+--  use 'nvim-lua/lsp_extensions.nvim'
+  use({
+      'ray-x/navigator.lua',
+      requires = {
+          { 'ray-x/guihua.lua', run = 'cd lua/fzy && make' },
+          { 'neovim/nvim-lspconfig' },
+      },
+  })
+  --[[ use { 'camspiers/snap', rocks = {'fzy'}} ]]
+  --[[ use ({ ]]
+  --[[   'camspiers/snap', ]]
+  --[[   config = function() ]]
+  --[[     require "user.snap" ]]
+  --[[   end ]]
+  --[[ }) ]]
   -- Telescope
   use({
     "nvim-telescope/telescope.nvim",
@@ -187,14 +204,14 @@ return packer.startup(function(use)
   use {
     'nvim-treesitter/nvim-treesitter',
     run = ':TSUpdate',
-    config = function ()
+    config = function()
       require "user.treesitter"
     end
   }
 
   use({
     "nvim-treesitter/nvim-treesitter-context",
-    config = function ()
+    config = function()
       require "user.treesitter-context"
     end
   })
@@ -204,7 +221,7 @@ return packer.startup(function(use)
   use({ "sindrets/diffview.nvim", requires = "nvim-lua/plenary.nvim" })
   use({
     "ThePrimeagen/git-worktree.nvim",
-    config = function ()
+    config = function()
       require "user.git-worktree"
     end
   })
@@ -218,7 +235,7 @@ return packer.startup(function(use)
     end
   })
   use({ "rcarriga/nvim-dap-ui" })
-  --[[ use({ "Pocco81/dap-buddy.nvim" }) ]]
+  --[--[[ [ use({ "Pocco81/dap-buddy.nvim" }) ] ]]]
 
   --[[ use ({ ]]
   --[[   "williamboman/mason.nvim", ]]
@@ -244,18 +261,17 @@ return packer.startup(function(use)
   })
   use({
     "Mephistophiles/surround.nvim",
-    config = function ()
+    config = function()
       require "user.surround"
     end
   })
   use("tpope/vim-repeat")
-  -- }}}
 
   -- Misc
   use("folke/which-key.nvim")
   use("p00f/nvim-ts-rainbow")
   use({ "ThePrimeagen/harpoon" })
-  use ({
+  use({
     "Shatur/neovim-session-manager",
     config = function()
       require "user.session"
@@ -263,8 +279,8 @@ return packer.startup(function(use)
   })
   use({
     "chentoast/marks.nvim",
-     config = function()
-       require "user.marks"
+    config = function()
+      require "user.marks"
     end,
   })
   use({
@@ -280,21 +296,18 @@ return packer.startup(function(use)
     end,
   })
   use "rcarriga/nvim-notify"
-  use { "dstein64/vim-startuptime" }
+  --[[ use { "dstein64/vim-startuptime" } ]]
 
-  use ({
+  use({
     'kazhala/close-buffers.nvim',
-    config = function ()
+    config = function()
       require "user.buffer-close"
     end
   })
-  use {
-    'pianocomposer321/yabs.nvim',
-    requires = { 'nvim-lua/plenary.nvim' },
-    config = function()
-      require "user.yabs"
-    end
-  }
+  --[[ use { ]]
+  --[[   'pianocomposer321/yabs.nvim', ]]
+  --[[   requires = { 'nvim-lua/plenary.nvim' }, ]]
+  --[[ } ]]
   -- use {
   --   'jghauser/kitty-runner.nvim',
   --   config = function()
