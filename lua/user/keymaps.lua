@@ -45,10 +45,13 @@ keymap("n", "gs", "<cmd>!tmux send-keys -t flutter 'R'<CR><CR>", opts)
 -- keymap("x", "<leader>E", "<cmd>NvimTreeFocus<CR>", opts)
 
 -- Telescope
+keymap("n", ";;",
+  "<cmd>lua require('telescope.builtin').buffers(require('telescope.themes').get_dropdown{previewer = false})<cr>", opts)
 keymap("n", "<leader>b",
   "<cmd>lua require('telescope.builtin').buffers(require('telescope.themes').get_dropdown{previewer = false})<cr>", opts)
 keymap("n", "<C-p>",
-  "<cmd>lua require('telescope.builtin').extensions.neoclip.default(require('telescope.themes').get_dropdown{})<cr>",
+  "<cmd>lua require('telescope.builtin').find_files({ debounce = 150, file_ignore_patterns = {'ios/', 'android/', 'fonts/', 'assets/', 'packages/', 'doc/'}})<cr>"
+  ,
   opts)
 
 -- paste register
@@ -68,33 +71,11 @@ keymap("v", "<leader>la", ":<C-U>lua vim.lsp.buf.range_code_action()<CR>", opts)
 keymap("v", "<leader>a", "<esc><cmd>lua require('lsp-fastaction').range_code_action()<CR>", opts)
 keymap("n", "<leader>a", "<cmd>lua require('lsp-fastaction').code_action()<CR>", opts)
 
+keymap("n", "gl", "<cmd>lua require('lsp-fastaction').code_action()<CR>", opts)
+
 -- LSP SAGA
 keymap("n", "<C-;>", "<cmd>Lspsaga open_floaterm lazygit<CR>", opts)
 keymap("t", "<C-;>", "<C-\\><C-n><cmd>Lspsaga close_floaterm<CR>", opts)
-
---local action = require("lspsaga.action")
---keymap("n", "<leader>a", action.code_action, { silent = true })
--- vim.keymap.set("v", "<leader>a", function()
---     vim.fn.feedkeys(vim.api.nvim_replace_termcodes("<C-U>", true, false, true))
---     action.range_code_action()
--- end, { silent = true })
-
--- keymap("n", "K", "<Cmd>lua vim.lsp.buf.hover()<CR>", opts)
--- keymap('n', 'gk', '<cmd>lua vim.lsp.buf.declaration()<CR>', opts) -- does not seems to work
--- keymap('n', 'gD', '<cmd>:vsp<cr>:lua vim.lsp.buf.definition()<cr><CR>', opts)
--- keymap("n", "gd", "<cmd>lua require('telescope.builtin').lsp_definitions()<cr>", opts)
--- keymap("n", "gE", '<cmd>lua vim.diagnostic.goto_prev({ border = "rounded" })<CR>', opts)
--- keymap("n", "ge", '<cmd>lua vim.diagnostic.goto_next({ border = "rounded" })<CR>', opts)
--- keymap("n", "gm", "<cmd>lua vim.lsp.buf.implementation()<CR>", opts)
--- keymap('n', '<C-space>', '<cmd>lua vim.lsp.buf.signature_help()<CR>', opts)
--- keymap('n', 'gy', '<cmd>lua vim.lsp.buf.type_definition()<CR>', opts)
--- keymap("n", "gr", "<cmd>lua require('telescope.builtin').lsp_references()<cr>", opts)
--- keymap('n', 'E', '<Cmd>lua vim.diagnostic.open_float()<CR>', opts)
--- keymap(
---   "n", "gl",
---   '<cmd>lua vim.lsp.diagnostic.show_line_diagnostics({ border = "rounded" })<CR>', opts)
-
--- keymap('n', 'go', '<Cmd>Neotree float reveal_file=<cfile> reveal_force_cwd<cr>', opts)
 
 -- Hop ---
 -- place this in one of your configuration file(s)
@@ -104,10 +85,10 @@ keymap('v', "<leader>nw", "<cmd>lua require'hop'.hint_words()<cr>", opts)
 keymap('v', "<leader>na", "<cmd>HopPattern<cr>", opts)
 
 keymap('n', 'f',
-  "<cmd>lua require'hop'.hint_char1({ direction = require'hop.hint'.HintDirection.AFTER_CURSOR, current_line_only = false })<cr>"
+  "<cmd>lua require'hop'.hint_char1({ direction = require'hop.hint'.HintDirection.AFTER_CURSOR, current_line_only = true })<cr>"
   , {})
 keymap('n', 'F',
-  "<cmd>lua require'hop'.hint_char1({ direction = require'hop.hint'.HintDirection.BEFORE_CURSOR, current_line_only = false })<cr>"
+  "<cmd>lua require'hop'.hint_char1({ direction = require'hop.hint'.HintDirection.BEFORE_CURSOR, current_line_only = true })<cr>"
   , {})
 keymap('o', 'f',
   "<cmd>lua require'hop'.hint_char1({ direction = require'hop.hint'.HintDirection.AFTER_CURSOR, current_line_only = false, inclusive_jump = true })<cr>"
