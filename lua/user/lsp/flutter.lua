@@ -9,6 +9,15 @@ if not dap_ok then
 end
 
 flutter.setup({
+   ui = {
+    -- the border type to use for all floating windows, the same options/formats
+    -- used for ":h nvim_open_win" e.g. "single" | "shadow" | {<table-of-eight-chars>}
+    border = "rounded",
+    -- This determines whether notifications are show with `vim.notify` or with the plugin's custom UI
+    -- please note that this option is eventually going to be deprecated and users will need to
+    -- depend on plugins like `nvim-notify` instead.
+    notification_style = 'plugin'
+  },
   -- flutter_path = "$HOME/fvm/default", -- <-- this takes priority over the lookup
   -- flutter_path = "$HOME/flutter/bin/flutter/", -- <-- this takes priority over the lookup
   fvm = false, -- takes priority over path, uses <workspace>/.fvm/flutter_sdk if enabled
@@ -18,7 +27,7 @@ flutter.setup({
   },
   dev_tools = {
     autostart = true, -- autostart devtools server if not detected
-    auto_open_browser = false, -- Automatically opens devtools in the browser
+    auto_open_browser = true, -- Automatically opens devtools in the browser
   },
   widget_guides = {
     enabled = true,
@@ -71,7 +80,7 @@ flutter.setup({
       require("user.lsp.handlers").on_attach(client, bufnr)
       vim.g.dart_style_guide = 2
       vim.g.dart_format_on_save = 1
-      vim.cmd "highlight FlutterWidgetGuides ctermfg=9 guifg=green"
+      vim.cmd "highlight FlutterWidgetGuides ctermfg=9 guifg=cyan"
     end,
     -- capabilities = my_custom_capabilities -- e.g. lsp_status capabilities
     --- OR you can specify a function to deactivate or change or control how the config is created
