@@ -19,14 +19,14 @@ vim.opt.termguicolors = true -- set term gui colors (most terminals support this
 vim.opt.timeoutlen = 300 -- time to wait for a mapped sequence to complete (in milliseconds)
 vim.opt.ttimeoutlen = 0
 vim.opt.undofile = true -- enable persistent undo
-vim.opt.updatetime = 300 -- faster completion (4000ms default)
+vim.opt.updatetime = 250 -- faster completion (4000ms default)
 vim.opt.writebackup = false -- if a file is being edited by another program (or was written to file while editing with another program), it is not allowed to be edited
 vim.opt.expandtab = true -- convert tabs to spaces
 vim.opt.shiftwidth = 2 -- the number of spaces inserted for each indentation
 vim.opt.tabstop = 2 -- insert 2 spaces for a tab
 vim.opt.cursorline = true -- highlight the current line
 
-vim.opt.lazyredraw = true
+--[[ vim.opt.lazyredraw = false ]]
 
 vim.opt.number = true -- set numbered lines
 vim.opt.laststatus = 3
@@ -49,10 +49,10 @@ vim.opt.relativenumber = true -- set relative numbered lines
 -- Vim Wiki settings
 vim.opt.compatible = false
 -- vim.opt.syntax = true
-vim.cmd [[
- filetype plugin on
- syntax on
-]]
+-- vim.cmd [[
+--  filetype plugin on
+--  syntax on
+-- ]]
 
 vim.g.vimwiki_list = { { path = '~/Documents/vimwiki', syntax = 'markdown', ext = '.md' } }
 vim.g.vimwiki_markdown_link_ext = 1
