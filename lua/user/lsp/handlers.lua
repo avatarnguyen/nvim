@@ -45,6 +45,8 @@ M.setup = function()
   vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers.signature_help, {
     border = "rounded",
   })
+
+  vim.lsp.handlers["dart/textDocument/publishOutline"] = require('lsp_extensions.dart.outline').get_callback()
 end
 
 local function lsp_keymaps(bufnr)
@@ -56,14 +58,16 @@ local function lsp_keymaps(bufnr)
   --[[ keymap(bufnr, "n", "K", "<cmd>Lspsaga hover_doc<CR>", { silent = true }) ]]
 
   keymap(bufnr, "n", "gm", "<cmd>lua vim.lsp.buf.implementation()<CR>", opts)
-  keymap(bufnr, 'n', 'gk', '<cmd>lua vim.lsp.buf.declaration()<CR>', opts) -- does not seems to work
+  --[[ keymap(bufnr, 'n', 'gk', '<cmd>lua vim.lsp.buf.declaration()<CR>', opts) -- does not seems to work ]]
   -- keymap(bufnr, "n", "gr", "<cmd>lua vim.lsp.buf.references()<CR>", opts)
   keymap(bufnr, "n", "gr", "<cmd>lua require('telescope.builtin').lsp_references()<cr>", opts)
-  keymap(bufnr, "n", "gl", "<cmd>lua vim.diagnostic.open_float()<CR>", opts)
+  keymap(bufnr, "n", "gu", "<cmd>Lspsaga lsp_finder<cr>", opts)
+  keymap(bufnr, "n", "gL", "<cmd>lua vim.diagnostic.open_float()<CR>", opts)
   keymap(
     bufnr, "n", "gn",
     '<cmd>lua vim.lsp.diagnostic.show_line_diagnostics({ border = "rounded" })<CR>', opts)
 
+  keymap(bufnr, 'n', 'E', '<Cmd>lua vim.diagnostic.open_float()<CR>', opts)
   -- Standard LSP
   --[[ keymap(bufnr, "n", "ge", '<cmd>lua vim.diagnostic.goto_next({ border = "rounded" })<CR>', opts) ]]
   --[[ keymap(bufnr, "n", "g[", '<cmd>lua vim.diagnostic.goto_prev({ border = "rounded" })<CR>', opts) ]]

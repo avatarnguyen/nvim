@@ -135,7 +135,7 @@ local mappings = {
       "Find App Constants",
     },
     t = {
-      "<cmd>lua require('telescope.builtin').live_grep({ search_dirs = { '~/Developer/app-flutter/lib/constants/app_theme.dart' }})<cr>",
+      "<cmd>lua require('telescope.builtin').live_grep({ search_dirs = { '~/Developer/app-flutter/packages/bricks/lib/src/' }})<cr>",
       "Find App Theme",
     },
     n = {
@@ -146,21 +146,16 @@ local mappings = {
       "<cmd>lua require('telescope.builtin').live_grep({ search_dirs = { '~/Developer/app-flutter/lib/l10n/app_en_GB.arb' }})<cr>",
       "Find Translation Key",
     },
-    -- e = { "<cmd>Neotree reveal float<cr>", "Float Explorer" },
-    -- j = { "<cmd>Neotree buffers<cr>", "Show Buffer Explorer" },
     -- o, f, g occupied by snap
-    -- f = {
-    --   "<cmd>lua require('telescope.builtin').find_files(require('telescope.themes').get_dropdown{debounce = 150, search_dirs = { '~/Developer/app-flutter/lib/' }, file_ignore_patterns = {'l10n/'}})<cr>",
-    --   "Find files in lib",
-    -- },
     l = { "<cmd>lua require('telescope.builtin').live_grep({ debounce = 200, file_ignore_patterns = {'ios/', 'android/', 'assets/', 'fonts/', 'packages/', 'doc/', 'l10n/'} })<cr>",
       "Find Text" },
     c = { "<cmd>lua require('telescope').extensions.neoclip.default(require('telescope.themes').get_dropdown{})<CR>",
       "Clipboard" },
     m = { "<cmd>lua require('telescope').extensions.macroscope.default(require('telescope.themes').get_dropdown{})<CR>",
       "Clipboard" },
-    b = { " <Cmd>lua require('telescope.builtin').current_buffer_fuzzy_find(require('telescope.themes').get_dropdown{})<CR>",
+    b = { "<Cmd>lua require('telescope.builtin').current_buffer_fuzzy_find(require('telescope.themes').get_dropdown{})<CR>",
       "Find in Buffer" },
+    o = { "<cmd>lua require('telescope.builtin').oldfiles( { search_dirs = 'CWD' } )<cr>", "Open Recent File" },
   },
 
   o = {
@@ -169,7 +164,7 @@ local mappings = {
     d = { "<cmd>lua require('telescope.builtin').lsp_document_symbols(require('telescope.themes').get_dropdown{})<cr>",
       "Document Symbols" },
     s = {
-      "<cmd>lua require('telescope.builtin').lsp_dynamic_workspace_symbols({ debounce = 150 })<cr>",
+      "<cmd>lua require('telescope.builtin').lsp_dynamic_workspace_symbols({ debounce = 150, file_ignore_patterns = {'ios/', 'android/', 'assets/', 'fonts/', 'packages/', 'doc/', 'l10n/'} })<cr>",
       "Workspace Symbols",
     },
   },
@@ -249,7 +244,6 @@ local mappings = {
     c = { "<cmd>Telescope colorscheme<cr>", "Colorscheme" },
     h = { "<cmd>Telescope help_tags<cr>", "Find Help" },
     M = { "<cmd>Telescope man_pages<cr>", "Man Pages" },
-    r = { "<cmd>Telescope oldfiles<cr>", "Open Recent File" },
     R = { "<cmd>Telescope registers<cr>", "Registers" },
     K = { "<cmd>Telescope keymaps<cr>", "Keymaps" },
     C = { "<cmd>Telescope commands<cr>", "Commands" },
