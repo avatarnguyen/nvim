@@ -47,6 +47,7 @@ local filepath = {
   file_status = true, -- displays file status (readonly status, modified status)
   path = 1, -- 0 = just filename, 1 = relative path, 2 = absolute path
   shorting_target = 24,
+  colored = true,
 }
 
 local tabs = {
@@ -88,7 +89,7 @@ local config = {
     -- component_separators = "|",
     disabled_filetypes = {
       statusline = { "alpha", "dashboard" },
-      -- winbar = { "alpha", "dashboard", "neotree", "neo-tree", "NvimTree", "Telescope", "StartupTime" },
+      winbar = { "alpha", "dashboard", "neotree", "neo-tree", "NvimTree", "Telescope", "StartupTime", "term", "toggleterm" },
       tabline = { "alpha", "dashboard", "neotree", "neo-tree", "NvimTree", "NvimTree_1", "Telescope", "nvim_lsp",
         "fidget", "No name", "No Name" },
     },
@@ -134,22 +135,22 @@ local config = {
     },
     lualine_x = { 'lsp_progress' },
   },
-  winbar = {
-    lualine_a = {},
-    lualine_b = {},
-    lualine_c = { filepath },
-    lualine_x = { diagnostics },
-    lualine_y = {},
-    lualine_z = {}
-  },
-  inactive_winbar = {
-    lualine_a = {},
-    lualine_b = {},
-    lualine_c = { filepath },
-    lualine_x = {},
-    lualine_y = {},
-    lualine_z = {}
-  },
+  --[[ winbar = { ]]
+  --[[   lualine_a = {}, ]]
+  --[[   lualine_b = {}, ]]
+  --[[   lualine_c = { filepath }, ]]
+  --[[   lualine_x = { diagnostics }, ]]
+  --[[   lualine_y = {}, ]]
+  --[[   lualine_z = {} ]]
+  --[[ }, ]]
+  --[[ inactive_winbar = { ]]
+  --[[   lualine_a = {}, ]]
+  --[[   lualine_b = {}, ]]
+  --[[   lualine_c = { filepath }, ]]
+  --[[   lualine_x = {}, ]]
+  --[[   lualine_y = {}, ]]
+  --[[   lualine_z = {} ]]
+  --[[ }, ]]
   extensions = { 'nvim-tree', 'toggleterm' }
 }
 -- Color for highlights
