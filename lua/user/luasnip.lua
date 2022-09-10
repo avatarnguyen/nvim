@@ -6,17 +6,17 @@ end
 
 -- some shorthands...
 local snip = ls.snippet
-local node = ls.snippet_node
-local indent = ls.indent_snippet_node
-local text = ls.text_node
+--[[ local node = ls.snippet_node ]]
+--[[ local indent = ls.indent_snippet_node ]]
+--[[ local text = ls.text_node ]]
 local insert = ls.insert_node
 local func = ls.function_node
-local choice = ls.choice_node
-local dynamic = ls.dynamic_node
+--[[ local choice = ls.choice_node ]]
+--[[ local dynamic = ls.dynamic_node ]]
 
 local types = require('luasnip.util.types')
 local rep = require("luasnip.extras").rep
-local fmt = require("luasnip.extras.fmt").fmt
+--[[ local fmt = require("luasnip.extras.fmt").fmt ]]
 local fmta = require("luasnip.extras.fmt").fmta
 
 ls.config.set_config {
@@ -57,54 +57,27 @@ ls.add_snippets(nil, {
     --   }, ""),
   },
   dart = {
-    ls.parser.parse_snippet("th", "final theme = AppTheme.of(context);"),
-    ls.parser.parse_snippet("loc", "final localizations = context.localizations;"),
-    ls.parser.parse_snippet("si", "final screenSize = MediaQuery.of(context).size;"),
+    ls.parser.parse_snippet("ath", "final theme = AppTheme.of(context);"),
+    ls.parser.parse_snippet("_th", "final theme = AppTheme.of(context);"),
+    ls.parser.parse_snippet("ssi", "final screenSize = MediaQuery.of(context).size;"),
+    ls.parser.parse_snippet("_si", "final screenSize = MediaQuery.of(context).size;"),
     ls.parser.parse_snippet("tor", "//TODO: (@anh): remove before push"),
     ls.parser.parse_snippet("ton", "//TODO: (@anh): implement on next ticket"),
-    ls.parser.parse_snippet("rcon", "Container(color: Colors.red,);"),
+    ls.parser.parse_snippet("rcon", "ColoredBox(color: Colors.red,);"),
     snip("csl",
       fmta("class <> extends ConsumerWidget {\n\tconst <>({super.key});\n\t@override\tWidget build(BuildContext context, WidgetRef ref) {\n\t\treturn Container();\n\t}\n}"
         , { insert(1, "NameWidget"), rep(1) })),
     snip("cpn", fmta("context.pushPageNamed(Routes.<>)", { insert(1, "page") })),
     snip("cloc", fmta("context.loc.<>", { insert(1, "key") })),
+    snip("_cloc", fmta("context.loc.<>", { insert(1, "key") })),
+    snip("tsub1", fmta("Text( context.loc.<>, style: theme.subtitle1,)", { insert(1, "key") })),
+    snip("tsub2", fmta("Text( context.loc.<>, style: theme.subtitle2,)", { insert(1, "key") })),
+    snip("tbody1", fmta("Text( context.loc.<>, style: theme.body1,)", { insert(1, "key") })),
+    snip("tbody2", fmta("Text( context.loc.<>, style: theme.body2,)", { insert(1, "key") })),
+    snip("tcaption", fmta("Text( context.loc.<>, style: theme.caption,)", { insert(1, "key") })),
+    snip("theadline5", fmta("Text( context.loc.<>, style: theme.headline5,)", { insert(1, "key") })),
   },
 })
-
--- {
---   "Consumer Stateless": {
---     "scope": "dart",
---     "prefix": "stlessConsumer",
---     "description": "Create a ConsumerStatelessWidget",
---     "body": [
---       "class $1 extends ConsumerWidget {",
---       "\tconst $1({Key? key}) : super(key: key);\n",
---       "\t@override",
---       "\tWidget build(BuildContext context, WidgetRef ref) {",
---       "\t\treturn Container();",
---       "\t}",
---       "}"
---     ]
---   },
---   "Consumer Stateful": {
---     "scope": "dart",
---     "prefix": "stfulConsumer",
---     "description": "Create a ConsumerStatefulWidget",
---     "body": [
---       "class $1 extends ConsumerStatefulWidget {",
---       "\tconst $1({Key? key}) : super(key: key);\n",
---       "\t@override",
---       "\tConsumerState<ConsumerStatefulWidget> createState() => _$1State();",
---       "}\n",
---       "class _$1State extends ConsumerState<$1> {\n",
---       "\t@override",
---       "\tWidget build(BuildContext context) {",
---       "\t\treturn Container();",
---       "\t}",
---       "}"
---     ]
---   }
--- }
 
 -- Reload Snippet
 vim.keymap.set("n", "<leader><leader>l", "<cmd>source ~/.config/nvim/lua/user/lualine.lua<CR>", { silent = true })
