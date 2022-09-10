@@ -15,7 +15,7 @@ nvim_tree.setup {
     enable = true,
   },
   disable_netrw = true,
-  hijack_netrw = false,
+  hijack_netrw = true,
   open_on_setup = false,
   ignore_ft_on_setup = {
     "alpha",
@@ -25,7 +25,7 @@ nvim_tree.setup {
     add_trailing = false,
     group_empty = false,
     highlight_git = false,
-    -- highlight_opened_files = "none",
+    --highlight_opened_files =  --"none",
     root_folder_modifier = ":t",
     icons = {
       webdev_colors = true,
@@ -74,7 +74,7 @@ nvim_tree.setup {
   },
   update_focused_file = {
     enable = true,
-    update_cwd = true,
+    update_cwd = false,
     ignore_list = {},
   },
   git = {
