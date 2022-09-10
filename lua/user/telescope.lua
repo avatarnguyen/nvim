@@ -15,7 +15,7 @@ local new_maker = function(filepath, bufnr, opts)
       if mime_type == "text" then
         vim.loop.fs_stat(filepath, function(_, stat)
           if not stat then return end
-          if stat.size > 10000 then
+          if stat.size > 20000 then
             return
           else
             previewers.buffer_previewer_maker(filepath, bufnr, opts)

@@ -6,7 +6,7 @@ end
 
 npairs.setup {
   check_ts = true,
-  disable_filetype = { "TelescopePrompt", "spectre_panel" },
+  disable_filetype = { "TelescopePrompt", "spectre_panel", "guihua", "guihua_rust", "clap_input" },
 }
 
 local cmp_autopairs = require "nvim-autopairs.completion.cmp"
