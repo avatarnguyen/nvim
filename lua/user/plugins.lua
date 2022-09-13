@@ -70,10 +70,10 @@ return packer.startup(function(use)
     end
   }
   --[[ use("Tsuzat/NeoSolarized.nvim") ]]
-  use({
-    "catppuccin/nvim",
-    as = "catppuccin"
-  })
+  --[[ use({ ]]
+  --[[   "catppuccin/nvim", ]]
+  --[[   as = "catppuccin" ]]
+  --[[ }) ]]
 
   use({
     "kyazdani42/nvim-tree.lua",
@@ -165,14 +165,14 @@ return packer.startup(function(use)
       })
     end
   }
---  use 'nvim-lua/lsp_extensions.nvim'
-  use({
-      'ray-x/navigator.lua',
-      requires = {
-          { 'ray-x/guihua.lua', run = 'cd lua/fzy && make' },
-          { 'neovim/nvim-lspconfig' },
-      },
-  })
+  --  use 'nvim-lua/lsp_extensions.nvim'
+  --[[ use({ ]]
+  --[[   'ray-x/navigator.lua', ]]
+  --[[   requires = { ]]
+  --[[     { 'ray-x/guihua.lua', run = 'cd lua/fzy && make' }, ]]
+  --[[     { 'neovim/nvim-lspconfig' }, ]]
+  --[[   }, ]]
+  --[[ }) ]]
   --[[ use { 'camspiers/snap', rocks = {'fzy'}} ]]
   --[[ use ({ ]]
   --[[   'camspiers/snap', ]]
@@ -304,10 +304,16 @@ return packer.startup(function(use)
       require "user.buffer-close"
     end
   })
-  --[[ use { ]]
-  --[[   'pianocomposer321/yabs.nvim', ]]
-  --[[   requires = { 'nvim-lua/plenary.nvim' }, ]]
-  --[[ } ]]
+  use {
+    'jedrzejboczar/toggletasks.nvim',
+    requires = {
+      'nvim-lua/plenary.nvim',
+      'akinsho/toggleterm.nvim',
+      'nvim-telescope/telescope.nvim/',
+    },
+    -- To enable YAML config support
+    --[[ rocks = 'lyaml', ]]
+  }
   -- use {
   --   'jghauser/kitty-runner.nvim',
   --   config = function()
