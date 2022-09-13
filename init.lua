@@ -21,3 +21,4 @@ require "user.whichkey"
 require "user.diffview"
 --[[ require "user.outline" ]]
 require "user.lspsaga"
+require "user.toggletask"
