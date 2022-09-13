@@ -108,6 +108,7 @@ keymap('', 'T',
 keymap("n", "s", "<cmd>lua require('substitute').operator()<cr>", { noremap = true })
 keymap("n", "ss", "<cmd>lua require('substitute').line()<cr>", { noremap = true })
 keymap("n", "<S-s>", "<cmd>lua require('substitute').eol()<cr>", { noremap = true })
+keymap("v", "<S-s>", "<cmd>lua require('substitute').visual()<cr>", { noremap = true })
 keymap("n", "<C-s>", "<cmd>lua require('substitute.range').operator()<cr>", { noremap = true })
 keymap("x", "<C-s>", "<cmd>lua require('substitute.range').visual()<cr>", {})
 keymap("n", "<leader><leader>s", "<cmd>lua require('substitute.range').word()<cr>", {})
