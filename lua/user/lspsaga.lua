@@ -6,10 +6,10 @@ end
 
 saga.init_lsp_saga {
   code_action_lightbulb = {
-    enable = false,
-    --[[ sign = true, ]]
-    --[[ sign_priority = 20, ]]
-    --[[ virtual_text = true, ]]
+    enable = true,
+    sign = true,
+    sign_priority = 20,
+    virtual_text = false,
   },
   -- preview lines of lsp_finder and definition preview
   max_preview_lines = 20,
@@ -51,9 +51,9 @@ local function get_file_name(include_path)
   local file_path = ''
   for _, cur in ipairs(path_list) do
     file_path = (cur == '.' or cur == '~') and '' or
-        file_path .. cur .. ' ' .. '%#LspSagaWinbarSep#>%*' .. ' %*'
+        file_path .. cur .. '' .. '%#LspSagaWinbarSep#/%*' .. '%*'
   end
-  return file_path .. file_name
+  return file_path .. ' ' .. file_name
 end
 
 local function config_winbar_or_statusline()
@@ -64,6 +64,7 @@ local function config_winbar_or_statusline()
     ['NvimTree'] = true,
     ['lualine'] = true,
     ['help'] = true,
+    ['json'] = true,
   } -- Ignore float windows and exclude filetype
   if vim.api.nvim_win_get_config(0).zindex or exclude[vim.bo.filetype] then
     vim.wo.winbar = ''
@@ -73,7 +74,7 @@ local function config_winbar_or_statusline()
     if ok then sym = lspsaga.get_symbol_node() end
     local win_val = ''
     win_val = get_file_name(true) -- set to true to include path
-    if sym ~= nil then win_val = win_val .. sym end
+    if sym ~= nil then win_val = win_val .. ' ' .. sym end
     vim.wo.winbar = win_val
     -- if work in statusline
     --[[ vim.wo.stl = win_val ]]
