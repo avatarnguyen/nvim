@@ -156,6 +156,8 @@ local mappings = {
     b = { "<Cmd>lua require('telescope.builtin').current_buffer_fuzzy_find(require('telescope.themes').get_dropdown{})<CR>",
       "Find in Buffer" },
     o = { "<cmd>lua require('telescope.builtin').oldfiles( { search_dirs = 'CWD' } )<cr>", "Open Recent File" },
+    k = { "<cmd>Telescope toggletasks spawn<cr>", "Select Task Runner" },
+    r = { "<cmd>Telescope toggletasks select<cr>", "Show Task Runner" },
   },
 
   o = {
@@ -251,10 +253,11 @@ local mappings = {
 
   t = {
     name = "Terminal",
-    t = { "<cmd>lua _HTOP_TOGGLE()<cr>", "Htop" },
+    T = { "<cmd>lua _HTOP_TOGGLE()<cr>", "Htop" },
     f = { "<cmd>ToggleTerm direction=float<cr>", "Float" },
     h = { "<cmd>ToggleTerm size=10 direction=horizontal<cr>", "Horizontal" },
     v = { "<cmd>ToggleTerm size=80 direction=vertical<cr>", "Vertical" },
+    t = { "<cmd>lua _RUN_TRANSLATION()<cr>", "Run Flutter Translation" },
   },
 
   d = {

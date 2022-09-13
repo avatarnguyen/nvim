@@ -33,8 +33,13 @@ vim.cmd('autocmd! TermOpen term://* lua set_terminal_keymaps()')
 
 local Terminal = require("toggleterm.terminal").Terminal
 local lazygit = Terminal:new({ cmd = "lazygit", hidden = true })
+local flutterTranslationUpdate = Terminal:new({ cmd = "ft && fpg", hidden = false })
 
 function _LAZYGIT_TOGGLE()
 	lazygit:toggle()
+end
+
+function _RUN_TRANSLATION()
+	flutterTranslationUpdate:toggle()
 end
 
