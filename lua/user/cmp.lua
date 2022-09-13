@@ -11,7 +11,7 @@ if not snip_status_ok then
 end
 
 
-luasnip.filetype_extend("dart", {"flutter"})
+luasnip.filetype_extend("dart", { "flutter" })
 require("luasnip/loaders/from_vscode").load()
 require("luasnip/loaders/from_vscode").lazy_load({ paths = { "~/.config/nvim/vscodesnips" } })
 
@@ -25,8 +25,19 @@ end
 
 local compare = require('cmp.config.compare')
 local lspkind = require('lspkind')
-local types = require("cmp.types")
-local str = require("cmp.utils.str")
+--[[ local types = require("cmp.types") ]]
+--[[ local str = require("cmp.utils.str") ]]
+
+local source_mapping = {
+  buffer = "[Buffer]",
+  nvim_lsp = "[LSP]",
+  nvim_lua = "[Lua]",
+  cmp_tabnine = "[TN]",
+  path = "[Path]",
+  luasnip = "",
+  emoji = "",
+
+}
 
 cmp.setup {
   snippet = {
@@ -85,28 +96,44 @@ cmp.setup {
 
       -- The function below will be called before any actual modifications from lspkind
       -- so that you can provide more controls on popup customization. (See [#30](https://github.com/onsails/lspkind-nvim/pull/30))
-      before = function (entry, vim_item)
-          -- Get the full snippet (and only keep first line)
-          local word = entry:get_insert_text()
-          if entry.completion_item.insertTextFormat == types.lsp.InsertTextFormat.Snippet then
-            word = vim.lsp.util.parse_snippet(word)
+      before = function(entry, vim_item)
+        --[[ -- Get the full snippet (and only keep first line) ]]
+        --[[ local word = entry:get_insert_text() ]]
+        --[[ if entry.completion_item.insertTextFormat == types.lsp.InsertTextFormat.Snippet then ]]
+        --[[   word = vim.lsp.util.parse_snippet(word) ]]
+        --[[ end ]]
+        --[[ word = str.oneline(word) ]]
+        --[[]]
+        --[[ -- concatenates the string ]]
+        --[[ -- local max = 50 ]]
+        --[[ -- if string.len(word) >= max then ]]
+        --[[ -- 	local before = string.sub(word, 1, math.floor((max - 3) / 2)) ]]
+        --[[ -- 	word = before .. "..." ]]
+        --[[ -- end ]]
+        --[[]]
+        --[[ if ]]
+        --[[   entry.completion_item.insertTextFormat == types.lsp.InsertTextFormat.Snippet ]]
+        --[[   and string.sub(vim_item.abbr, -1, -1) == "~" ]]
+        --[[ then ]]
+        --[[   word = word .. "~" ]]
+        --[[ end ]]
+        --[[ vim_item.abbr = word ]]
+        --[[ return vim_item ]]
+        vim_item.kind = lspkind.symbolic(vim_item.kind, { mode = "symbol" })
+        vim_item.menu = source_mapping[entry.source.name]
+        if entry.source.name == "cmp_tabnine" then
+          local detail = (entry.completion_item.data or {}).detail
+          vim_item.kind = ""
+          if detail and detail:find('.*%%.*') then
+            vim_item.kind = vim_item.kind .. ' ' .. detail
           end
-          word = str.oneline(word)
 
-          -- concatenates the string
-          -- local max = 50
-          -- if string.len(word) >= max then
-          -- 	local before = string.sub(word, 1, math.floor((max - 3) / 2))
-          -- 	word = before .. "..."
-          -- end
-
-          if
-            entry.completion_item.insertTextFormat == types.lsp.InsertTextFormat.Snippet
-            and string.sub(vim_item.abbr, -1, -1) == "~"
-          then
-            word = word .. "~"
+          if (entry.completion_item.data or {}).multiline then
+            vim_item.kind = vim_item.kind .. ' ' .. '[ML]'
           end
-          vim_item.abbr = word
+        end
+        local maxwidth = 80
+        vim_item.abbr = string.sub(vim_item.abbr, 1, maxwidth)
         return vim_item
       end
     }),
@@ -147,11 +174,11 @@ cmp.setup {
     priority_weight = 2,
     comparators = {
       compare.score,
+      compare.exact,
       compare.kind,
       compare.offset,
-      compare.recently_used,
       require('cmp_tabnine.compare'),
-      compare.exact,
+      compare.recently_used,
       compare.sort_text,
       compare.length,
       compare.order,
@@ -175,3 +202,14 @@ cmp.setup {
     ghost_text = true,
   },
 }
+
+-- prefetch Dart files
+local prefetch = vim.api.nvim_create_augroup("prefetch", {clear = true})
+
+vim.api.nvim_create_autocmd('BufRead', {
+  group = prefetch,
+  pattern = '*.dart',
+  callback = function()
+    require('cmp_tabnine'):prefetch(vim.fn.expand('%:p'))
+  end
+})

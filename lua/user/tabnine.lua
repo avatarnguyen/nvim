@@ -21,6 +21,9 @@ tabnine:setup({
     Renamer = true,
     Rename = true,
     prompt = true,
+    lspsaga = true,
+    lspsagarename = true,
+    sagarename = true,
 	};
 	show_prediction_strength = false;
 })
