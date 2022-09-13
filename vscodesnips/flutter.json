@@ -14,12 +14,20 @@
   },
   "Test Group Setup": {
     "prefix": "testg",
-    "body": ["group('${1} -', () {", " \ttest('${2}', () {", " \t});", "});"],
+    "body": [
+      "group('${1} -', () {",
+      " \ttest('${2}', () {",
+      " \t});",
+      "});"
+    ],
     "description": "Creates a Test group with a test"
   },
   "Single Test Setup": {
     "prefix": "tests",
-    "body": [" test('${1}', () {", "\t });"],
+    "body": [
+      " test('${1}', () {",
+      "\t });"
+    ],
     "description": "Creates a single test"
   },
   "triple_a_test": {
@@ -50,7 +58,7 @@
       ");"
     ]
   },
-    "Consumer Stateless": {
+  "Consumer Stateless": {
     "scope": "dart",
     "prefix": "stlessConsumer",
     "description": "Create a ConsumerStatelessWidget",
@@ -80,6 +88,66 @@
       "\t\treturn Container();",
       "\t}",
       "}"
+    ]
+  },
+  "State Provider": {
+    "scope": "dart",
+    "prefix": "stateProvider",
+    "description": "Create a StateProvider",
+    "body": [
+      "final $1Provider = StateProvider<$2>((ref) {",
+      "\treturn $3;",
+      "});"
+    ]
+  },
+  "State Provider Family": {
+    "scope": "dart",
+    "prefix": "stateProviderFamily",
+    "description": "Create a StateProvider with Family modifier",
+    "body": [
+      "final $1Provider = StateProvider.family<$2, $3>((ref, $4) {",
+      "\treturn $5;",
+      "});"
+    ]
+  },
+  "Provider": {
+    "scope": "dart",
+    "prefix": "provider",
+    "description": "Create a simple Provider",
+    "body": [
+      "final $1Provider = Provider<$2>((ref) {",
+      "\treturn $3;",
+      "});"
+    ]
+  },
+  "Provider with Family": {
+    "scope": "dart",
+    "prefix": "providerFamily",
+    "description": "Create a simple Provider with Family modifier",
+    "body": [
+      "final $1Provider = Provider.family<$2, $3>((ref, $4) {",
+      "\treturn $5;",
+      "});"
+    ]
+  },
+  "State Notifier Provider": {
+    "scope": "dart",
+    "prefix": "stateNotifierProvider",
+    "description": "Create a StateNotifierProvider",
+    "body": [
+      "final $1Provider = StateNotifierProvider<$2>((ref) {",
+      "\treturn $3",
+      "});"
+    ]
+  },
+  "State Notifier Provider with Family": {
+    "scope": "dart",
+    "prefix": "stateNotifierProviderFamily",
+    "description": "Create a StateNotifierProvider with Family Modifier",
+    "body": [
+      "final $1Provider = StateNotifierProvider.family<$2, $3>((ref, $4) {",
+      "\treturn $5",
+      "});"
     ]
   }
 }
