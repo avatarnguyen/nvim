@@ -6,6 +6,7 @@ vim.opt.conceallevel = 0 -- so that `` is visible in markdown files
 vim.opt.fileencoding = "utf-8" -- the encoding written to a file
 vim.opt.hlsearch = true -- highlight all matches on previous search pattern
 vim.opt.ignorecase = true -- ignore case in search patterns
+
 vim.opt.mouse = "a" -- allow the mouse to be used in neovim
 vim.opt.pumheight = 10 -- pop up menu height
 vim.opt.showmode = true -- we don't need to see things like -- INSERT -- anymore
@@ -16,17 +17,17 @@ vim.opt.splitbelow = true -- force all horizontal splits to go below current win
 vim.opt.splitright = true -- force all vertical splits to go to the right of current window
 vim.opt.swapfile = false -- creates a swapfile
 vim.opt.termguicolors = true -- set term gui colors (most terminals support this)
-vim.opt.timeoutlen = 300 -- time to wait for a mapped sequence to complete (in milliseconds)
+vim.opt.timeoutlen = 250 -- time to wait for a mapped sequence to complete (in milliseconds)
 vim.opt.ttimeoutlen = 0
 vim.opt.undofile = true -- enable persistent undo
-vim.opt.updatetime = 250 -- faster completion (4000ms default)
+vim.opt.updatetime = 240 -- faster completion (4000ms default)
 vim.opt.writebackup = false -- if a file is being edited by another program (or was written to file while editing with another program), it is not allowed to be edited
 vim.opt.expandtab = true -- convert tabs to spaces
 vim.opt.shiftwidth = 2 -- the number of spaces inserted for each indentation
 vim.opt.tabstop = 2 -- insert 2 spaces for a tab
-vim.opt.cursorline = true -- highlight the current line
 
---[[ vim.opt.lazyredraw = false ]]
+vim.opt.lazyredraw = false
+vim.opt.shell = "/bin/bash"
 
 vim.opt.number = true -- set numbered lines
 vim.opt.laststatus = 3
@@ -61,6 +62,7 @@ vim.g.markdown_folding = 1
 -- vim.g.vimwiki_ext2syntax = {'.md': 'markdown', '.markdown': 'markdown', '.mdown': 'markdown'}
 
 
+-- vim.opt.cursorline = true -- highlight the current line
 -- remove cursorline on inactive window
 local group = vim.api.nvim_create_augroup("CursorLineControl", { clear = true })
 local set_cursorline = function(event, value, pattern)
@@ -80,7 +82,9 @@ set_cursorline("WinEnter", true, "*.lua")
 set_cursorline("FileType", false, "TelescopePrompt")
 set_cursorline("FileType", false, "log")
 set_cursorline("FileType", false, "No Name")
--- opt.shada = { "!", "'1000", "<50", "s10", "h" }
+
+-- vim.g.opt.shada = { "!", "'1000", "<50", "s10", "h" }
+
 -- opt.breakindent = true
 -- opt.showbreak = string.rep(" ", 3) -- Make it so that long lines wrap smartly
 -- opt.linebreak = true
