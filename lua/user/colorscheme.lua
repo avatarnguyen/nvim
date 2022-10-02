@@ -1,10 +1,11 @@
--- local colorscheme = "kanagawa"
--- local colorscheme = "tokyonight"
+local colorscheme = "kanagawa"
+--[[ local colorscheme = "tokyonight" ]]
 --[[ local colorscheme = "cobalt2" ]]
 -- local colorscheme = "material"
--- local colorscheme = "nightfly"
-local colorscheme = "catppuccin"
+--[[ local colorscheme = "nightfly" ]]
+--[[ local colorscheme = "catppuccin" ]]
 --[[ local colorscheme = "NeoSolarized" ]]
+--[[ local colorscheme = "night-owl" ]]
 
 -- NeoSolarized
 if colorscheme == "NeoSolarized" then
@@ -113,12 +114,13 @@ end
 
 -- nightfly
 if colorscheme == "nightfly" then
- vim.g.nightflyTransparent = 1
- vim.g.nightflyItalics = 1
- vim.g.nightflyNormalFloat = 1
- vim.g.nightflyCursorColor = 0
- vim.g.nightflyUnderlineMatchParen = 1
- vim.g.nightflyUndercurls = 1
+  vim.g.nightflyTransparent = 0
+  vim.g.nightflyTerminalColors = 1
+  vim.g.nightflyItalics = 1
+  vim.g.nightflyNormalFloat = 1
+  vim.g.nightflyCursorColor = 1
+  vim.g.nightflyUnderlineMatchParen = true
+  vim.g.nightflyWinSeparator = 2
 end
 
 if colorscheme == "cobalt2" then
@@ -132,7 +134,7 @@ if colorscheme == "kanagawa" then
   require('kanagawa').setup({
     undercurl = true, -- enable undercurls
     commentStyle = { italic = true },
-    functionStyle = {},
+    functionStyle = { bold = true },
     keywordStyle = { italic = true },
     statementStyle = { bold = true },
     typeStyle = { bold = true },
@@ -141,27 +143,47 @@ if colorscheme == "kanagawa" then
     specialException = true, -- special highlight for exception handling keywords
     transparent = false, -- do not set background color
     dimInactive = false, -- dim inactive window `:h hl-NormalNC`
-    globalStatus = false, -- adjust window separators highlight for laststatus=3
+    globalStatus = true, -- adjust window separators highlight for laststatus=3
     colors = {},
     overrides = {},
   })
 end
 
 if colorscheme == "tokyonight" then
-  -- Tokyonight Storm Colorscheme
-  -- vim.g.tokyonight_sidebars = [ "qf", "vista_kind", "terminal", "packer" ]
-  -- vim.g.tokyonight_colors = { hint = "orange", error = "#ff0000" }
-  -- vim.g.tokyonight_transparent_sidebar = 0
+  require("tokyonight").setup({
+    -- your configuration comes here
+    -- or leave it empty to use the default settings
+    style = "moon", -- The theme comes in three styles, `storm`, `moon`, a darker variant `night` and `day`
+    transparent = false, -- Enable this to disable setting the background color
+    terminal_colors = true, -- Configure the colors used when opening a `:terminal` in Neovim
+    styles = {
+      -- Style to be applied to different syntax groups
+      -- Value is any valid attr-list value for `:help nvim_set_hl`
+      comments = { italic = true },
+      keywords = { italic = true },
+      functions = { bold = true },
+      variables = {},
+      -- Background styles. Can be "dark", "transparent" or "normal"
+      sidebars = "dark", -- style for sidebars, see below
+      floats = "transparent", -- style for floating windows
+    },
+    sidebars = { "qf", "help" }, -- Set a darker background on sidebar-like windows. For example: `["qf", "vista_kind", "terminal", "packer"]`
+    day_brightness = 0.3, -- Adjusts the brightness of the colors of the **Day** style. Number between 0 and 1, from dull to vibrant colors
+    hide_inactive_statusline = false, -- Enabling this option, will hide inactive statuslines and replace them with a thin border instead. Should work with the standard **StatusLine** and **LuaLine**.
+    dim_inactive = false, -- dims inactive windows
+    lualine_bold = false, -- When `true`, section headers in the lualine theme will be bold
 
-  -- Current Use Option
-  vim.g.tokyonight_style = "night"
-  -- vim.g.tokyonight_style = "storm"
-  vim.g.tokyonight_italic_variables = 1
-  vim.g.tokyonight_italic_keywords = 1
-  vim.g.tokyonight_lualine_bold = 1
-  vim.g.tokyonight_italic_functions = 1
-  vim.g.tokyonight_transparent = 0
-  vim.g.tokyonight_dark_sidebar = 1
+    --- You can override specific color groups to use other groups or a hex color
+    --- function will be called with a ColorScheme table
+    --- param colors ColorScheme
+    -- on_colors = function(colors) end,
+
+    --- You can override specific highlights to use other groups or a hex color
+    --- function will be called with a Highlights and ColorScheme table
+    --- param highlights Highlights
+    --- param colors ColorScheme
+    -- on_highlights = function(highlights, colors) end,
+  })
 end
 
 
@@ -175,8 +197,8 @@ end
 if colorscheme == "NeoSolarized" then
   vim.cmd [[
       highlight FloatBorder guibg=NONE ctermbg=NONE  " Removes the border of float menu (LSP and Autocompletion uses it)
-      highlight link NormalFloat Normal 
-      highlight NormalFloat ctermbg=NONE ctermfg=NONE guibg=NONE guifg=NONE 
-      highlight Pmenu ctermbg=NONE guibg=NONE 
+      highlight link NormalFloat Normal
+      highlight NormalFloat ctermbg=NONE ctermfg=NONE guibg=NONE guifg=NONE
+      highlight Pmenu ctermbg=NONE guibg=NONE
   ]]
 end
