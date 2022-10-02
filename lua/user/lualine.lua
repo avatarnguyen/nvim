@@ -12,10 +12,57 @@ local diagnostics = {
   sources = { "nvim_diagnostic" },
   sections = { "error", "warn", 'info' },
   symbols = { error = " ", warn = " ", info = " " },
-  colored = true,
+  colored = false,
   update_in_insert = false,
   always_visible = false,
 }
+
+local function workspace_diagnostic()
+  local error_count, warning_count, info_count, hint_count
+  local count = { 0, 0, 0, 0 }
+  local lsp_diagnostics = vim.diagnostic.get(nil)
+  for _, diagnostic in ipairs(lsp_diagnostics) do
+    if vim.startswith(
+      vim.diagnostic.get_namespace(diagnostic.namespace).name,
+      "vim.lsp"
+    )
+    then
+      count[diagnostic.severity] = count[diagnostic.severity] + 1
+    end
+  end
+  error_count = count[vim.diagnostic.severity.ERROR]
+  warning_count = count[vim.diagnostic.severity.WARN]
+  info_count = count[vim.diagnostic.severity.INFO]
+  hint_count = count[vim.diagnostic.severity.HINT]
+
+  local str = ""
+  if error_count > 0 then
+    if string.len(str) > 0 then
+      str = str .. " "
+    end
+    str = str .. " " .. error_count
+  end
+  if warning_count > 0 then
+    if string.len(str) > 0 then
+      str = str .. " "
+    end
+    str = str .. " " .. warning_count
+  end
+  if info_count > 0 then
+    if string.len(str) > 0 then
+      str = str .. " "
+    end
+    str = str .. " " .. info_count
+  end
+  if hint_count > 0 then
+    if string.len(str) > 0 then
+      str = str .. " "
+    end
+    str = str .. " " .. hint_count
+  end
+
+  return str
+end
 
 local diff = {
   "diff",
@@ -46,8 +93,16 @@ local filepath = {
   'filename',
   file_status = true, -- displays file status (readonly status, modified status)
   path = 1, -- 0 = just filename, 1 = relative path, 2 = absolute path
-  shorting_target = 24,
+  shorting_target = 48,
   colored = true,
+}
+
+local fileName = {
+  'filename',
+  file_status = false, -- displays file status (readonly status, modified status)
+  path = 0, -- 0 = just filename, 1 = relative path, 2 = absolute path
+  shorting_target = 32,
+  colored = false,
 }
 
 local tabs = {
@@ -55,16 +110,31 @@ local tabs = {
   mode = 1,
 }
 
--- local filename2 = {
---   'filename',
---   file_status = true, -- displays file status (readonly status, modified status)
---   path = 1, -- 0 = just filename, 1 = relative path, 2 = absolute path
---   shorting_target = 30,
--- }
-
-local spaces = function()
-  return "spaces: " .. vim.api.nvim_buf_get_option(0, "shiftwidth")
+local winbar_symbol = function()
+  local exclude = {
+    ['teminal'] = true,
+    ['toggleterm'] = true,
+    ['prompt'] = true,
+    ['NvimTree'] = true,
+    ['lualine'] = true,
+    ['help'] = true,
+    ['json'] = true,
+  }
+  if vim.api.nvim_win_get_config(0).zindex or exclude[vim.bo.filetype] then
+    return ""
+  else
+    local ok, lspsaga = pcall(require, 'lspsaga.symbolwinbar')
+    local sym
+    if ok then sym = lspsaga.get_symbol_node() end
+    local win_val = ''
+    if sym ~= nil then win_val = win_val .. ' ' .. sym end
+    return win_val
+  end
 end
+
+--[[ local spaces = function() ]]
+--[[   return "spaces: " .. vim.api.nvim_buf_get_option(0, "shiftwidth") ]]
+--[[ end ]]
 
 -- local nvim_tree_shift = {
 --   function()
@@ -89,68 +159,70 @@ local config = {
     -- component_separators = "|",
     disabled_filetypes = {
       statusline = { "alpha", "dashboard" },
-      winbar = { "alpha", "dashboard", "neotree", "neo-tree", "NvimTree", "Telescope", "StartupTime", "term", "toggleterm" },
+      winbar = { "alpha", "dashboard", "neotree", "neo-tree", "NvimTree", "Telescope", "StartupTime", "term",
+        "toggleterm" },
       tabline = { "alpha", "dashboard", "neotree", "neo-tree", "NvimTree", "NvimTree_1", "Telescope", "nvim_lsp",
         "fidget", "No name", "No Name" },
     },
     always_divide_middle = false,
     refresh = {
       statusline = 1000,
-      tabline = 800,
-      winbar = 1000,
+      tabline = 1000,
+      winbar = 800,
     },
   },
   sections = {
     lualine_a = { branch, diff },
     lualine_b = { tabs },
-    lualine_c = { diagnostics },
-    lualine_x = { spaces, filetype },
+    lualine_c = { diagnostics, 'lsp_progress' },
+    lualine_x = { workspace_diagnostic, filetype },
     lualine_y = { location },
     -- lualine_z = { { "progress", separator = { right = "" }, } },
     lualine_z = { "progress" },
   },
-  tabline = {
-    -- lualine_a = {
-    --   nvim_tree_shift,
-    -- },
-    lualine_a = {
-      {
-        "buffers",
-        -- separator = { left = "", right = "" },
-        separator = {  right = '' },
-        right_padding = 2,
-        symbols = { alternate_file = "" },
-        show_filename_only = true, -- Shows shortened relative path when set to false.
-        hide_filename_extension = true, -- Hide filename extension when set to true.
-        show_modified_status = true, -- Shows indicator when the buffer is modified.
-        mode = 0, -- 0: Shows buffer name
-        -- 1: Shows buffer index
-        -- 2: Shows buffer name + buffer index
-        -- 3: Shows buffer number
-        -- 4: Shows buffer name + buffer number
-        -- max_length = vim.o.columns * 2 / 3, -- Maximum width of buffers component,
-        -- it can also be a function that returns
-        -- the value of `max_length` dynamically.
-      },
-    },
-    lualine_x = { 'lsp_progress' },
+  --[[ tabline = { ]]
+  --[[   -- lualine_a = { ]]
+  --[[   --   nvim_tree_shift, ]]
+  --[[   -- }, ]]
+  --[[   lualine_a = { ]]
+  --[[     { ]]
+  --[[       "buffers", ]]
+  --[[       -- separator = { left = "", right = "" }, ]]
+  --[[       separator = { right = '' }, ]]
+  --[[       right_padding = 2, ]]
+  --[[       symbols = { alternate_file = "" }, ]]
+  --[[       show_filename_only = true, -- Shows shortened relative path when set to false. ]]
+  --[[       hide_filename_extension = true, -- Hide filename extension when set to true. ]]
+  --[[       show_modified_status = true, -- Shows indicator when the buffer is modified. ]]
+  --[[       mode = 0, -- 0: Shows buffer name ]]
+  --[[       -- 1: Shows buffer index ]]
+  --[[       -- 2: Shows buffer name + buffer index ]]
+  --[[       -- 3: Shows buffer number ]]
+  --[[       -- 4: Shows buffer name + buffer number ]]
+  --[[       -- max_length = vim.o.columns * 2 / 3, -- Maximum width of buffers component, ]]
+  --[[       -- it can also be a function that returns ]]
+  --[[       -- the value of `max_length` dynamically. ]]
+  --[[     }, ]]
+  --[[   }, ]]
+  --[[   lualine_x = { 'lsp_progress' }, ]]
+  --[[   lualine_y = { workspace_diagnostic } ]]
+  --[[ }, ]]
+  winbar = {
+    lualine_a = { diagnostics },
+    lualine_b = { filepath },
+    lualine_c = { winbar_symbol },
+    lualine_x = {},
+    lualine_y = {},
+    lualine_z = {}
   },
-  --[[ winbar = { ]]
-  --[[   lualine_a = {}, ]]
-  --[[   lualine_b = {}, ]]
-  --[[   lualine_c = { filepath }, ]]
-  --[[   lualine_x = { diagnostics }, ]]
-  --[[   lualine_y = {}, ]]
-  --[[   lualine_z = {} ]]
-  --[[ }, ]]
-  --[[ inactive_winbar = { ]]
-  --[[   lualine_a = {}, ]]
-  --[[   lualine_b = {}, ]]
-  --[[   lualine_c = { filepath }, ]]
-  --[[   lualine_x = {}, ]]
-  --[[   lualine_y = {}, ]]
-  --[[   lualine_z = {} ]]
-  --[[ }, ]]
+  inactive_winbar = {
+    lualine_a = { diagnostics },
+    lualine_b = {},
+    lualine_c = { fileName },
+    lualine_x = {},
+    lualine_y = {},
+    lualine_z = {}
+  },
   extensions = { 'nvim-tree', 'toggleterm' }
 }
 -- Color for highlights
