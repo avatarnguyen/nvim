@@ -45,8 +45,6 @@ keymap("n", "gs", "<cmd>!tmux send-keys -t flutter 'R'<CR><CR>", opts)
 -- keymap("x", "<leader>E", "<cmd>NvimTreeFocus<CR>", opts)
 
 -- Telescope
-keymap("n", ";;",
-  "<cmd>lua require('telescope.builtin').buffers(require('telescope.themes').get_dropdown{previewer = false})<cr>", opts)
 keymap("n", "<leader>b",
   "<cmd>lua require('telescope.builtin').buffers(require('telescope.themes').get_dropdown{previewer = false})<cr>", opts)
 keymap("n", "<C-p>",
@@ -56,6 +54,7 @@ keymap("n", "<C-p>",
 
 -- paste register
 keymap("n", ",p", '"0p', opts)
+keymap("v", "<leader>p", '"_dP', opts)
 
 
 -- Clear highlights
@@ -72,36 +71,6 @@ keymap("v", "<leader>a", "<esc><cmd>lua require('lsp-fastaction').range_code_act
 keymap("n", "<leader>a", "<cmd>lua require('lsp-fastaction').code_action()<CR>", opts)
 
 keymap("n", "gl", "<cmd>lua require('lsp-fastaction').code_action()<CR>", opts)
-
--- LSP SAGA
-keymap("n", "<C-;>", "<cmd>Lspsaga open_floaterm lazygit<CR>", opts)
-keymap("t", "<C-;>", "<C-\\><C-n><cmd>Lspsaga close_floaterm<CR>", opts)
-
--- Hop ---
--- place this in one of your configuration file(s)
-keymap('v', "<leader>nl", "<cmd>lua require'hop'.hint_lines()<cr>", opts)
-keymap('x', "<leader>nl", "<cmd>lua require'hop'.hint_lines()<cr>", opts)
-keymap('v', "<leader>nw", "<cmd>lua require'hop'.hint_words()<cr>", opts)
-keymap('v', "<leader>na", "<cmd>HopPattern<cr>", opts)
-
-keymap('n', 'f',
-  "<cmd>lua require'hop'.hint_char1({ direction = require'hop.hint'.HintDirection.AFTER_CURSOR, current_line_only = true })<cr>"
-  , {})
-keymap('n', 'F',
-  "<cmd>lua require'hop'.hint_char1({ direction = require'hop.hint'.HintDirection.BEFORE_CURSOR, current_line_only = true })<cr>"
-  , {})
-keymap('o', 'f',
-  "<cmd>lua require'hop'.hint_char1({ direction = require'hop.hint'.HintDirection.AFTER_CURSOR, current_line_only = false, inclusive_jump = true })<cr>"
-  , {})
-keymap('o', 'F',
-  "<cmd>lua require'hop'.hint_char1({ direction = require'hop.hint'.HintDirection.BEFORE_CURSOR, current_line_only = false, inclusive_jump = true })<cr>"
-  , {})
-keymap('', 't',
-  "<cmd>lua require'hop'.hint_char1({ direction = require'hop.hint'.HintDirection.AFTER_CURSOR, current_line_only = true })<cr>"
-  , {})
-keymap('', 'T',
-  "<cmd>lua require'hop'.hint_char1({ direction = require'hop.hint'.HintDirection.BEFORE_CURSOR, current_line_only = true })<cr>"
-  , {})
 
 -- SUBSTITUTE plugin  {{{
 -- keymap("x", "s", "<cmd>lua require('substitute').visual()<cr>", { noremap = true })
@@ -137,7 +106,6 @@ keymap("n", "<S-Tab>", ":bprevious<CR>", opts)
 keymap("v", "<", "<gv", opts)
 keymap("v", ">", ">gv", opts)
 
-keymap("v", "p", '"_dP', opts)
 
 -- Visual Block --
 -- Move text up and down
