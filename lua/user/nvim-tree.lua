@@ -15,7 +15,7 @@ nvim_tree.setup {
     enable = true,
   },
   disable_netrw = true,
-  hijack_netrw = true,
+  hijack_netrw = false,
   open_on_setup = false,
   ignore_ft_on_setup = {
     "alpha",
@@ -84,7 +84,7 @@ nvim_tree.setup {
   },
   view = {
     width = 45,
-    height = 30,
+    --[[ height = 30, ]]
     hide_root_folder = false,
     side = "left",
     mappings = {

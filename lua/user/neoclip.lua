@@ -3,6 +3,8 @@ if not cmp_status_ok then
   return
 end
 
+require('telescope').load_extension('neoclip')
+
 neoclip.setup({
   history = 100,
   enable_persistent_history = true,

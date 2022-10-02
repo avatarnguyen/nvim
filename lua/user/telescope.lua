@@ -42,7 +42,7 @@ telescope.setup {
     prompt_prefix = " ",
     selection_caret = " ",
     path_display = { "smart" },
-    file_ignore_patterns = { ".git/", "node_modules", "gen_l10n/", "analytics" },
+    file_ignore_patterns = { ".git/", "node_modules", "gen_l10n/", "analytics", ".pub-cache/", "flutter/packages/" },
 
     sorting_strategy = "ascending",
     layout_config = {
@@ -120,6 +120,9 @@ telescope.setup {
     -- builtin picker
     lsp_references = {
       search_dirs = 'CWD',
+    },
+    old_files = {
+      search_dirs = 'CWD',
     }
   },
   extensions = {
@@ -134,12 +137,22 @@ telescope.setup {
     -- ["ui-select"] = {
     --   require("telescope.themes").get_cursor({}),
     -- },
+    file_browser = {
+      theme = "dropdown",
+      -- disables netrw and use telescope-file-browser in its place
+      hijack_netrw = true,
+      --[[ mappings = { ]]
+      --[[   ["i"] = { ]]
+      --[[     -- your custom insert mode mappings ]]
+      --[[   }, ]]
+      --[[   ["n"] = { ]]
+      --[[     -- your custom normal mode mappings ]]
+      --[[   }, ]]
+      --[[ }, ]]
+    },
   },
 }
 
-telescope.load_extension("git_worktree")
-telescope.load_extension('harpoon')
+--[[ telescope.load_extension("git_worktree") ]]
 telescope.load_extension('fzf')
--- telescope.load_extension('ui-select')
-telescope.load_extension('neoclip')
-telescope.load_extension('toggletasks')
+telescope.load_extension('file_browser')

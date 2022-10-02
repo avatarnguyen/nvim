@@ -4,3 +4,5 @@ if not status_ok then
 end
 
 harpoon.setup({})
+
+require('telescope').load_extension('harpoon')

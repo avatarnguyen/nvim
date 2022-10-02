@@ -47,7 +47,7 @@ return packer.startup(function(use)
   use({ "numToStr/Comment.nvim" })
   use({ "JoosepAlviste/nvim-ts-context-commentstring" })
   use({ "kyazdani42/nvim-web-devicons" })
-  -- use({ "akinsho/bufferline.nvim" })
+  use { 'akinsho/bufferline.nvim', tag = "v2.*", requires = 'kyazdani42/nvim-web-devicons' }
   use({ "moll/vim-bbye" })
   use({ "nvim-lualine/lualine.nvim" })
   use({ 'arkav/lualine-lsp-progress' })
@@ -59,16 +59,14 @@ return packer.startup(function(use)
   use "b0o/schemastore.nvim"
 
   -- Colorschemes
-  -- use({ "folke/tokyonight.nvim" })
-  -- use("bluz71/vim-nightfly-guicolors")
-  -- use("rebelot/kanagawa.nvim")
-  use {
-    'lalitmee/cobalt2.nvim',
-    requires = 'tjdevries/colorbuddy.nvim',
-    config = function()
-      require('colorbuddy').colorscheme('cobalt2')
-    end
-  }
+  use({ "folke/tokyonight.nvim" })
+  --[[ use("bluz71/vim-nightfly-guicolors") ]]
+  use("rebelot/kanagawa.nvim")
+  --[[ use { ]]
+  --[[   'lalitmee/cobalt2.nvim', ]]
+  --[[   requires = 'tjdevries/colorbuddy.nvim', ]]
+  --[[ } ]]
+
   --[[ use("Tsuzat/NeoSolarized.nvim") ]]
   --[[ use({ ]]
   --[[   "catppuccin/nvim", ]]
@@ -81,32 +79,15 @@ return packer.startup(function(use)
       require "user.nvim-tree"
     end
   })
-  -- use {
-  --   "nvim-neo-tree/neo-tree.nvim",
-  --   as = "neotree",
-  --   branch = "v2.x",
-  --   requires = {
-  --     "nvim-lua/plenary.nvim",
-  --     "kyazdani42/nvim-web-devicons", -- not strictly required, but recommended
-  --     "MunifTanjim/nui.nvim",
-  --   }
-  -- }
-  -- use {
-  --   's1n7ax/nvim-window-picker',
-  --   tag = 'v1.*',
-  --   after = 'neotree',
-  --   config = function()
-  --     require 'window-picker'.setup()
-  --   end,
-  -- }
 
   -- Vim Wiki
-  use "vimwiki/vimwiki"
+  --[[ use "vimwiki/vimwiki" ]]
 
   -- cmp plugins
   use({ "hrsh7th/nvim-cmp" }) -- The completion plugin
   use({
     'tzachar/cmp-tabnine',
+    after = 'nvim-cmp',
     run = './install.sh',
     requires = 'hrsh7th/nvim-cmp',
     config = function()
@@ -118,10 +99,13 @@ return packer.startup(function(use)
   use({ "saadparwaiz1/cmp_luasnip" }) -- snippet completions
   use({ "hrsh7th/cmp-nvim-lsp" })
   use({ "hrsh7th/cmp-nvim-lua" })
-  use({ "folke/trouble.nvim", cmd = "TroubleToggle" })
+  --[[ use({ "folke/trouble.nvim", cmd = "TroubleToggle" }) ]]
   -- snippets
   use({ "L3MON4D3/LuaSnip" }) --snippet engine
-  use({ "rafamadriz/friendly-snippets" }) -- a bunch of snippets to use
+  use({
+    "rafamadriz/friendly-snippets",
+    event = "InsertCharPre"
+  }) -- a bunch of snippets to use
 
   -- LSP
   use({ "neovim/nvim-lspconfig" }) -- enable LSP
@@ -139,8 +123,6 @@ return packer.startup(function(use)
   use "onsails/lspkind.nvim"
 
   -- Flutter
-  -- use({ "akinsho/flutter-tools.nvim", requires = "nvim-lua/plenary.nvim",
-  --   commit = "3c2b196de3a7f62247d50fe63e596b0884d6156a" })
   use({ "akinsho/flutter-tools.nvim", requires = "nvim-lua/plenary.nvim" })
   use "sidlatau/lsp-fastaction.nvim"
   use "dart-lang/dart-vim-plugin"
@@ -151,7 +133,6 @@ return packer.startup(function(use)
     "nvim-neotest/neotest",
     requires = {
       "nvim-lua/plenary.nvim",
-      "nvim-treesitter/nvim-treesitter",
       "antoinemadec/FixCursorHold.nvim",
       "sidlatau/neotest-dart",
     },
@@ -173,13 +154,6 @@ return packer.startup(function(use)
   --[[     { 'neovim/nvim-lspconfig' }, ]]
   --[[   }, ]]
   --[[ }) ]]
-  --[[ use { 'camspiers/snap', rocks = {'fzy'}} ]]
-  --[[ use ({ ]]
-  --[[   'camspiers/snap', ]]
-  --[[   config = function() ]]
-  --[[     require "user.snap" ]]
-  --[[   end ]]
-  --[[ }) ]]
   -- Telescope
   use({
     "nvim-telescope/telescope.nvim",
@@ -192,12 +166,19 @@ return packer.startup(function(use)
     after = "telescope.nvim",
     run = 'cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build',
   }
+  use {
+    "nvim-telescope/telescope-file-browser.nvim",
+  }
 
   use({
     "AckslD/nvim-neoclip.lua",
+    after = { "telescope.nvim" },
     requires = {
       { "tami5/sqlite.lua", module = "sqlite" },
     },
+    config = function()
+      require("user.neoclip")
+    end
   })
 
   -- Treesitter
@@ -215,16 +196,17 @@ return packer.startup(function(use)
       require "user.treesitter-context"
     end
   })
+  use({ "nvim-treesitter/nvim-treesitter-textobjects" })
 
   -- Git
   use({ "lewis6991/gitsigns.nvim" })
   use({ "sindrets/diffview.nvim", requires = "nvim-lua/plenary.nvim" })
-  use({
-    "ThePrimeagen/git-worktree.nvim",
-    config = function()
-      require "user.git-worktree"
-    end
-  })
+  --[[ use({ ]]
+  --[[   "ThePrimeagen/git-worktree.nvim", ]]
+  --[[   config = function() ]]
+  --[[     require "user.git-worktree" ]]
+  --[[   end ]]
+  --[[ }) ]]
 
   -- DAP
   use({
@@ -252,25 +234,20 @@ return packer.startup(function(use)
     end,
   }
   use({
-    "phaazon/hop.nvim",
-    branch = "v1", -- optional but strongly recommended
-    config = function()
-      -- you can configure Hop the way you like here; see :h hop-config
-      require("hop").setup({ keys = "etovxqpdygfblzhckisuran" })
-    end,
-  })
-  use({
     "Mephistophiles/surround.nvim",
     config = function()
       require "user.surround"
     end
   })
-  use("tpope/vim-repeat")
+  --[[ use("tpope/vim-repeat") ]]
 
   -- Misc
   use("folke/which-key.nvim")
   use("p00f/nvim-ts-rainbow")
-  use({ "ThePrimeagen/harpoon" })
+  use({
+    "ThePrimeagen/harpoon",
+    after = { "telescope.nvim" },
+  })
   use({
     "Shatur/neovim-session-manager",
     config = function()
@@ -306,11 +283,10 @@ return packer.startup(function(use)
   })
   use {
     'jedrzejboczar/toggletasks.nvim',
-    requires = {
-      'nvim-lua/plenary.nvim',
-      'akinsho/toggleterm.nvim',
-      'nvim-telescope/telescope.nvim/',
-    },
+    after = { "telescope.nvim", "toggleterm.nvim" },
+    config = function()
+      require "user.toggletask"
+    end
     -- To enable YAML config support
     --[[ rocks = 'lyaml', ]]
   }

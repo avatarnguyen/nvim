@@ -3,6 +3,8 @@ if not status_ok then
   return
 end
 
+require('telescope').load_extension('toggletasks')
+
 toggletasks.setup {
     debug = false,
     silent = false,  -- don't show "info" messages
@@ -22,7 +24,7 @@ toggletasks.setup {
         win_cwd = true,     -- vim.fn.getcwd(win)
         lsp_root = true,    -- root_dir for first LSP available for the buffer
         dirs = {
-         '/Users/anhknowunity/Developer/toggletasks'
+         '/Users/anhknowunity/Developer/.toggletasks'
         },          -- explicit list of directories to search
     },
     -- Language server priorities when selecting lsp_root (default is 0)
@@ -52,7 +54,7 @@ toggletasks.setup {
         -- direction for select horiz/vert/tab)
         select = {
             mappings = {
-                select_float = '<C-f>',
+                select_horiz = '<C-f>',
                 open_smart = '<C-a>',
                 open_all = '<M-a>',
                 open_selected = nil,
@@ -66,3 +68,4 @@ toggletasks.setup {
         },
     },
 }
+
