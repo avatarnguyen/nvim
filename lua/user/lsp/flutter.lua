@@ -80,7 +80,8 @@ flutter.setup({
       require("user.lsp.handlers").on_attach(client, bufnr)
       vim.g.dart_style_guide = 2
       vim.g.dart_format_on_save = 1
-      vim.cmd "highlight FlutterWidgetGuides ctermfg=9 guifg=cyan"
+      --[[ vim.cmd "highlight FlutterWidgetGuides ctermfg=9 guifg=cyan" ]]
+      vim.cmd "highlight FlutterWidgetGuides ctermfg=9 guifg=#72A7BC"
     end,
     -- capabilities = my_custom_capabilities -- e.g. lsp_status capabilities
     --- OR you can specify a function to deactivate or change or control how the config is created

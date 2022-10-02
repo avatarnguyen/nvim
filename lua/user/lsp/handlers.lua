@@ -1,5 +1,10 @@
 local M = {}
 
+vim.cmd [[
+highlight DiagnosticUnderlineError guifg=Red ctermfg=Red
+hi DiagnosticError guifg=Red ctermfg=Red
+]]
+
 M.capabilities = vim.lsp.protocol.make_client_capabilities()
 
 M.setup = function()
@@ -45,9 +50,8 @@ M.setup = function()
   vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers.signature_help, {
     border = "rounded",
   })
-
-  vim.lsp.handlers["dart/textDocument/publishOutline"] = require('lsp_extensions.dart.outline').get_callback()
 end
+  --vim.lsp.handlers["dart/textDocument/publishOutline"] = require('lsp_extensions.dart.outline').get_callback()
 
 local function lsp_keymaps(bufnr)
   local opts = { noremap = true, silent = true }
@@ -84,15 +88,6 @@ local function lsp_keymaps(bufnr)
   keymap(bufnr, "i", "<C-space>", "<Cmd>Lspsaga signature_help<CR>", { silent = true })
   keymap(bufnr, "n", "<leader>lr", "<cmd>Lspsaga rename<CR>", opts)
 
-  -- keymap(bufnr, "n", "<leader>lf", "<cmd>lua vim.lsp.buf.formatting()<cr>", opts)
-  -- keymap(bufnr, "n", "<leader>li", "<cmd>LspInfo<cr>", opts)
-  -- keymap(bufnr, "n", "<leader>lI", "<cmd>LspInstallInfo<cr>", opts)
-  -- keymap(bufnr, "n", "<leader>la", "<cmd>lua vim.lsp.buf.code_action()<cr>", opts)
-  -- keymap(bufnr, "n", "<leader>lj", "<cmd>lua vim.diagnostic.goto_next({buffer=0})<cr>", opts)
-  -- keymap(bufnr, "n", "<leader>lk", "<cmd>lua vim.diagnostic.goto_prev({buffer=0})<cr>", opts)
-  -- keymap(bufnr, "n", "<leader>lr", "<cmd>lua vim.lsp.buf.rename()<cr>", opts)
-  -- keymap(bufnr, "n", "<leader>ls", "<cmd>lua vim.lsp.buf.signature_help()<CR>", opts)
-  -- keymap(bufnr, "n", "<leader>lq", "<cmd>lua vim.diagnostic.setloclist()<CR>", opts)
 end
 
 M.on_attach = function(client, bufnr)
@@ -133,13 +128,6 @@ M.on_attach = function(client, bufnr)
   end
   illuminate.on_attach(client)
 
-  -- local ok, lsp_format = pcall(require, "lsp-format")
-  -- if ok then
-  --   lsp_format.on_attach(client)
-  -- else
-  --   vim.api.nvim_err_writeln "Failed to load lsp format on on_attach"
-  -- end
-
   M.capabilities.textDocument.completion.completionItem.snippetSupport = true
   M.capabilities = cmp_nvim_lsp.update_capabilities(M.capabilities)
 end
@@ -153,50 +141,50 @@ end
 -- end
 -- M.capabilities = cmp_nvim_lsp.update_capabilities(capabilities)
 --
--- local function lsp_execute_command(val)
---   if val.edit or type(val.command) == "table" then
---     if val.edit then
---       vim.lsp.util.apply_workspace_edit(val.edit)
---     end
---     if type(val.command) == "table" then
---       vim.lsp.buf.execute_command(val.command)
---     end
---   else
---     vim.lsp.buf.execute_command(val)
---   end
--- end
---
--- function M.code_action_fix_all()
---   local context = { diagnostics = vim.lsp.diagnostic.get_line_diagnostics() }
---   local params = vim.lsp.util.make_range_params()
---   params.context = context
---   vim.lsp.buf_request(
---     0,
---     "textDocument/codeAction",
---     params,
---     function(err, results_lsp)
---       if err then
---         vim.pretty_print(err)
---         if err.message then
---           vim.notify(err.message, "error")
---         end
---         return
---       end
---       if not results_lsp or vim.tbl_isempty(results_lsp) then
---         print "No results from textDocument/codeAction"
---         return
---       end
---       for _, result in pairs(results_lsp) do
---         if
---           result
---           and result.command
---           and result.command.command == "edit.fixAll"
---         then
---           lsp_execute_command(result)
---         end
---       end
---     end
---   )
--- end
+local function lsp_execute_command(val)
+  if val.edit or type(val.command) == "table" then
+    if val.edit then
+      vim.lsp.util.apply_workspace_edit(val.edit)
+    end
+    if type(val.command) == "table" then
+      vim.lsp.buf.execute_command(val.command)
+    end
+  else
+    vim.lsp.buf.execute_command(val)
+  end
+end
+
+function M.code_action_fix_all()
+  local context = { diagnostics = vim.lsp.diagnostic.get_line_diagnostics() }
+  local params = vim.lsp.util.make_range_params()
+  params.context = context
+  vim.lsp.buf_request(
+    0,
+    "textDocument/codeAction",
+    params,
+    function(err, results_lsp)
+      if err then
+        vim.pretty_print(err)
+        if err.message then
+          vim.notify(err.message, "error")
+        end
+        return
+      end
+      if not results_lsp or vim.tbl_isempty(results_lsp) then
+        print "No results from textDocument/codeAction"
+        return
+      end
+      for _, result in pairs(results_lsp) do
+        if
+          result
+          and result.command
+          and result.command.command == "edit.fixAll"
+        then
+          lsp_execute_command(result)
+        end
+      end
+    end
+  )
+end
 
 return M
