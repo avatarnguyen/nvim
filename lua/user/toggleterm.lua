@@ -4,7 +4,7 @@ if not status_ok then
 end
 
 toggleterm.setup({
-	size = 22,
+	size = 10,
 	open_mapping = [[<c-\>]],
 	hide_numbers = true,
 	shade_terminals = false,
@@ -12,7 +12,7 @@ toggleterm.setup({
 	start_in_insert = true,
 	insert_mappings = true,
 	persist_size = true,
-	direction = "float",
+	direction = 'horizontal', -- "float",
 	close_on_exit = true,
 	shell = vim.o.shell,
 	float_opts = {
@@ -32,7 +32,7 @@ end
 vim.cmd('autocmd! TermOpen term://* lua set_terminal_keymaps()')
 
 local Terminal = require("toggleterm.terminal").Terminal
-local lazygit = Terminal:new({ cmd = "lazygit", hidden = true })
+local lazygit = Terminal:new({ cmd = "lazygit", hidden = true, direction = "float", size = 24 })
 local flutterTranslationUpdate = Terminal:new({ cmd = "ft && fpg", hidden = false })
 
 function _LAZYGIT_TOGGLE()
