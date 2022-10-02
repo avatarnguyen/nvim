@@ -54,9 +54,12 @@ vim.api.nvim_create_autocmd({ "BufWinEnter", "FileType" }, {
   end,
 })
 
--- vim.api.nvim_create_autocmd({ "BufWritePre" }, {
---   pattern = "*.dart",
---   callback = function()
---     vim.lsp.buf.format()
---   end,
--- })
+local fix_all_on_save = vim.api.nvim_create_augroup("fix_all_on_save", {})
+
+vim.api.nvim_create_autocmd({ "BufWritePre" }, {
+  group = fix_all_on_save,
+  pattern = "*.dart",
+  callback = function()
+    require("user.lsp.handlers").code_action_fix_all()
+  end,
+})
