@@ -25,18 +25,17 @@ end
 
 local compare = require('cmp.config.compare')
 local lspkind = require('lspkind')
---[[ local types = require("cmp.types") ]]
---[[ local str = require("cmp.utils.str") ]]
+local types = require("cmp.types")
+local str = require("cmp.utils.str")
 
 local source_mapping = {
-  buffer = "[Buffer]",
+  buffer = "[Buf]",
   nvim_lsp = "[LSP]",
   nvim_lua = "[Lua]",
   cmp_tabnine = "[TN]",
   path = "[Path]",
-  luasnip = "",
+  luasnip = "[SNIP]",
   emoji = "",
-
 }
 
 cmp.setup {
@@ -89,37 +88,12 @@ cmp.setup {
     }),
   },
   formatting = {
-    fields = { "kind", "abbr", "menu" },
+    fields = { "abbr","kind", "menu" },
     format = lspkind.cmp_format({
-      mode = 'symbol', -- show only symbol annotations
+    -- options: 'text', 'text_symbol', 'symbol_text', 'symbol'
+      mode = 'symbol_text', -- show only symbol annotations
       maxwidth = 50, -- prevent the popup from showing more than provided characters (e.g 50 will not show more than 50 characters)
-
-      -- The function below will be called before any actual modifications from lspkind
-      -- so that you can provide more controls on popup customization. (See [#30](https://github.com/onsails/lspkind-nvim/pull/30))
       before = function(entry, vim_item)
-        --[[ -- Get the full snippet (and only keep first line) ]]
-        --[[ local word = entry:get_insert_text() ]]
-        --[[ if entry.completion_item.insertTextFormat == types.lsp.InsertTextFormat.Snippet then ]]
-        --[[   word = vim.lsp.util.parse_snippet(word) ]]
-        --[[ end ]]
-        --[[ word = str.oneline(word) ]]
-        --[[]]
-        --[[ -- concatenates the string ]]
-        --[[ -- local max = 50 ]]
-        --[[ -- if string.len(word) >= max then ]]
-        --[[ -- 	local before = string.sub(word, 1, math.floor((max - 3) / 2)) ]]
-        --[[ -- 	word = before .. "..." ]]
-        --[[ -- end ]]
-        --[[]]
-        --[[ if ]]
-        --[[   entry.completion_item.insertTextFormat == types.lsp.InsertTextFormat.Snippet ]]
-        --[[   and string.sub(vim_item.abbr, -1, -1) == "~" ]]
-        --[[ then ]]
-        --[[   word = word .. "~" ]]
-        --[[ end ]]
-        --[[ vim_item.abbr = word ]]
-        --[[ return vim_item ]]
-        vim_item.kind = lspkind.symbolic(vim_item.kind, { mode = "symbol" })
         vim_item.menu = source_mapping[entry.source.name]
         if entry.source.name == "cmp_tabnine" then
           local detail = (entry.completion_item.data or {}).detail
@@ -132,24 +106,33 @@ cmp.setup {
             vim_item.kind = vim_item.kind .. ' ' .. '[ML]'
           end
         end
-        local maxwidth = 80
-        vim_item.abbr = string.sub(vim_item.abbr, 1, maxwidth)
+
+         -- Get the full snippet (and only keep first line)
+        local word = entry:get_insert_text()
+        if entry.completion_item.insertTextFormat == types.lsp.InsertTextFormat.Snippet then
+          word = vim.lsp.util.parse_snippet(word)
+        end
+        word = str.oneline(word)
+
+        -- concatenates the string
+        -- local max = 50
+        -- if string.len(word) >= max then
+        -- 	local before = string.sub(word, 1, math.floor((max - 3) / 2))
+        -- 	word = before .. "..."
+        -- end
+
+        if
+          entry.completion_item.insertTextFormat == types.lsp.InsertTextFormat.Snippet
+          and string.sub(vim_item.abbr, -1, -1) == "~"
+        then
+          word = word .. "~"
+        end
+        vim_item.abbr = word
+        --[[ local maxwidth = 80 ]]
+        --[[ vim_item.abbr = string.sub(vim_item.abbr, 1, maxwidth) ]]
         return vim_item
       end
     }),
-    -- format = function(entry, vim_item)
-    --   vim_item.kind = string.format("%s", kind_icons[vim_item.kind])
-    --   vim_item.menu = ({
-    --     nvim_lsp = "",
-    --     nvim_lua = "",
-    --     luasnip = "",
-    --     buffer = "",
-    --     path = "",
-    --     emoji = "",
-    --     cmp_tabnine = "[T9]",
-    --   })[entry.source.name]
-    --   return vim_item
-    -- end,
   },
   sources = {
     { name = "nvim_lsp" },
@@ -178,10 +161,10 @@ cmp.setup {
       compare.kind,
       compare.offset,
       require('cmp_tabnine.compare'),
-      compare.recently_used,
       compare.sort_text,
       compare.length,
       compare.order,
+      compare.recently_used,
     },
   },
   confirm_opts = {
