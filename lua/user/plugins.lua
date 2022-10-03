@@ -240,6 +240,18 @@ return packer.startup(function(use)
     end
   })
   --[[ use("tpope/vim-repeat") ]]
+  use({
+    "petertriho/nvim-scrollbar",
+    config = function ()
+      require("user.scrollbar")
+    end
+  })
+  use ({
+    'kevinhwang91/nvim-hlslens',
+    config = function ()
+      require("scrollbar.handlers.search").setup()
+    end
+  })
 
   -- Misc
   use("folke/which-key.nvim")
