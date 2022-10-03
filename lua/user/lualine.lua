@@ -93,16 +93,16 @@ local filepath = {
   'filename',
   file_status = true, -- displays file status (readonly status, modified status)
   path = 1, -- 0 = just filename, 1 = relative path, 2 = absolute path
-  shorting_target = 48,
+  shorting_target = 32,
   colored = true,
 }
 
 local fileName = {
   'filename',
-  file_status = false, -- displays file status (readonly status, modified status)
+  file_status = true, -- displays file status (readonly status, modified status)
   path = 0, -- 0 = just filename, 1 = relative path, 2 = absolute path
-  shorting_target = 32,
-  colored = false,
+  shorting_target = 100,
+  colored = true,
 }
 
 local tabs = {
@@ -164,7 +164,7 @@ local config = {
       tabline = { "alpha", "dashboard", "neotree", "neo-tree", "NvimTree", "NvimTree_1", "Telescope", "nvim_lsp",
         "fidget", "No name", "No Name" },
     },
-    always_divide_middle = false,
+    always_divide_middle = true,
     refresh = {
       statusline = 1000,
       tabline = 1000,
@@ -173,8 +173,8 @@ local config = {
   },
   sections = {
     lualine_a = { branch, diff },
-    lualine_b = { tabs },
-    lualine_c = { diagnostics, 'lsp_progress' },
+    lualine_b = { filepath },
+    lualine_c = { 'lsp_progress' },
     lualine_x = { workspace_diagnostic, filetype },
     lualine_y = { location },
     -- lualine_z = { { "progress", separator = { right = "" }, } },
@@ -208,19 +208,19 @@ local config = {
   --[[   lualine_y = { workspace_diagnostic } ]]
   --[[ }, ]]
   winbar = {
-    lualine_a = { diagnostics },
-    lualine_b = { filepath },
+    lualine_a = {},
+    lualine_b = { fileName },
     lualine_c = { winbar_symbol },
     lualine_x = {},
-    lualine_y = {},
+    lualine_y = { diagnostics },
     lualine_z = {}
   },
   inactive_winbar = {
-    lualine_a = { diagnostics },
+    lualine_a = {},
     lualine_b = {},
-    lualine_c = { fileName },
+    lualine_c = { filepath },
     lualine_x = {},
-    lualine_y = {},
+    lualine_y = { diagnostics },
     lualine_z = {}
   },
   extensions = { 'nvim-tree', 'toggleterm' }
