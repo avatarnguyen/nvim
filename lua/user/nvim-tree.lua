@@ -15,7 +15,7 @@ nvim_tree.setup {
     enable = true,
   },
   disable_netrw = true,
-  hijack_netrw = false,
+  hijack_netrw = true,
   open_on_setup = false,
   ignore_ft_on_setup = {
     "alpha",

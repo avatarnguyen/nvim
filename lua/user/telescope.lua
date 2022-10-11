@@ -137,10 +137,22 @@ telescope.setup {
     -- ["ui-select"] = {
     --   require("telescope.themes").get_cursor({}),
     -- },
+    frecency = {
+      show_scores = false,
+      show_unindexed = true,
+      ignore_patterns = { "*.git/*", "*/tmp/*",  '*.pub-cache/*',  '*packages/*' },
+      disable_devicons = false,
+      search_dirs = 'CWD',
+      workspaces = {
+        --[[ 'CWD', ]]
+        --[[ ["project"] = "/home/my_username/projects", ]]
+        --[[ ["wiki"]    = "/home/my_username/wiki" ]]
+      }
+    },
     file_browser = {
       theme = "dropdown",
       -- disables netrw and use telescope-file-browser in its place
-      hijack_netrw = true,
+      hijack_netrw = false,
       --[[ mappings = { ]]
       --[[   ["i"] = { ]]
       --[[     -- your custom insert mode mappings ]]
@@ -156,3 +168,5 @@ telescope.setup {
 --[[ telescope.load_extension("git_worktree") ]]
 telescope.load_extension('fzf')
 telescope.load_extension('file_browser')
+telescope.load_extension("frecency")
+--[[ return telescope ]]
