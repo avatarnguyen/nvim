@@ -2,6 +2,9 @@ local opts = { noremap = true, silent = true }
 
 -- local term_opts = { silent = true }
 
+---@diagnostic disable-next-line: unused-local
+local knowunity_file_ignore = { 'pub.dartlang.org/', '.pub-cache/', 'ios/', 'windows/', 'web/', 'android/', 'assets/', 'fonts/', 'packages/', 'doc/', 'l10n/'}
+
 -- Shorten function name
 local keymap = vim.keymap.set
 
@@ -66,11 +69,12 @@ keymap("n", "<S-q>", "<cmd>q<CR>", opts)
 -- LSP Mapping
 keymap("n", "<leader>la", "<Cmd>lua vim.lsp.buf.code_action()<CR>", opts)
 keymap("v", "<leader>la", ":<C-U>lua vim.lsp.buf.range_code_action()<CR>", opts)
--- fastaction
-keymap("v", "<leader>a", "<esc><cmd>lua require('lsp-fastaction').range_code_action()<CR>", opts)
-keymap("n", "<leader>a", "<cmd>lua require('lsp-fastaction').code_action()<CR>", opts)
 
+-- fastaction
+--[[ keymap("v", "<leader>a", "<esc><cmd>lua require('lsp-fastaction').range_code_action()<CR>", opts) ]]
+--[[ keymap("n", "<leader>a", "<cmd>lua require('lsp-fastaction').code_action()<CR>", opts) ]]
 keymap("n", "gl", "<cmd>lua require('lsp-fastaction').code_action()<CR>", opts)
+keymap("v", "gl", "<esc><cmd>lua require('lsp-fastaction').range_code_action()<CR>", opts)
 
 -- SUBSTITUTE plugin  {{{
 -- keymap("x", "s", "<cmd>lua require('substitute').visual()<cr>", { noremap = true })
@@ -85,6 +89,9 @@ keymap("n", "<leader><leader>s", "<cmd>lua require('substitute.range').word()<cr
 
 -- keymap("n", "<leader>r", ":%s///g<Left><Left>", {})
 -- keymap("x", "<leader>r", ":s///g<Left><Left>", opts)
+
+-- Telescope
+keymap("n", "<leader><leader>", "<Cmd>lua require('telescope').extensions.frecency.frecency({  file_ignore_patterns = knowunity_file_ignore })<CR>", opts)
 
 -- Resize with arrows
 keymap("n", "<A-Up>", ":resize -2<CR>", opts)
@@ -131,22 +138,22 @@ keymap("n", ";w", "<CMD> lua require'dap'.step_over()<CR>", opts)
 -- }}}
 
 -- Bufferline
--- keymap("n", "<leader>1", "<Cmd>BufferLineGoToBuffer 1<CR>", opts)
--- keymap("n", "<leader>2", "<Cmd>BufferLineGoToBuffer 2<CR>", opts)
--- keymap("n", "<leader>3", "<Cmd>BufferLineGoToBuffer 3<CR>", opts)
--- keymap("n", "<leader>4", "<Cmd>BufferLineGoToBuffer 4<CR>", opts)
--- keymap("n", "<leader>5", "<Cmd>BufferLineGoToBuffer 5<CR>", opts)
--- keymap("n", "<leader>6", "<Cmd>BufferLineGoToBuffer 6<CR>", opts)
--- keymap("n", "<leader>7", "<Cmd>BufferLineGoToBuffer 7<CR>", opts)
+keymap("n", "<leader>1", "<Cmd>BufferLineGoToBuffer 1<CR>", opts)
+keymap("n", "<leader>2", "<Cmd>BufferLineGoToBuffer 2<CR>", opts)
+keymap("n", "<leader>3", "<Cmd>BufferLineGoToBuffer 3<CR>", opts)
+keymap("n", "<leader>4", "<Cmd>BufferLineGoToBuffer 4<CR>", opts)
+keymap("n", "<leader>5", "<Cmd>BufferLineGoToBuffer 5<CR>", opts)
+keymap("n", "<leader>6", "<Cmd>BufferLineGoToBuffer 6<CR>", opts)
+keymap("n", "<leader>7", "<Cmd>BufferLineGoToBuffer 7<CR>", opts)
 
 -- Lualine Tabline
-keymap("n", "<leader>1", "<Cmd>LualineBuffersJump 1<CR>", opts)
-keymap("n", "<leader>2", "<Cmd>LualineBuffersJump 2<CR>", opts)
-keymap("n", "<leader>3", "<Cmd>LualineBuffersJump 3<CR>", opts)
-keymap("n", "<leader>4", "<Cmd>LualineBuffersJump 4<CR>", opts)
-keymap("n", "<leader>5", "<Cmd>LualineBuffersJump 5<CR>", opts)
-keymap("n", "<leader>6", "<Cmd>LualineBuffersJump 6<CR>", opts)
-keymap("n", "<leader>7", "<Cmd>LualineBuffersJump 7<CR>", opts)
+--[[ keymap("n", "<leader>1", "<Cmd>LualineBuffersJump 1<CR>", opts) ]]
+--[[ keymap("n", "<leader>2", "<Cmd>LualineBuffersJump 2<CR>", opts) ]]
+--[[ keymap("n", "<leader>3", "<Cmd>LualineBuffersJump 3<CR>", opts) ]]
+--[[ keymap("n", "<leader>4", "<Cmd>LualineBuffersJump 4<CR>", opts) ]]
+--[[ keymap("n", "<leader>5", "<Cmd>LualineBuffersJump 5<CR>", opts) ]]
+--[[ keymap("n", "<leader>6", "<Cmd>LualineBuffersJump 6<CR>", opts) ]]
+--[[ keymap("n", "<leader>7", "<Cmd>LualineBuffersJump 7<CR>", opts) ]]
 
 -- Terminal --
 -- Better terminal navigation
@@ -165,7 +172,3 @@ keymap("n", "<leader>7", "<Cmd>LualineBuffersJump 7<CR>", opts)
 -- keymap("n", "<F11>", "<cmd>lua vim.lsp.buf.references()<CR>", opts)
 -- keymap("n", "<F12>", "<cmd>lua vim.lsp.buf.definition()<CR>", opts)
 -- keymap("v", "//", [[y/\V<C-R>=escape(@",'/\')<CR><CR>]], opts)
-
--- Comment
-keymap("n", "<leader>/", "<cmd>lua require('Comment.api').toggle_current_linewise()<CR>", opts)
-keymap("x", "<leader>/", '<ESC><CMD>lua require("Comment.api").toggle_linewise_op(vim.fn.visualmode())<CR>')
