@@ -78,9 +78,14 @@ local opts = {
   nowait = true, -- use `nowait` when creating keymaps
 }
 
+
+---@diagnostic disable-next-line: unused-local
+local knowunity_file_ignore = { 'pub.dartlang.org/', '.pub-cache/', 'ios/', 'windows/', 'web/', 'android/', 'assets/',
+  'fonts/', 'packages/', 'doc/', 'l10n/' }
+
 local mappings = {
-  -- ["q"] = { " <Cmd>lua require('telescope.builtin').current_buffer_fuzzy_find(require('telescope.themes').get_dropdown{})<CR>",
-  --   "Find in Buffer", },
+  ["a"] = { "<cmd>Telescope file_browser<cr>", "File Browser" },
+
   ["e"] = { "<cmd>NvimTreeToggle<cr>", "Explorer" },
   ["E"] = { "<cmd>NvimTreeFocus<cr>", "Explorer" },
 
@@ -110,7 +115,7 @@ local mappings = {
   s = {
     name = "pickers",
     s = {
-      "<cmd>lua require('telescope.builtin').lsp_dynamic_workspace_symbols({ debounce = 150, search_dirs = 'CWD', file_ignore_patterns = { 'pub.dartlang.org/', '.pub-cache/', 'ios/', 'windows/', 'web/', 'android/', 'assets/', 'fonts/', 'packages/', 'doc/', 'l10n/'} })<cr>",
+      "<cmd>lua require('telescope.builtin').lsp_dynamic_workspace_symbols({ debounce = 150, search_dirs = 'CWD', file_ignore_patterns = knowunity_file_ignore }, opts = {symbols = {'info', 'error'}})<cr>",
       "Workspace Symbols",
     },
     a = {
@@ -265,15 +270,15 @@ local mappings = {
     o = { "<cmd>lua require('flutter-tools.outline').toggle()<cr>", "Flutter Outlines" },
   },
 
-  x = {
-    name = "Trouble",
-    r = { "<cmd>Trouble references<cr>", "References" },
-    f = { "<cmd>Trouble definitions<cr>", "Definitions" },
-    d = { "<cmd>Trouble document_diagnostics<cr>", "Diagnostics" },
-    q = { "<cmd>Trouble quickfix<cr>", "QuickFix" },
-    l = { "<cmd>Trouble loclist<cr>", "LocationList" },
-    w = { "<cmd>Trouble workspace_diagnostics<cr>", "Workspace Diagnostics" },
-  },
+  --[[ x = { ]]
+  --[[   name = "Trouble", ]]
+  --[[   r = { "<cmd>Trouble references<cr>", "References" }, ]]
+  --[[   f = { "<cmd>Trouble definitions<cr>", "Definitions" }, ]]
+  --[[   d = { "<cmd>Trouble document_diagnostics<cr>", "Diagnostics" }, ]]
+  --[[   q = { "<cmd>Trouble quickfix<cr>", "QuickFix" }, ]]
+  --[[   l = { "<cmd>Trouble loclist<cr>", "LocationList" }, ]]
+  --[[   w = { "<cmd>Trouble workspace_diagnostics<cr>", "Workspace Diagnostics" }, ]]
+  --[[ }, ]]
 
   i = {
     name = "Session",
