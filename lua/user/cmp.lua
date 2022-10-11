@@ -88,9 +88,9 @@ cmp.setup {
     }),
   },
   formatting = {
-    fields = { "abbr","kind", "menu" },
+    fields = { "abbr", "kind", "menu" },
     format = lspkind.cmp_format({
-    -- options: 'text', 'text_symbol', 'symbol_text', 'symbol'
+      -- options: 'text', 'text_symbol', 'symbol_text', 'symbol'
       mode = 'symbol_text', -- show only symbol annotations
       maxwidth = 50, -- prevent the popup from showing more than provided characters (e.g 50 will not show more than 50 characters)
       before = function(entry, vim_item)
@@ -107,7 +107,7 @@ cmp.setup {
           end
         end
 
-         -- Get the full snippet (and only keep first line)
+        -- Get the full snippet (and only keep first line)
         local word = entry:get_insert_text()
         if entry.completion_item.insertTextFormat == types.lsp.InsertTextFormat.Snippet then
           word = vim.lsp.util.parse_snippet(word)
@@ -121,9 +121,8 @@ cmp.setup {
         -- 	word = before .. "..."
         -- end
 
-        if
-          entry.completion_item.insertTextFormat == types.lsp.InsertTextFormat.Snippet
-          and string.sub(vim_item.abbr, -1, -1) == "~"
+        if entry.completion_item.insertTextFormat == types.lsp.InsertTextFormat.Snippet
+            and string.sub(vim_item.abbr, -1, -1) == "~"
         then
           word = word .. "~"
         end
@@ -156,15 +155,15 @@ cmp.setup {
   sorting = {
     priority_weight = 2,
     comparators = {
-      compare.score,
-      compare.exact,
-      compare.kind,
       compare.offset,
+      compare.exact,
+      compare.score,
+      compare.kind,
       require('cmp_tabnine.compare'),
+      compare.recently_used,
       compare.sort_text,
       compare.length,
       compare.order,
-      compare.recently_used,
     },
   },
   confirm_opts = {
@@ -187,7 +186,7 @@ cmp.setup {
 }
 
 -- prefetch Dart files
-local prefetch = vim.api.nvim_create_augroup("prefetch", {clear = true})
+local prefetch = vim.api.nvim_create_augroup("prefetch", { clear = true })
 
 vim.api.nvim_create_autocmd('BufRead', {
   group = prefetch,
@@ -195,4 +194,22 @@ vim.api.nvim_create_autocmd('BufRead', {
   callback = function()
     require('cmp_tabnine'):prefetch(vim.fn.expand('%:p'))
   end
+})
+
+-- Use buffer source for `/` and `?` (if you enabled `native_menu`, this won't work anymore).
+cmp.setup.cmdline({ '/', '?' }, {
+  mapping = cmp.mapping.preset.cmdline(),
+  sources = {
+    { name = 'buffer' }
+  }
+})
+
+-- Use cmdline & path source for ':' (if you enabled `native_menu`, this won't work anymore).
+cmp.setup.cmdline(':', {
+  mapping = cmp.mapping.preset.cmdline(),
+  sources = cmp.config.sources({
+    { name = 'path' }
+  }, {
+    { name = 'cmdline' }
+  })
 })

@@ -59,7 +59,7 @@ return packer.startup(function(use)
   use "b0o/schemastore.nvim"
 
   -- Colorschemes
-  use({ "folke/tokyonight.nvim" })
+  --[[ use({ "folke/tokyonight.nvim" }) ]]
   --[[ use("bluz71/vim-nightfly-guicolors") ]]
   use("rebelot/kanagawa.nvim")
   --[[ use { ]]
@@ -94,6 +94,7 @@ return packer.startup(function(use)
       require "user.tabnine"
     end
   })
+  use 'hrsh7th/cmp-cmdline'
   use({ "hrsh7th/cmp-buffer" }) -- buffer completions
   use({ "hrsh7th/cmp-path" }) -- path completions
   use({ "saadparwaiz1/cmp_luasnip" }) -- snippet completions
@@ -181,6 +182,10 @@ return packer.startup(function(use)
     end
   })
 
+  use {
+    "nvim-telescope/telescope-frecency.nvim",
+    requires = { "kkharji/sqlite.lua" }
+  }
   -- Treesitter
   use {
     'nvim-treesitter/nvim-treesitter',
@@ -198,6 +203,13 @@ return packer.startup(function(use)
   })
   use({ "nvim-treesitter/nvim-treesitter-textobjects" })
 
+  -- Quickfix
+  use {'kevinhwang91/nvim-bqf', ft = 'qf'}
+
+  use {'junegunn/fzf', run = function()
+      vim.fn['fzf#install']()
+  end
+  }
   -- Git
   use({ "lewis6991/gitsigns.nvim" })
   use({ "sindrets/diffview.nvim", requires = "nvim-lua/plenary.nvim" })
@@ -242,13 +254,13 @@ return packer.startup(function(use)
   --[[ use("tpope/vim-repeat") ]]
   use({
     "petertriho/nvim-scrollbar",
-    config = function ()
+    config = function()
       require("user.scrollbar")
     end
   })
-  use ({
+  use({
     'kevinhwang91/nvim-hlslens',
-    config = function ()
+    config = function()
       require("scrollbar.handlers.search").setup()
     end
   })
@@ -302,14 +314,7 @@ return packer.startup(function(use)
     -- To enable YAML config support
     --[[ rocks = 'lyaml', ]]
   }
-  -- use {
-  --   'jghauser/kitty-runner.nvim',
-  --   config = function()
-  --     require('kitty-runner').setup({
-  --       use_keymaps = false,
-  --     })
-  --   end
-  -- }
+  use 'wakatime/vim-wakatime'
 
   -- Automatically set up your configuration after cloning packer.nvim
   -- Put this at the end after all plugins
