@@ -140,7 +140,7 @@ telescope.setup {
     frecency = {
       show_scores = false,
       show_unindexed = true,
-      ignore_patterns = { "*.git/*", "*/tmp/*",  '*.pub-cache/*',  '*packages/*' },
+      ignore_patterns = { "*.git/*", "*/tmp/*",  '*.pub-cache/*',  '*packages/*', 'pub.dartlang.org/*', '*/ios/*', '*/windows/*', '*/web/*', '*/android/*', '*/assets/*', '*/fonts/*', '*/doc/*', '*/l10n/*' },
       disable_devicons = false,
       search_dirs = 'CWD',
       workspaces = {
@@ -153,6 +153,7 @@ telescope.setup {
       theme = "dropdown",
       -- disables netrw and use telescope-file-browser in its place
       hijack_netrw = false,
+      search_dirs = 'CWD',
       --[[ mappings = { ]]
       --[[   ["i"] = { ]]
       --[[     -- your custom insert mode mappings ]]
@@ -166,6 +167,8 @@ telescope.setup {
 }
 
 --[[ telescope.load_extension("git_worktree") ]]
+telescope.load_extension('neoclip')
+telescope.load_extension('harpoon')
 telescope.load_extension('fzf')
 telescope.load_extension('file_browser')
 telescope.load_extension("frecency")
