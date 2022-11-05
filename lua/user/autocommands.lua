@@ -54,12 +54,19 @@ vim.api.nvim_create_autocmd({ "BufWinEnter", "FileType" }, {
   end,
 })
 
-local fix_all_on_save = vim.api.nvim_create_augroup("fix_all_on_save", {})
+-- vim.api.nvim_create_autocmd({ "BufWritePost" }, {
+--   pattern = "*.dart",
+--   vim.cmd [[
+--     !tmux send-keys -t flutter 'r'<CR><CR>
+--   ]]
+-- })
 
-vim.api.nvim_create_autocmd({ "BufWritePre" }, {
-  group = fix_all_on_save,
-  pattern = "*.dart",
-  callback = function()
-    require("user.lsp.handlers").code_action_fix_all()
-  end,
-})
+--[[ local fix_all_on_save = vim.api.nvim_create_augroup("fix_all_on_save", {}) ]]
+--[[]]
+--[[ vim.api.nvim_create_autocmd({ "BufWritePre" }, { ]]
+--[[   group = fix_all_on_save, ]]
+--[[   pattern = "*.dart", ]]
+--[[   callback = function() ]]
+--[[     require("user.lsp.handlers").code_action_fix_all() ]]
+--[[   end, ]]
+--[[ }) ]]
