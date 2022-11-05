@@ -105,10 +105,10 @@ local fileName = {
   colored = true,
 }
 
-local tabs = {
-  "tabs",
-  mode = 1,
-}
+--[[ local tabs = { ]]
+--[[   "tabs", ]]
+--[[   mode = 1, ]]
+--[[ } ]]
 
 local winbar_symbol = function()
   local exclude = {
@@ -118,7 +118,6 @@ local winbar_symbol = function()
     ['NvimTree'] = true,
     ['lualine'] = true,
     ['help'] = true,
-    ['json'] = true,
   }
   if vim.api.nvim_win_get_config(0).zindex or exclude[vim.bo.filetype] then
     return ""
@@ -174,7 +173,7 @@ local config = {
   sections = {
     lualine_a = { branch, diff },
     lualine_b = { filepath },
-    lualine_c = { 'lsp_progress' },
+    lualine_c = { },
     lualine_x = { workspace_diagnostic, filetype },
     lualine_y = { location },
     -- lualine_z = { { "progress", separator = { right = "" }, } },
