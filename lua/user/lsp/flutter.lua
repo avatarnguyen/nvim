@@ -16,7 +16,7 @@ flutter.setup({
     -- This determines whether notifications are show with `vim.notify` or with the plugin's custom UI
     -- please note that this option is eventually going to be deprecated and users will need to
     -- depend on plugins like `nvim-notify` instead.
-    notification_style = 'plugin'
+    notification_style = 'nvim-notify'
   },
   -- flutter_path = "$HOME/fvm/default", -- <-- this takes priority over the lookup
   -- flutter_path = "$HOME/flutter/bin/flutter/", -- <-- this takes priority over the lookup
@@ -36,7 +36,7 @@ flutter.setup({
     enabled = true, -- set to false to disable
   },
   outline = {
-    open_cmd = "40vnew", -- command to use to open the outline buffer
+    open_cmd = "50vnew", -- command to use to open the outline buffer
     auto_open = false, -- if true this will open the outline automatically when it is first populated
   },
   decorations = {
@@ -47,7 +47,7 @@ flutter.setup({
   },
   debugger = { -- integrate with nvim dap + install dart code debugger
     enabled = true,
-    run_via_dap = false, -- use dap instead of a plenary job to run flutter apps
+    run_via_dap = true, -- use dap instead of a plenary job to run flutter apps
     register_configurations = function(_)
       dap.adapters.dart = {
         type = "executable",
@@ -80,8 +80,8 @@ flutter.setup({
       require("user.lsp.handlers").on_attach(client, bufnr)
       vim.g.dart_style_guide = 2
       vim.g.dart_format_on_save = 1
-      --[[ vim.cmd "highlight FlutterWidgetGuides ctermfg=9 guifg=cyan" ]]
-      vim.cmd "highlight FlutterWidgetGuides ctermfg=9 guifg=#72A7BC"
+      vim.cmd "highlight FlutterWidgetGuides ctermfg=9 guifg=cyan"
+      --[[ vim.cmd "highlight FlutterWidgetGuides ctermfg=9 guifg=#72A7BC" ]]
     end,
     -- capabilities = my_custom_capabilities -- e.g. lsp_status capabilities
     --- OR you can specify a function to deactivate or change or control how the config is created
@@ -96,6 +96,7 @@ flutter.setup({
         vim.fn.expand("$HOME/flutter/.pub-cache"),
         vim.fn.expand("$HOME/fvm"),
         vim.fn.expand("$HOME/flutter/packages"),
+        vim.fn.expand("~/flutter/packages"),
       },
       renameFilesWithClasses = "prompt", -- "always"
       enableSnippets = true,
