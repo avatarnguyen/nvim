@@ -31,6 +31,7 @@ end
 
 -- Have packer use a popup window
 packer.init({
+  max_jobs = 10,
   display = {
     open_fn = function()
       return require("packer.util").float({ border = "rounded" })
@@ -50,7 +51,7 @@ return packer.startup(function(use)
   use { 'akinsho/bufferline.nvim', tag = "v2.*", requires = 'kyazdani42/nvim-web-devicons' }
   use({ "moll/vim-bbye" })
   use({ "nvim-lualine/lualine.nvim" })
-  use({ 'arkav/lualine-lsp-progress' })
+  --[[ use({ 'arkav/lualine-lsp-progress' }) ]]
   use { "akinsho/toggleterm.nvim" }
   use({ "ahmedkhalf/project.nvim" })
   use({ "lewis6991/impatient.nvim" })
@@ -62,10 +63,10 @@ return packer.startup(function(use)
   --[[ use({ "folke/tokyonight.nvim" }) ]]
   --[[ use("bluz71/vim-nightfly-guicolors") ]]
   use("rebelot/kanagawa.nvim")
-  --[[ use { ]]
-  --[[   'lalitmee/cobalt2.nvim', ]]
-  --[[   requires = 'tjdevries/colorbuddy.nvim', ]]
-  --[[ } ]]
+  use {
+    'lalitmee/cobalt2.nvim',
+    requires = 'tjdevries/colorbuddy.nvim',
+  }
 
   --[[ use("Tsuzat/NeoSolarized.nvim") ]]
   --[[ use({ ]]
@@ -156,12 +157,7 @@ return packer.startup(function(use)
   --[[   }, ]]
   --[[ }) ]]
   -- Telescope
-  use({
-    "nvim-telescope/telescope.nvim",
-    config = function()
-      require "user.telescope"
-    end
-  })
+  use({ "nvim-telescope/telescope.nvim" })
   use {
     'nvim-telescope/telescope-fzf-native.nvim',
     after = "telescope.nvim",
@@ -170,7 +166,14 @@ return packer.startup(function(use)
   use {
     "nvim-telescope/telescope-file-browser.nvim",
   }
-
+  --[[ use { ]]
+  --[[   "folke/todo-comments.nvim", ]]
+  --[[   after = "telescope.nvim", ]]
+  --[[   requires = "nvim-lua/plenary.nvim", ]]
+  --[[   config = function() ]]
+  --[[     require('user.todo-comment') ]]
+  --[[   end ]]
+  --[[ } ]]
   use({
     "AckslD/nvim-neoclip.lua",
     after = { "telescope.nvim" },
@@ -204,10 +207,16 @@ return packer.startup(function(use)
   use({ "nvim-treesitter/nvim-treesitter-textobjects" })
 
   -- Quickfix
-  use {'kevinhwang91/nvim-bqf', ft = 'qf'}
+  use {
+    'kevinhwang91/nvim-bqf',
+    ft = 'qf',
+    config = function()
+      require 'user.bqf'
+    end
+  }
 
-  use {'junegunn/fzf', run = function()
-      vim.fn['fzf#install']()
+  use { 'junegunn/fzf', run = function()
+    vim.fn['fzf#install']()
   end
   }
   -- Git
@@ -266,6 +275,27 @@ return packer.startup(function(use)
   })
 
   -- Misc
+  --[[ use ("ggandor/leap.nvim") ]]
+  use 'karb94/neoscroll.nvim'
+  use({
+    "folke/noice.nvim",
+    requires = {
+      -- if you lazy-load any plugin below, make sure to add proper `module="..."` entries
+      "MunifTanjim/nui.nvim",
+      -- OPTIONAL:
+      --   `nvim-notify` is only needed, if you want to use the notification view.
+      --   If not available, we use `mini` as the fallback
+      "rcarriga/nvim-notify",
+      }
+  })
+  use {
+    'phaazon/hop.nvim',
+    branch = 'v2',
+    config = function()
+      -- you can configure Hop the way you like here; see :h hop-config
+      require'hop'.setup { keys = 'etovxqpdygfblzhckisuran' }
+    end
+  }
   use("folke/which-key.nvim")
   use("p00f/nvim-ts-rainbow")
   use({
@@ -306,13 +336,10 @@ return packer.startup(function(use)
     end
   })
   use {
-    'jedrzejboczar/toggletasks.nvim',
-    after = { "telescope.nvim", "toggleterm.nvim" },
+    'stevearc/overseer.nvim',
     config = function()
-      require "user.toggletask"
+      require('user.overseer')
     end
-    -- To enable YAML config support
-    --[[ rocks = 'lyaml', ]]
   }
   use 'wakatime/vim-wakatime'
 

@@ -3,7 +3,8 @@ local opts = { noremap = true, silent = true }
 -- local term_opts = { silent = true }
 
 ---@diagnostic disable-next-line: unused-local
-local knowunity_file_ignore = { 'pub.dartlang.org/', '.pub-cache/', 'ios/', 'windows/', 'web/', 'android/', 'assets/', 'fonts/', 'packages/', 'doc/', 'l10n/'}
+local knowunity_file_ignore = { 'pub.dartlang.org/', '.pub-cache/', 'ios/', 'windows/', 'web/', 'android/', 'assets/',
+  'fonts/', 'packages/', 'doc/', 'l10n/' }
 
 -- Shorten function name
 local keymap = vim.keymap.set
@@ -28,35 +29,28 @@ keymap("n", "<Down>", "<C-w>j", opts)
 keymap("n", "<Up>", "<C-w>k", opts)
 keymap("n", "<Right>", "<C-w>l", opts)
 
--- Save
--- vim.api.nvim_create_autocmd("FileType", { pattern = "md",
---     callback = function()
---         vim.api.nvim_buf_set_keymap(0,"n","<C-c>",":split<CR>:te g++ -std=c++14 -Wshadow -Wall -o %:t:r % -g -fsanitize=address -fsanitize=undefined -D_GLIBCXX_DEBUG && ./%:t:r<CR>i",opts)
---     end})
+keymap("n", "]q", "<cmd>cnext<cr>zz", opts)
+keymap("n", "[q", "<cmd>cprev<cr>zz", opts)
 
+
+keymap("n", "<C-Enter>", "<cmd>w!<CR><cmd>!tmux send-keys -t flutter 'r'<CR><CR>", opts)
 keymap("n", "<Enter>", "<cmd>w!<CR>", opts)
--- keymap("n", "<C-s>", "<cmd>w!<CR>", opts)
--- keymap("i", "<C-s>", "<ESC><cmd>w!<CR>", opts)
--- keymap("v", "<C-s>", "<cmd>w!<CR>", opts)
+keymap("n", "<C-s>", "<cmd>wa<CR>", opts)
 
 -- TMUX Flutter
 keymap("n", "ga", "<cmd>!tmux send-keys -t flutter 'r'<CR><CR>", opts)
-keymap("n", "gs", "<cmd>!tmux send-keys -t flutter 'R'<CR><CR>", opts)
--- keymap("n", "gt", ":!tmux send-keys -t flutter 'fte'", opts)
--- NvimTree
--- keymap("n", "<leader>E", "<cmd>NvimTreeFocus<CR>", opts)
--- keymap("x", "<leader>E", "<cmd>NvimTreeFocus<CR>", opts)
+keymap("n", "gA", "<cmd>!tmux send-keys -t flutter 'R'<CR><CR>", opts)
+--[[ keymap("n", "gS", "<cmd>!tmux send-keys -t flutter 'q'<CR><CR>", opts) ]]
 
 -- Telescope
 keymap("n", "<leader>b",
-  "<cmd>lua require('telescope.builtin').buffers(require('telescope.themes').get_dropdown{previewer = false})<cr>", opts)
+  "<cmd>lua require('telescope.builtin').buffers(require('telescope.themes').get_dropdown{previewer = false, sort_mru = true})<cr>"
+  , opts)
 keymap("n", "<C-p>",
-  "<cmd>lua require('telescope.builtin').find_files({ debounce = 150, file_ignore_patterns = {'ios/', 'android/', 'fonts/', 'assets/', 'packages/', 'doc/'}})<cr>"
-  ,
-  opts)
+  "<Cmd>lua require('telescope').extensions.frecency.frecency({ workspace = 'CWD', debounce = 150, })<CR>", opts)
 
 -- paste register
-keymap("n", ",p", '"0p', opts)
+keymap("n", "<leader>p", '"0p', opts)
 keymap("v", "<leader>p", '"_dP', opts)
 
 
@@ -71,27 +65,51 @@ keymap("n", "<leader>la", "<Cmd>lua vim.lsp.buf.code_action()<CR>", opts)
 keymap("v", "<leader>la", ":<C-U>lua vim.lsp.buf.range_code_action()<CR>", opts)
 
 -- fastaction
---[[ keymap("v", "<leader>a", "<esc><cmd>lua require('lsp-fastaction').range_code_action()<CR>", opts) ]]
---[[ keymap("n", "<leader>a", "<cmd>lua require('lsp-fastaction').code_action()<CR>", opts) ]]
+keymap("n", "<C-j>", "<cmd>lua require('lsp-fastaction').code_action()<CR>", opts)
+keymap("i", "<C-j>", "<cmd>lua require('lsp-fastaction').code_action()<CR>", opts)
+keymap("v", "<C-j>", "<esc><cmd>lua require('lsp-fastaction').range_code_action()<CR>", opts)
 keymap("n", "gl", "<cmd>lua require('lsp-fastaction').code_action()<CR>", opts)
 keymap("v", "gl", "<esc><cmd>lua require('lsp-fastaction').range_code_action()<CR>", opts)
 
 -- SUBSTITUTE plugin  {{{
--- keymap("x", "s", "<cmd>lua require('substitute').visual()<cr>", { noremap = true })
-keymap("n", "s", "<cmd>lua require('substitute').operator()<cr>", { noremap = true })
+keymap("x", "s", "<cmd>lua require('substitute').visual()<cr>", { noremap = true })
 keymap("n", "ss", "<cmd>lua require('substitute').line()<cr>", { noremap = true })
-keymap("n", "<S-s>", "<cmd>lua require('substitute').eol()<cr>", { noremap = true })
-keymap("v", "<S-s>", "<cmd>lua require('substitute').visual()<cr>", { noremap = true })
-keymap("n", "<C-s>", "<cmd>lua require('substitute.range').operator()<cr>", { noremap = true })
-keymap("x", "<C-s>", "<cmd>lua require('substitute.range').visual()<cr>", {})
-keymap("n", "<leader><leader>s", "<cmd>lua require('substitute.range').word()<cr>", {})
+keymap("n", "<S-r>", "<cmd>lua require('substitute').eol()<cr>", { noremap = true })
+keymap("v", "<S-r>", "<cmd>lua require('substitute').visual()<cr>", { noremap = true })
+keymap("n", "<leader>s", "<cmd>lua require('substitute.range').operator()<cr>", { noremap = true })
+keymap("x", "<leader>s", "<cmd>lua require('substitute.range').visual()<cr>", {})
+keymap("n", "<leader>ss", "<cmd>lua require('substitute.range').word()<cr>", {})
 --}}}
 
 -- keymap("n", "<leader>r", ":%s///g<Left><Left>", {})
 -- keymap("x", "<leader>r", ":s///g<Left><Left>", opts)
 
--- Telescope
-keymap("n", "<leader><leader>", "<Cmd>lua require('telescope').extensions.frecency.frecency({  file_ignore_patterns = knowunity_file_ignore })<CR>", opts)
+-- Code Navigation
+-- place this in one of your configuration file(s)
+local hop = require('hop')
+local directions = require('hop.hint').HintDirection
+vim.keymap.set('', 'f', function()
+  hop.hint_char1({ direction = directions.AFTER_CURSOR, current_line_only = true })
+end, { remap = true })
+vim.keymap.set('', 'F', function()
+  hop.hint_char1({ direction = directions.BEFORE_CURSOR, current_line_only = true })
+end, { remap = true })
+vim.keymap.set('', 't', function()
+  hop.hint_char1({ direction = directions.AFTER_CURSOR, current_line_only = true, hint_offset = -1 })
+end, { remap = true })
+vim.keymap.set('', 'T', function()
+  hop.hint_char1({ direction = directions.BEFORE_CURSOR, current_line_only = true, hint_offset = 1 })
+end, { remap = true })
+
+-- place this in one of your configuration file(s)
+keymap('n', "<C-l>", "<cmd>lua require'hop'.hint_lines()<cr>", opts)
+keymap('v', "<C-l>", "<cmd>lua require'hop'.hint_lines()<cr>", opts)
+vim.keymap.set('', '<C-h>', function()
+  hop.hint_char1({ direction = directions.AFTER_CURSOR, current_line_only = false })
+end, { remap = true })
+vim.keymap.set('', '<C-S-h>', function()
+  hop.hint_char1({ direction = directions.BEFORE_CURSOR, current_line_only = false })
+end, { remap = true })
 
 -- Resize with arrows
 keymap("n", "<A-Up>", ":resize -2<CR>", opts)
@@ -107,12 +125,10 @@ keymap("n", "<A-->", ":vertical resize +2<CR>", opts)
 keymap("n", "<Tab>", ":bnext<CR>", opts)
 keymap("n", "<S-Tab>", ":bprevious<CR>", opts)
 
-
 -- Visual --
 -- Stay in indent mode
 keymap("v", "<", "<gv", opts)
 keymap("v", ">", ">gv", opts)
-
 
 -- Visual Block --
 -- Move text up and down
@@ -130,14 +146,18 @@ keymap("i", "jk", "<ESC>", opts)
 
 
 -- DEBUGGER {{{
-keymap("n", ";b", "<CMD> lua require'dap'.toggle_breakpoint()<CR>", opts)
-keymap("n", ";c", "<CMD> lua require'dap'.continue()<CR>", opts)
-keymap("n", ";a", "<CMD> lua require'dap'.step_into()<CR>", opts)
-keymap("n", ";q", "<CMD> lua require'dap'.step_out()<CR>", opts)
-keymap("n", ";w", "<CMD> lua require'dap'.step_over()<CR>", opts)
+--[[ keymap("n", ";b", "<CMD> lua require'dap'.toggle_breakpoint()<CR>", opts) ]]
+--[[ keymap("n", "[d", "<CMD> lua require'dap'.continue()<CR>", opts) ]]
+
+keymap("n", "[d", "<CMD> lua require'dap'.step_into()<CR>", opts)
+keymap("n", "]d", "<CMD> lua require'dap'.step_out()<CR>", opts)
+keymap("n", "\\d", "<CMD> lua require'dap'.step_over()<CR>", opts)
+
 -- }}}
 
--- Bufferline
+-- Buffer
+keymap("n", "<C-k>", "<cmd>Bdelete!<CR>", opts)
+
 keymap("n", "<leader>1", "<Cmd>BufferLineGoToBuffer 1<CR>", opts)
 keymap("n", "<leader>2", "<Cmd>BufferLineGoToBuffer 2<CR>", opts)
 keymap("n", "<leader>3", "<Cmd>BufferLineGoToBuffer 3<CR>", opts)
@@ -145,15 +165,6 @@ keymap("n", "<leader>4", "<Cmd>BufferLineGoToBuffer 4<CR>", opts)
 keymap("n", "<leader>5", "<Cmd>BufferLineGoToBuffer 5<CR>", opts)
 keymap("n", "<leader>6", "<Cmd>BufferLineGoToBuffer 6<CR>", opts)
 keymap("n", "<leader>7", "<Cmd>BufferLineGoToBuffer 7<CR>", opts)
-
--- Lualine Tabline
---[[ keymap("n", "<leader>1", "<Cmd>LualineBuffersJump 1<CR>", opts) ]]
---[[ keymap("n", "<leader>2", "<Cmd>LualineBuffersJump 2<CR>", opts) ]]
---[[ keymap("n", "<leader>3", "<Cmd>LualineBuffersJump 3<CR>", opts) ]]
---[[ keymap("n", "<leader>4", "<Cmd>LualineBuffersJump 4<CR>", opts) ]]
---[[ keymap("n", "<leader>5", "<Cmd>LualineBuffersJump 5<CR>", opts) ]]
---[[ keymap("n", "<leader>6", "<Cmd>LualineBuffersJump 6<CR>", opts) ]]
---[[ keymap("n", "<leader>7", "<Cmd>LualineBuffersJump 7<CR>", opts) ]]
 
 -- Terminal --
 -- Better terminal navigation
@@ -172,3 +183,6 @@ keymap("n", "<leader>7", "<Cmd>BufferLineGoToBuffer 7<CR>", opts)
 -- keymap("n", "<F11>", "<cmd>lua vim.lsp.buf.references()<CR>", opts)
 -- keymap("n", "<F12>", "<cmd>lua vim.lsp.buf.definition()<CR>", opts)
 -- keymap("v", "//", [[y/\V<C-R>=escape(@",'/\')<CR><CR>]], opts)
+
+keymap("n", "<leader>/", "<cmd>lua require('Comment.api').toggle.linewise.current()<CR>", opts)
+keymap("v", "<leader>/", "<esc><cmd>lua require('Comment.api').toggle.linewise(vim.fn.visualmode())<CR>", opts)
