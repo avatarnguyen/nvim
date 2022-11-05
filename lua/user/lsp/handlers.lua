@@ -59,13 +59,11 @@ local function lsp_keymaps(bufnr)
   keymap(bufnr, "n", "gD", "<cmd>lua vim.lsp.buf.declaration()<CR>", opts)
   keymap(bufnr, "n", "gd", "<cmd>lua vim.lsp.buf.definition()<CR>", opts)
   keymap(bufnr, "n", "K", "<cmd>lua vim.lsp.buf.hover()<CR>", opts)
-  --[[ keymap(bufnr, "n", "K", "<cmd>Lspsaga hover_doc<CR>", { silent = true }) ]]
 
   keymap(bufnr, "n", "gm", "<cmd>lua vim.lsp.buf.implementation()<CR>", opts)
-  --[[ keymap(bufnr, 'n', 'gk', '<cmd>lua vim.lsp.buf.declaration()<CR>', opts) -- does not seems to work ]]
   -- keymap(bufnr, "n", "gr", "<cmd>lua vim.lsp.buf.references()<CR>", opts)
   keymap(bufnr, "n", "gr", "<cmd>lua require('telescope.builtin').lsp_references()<cr>", opts)
-  keymap(bufnr, "n", "gu", "<cmd>Lspsaga lsp_finder<cr>", opts)
+  keymap(bufnr, "n", "<leader>la", "<cmd>Lspsaga lsp_finder<cr>", opts)
   keymap(bufnr, "n", "gL", "<cmd>lua vim.diagnostic.open_float()<CR>", opts)
   keymap(
     bufnr, "n", "gn",
@@ -83,7 +81,7 @@ local function lsp_keymaps(bufnr)
 
   -- LSP Saga
   keymap(bufnr, "n", "ge", "<cmd>Lspsaga diagnostic_jump_next<CR>", opts)
-  keymap(bufnr, "n", ";e", "<cmd>Lspsaga diagnostic_jump_prev<CR>", opts)
+  keymap(bufnr, "n", "gE", "<cmd>Lspsaga diagnostic_jump_prev<CR>", opts)
 
   keymap(bufnr, "i", "<C-space>", "<Cmd>Lspsaga signature_help<CR>", { silent = true })
   keymap(bufnr, "n", "<leader>lr", "<cmd>Lspsaga rename<CR>", opts)
@@ -129,7 +127,7 @@ M.on_attach = function(client, bufnr)
   illuminate.on_attach(client)
 
   M.capabilities.textDocument.completion.completionItem.snippetSupport = true
-  M.capabilities = cmp_nvim_lsp.update_capabilities(M.capabilities)
+  M.capabilities = cmp_nvim_lsp.default_capabilities(M.capabilities)
 end
 
 -- possible config: need to investigate

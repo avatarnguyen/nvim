@@ -4,6 +4,8 @@ if not status_ok then
 end
 
 local setup = {
+  show_help = false,
+  show_keys = false,
   plugins = {
     marks = true, -- shows a list of your marks on ' and `
     registers = true, -- shows your registers on " in NORMAL or <C-r> in INSERT mode
@@ -57,7 +59,6 @@ local setup = {
   },
   ignore_missing = true, -- enable this to hide mappings for which you didn't specify a label
   hidden = { "<silent>", "<cmd>", "<Cmd>", "<CR>", "call", "lua", "^:", "^ " }, -- hide mapping boilerplate
-  show_help = true, -- show help message on the command line when the popup is visible
   triggers = "auto", -- automatically setup triggers
   -- triggers = {"<leader>"} -- or specify a list manually
   triggers_blacklist = {
@@ -93,7 +94,7 @@ local mappings = {
   -- ["e"] = { "<cmd>Neotree toggle reveal left<cr>", "Explorer" },
   ["A"] = { "<cmd>wa<CR>", "Save All" },
   ["Q"] = { "<cmd>q<CR>", "Quit" },
-  ["c"] = { "<cmd>Bdelete!<CR>", "Close Buffer" },
+  --[[ ["c"] = { "<cmd>Bdelete!<CR>", "Close Buffer" }, ]]
   ["F"] = { "<cmd>Telescope resume<CR>", "Last Telescope command" },
   -- ["f"] = {
   --   "<cmd>lua require('telescope.builtin').find_files(require('telescope.themes').get_dropdown{ debounce = 150, file_ignore_patterns = {'ios/', 'android/', 'fonts/', 'assets/', 'packages/', 'doc/'}})<cr>",
@@ -115,7 +116,7 @@ local mappings = {
   s = {
     name = "pickers",
     s = {
-      "<cmd>lua require('telescope.builtin').lsp_dynamic_workspace_symbols({ debounce = 150, search_dirs = 'CWD', file_ignore_patterns = knowunity_file_ignore }, opts = {symbols = {'info', 'error'}})<cr>",
+      "<cmd>lua require('telescope.builtin').lsp_dynamic_workspace_symbols({ debounce = 150, search_dirs = 'CWD', file_ignore_patterns = knowunity_file_ignore , opts = {symbols = {'info', 'error'}}})<cr>",
       "Workspace Symbols",
     },
     a = {
@@ -152,11 +153,10 @@ local mappings = {
       "Find in Buffer" },
     o = { "<cmd>lua require('telescope.builtin').oldfiles( { search_dirs = 'CWD' , file_ignore_patterns = {'ios/', 'android/', 'assets/', 'fonts/', 'packages/', 'doc/'} } )<cr>",
       "Open Recent File" },
-    k = { "<cmd>Telescope toggletasks spawn<cr>", "Select Task Runner" },
-    r = { "<cmd>Telescope toggletasks select<cr>", "Show Task Runner" },
   },
 
-  C = {
+
+  c = {
     -- bdelete
     name = "Close Buffer Option",
     c = { "<cmd>lua require('close_buffers').delete({ type = 'hidden', force = true }) <cr>", "Delete all non-visible" }, -- Delete all non-visible buffers
@@ -206,7 +206,11 @@ local mappings = {
       "<cmd>lua require('telescope.builtin').diagnostics({file_ignore_patterns = {'packages/'}})<cr>",
       "Workspace Diagnostics Popup",
     },
-    W = { "<cmd>Trouble workspace_diagnostics<cr>", "Workspace Diagnostics" },
+    W = {
+      "<cmd>lua require('telescope.builtin').diagnostics({file_ignore_patterns = {'packages/'}, severity=2})<cr>",
+      "Workspace Error Popup",
+    },
+    --[[ W = { "<cmd>Trouble workspace_diagnostics<cr>", "Workspace Diagnostics" }, ]]
     f = { "<cmd>lua vim.lsp.buf.format()<cr>", "Format" },
     -- i = { "<cmd>LspInfo<cr>", "Info" },
     I = { "<cmd>LspInstallInfo<cr>", "Installer Info" },
@@ -214,10 +218,18 @@ local mappings = {
     q = { "<cmd>lua vim.lsp.diagnostic.set_loclist()<cr>", "Quickfix" },
     -- r = { "<cmd>lua require('renamer').rename()<cr>", "Rename" }, -- not working well with cmp-tabnine
     --[[ r = { "<cmd>lua vim.lsp.buf.rename()<cr>", "Rename" }, ]]
-    R = { "<cmd>Trouble lsp_references<cr>", "References" },
+    --[[ R = { "<cmd>Trouble lsp_references<cr>", "References" }, ]]
   },
 
-  r = {
+  o = {
+    name = "Run Command",
+    o = { "<cmd>OverseerToggle<cr>", "Toggle Command Window" },
+    g = { "<cmd>OverseerRunCmd flutter pub get<cr>", "Run Flutter Get" },
+    f = { "<cmd>OverseerRunCmd flutter pub run ota_translation && flutter pub get<cr>", "Run Flutter Translation" },
+    b = { "<cmd>OverseerRunCmd flutter pub run build_runner build --delete-conflicting-outputs<cr>", "Run Flutter Build" },
+  },
+
+  t = {
     name = "Run Test",
     r = { "<cmd>lua require('neotest').run.run()<cr>", "Test Nearest" },
     f = { "<cmd>require('neotest').run.run(vim.fn.expand('%'))<cr>", "Test File" },
@@ -240,7 +252,7 @@ local mappings = {
     C = { "<cmd>Telescope commands<cr>", "Commands" },
   },
 
-  t = {
+  m = {
     name = "Terminal",
     T = { "<cmd>lua _HTOP_TOGGLE()<cr>", "Htop" },
     f = { "<cmd>ToggleTerm direction=float<cr>", "Float" },
@@ -287,17 +299,19 @@ local mappings = {
     d = { "<cmd>SessionManager load_current_dir_session<cr>", "Load current Dir session" },
   },
 
-  m = {
-    name = "Plantuml",
-    o = { "<cmd>PlantumlOpen<CR>", "Open UML" },
-    s = { "<cmd>PlantumlSave ", "Save Diagram" },
-  },
+  --[[ m = { ]]
+  --[[   name = "Plantuml", ]]
+  --[[   o = { "<cmd>PlantumlOpen<CR>", "Open UML" }, ]]
+  --[[   s = { "<cmd>PlantumlSave ", "Save Diagram" }, ]]
+  --[[ }, ]]
 
   h = {
     name = "Harpoon",
     a = { "<CMD>lua require('harpoon.mark').add_file()<CR>", "Add File" },
     h = { "<CMD>lua require('harpoon.ui').toggle_quick_menu()<CR>", "Toggle Menu" },
     l = { "<CMD>Telescope harpoon marks<CR>", "List" },
+    n = { "<CMD>lua require('harpoon.ui').nav_next() <CR>", "Next" },
+    b = { "<CMD>lua require('harpoon.ui').nav_prev() <CR>", "Prev" },
     ['1'] = { "<CMD>lua require('harpoon.ui').nav_file(1)<CR>", "Go To File 1" },
     ['2'] = { "<CMD>lua require('harpoon.ui').nav_file(2)<CR>", "Go To File 2" },
     ['3'] = { "<CMD>lua require('harpoon.ui').nav_file(3)<CR>", "Go To File 3" },
@@ -305,12 +319,12 @@ local mappings = {
     ['5'] = { "<CMD>lua require('harpoon.ui').nav_file(5)<CR>", "Go To File 5" },
   },
 
-  u = {
+  k = {
     name = "Debugger",
     c = { "<CMD> lua require'dap'.continue()<CR>", "Continue or Start" },
-    --[[ o = { "<CMD> lua require'dap'.step_over()<CR>", "Step Over" }, ]]
-    --[[ O = { "<CMD> lua require'dap'.step_out()<CR>", "Step Out" }, ]]
-    --[[ i = { "<CMD> lua require'dap'.step_into()<CR>", "Step Into" }, ]]
+    w = { "<CMD> lua require'dap'.step_over()<CR>", "Step Over" },
+    e = { "<CMD> lua require'dap'.step_out()<CR>", "Step Out" },
+    a = { "<CMD> lua require'dap'.step_into()<CR>", "Step Into" },
     u = { "<CMD> lua require('dapui').toggle()<CR>", "Toggle Dap UI" },
     b = { "<CMD> lua require'dap'.toggle_breakpoint()<CR>", "Toggle Breakpoint" },
     r = { "<cmd>lua require'dap'.repl.toggle()<cr>", "Toggle Repl" },

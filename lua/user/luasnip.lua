@@ -80,4 +80,4 @@ ls.add_snippets(nil, {
 })
 
 -- Reload Snippet
-vim.keymap.set("n", "<leader><leader>l", "<cmd>source ~/.config/nvim/lua/user/lualine.lua<CR>", { silent = true })
+--[[ vim.keymap.set("n", "<leader><leader>l", "<cmd>source ~/.config/nvim/lua/user/lualine.lua<CR>", { silent = true }) ]]
