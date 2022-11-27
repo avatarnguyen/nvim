@@ -1,9 +1,9 @@
---[[ local colorscheme = "kanagawa" ]]
+-- local colorscheme = "kanagawa"
 --[[ local colorscheme = "tokyonight" ]]
 local colorscheme = "cobalt2"
+--[[ local colorscheme = "catppuccin" ]]
 -- local colorscheme = "material"
 --[[ local colorscheme = "nightfly" ]]
---[[ local colorscheme = "catppuccin" ]]
 --[[ local colorscheme = "NeoSolarized" ]]
 --[[ local colorscheme = "night-owl" ]]
 
@@ -18,8 +18,7 @@ end
 
 -- catppuccin
 if colorscheme == "catppuccin" then
-  vim.g.catppuccin_flavour = "macchiato" -- latte, frappe, macchiato, mocha
-  -- vim.g.catppuccin_flavour = "mocha" -- darker theme
+  vim.g.catppuccin_flavour = "mocha" -- latte, frappe, macchiato, mocha
 
   require("catppuccin").setup({
     -- dim_inactive = {
@@ -33,20 +32,20 @@ if colorscheme == "catppuccin" then
       enabled = true,
       path = vim.fn.stdpath "cache" .. "/catppuccin",
     },
-    -- styles = {
-    --   comments = { "italic" },
-    --   conditionals = { "italic" },
-    --   loops = {},
-    --   functions = {},
-    --   keywords = {},
-    --   strings = {},
-    --   variables = {},
-    --   numbers = {},
-    --   booleans = {},
-    --   properties = {},
-    --   types = {},
-    --   operators = {},
-    -- },
+    styles = {
+      comments = { "italic" },
+      --   conditionals = { "italic" },
+      --   loops = {},
+      --   functions = {},
+      --   keywords = {},
+      --   strings = {},
+      --   variables = {},
+      --   numbers = {},
+      --   booleans = {},
+      --   properties = {},
+      --   types = {},
+      --   operators = {},
+    },
     integrations = {
       treesitter = true,
       native_lsp = {
@@ -67,24 +66,24 @@ if colorscheme == "catppuccin" then
       coc_nvim = false,
       lsp_trouble = false,
       cmp = true,
-      lsp_saga = false,
+      lsp_saga = true,
       gitgutter = true,
       gitsigns = true,
       -- leap = false,
       telescope = true,
-      -- nvimtree = {
-      --   enabled = true,
-      --   show_root = true,
-      --   transparent_panel = false,
-      -- },
-      neotree = {
+      nvimtree = {
         enabled = true,
         show_root = true,
         transparent_panel = false,
       },
+      --[[ neotree = { ]]
+      --[[   enabled = false, ]]
+      --[[   show_root = true, ]]
+      --[[   transparent_panel = false, ]]
+      --[[ }, ]]
       dap = {
-        enabled = false,
-        enable_ui = false,
+        enabled = true,
+        enable_ui = true,
       },
       which_key = true,
       indent_blankline = {
@@ -102,7 +101,7 @@ if colorscheme == "catppuccin" then
       ts_rainbow = false,
       hop = true,
       notify = true,
-      telekasten = true,
+      telekasten = false,
       symbols_outline = true,
       mini = false,
       aerial = false,
@@ -126,6 +125,8 @@ end
 if colorscheme == "cobalt2" then
   -- require('colorbuddy').setup()
   require('colorbuddy').colorscheme('cobalt2')
+  require("cobalt2.utils").Group.new("Cursor", require("cobalt2.utils").colors.cobalt_bg,
+    require("cobalt2.utils").colors.yellow, nil)
   -- Group.new('italicBoldFunction', colors.green, groups.Function, styles.bold + styles.italic)
 end
 
@@ -153,7 +154,7 @@ if colorscheme == "tokyonight" then
   require("tokyonight").setup({
     -- your configuration comes here
     -- or leave it empty to use the default settings
-    style = "moon", -- The theme comes in three styles, `storm`, `moon`, a darker variant `night` and `day`
+    style = "storm", -- The theme comes in three styles, `storm`, `moon`, a darker variant `night` and `day`
     transparent = false, -- Enable this to disable setting the background color
     terminal_colors = true, -- Configure the colors used when opening a `:terminal` in Neovim
     styles = {
