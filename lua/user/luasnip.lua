@@ -61,13 +61,16 @@ ls.add_snippets(nil, {
     ls.parser.parse_snippet("_th", "final theme = AppTheme.of(context);"),
     ls.parser.parse_snippet("ssi", "final screenSize = MediaQuery.of(context).size;"),
     ls.parser.parse_snippet("_si", "final screenSize = MediaQuery.of(context).size;"),
-    ls.parser.parse_snippet("tor", "//TODO: (@anh): remove before push"),
-    ls.parser.parse_snippet("ton", "//TODO: (@anh): implement on next ticket"),
+    ls.parser.parse_snippet("tdr", "//TODO(@anh): remove before push"),
+    ls.parser.parse_snippet("tdn", "//TODO(@anh): implement on next mr"),
+    ls.parser.parse_snippet("tiu", "// ignore: unused-code"),
     ls.parser.parse_snippet("rcon", "ColoredBox(color: Colors.red,);"),
     snip("csl",
       fmta("class <> extends ConsumerWidget {\n\tconst <>({super.key});\n\t@override\tWidget build(BuildContext context, WidgetRef ref) {\n\t\treturn Container();\n\t}\n}"
         , { insert(1, "NameWidget"), rep(1) })),
     snip("cpn", fmta("context.pushPageNamed(Routes.<>)", { insert(1, "page") })),
+    snip("logi", fmta("Log.i('<>');", { insert(1, "message") })),
+    snip("logd", fmta("Log.d('<>');", { insert(1, "message") })),
     snip("cloc", fmta("context.loc.<>", { insert(1, "key") })),
     snip("_cloc", fmta("context.loc.<>", { insert(1, "key") })),
     snip("tsub1", fmta("Text( context.loc.<>, style: theme.subtitle1,)", { insert(1, "key") })),
@@ -81,3 +84,11 @@ ls.add_snippets(nil, {
 
 -- Reload Snippet
 --[[ vim.keymap.set("n", "<leader><leader>l", "<cmd>source ~/.config/nvim/lua/user/lualine.lua<CR>", { silent = true }) ]]
+
+--[[ inoremap <silent> <S-Tab> <cmd>lua require'luasnip'.jump(-1)<Cr> ]]
+--[[ snoremap <silent> <S-Tab> <cmd>lua require('luasnip').jump(-1)<Cr> ]]
+vim.cmd [[
+imap <silent><expr> <ENTER> luasnip#expand_or_jumpable() ? <cmd>lua require'luasnip'.jump(-1)<Cr> : '<Enter>' 
+
+snoremap <silent> <Enter> <cmd>lua require('luasnip').jump(1)<Cr>
+]]
