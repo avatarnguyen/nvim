@@ -47,9 +47,9 @@ M.setup = function()
     height = 24,
   })
 
-  vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers.signature_help, {
-    border = "rounded",
-  })
+  --[[ vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers.signature_help, { ]]
+  --[[   border = "rounded", ]]
+  --[[ }) ]]
 end
   --vim.lsp.handlers["dart/textDocument/publishOutline"] = require('lsp_extensions.dart.outline').get_callback()
 
@@ -66,7 +66,7 @@ local function lsp_keymaps(bufnr)
   keymap(bufnr, "n", "<leader>la", "<cmd>Lspsaga lsp_finder<cr>", opts)
   keymap(bufnr, "n", "gL", "<cmd>lua vim.diagnostic.open_float()<CR>", opts)
   keymap(
-    bufnr, "n", "gn",
+    bufnr, "n", "<leader>ls",
     '<cmd>lua vim.lsp.diagnostic.show_line_diagnostics({ border = "rounded" })<CR>', opts)
 
   keymap(bufnr, 'n', 'E', '<Cmd>lua vim.diagnostic.open_float()<CR>', opts)
