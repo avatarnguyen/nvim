@@ -1,3 +1,12 @@
+require'nvim-treesitter.configs'.setup {
+  context_commentstring = {
+    enable = true,
+    config = {
+      lua = '-- %s'
+    }
+  }
+}
+
 local status_ok, comment = pcall(require, "Comment")
 if not status_ok then
   return
