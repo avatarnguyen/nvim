@@ -33,7 +33,7 @@ noice.setup {
     view_error = "notify", -- view for errors
     view_warn = "notify", -- view for warnings
     view_history = "messages", -- view for :messages
-    view_search = "virtualtext", -- view for search count messages. Set to `false` to disable
+    view_search = false, -- view for search count messages. Set to `false` to disable
   },
   popupmenu = {
     enabled = true, -- enables the Noice popupmenu UI
@@ -120,7 +120,7 @@ noice.setup {
       opts = {}, -- merged with defaults from documentation
     },
     signature = {
-      enabled = true,
+      enabled = false,
       auto_open = {
         enabled = true,
         trigger = true, -- Automatically show signature help when typing a trigger character from the LSP
@@ -185,9 +185,57 @@ noice.setup {
   },
   throttle = 1000 / 30, -- how frequently does Noice need to check for ui updates? This has no effect when in blocking mode.
   --[[ ---@type NoiceConfigViews ]]
-  views = {}, ---@see section on views
+  views = {
+    --[[ cmdline_popup = { ]]
+    --[[   border = { ]]
+    --[[     style = "none", ]]
+    --[[     padding = { 2, 3 }, ]]
+    --[[   }, ]]
+    --[[   filter_options = {}, ]]
+    --[[   win_options = { ]]
+    --[[     winhighlight = "NormalFloat:NormalFloat,FloatBorder:FloatBorder", ]]
+    --[[   }, ]]
+    --[[ }, ]]
+  },
   --[[ ---@type NoiceRouteConfig[] ]]
-  routes = {}, --- @see section on routes
+  routes = {
+    --[[ { ]]
+    --[[   view = "notify", ]]
+    --[[   filter = { event = "msg_showmode" }, ]]
+    --[[ }, ]]
+    {
+      filter = {
+        event = "msg_show",
+        kind = "",
+        find = "geschrieben",
+      },
+      opts = { skip = true },
+    },
+    {
+      filter = {
+        event = "msg_show",
+        kind = "",
+        find = "yanked",
+      },
+      opts = { skip = true },
+    },
+    {
+      filter = {
+        event = "msg_show",
+        kind = "",
+        find = "<",
+      },
+      opts = { skip = true },
+    },
+    {
+      filter = {
+        event = "msg_show",
+        kind = "",
+        find = "fewer",
+      },
+      opts = { skip = true },
+    }
+  },
   --[[ ---@type table<string, NoiceFilter> ]]
   status = {}, --- @see section on statusline components
   --[[ ---@type NoiceFormatOptions ]]

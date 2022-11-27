@@ -7,6 +7,8 @@ local hide_in_width = function()
   return vim.fn.winwidth(0) > 80
 end
 
+local noice = require("noice");
+
 local diagnostics = {
   "diagnostics",
   sources = { "nvim_diagnostic" },
@@ -18,8 +20,8 @@ local diagnostics = {
 }
 
 local function workspace_diagnostic()
-  local error_count, warning_count, info_count, hint_count
-  local count = { 0, 0, 0, 0 }
+  local error_count, warning_count, info_count, hint_count, todo_count, anh_todo
+  local count = { 0, 0, 0, 0, 0, 0 }
   local lsp_diagnostics = vim.diagnostic.get(nil)
   for _, diagnostic in ipairs(lsp_diagnostics) do
     if vim.startswith(
@@ -27,13 +29,22 @@ local function workspace_diagnostic()
       "vim.lsp"
     )
     then
-      count[diagnostic.severity] = count[diagnostic.severity] + 1
+      if string.find(diagnostic.message, 'TODO') then
+        count[5] = count[5] + 1
+        if string.find(diagnostic.message, '@anh') then
+          count[6] = count[6] + 1
+        end
+      else
+        count[diagnostic.severity] = count[diagnostic.severity] + 1
+      end
     end
   end
   error_count = count[vim.diagnostic.severity.ERROR]
   warning_count = count[vim.diagnostic.severity.WARN]
   info_count = count[vim.diagnostic.severity.INFO]
   hint_count = count[vim.diagnostic.severity.HINT]
+  todo_count = count[5]
+  anh_todo = count[6]
 
   local str = ""
   if error_count > 0 then
@@ -59,6 +70,18 @@ local function workspace_diagnostic()
       str = str .. " "
     end
     str = str .. " " .. hint_count
+  end
+  if todo_count > 0 then
+    if string.len(str) > 0 then
+      str = str .. " "
+    end
+    str = str .. " " .. todo_count
+  end
+  if anh_todo > 0 then
+    if string.len(str) > 0 then
+      str = str .. " "
+    end
+    str = str .. " " .. anh_todo
   end
 
   return str
@@ -173,9 +196,30 @@ local config = {
   sections = {
     lualine_a = { branch, diff },
     lualine_b = { filepath },
-    lualine_c = { },
-    lualine_x = { workspace_diagnostic, filetype },
-    lualine_y = { location },
+    lualine_c = {
+    },
+    lualine_x = {
+      {
+        noice.api.status.command.get,
+        cond = noice.api.status.command.has,
+      },
+      {
+        noice.api.status.message.get_hl,
+        cond = noice.api.status.message.has,
+      },
+      {
+        noice.api.statusline.mode.get,
+        cond = noice.api.statusline.mode.has,
+        color = { fg = "#ff9e64" },
+      },
+      {
+        noice.api.status.search.get,
+        cond = noice.api.status.search.has,
+        color = { fg = "#ff9e64" },
+      },
+      workspace_diagnostic,
+    },
+    lualine_y = { filetype, location },
     -- lualine_z = { { "progress", separator = { right = "" }, } },
     lualine_z = { "progress" },
   },
