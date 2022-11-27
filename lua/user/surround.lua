@@ -14,5 +14,5 @@ surround.setup {
     nestable = { { "(", ")" }, { "[", "]" }, { "{", "}" } },
     linear = { { "'", "'" }, { "`", "`" }, { '"', '"' } }
   },
-  prefix = "S"
+  prefix = "s"
 }
