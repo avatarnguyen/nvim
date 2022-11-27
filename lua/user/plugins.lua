@@ -58,21 +58,22 @@ return packer.startup(function(use)
   use({ "lukas-reineke/indent-blankline.nvim" })
   use({ "goolord/alpha-nvim" })
   use "b0o/schemastore.nvim"
+  use { "ray-x/lsp_signature.nvim" }
 
   -- Colorschemes
-  --[[ use({ "folke/tokyonight.nvim" }) ]]
-  --[[ use("bluz71/vim-nightfly-guicolors") ]]
+  use({ "folke/tokyonight.nvim" })
+  use("bluz71/vim-nightfly-guicolors")
   use("rebelot/kanagawa.nvim")
   use {
     'lalitmee/cobalt2.nvim',
     requires = 'tjdevries/colorbuddy.nvim',
   }
 
-  --[[ use("Tsuzat/NeoSolarized.nvim") ]]
-  --[[ use({ ]]
-  --[[   "catppuccin/nvim", ]]
-  --[[   as = "catppuccin" ]]
-  --[[ }) ]]
+  use("Tsuzat/NeoSolarized.nvim")
+  use({
+    "catppuccin/nvim",
+    as = "catppuccin"
+  })
 
   use({
     "kyazdani42/nvim-tree.lua",
@@ -166,14 +167,6 @@ return packer.startup(function(use)
   use {
     "nvim-telescope/telescope-file-browser.nvim",
   }
-  --[[ use { ]]
-  --[[   "folke/todo-comments.nvim", ]]
-  --[[   after = "telescope.nvim", ]]
-  --[[   requires = "nvim-lua/plenary.nvim", ]]
-  --[[   config = function() ]]
-  --[[     require('user.todo-comment') ]]
-  --[[   end ]]
-  --[[ } ]]
   use({
     "AckslD/nvim-neoclip.lua",
     after = { "telescope.nvim" },
@@ -185,10 +178,10 @@ return packer.startup(function(use)
     end
   })
 
-  use {
-    "nvim-telescope/telescope-frecency.nvim",
-    requires = { "kkharji/sqlite.lua" }
-  }
+  --[[ use { ]]
+  --[[   "nvim-telescope/telescope-frecency.nvim", ]]
+  --[[   requires = { "kkharji/sqlite.lua" } ]]
+  --[[ } ]]
   -- Treesitter
   use {
     'nvim-treesitter/nvim-treesitter',
@@ -260,7 +253,7 @@ return packer.startup(function(use)
       require "user.surround"
     end
   })
-  --[[ use("tpope/vim-repeat") ]]
+  use("tpope/vim-repeat")
   use({
     "petertriho/nvim-scrollbar",
     config = function()
@@ -286,14 +279,21 @@ return packer.startup(function(use)
       --   `nvim-notify` is only needed, if you want to use the notification view.
       --   If not available, we use `mini` as the fallback
       "rcarriga/nvim-notify",
-      }
+    }
   })
   use {
     'phaazon/hop.nvim',
     branch = 'v2',
     config = function()
       -- you can configure Hop the way you like here; see :h hop-config
-      require'hop'.setup { keys = 'etovxqpdygfblzhckisuran' }
+      require 'hop'.setup { keys = 'etovxqpdygfblzhckisuran' }
+    end
+  }
+  use {
+    'mfussenegger/nvim-treehopper',
+    after = { "phaazon/hop.nvim" },
+    config = function()
+      require("tsht").config.hint_keys = { "h", "j", "f", "d", "n", "v", "s", "l", "a" }
     end
   }
   use("folke/which-key.nvim")
@@ -327,7 +327,7 @@ return packer.startup(function(use)
     end,
   })
   use "rcarriga/nvim-notify"
-  --[[ use { "dstein64/vim-startuptime" } ]]
+  use { "dstein64/vim-startuptime" }
 
   use({
     'kazhala/close-buffers.nvim',
