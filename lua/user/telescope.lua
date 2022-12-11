@@ -152,20 +152,6 @@ telescope.setup {
         --[[ ["wiki"]    = "/home/my_username/wiki" ]]
       }
     },
-    file_browser = {
-      theme = "dropdown",
-      -- disables netrw and use telescope-file-browser in its place
-      hijack_netrw = false,
-      search_dirs = 'PWD',
-      --[[ mappings = { ]]
-      --[[   ["i"] = { ]]
-      --[[     -- your custom insert mode mappings ]]
-      --[[   }, ]]
-      --[[   ["n"] = { ]]
-      --[[     -- your custom normal mode mappings ]]
-      --[[   }, ]]
-      --[[ }, ]]
-    },
     recent_files = {
       only_cwd = true,
       -- ignore_patterns = {"/tmp/"}
@@ -181,7 +167,6 @@ end
 telescope.load_extension('neoclip')
 telescope.load_extension('harpoon')
 telescope.load_extension('fzf')
-telescope.load_extension('file_browser')
 telescope.load_extension("noice")
 telescope.load_extension("recent_files")
 telescope.load_extension("git_worktree")

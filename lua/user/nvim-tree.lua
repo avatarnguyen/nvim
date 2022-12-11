@@ -24,7 +24,7 @@ nvim_tree.setup {
   renderer = {
     add_trailing = false,
     group_empty = false,
-    highlight_git = false,
+    highlight_git = true,
     --highlight_opened_files =  --"none",
     root_folder_modifier = ":t",
     icons = {

@@ -1,6 +1,6 @@
 local snip_status_ok, ls = pcall(require, "luasnip")
 if not snip_status_ok then
-  -- vim.api.nvim_err_writeln "Failed to load luasnip"
+  vim.api.nvim_err_writeln "Failed to load luasnip"
   return
 end
 
@@ -87,8 +87,8 @@ ls.add_snippets(nil, {
 
 --[[ inoremap <silent> <S-Tab> <cmd>lua require'luasnip'.jump(-1)<Cr> ]]
 --[[ snoremap <silent> <S-Tab> <cmd>lua require('luasnip').jump(-1)<Cr> ]]
-vim.cmd [[
-imap <silent><expr> <ENTER> luasnip#expand_or_jumpable() ? <cmd>lua require'luasnip'.jump(-1)<Cr> : '<Enter>' 
-
-snoremap <silent> <Enter> <cmd>lua require('luasnip').jump(1)<Cr>
-]]
+-- vim.cmd [[
+-- imap <silent><expr> <ENTER> luasnip#expand_or_jumpable() ? <cmd>lua require'luasnip'.jump(-1)<Cr> : '<Enter>' 
+--
+-- snoremap <silent> <Enter> <cmd>lua require('luasnip').jump(1)<Cr>
+-- ]]

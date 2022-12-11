@@ -7,6 +7,7 @@ end
 neoclip.setup({
   history = 100,
   enable_persistent_history = true,
+  length_limit = 1048576,
   continious_sync = true,
   db_path = vim.fn.stdpath("data") .. "/databases/neoclip.sqlite3",
   filter = nil,
@@ -39,6 +40,11 @@ neoclip.setup({
         custom = {},
       },
     },
+  },
+  fzf = {
+    select = 'default',
+    paste = 'ctrl-p',
+    paste_behind = 'ctrl-k',
+    custom = {},
   }
 })
-

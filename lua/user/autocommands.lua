@@ -30,6 +30,7 @@ vim.api.nvim_create_autocmd({ "FileType" }, {
 })
 
 vim.cmd "autocmd BufEnter * ++nested if winnr('$') == 1 && bufname() == 'NvimTree_' . tabpagenr() | quit | endif"
+-- vim.cmd "autocmd BufEnter * ++nested if winnr('$') == 1 && bufname() == 'neo-tree' . tabpagenr() | quit | endif"
 
 -- Fixes Autocomment
 vim.api.nvim_create_autocmd({ "BufWinEnter" }, {
@@ -53,6 +54,15 @@ vim.api.nvim_create_autocmd({ "BufWinEnter", "FileType" }, {
     ]]
   end,
 })
+
+-- local format_sync_grp = vim.api.nvim_create_augroup("GoFormat", {})
+-- vim.api.nvim_create_autocmd("BufWritePre", {
+--   pattern = "*.go",
+--   callback = function()
+--    require('go.format').goimport()
+--   end,
+--   group = format_sync_grp,
+-- })
 
 -- vim.api.nvim_create_autocmd({ "BufWritePost" }, {
 --   pattern = "*.dart",

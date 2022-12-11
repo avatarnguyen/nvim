@@ -55,7 +55,7 @@ bufferline.setup {
     --   end
     -- end,
     offsets = { { filetype = "NvimTree", text = "", padding = 1 } },
-    show_buffer_icons = true,
+    show_buffer_icons = false,
     show_buffer_close_icons = false,
     show_close_icon = true,
     show_tab_indicators = true,

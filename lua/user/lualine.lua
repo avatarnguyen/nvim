@@ -7,7 +7,7 @@ local hide_in_width = function()
   return vim.fn.winwidth(0) > 80
 end
 
-local noice = require("noice");
+local noice = require("user.noice").noice;
 
 local diagnostics = {
   "diagnostics",
@@ -116,7 +116,7 @@ local filepath = {
   'filename',
   file_status = true, -- displays file status (readonly status, modified status)
   path = 1, -- 0 = just filename, 1 = relative path, 2 = absolute path
-  shorting_target = 32,
+  shorting_target = 24,
   colored = true,
 }
 

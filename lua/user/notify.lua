@@ -6,7 +6,7 @@ end
 
 notify.setup {
   timeout = 175,
-  --[[ background_colour = "#1C1C1C", ]]
+  background_colour = "#1C1C1C",
 }
 
 vim.notify = notify

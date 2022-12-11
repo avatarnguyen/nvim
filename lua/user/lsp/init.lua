@@ -3,8 +3,9 @@ if not status_ok then
   return
 end
 
-require "user.lsp.lsp-installer"
+-- require "user.lsp.lsp-installer"
 require "user.lsp.flutter"
+-- require "user.lsp.go"
 require "user.lsp.mason"
 require "user.lsp.lsp-signature"
 --[[ require "user.lsp.navigator" ]]
