@@ -89,7 +89,7 @@ end
 
 local diff = {
   "diff",
-  colored = false,
+  colored = true,
   symbols = { added = " ", modified = " ", removed = " " }, -- changes diff symbols
   cond = hide_in_width,
 }
@@ -194,10 +194,9 @@ local config = {
     },
   },
   sections = {
-    lualine_a = { branch, diff },
+    lualine_a = { branch },
     lualine_b = { filepath },
-    lualine_c = {
-    },
+    lualine_c = { diff },
     lualine_x = {
       -- {
       --   noice.api.status.command.get,
@@ -252,8 +251,8 @@ local config = {
   --[[ }, ]]
   winbar = {
     lualine_a = {},
-    lualine_b = { fileName },
-    lualine_c = { winbar_symbol },
+    lualine_b = { },
+    lualine_c = { fileName, winbar_symbol },
     lualine_x = {},
     lualine_y = { diagnostics },
     lualine_z = {}
