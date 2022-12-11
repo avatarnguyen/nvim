@@ -3,16 +3,16 @@ if not status_ok then
   return
 end
 
-local dap_ok, dap = pcall(require, "dap")
-if not dap_ok then
-  return
-end
+-- local dap_ok, dap = pcall(require, "dap")
+-- if not dap_ok then
+--   return
+-- end
 
 flutter.setup({
-   ui = {
+  ui = {
     -- the border type to use for all floating windows, the same options/formats
     -- used for ":h nvim_open_win" e.g. "single" | "shadow" | {<table-of-eight-chars>}
-    border = "rounded",
+    border = "shadow",
     -- This determines whether notifications are show with `vim.notify` or with the plugin's custom UI
     -- please note that this option is eventually going to be deprecated and users will need to
     -- depend on plugins like `nvim-notify` instead.
@@ -46,27 +46,27 @@ flutter.setup({
     },
   },
   debugger = { -- integrate with nvim dap + install dart code debugger
-    enabled = true,
-    run_via_dap = true, -- use dap instead of a plenary job to run flutter apps
-    register_configurations = function(_)
-      dap.adapters.dart = {
-        type = "executable",
-        command = "node",
-        args = { os.getenv('HOME') .. "/.config/dap/Dart-Code/out/dist/debug.js", "flutter" }
-      }
-      dap.configurations.dart = {
-        {
-          type = "dart",
-          request = "launch",
-          name = "Launch flutter",
-          dartSdkPath = os.getenv('HOME') .. "/flutter/bin/cache/dart-sdk/",
-          flutterSdkPath = os.getenv('HOME') .. "/flutter",
-          program = "${workspaceFolder}/lib/main.dart",
-          cwd = "${workspaceFolder}",
-        }
-      }
-      --[[ require("dap.ext.vscode").load_launchjs() ]]
-    end,
+    enabled = false,
+    run_via_dap = false, -- use dap instead of a plenary job to run flutter apps
+    -- register_configurations = function(_)
+    --   dap.adapters.dart = {
+    --     type = "executable",
+    --     command = "node",
+    --     args = { os.getenv('HOME') .. "/.config/dap/Dart-Code/out/dist/debug.js", "flutter" }
+    --   }
+    --   dap.configurations.dart = {
+    --     {
+    --       type = "dart",
+    --       request = "launch",
+    --       name = "Launch flutter",
+    --       dartSdkPath = os.getenv('HOME') .. "/flutter/bin/cache/dart-sdk/",
+    --       flutterSdkPath = os.getenv('HOME') .. "/flutter",
+    --       program = "${workspaceFolder}/lib/main.dart",
+    --       cwd = "${workspaceFolder}",
+    --     }
+    --   }
+    --   --[[ require("dap.ext.vscode").load_launchjs() ]]
+    -- end,
   },
   lsp = {
     color = { -- show the derived colours for dart variables
@@ -74,14 +74,18 @@ flutter.setup({
       background = false, -- highlight the background
       foreground = false, -- highlight the foreground
       virtual_text = true, -- show the highlight using virtual text
-      virtual_text_str = "■", -- the virtual text character to highlight
+      virtual_text_str = "■■", -- the virtual text character to highlight
     },
     on_attach = function(client, bufnr)
       require("user.lsp.handlers").on_attach(client, bufnr)
       vim.g.dart_style_guide = 2
       vim.g.dart_format_on_save = 1
-      vim.cmd "highlight FlutterWidgetGuides ctermfg=9 guifg=cyan"
-      -- vim.cmd "highlight FlutterWidgetGuides ctermfg=9 guifg=#82aaff"
+      if require("user.colorscheme").colorscheme == "nightfly" then
+        vim.cmd "highlight FlutterWidgetGuides ctermfg=9 guifg=#82aaff"
+      else
+        vim.cmd "highlight FlutterWidgetGuides ctermfg=9 guifg=cyan"
+      end
+
       --[[ vim.cmd "highlight FlutterWidgetGuides ctermfg=9 guifg=#72A7BC" ]]
     end,
     -- capabilities = my_custom_capabilities -- e.g. lsp_status capabilities
