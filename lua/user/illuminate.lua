@@ -3,6 +3,7 @@ if not status_ok then
   return
 end
 
+local M = {}
 
 -- default configuration
 illuminate.configure({
@@ -52,7 +53,7 @@ illuminate.configure({
   -- If nil, vim-illuminate will be disabled for large files.
   large_file_overrides = nil,
   -- min_count_to_highlight: minimum number of matches required to perform highlighting
-  min_count_to_highlight = 2,
+  min_count_to_highlight = 1,
 })
 
 vim.api.nvim_set_keymap('n', '<a-n>', '<cmd>lua require"illuminate".next_reference{wrap=true}<cr>', { noremap = true })
@@ -72,3 +73,9 @@ vim.api.nvim_set_keymap('n', '<a-p>', '<cmd>lua require"illuminate".next_referen
 --     vim.cmd "hi illuminatedWord guifg=#82aaff"
 --   end,
 -- })
+
+function M.on_attach(client)
+  illuminate.on_attach(client)
+end
+
+return M

@@ -109,12 +109,21 @@ return packer.startup(function(use)
     event = "InsertCharPre"
   }) -- a bunch of snippets to use
   use({ "folke/trouble.nvim",
-    cmd = "TroubleToggle"
+    cmd = "TroubleToggle",
+    config = function()
+      require "user.trouble"
+    end
   })
 
   -- LSP
   use({ "neovim/nvim-lspconfig" }) -- enable LSP
-  use({ "williamboman/nvim-lsp-installer" }) -- simple to use language server installer
+  use 'tamago324/nlsp-settings.nvim'
+  -- use({ "williamboman/nvim-lsp-installer" }) -- simple to use language server installer
+  use {
+    "williamboman/mason.nvim",
+    "williamboman/mason-lspconfig.nvim",
+    "jayp0521/mason-null-ls.nvim",
+  }
   use({ "RRethy/vim-illuminate" })
   use({
     "rmagatti/goto-preview",
@@ -134,6 +143,10 @@ return packer.startup(function(use)
   -- use({ "chrisbra/Colorizer", as = "ansicolor" })
   --[[ use 'MTDL9/vim-log-highlighting' ]]
 
+  -- GO
+  -- use 'ray-x/go.nvim'
+  -- use 'ray-x/guihua.lua'
+
   use {
     "nvim-neotest/neotest",
     requires = {
@@ -152,15 +165,22 @@ return packer.startup(function(use)
     end
   }
 
+  use {
+    "nvim-neo-tree/neo-tree.nvim",
+    branch = "v2.x",
+    requires = {
+      "nvim-lua/plenary.nvim",
+      "nvim-tree/nvim-web-devicons",
+      "MunifTanjim/nui.nvim",
+    }
+  }
+
   -- Telescope
   use({ "nvim-telescope/telescope.nvim" })
   use {
     'nvim-telescope/telescope-fzf-native.nvim',
     after = "telescope.nvim",
     run = 'cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build',
-  }
-  use {
-    "nvim-telescope/telescope-file-browser.nvim",
   }
   use({
     "AckslD/nvim-neoclip.lua",
@@ -215,22 +235,19 @@ return packer.startup(function(use)
   })
 
   -- DAP
-  use({
-    "mfussenegger/nvim-dap",
-    module = "dap",
-    config = function()
-      require "user.dap-config"
-    end
-  })
-  use({ "rcarriga/nvim-dap-ui" })
+  -- use({
+  --   "mfussenegger/nvim-dap",
+  --   module = "dap",
+  --   config = function()
+  --     require "user.dap-config"
+  --   end
+  -- })
+  -- use({ "rcarriga/nvim-dap-ui" })
   --[--[[ [ use({ "Pocco81/dap-buddy.nvim" }) ] ]]]
 
+  -- Frontend
   use "windwp/nvim-ts-autotag"
-  use('MunifTanjim/prettier.nvim')
-  use {
-    "williamboman/mason.nvim",
-    "williamboman/mason-lspconfig.nvim",
-  }
+  -- use('MunifTanjim/prettier.nvim')
 
   -- Editing {{{
   use {
