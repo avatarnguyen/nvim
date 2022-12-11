@@ -6,8 +6,8 @@ local servers = {
 	-- "pyright",
 	-- "bashls",
 	"jsonls",
-  "ruby_ls",
-	-- "yamlls",
+  "gopls",
+	"yamlls",
 }
 
 local settings = {
