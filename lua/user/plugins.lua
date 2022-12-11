@@ -118,7 +118,6 @@ return packer.startup(function(use)
   -- LSP
   use({ "neovim/nvim-lspconfig" }) -- enable LSP
   use 'tamago324/nlsp-settings.nvim'
-  -- use({ "williamboman/nvim-lsp-installer" }) -- simple to use language server installer
   use {
     "williamboman/mason.nvim",
     "williamboman/mason-lspconfig.nvim",
@@ -144,8 +143,8 @@ return packer.startup(function(use)
   --[[ use 'MTDL9/vim-log-highlighting' ]]
 
   -- GO
-  -- use 'ray-x/go.nvim'
-  -- use 'ray-x/guihua.lua'
+  use 'ray-x/go.nvim'
+  use 'ray-x/guihua.lua'
 
   use {
     "nvim-neotest/neotest",
@@ -277,6 +276,20 @@ return packer.startup(function(use)
   })
 
   -- Misc
+  use {
+    "monaqa/dial.nvim",
+    config = function()
+      local augend = require "dial.augend"
+      require("dial.config").augends:register_group {
+        -- default augends used when no group name is specified
+        default = {
+          augend.integer.alias.decimal, -- nonnegative decimal number (0, 1, 2, 3, ...)
+          augend.integer.alias.hex, -- nonnegative hex number  (0x01, 0x1a1f, etc.)
+          augend.constant.alias.bool, -- boolean value (true <-> false)
+        },
+      }
+    end,
+  }
   use 'karb94/neoscroll.nvim'
   use({
     "folke/noice.nvim",

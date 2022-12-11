@@ -191,6 +191,14 @@ keymap("n", "<leader>5", "<Cmd>BufferLineGoToBuffer 5<CR>", opts)
 keymap("n", "<leader>6", "<Cmd>BufferLineGoToBuffer 6<CR>", opts)
 keymap("n", "<leader>7", "<Cmd>BufferLineGoToBuffer 7<CR>", opts)
 
+-- Dial
+keymap("n", "<C-a>", require("dial.map").inc_normal())
+keymap("n", "<C-x>", require("dial.map").dec_normal())
+keymap("v", "<C-a>", require("dial.map").inc_visual())
+keymap("v", "<C-x>", require("dial.map").dec_visual())
+keymap("v", "g<C-a>", require("dial.map").inc_gvisual())
+keymap("v", "g<C-x>", require("dial.map").dec_gvisual())
+
 -- Terminal --
 -- Better terminal navigation
 -- keymap("t", "<C-h>", "<C-\\><C-N><C-w>h", term_opts)
