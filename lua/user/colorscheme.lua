@@ -1,9 +1,10 @@
+local M = {}
 -- local colorscheme = "kanagawa"
--- local colorscheme = "tokyonight"
+local colorscheme = "tokyonight"
 -- local colorscheme = "cobalt2"
+-- local colorscheme = "nightfly"
 -- local colorscheme = "catppuccin"
 -- local colorscheme = "material"
-local colorscheme = "nightfly"
 -- local colorscheme = "NeoSolarized"
 
 -- NeoSolarized
@@ -203,3 +204,7 @@ if colorscheme == "NeoSolarized" then
       highlight Pmenu ctermbg=NONE guibg=NONE
   ]]
 end
+
+M.colorscheme = colorscheme
+
+return M
