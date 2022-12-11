@@ -75,13 +75,13 @@ local function workspace_diagnostic()
     if string.len(str) > 0 then
       str = str .. " "
     end
-    str = str .. " " .. todo_count
+    str = str .. " " .. todo_count
   end
   if anh_todo > 0 then
     if string.len(str) > 0 then
       str = str .. " "
     end
-    str = str .. " " .. anh_todo
+    str = str .. " " .. anh_todo
   end
 
   return str
@@ -199,10 +199,10 @@ local config = {
     lualine_c = {
     },
     lualine_x = {
-      {
-        noice.api.status.command.get,
-        cond = noice.api.status.command.has,
-      },
+      -- {
+      --   noice.api.status.command.get,
+      --   cond = noice.api.status.command.has,
+      -- },
       {
         noice.api.status.message.get_hl,
         cond = noice.api.status.message.has,

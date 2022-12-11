@@ -102,13 +102,15 @@ return packer.startup(function(use)
   use({ "saadparwaiz1/cmp_luasnip" }) -- snippet completions
   use({ "hrsh7th/cmp-nvim-lsp" })
   use({ "hrsh7th/cmp-nvim-lua" })
-  --[[ use({ "folke/trouble.nvim", cmd = "TroubleToggle" }) ]]
   -- snippets
   use({ "L3MON4D3/LuaSnip" }) --snippet engine
   use({
     "rafamadriz/friendly-snippets",
     event = "InsertCharPre"
   }) -- a bunch of snippets to use
+  use({ "folke/trouble.nvim",
+    cmd = "TroubleToggle"
+  })
 
   -- LSP
   use({ "neovim/nvim-lspconfig" }) -- enable LSP
@@ -149,14 +151,7 @@ return packer.startup(function(use)
       })
     end
   }
-  --  use 'nvim-lua/lsp_extensions.nvim'
-  --[[ use({ ]]
-  --[[   'ray-x/navigator.lua', ]]
-  --[[   requires = { ]]
-  --[[     { 'ray-x/guihua.lua', run = 'cd lua/fzy && make' }, ]]
-  --[[     { 'neovim/nvim-lspconfig' }, ]]
-  --[[   }, ]]
-  --[[ }) ]]
+
   -- Telescope
   use({ "nvim-telescope/telescope.nvim" })
   use {
@@ -177,11 +172,8 @@ return packer.startup(function(use)
       require("user.neoclip")
     end
   })
+  use { "smartpde/telescope-recent-files" }
 
-  --[[ use { ]]
-  --[[   "nvim-telescope/telescope-frecency.nvim", ]]
-  --[[   requires = { "kkharji/sqlite.lua" } ]]
-  --[[ } ]]
   -- Treesitter
   use {
     'nvim-treesitter/nvim-treesitter',
@@ -215,12 +207,12 @@ return packer.startup(function(use)
   -- Git
   use({ "lewis6991/gitsigns.nvim" })
   use({ "sindrets/diffview.nvim", requires = "nvim-lua/plenary.nvim" })
-  --[[ use({ ]]
-  --[[   "ThePrimeagen/git-worktree.nvim", ]]
-  --[[   config = function() ]]
-  --[[     require "user.git-worktree" ]]
-  --[[   end ]]
-  --[[ }) ]]
+  use({
+    "ThePrimeagen/git-worktree.nvim",
+    config = function()
+      require "user.git-worktree"
+    end
+  })
 
   -- DAP
   use({
@@ -233,12 +225,12 @@ return packer.startup(function(use)
   use({ "rcarriga/nvim-dap-ui" })
   --[--[[ [ use({ "Pocco81/dap-buddy.nvim" }) ] ]]]
 
-  --[[ use ({ ]]
-  --[[   "williamboman/mason.nvim", ]]
-  --[[   config = function () ]]
-  --[[     require("mason").setup() ]]
-  --[[   end ]]
-  --[[ }) ]]
+  use "windwp/nvim-ts-autotag"
+  use('MunifTanjim/prettier.nvim')
+  use {
+    "williamboman/mason.nvim",
+    "williamboman/mason-lspconfig.nvim",
+  }
 
   -- Editing {{{
   use {
@@ -268,7 +260,6 @@ return packer.startup(function(use)
   })
 
   -- Misc
-  --[[ use ("ggandor/leap.nvim") ]]
   use 'karb94/neoscroll.nvim'
   use({
     "folke/noice.nvim",
@@ -291,7 +282,7 @@ return packer.startup(function(use)
   }
   use {
     'mfussenegger/nvim-treehopper',
-    after = { "phaazon/hop.nvim" },
+    -- after = { "phaazon/hop.nvim" },
     config = function()
       require("tsht").config.hint_keys = { "h", "j", "f", "d", "n", "v", "s", "l", "a" }
     end

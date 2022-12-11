@@ -47,11 +47,11 @@ M.setup = function()
     height = 24,
   })
 
-  --[[ vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers.signature_help, { ]]
-  --[[   border = "rounded", ]]
-  --[[ }) ]]
+  vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers.signature_help, {
+    border = "rounded",
+    style = "minimal",
+  })
 end
-  --vim.lsp.handlers["dart/textDocument/publishOutline"] = require('lsp_extensions.dart.outline').get_callback()
 
 local function lsp_keymaps(bufnr)
   local opts = { noremap = true, silent = true }
@@ -62,7 +62,7 @@ local function lsp_keymaps(bufnr)
 
   keymap(bufnr, "n", "gm", "<cmd>lua vim.lsp.buf.implementation()<CR>", opts)
   -- keymap(bufnr, "n", "gr", "<cmd>lua vim.lsp.buf.references()<CR>", opts)
-  keymap(bufnr, "n", "gr", "<cmd>lua require('telescope.builtin').lsp_references()<cr>", opts)
+  keymap(bufnr, "n", "gu", "<cmd>lua require('telescope.builtin').lsp_references()<cr>", opts)
   keymap(bufnr, "n", "<leader>la", "<cmd>Lspsaga lsp_finder<cr>", opts)
   keymap(bufnr, "n", "gL", "<cmd>lua vim.diagnostic.open_float()<CR>", opts)
   keymap(
@@ -74,7 +74,7 @@ local function lsp_keymaps(bufnr)
   --[[ keymap(bufnr, "n", "ge", '<cmd>lua vim.diagnostic.goto_next({ border = "rounded" })<CR>', opts) ]]
   --[[ keymap(bufnr, "n", "g[", '<cmd>lua vim.diagnostic.goto_prev({ border = "rounded" })<CR>', opts) ]]
 
-  keymap(bufnr, 'n', '<C-space>', '<cmd>lua vim.lsp.buf.signature_help()<CR>', opts)
+  keymap(bufnr, 'n', 'gs', '<cmd>lua vim.lsp.buf.signature_help()<CR>', opts)
   keymap(bufnr, 'n', 'gy', '<cmd>lua vim.lsp.buf.type_definition()<CR>', opts)
 
   keymap(bufnr, "n", "<leader>q", '<cmd>vim.diagnostic.setloclist()<CR>', opts)
@@ -96,6 +96,7 @@ M.on_attach = function(client, bufnr)
 
   if client.name == "tsserver" then
     client.server_capabilities.document_formatting = false
+    client.server_capabilities.documentFormattingProvider = false
   end
 
   if client.name == "jsonls" or client.name == "json" then
@@ -120,25 +121,17 @@ M.on_attach = function(client, bufnr)
 
   lsp_keymaps(bufnr)
 
-  local status_ok, illuminate = pcall(require, "illuminate")
-  if not status_ok then
-    return
-  end
-  illuminate.on_attach(client)
+  -- enabled on global config level
+  -- local status_ok, illuminate = pcall(require, "illuminate")
+  -- if not status_ok then
+  --   return
+  -- end
+  -- illuminate.on_attach(client)
 
   M.capabilities.textDocument.completion.completionItem.snippetSupport = true
   M.capabilities = cmp_nvim_lsp.default_capabilities(M.capabilities)
 end
 
--- possible config: need to investigate
--- local capabilities = vim.lsp.protocol.make_client_capabilities()
---
--- local cmp_status_ok, cmp_nvim_lsp = pcall(require, "cmp_nvim_lsp")
--- if not cmp_status_ok then
---   return
--- end
--- M.capabilities = cmp_nvim_lsp.update_capabilities(capabilities)
---
 local function lsp_execute_command(val)
   if val.edit or type(val.command) == "table" then
     if val.edit then
@@ -173,10 +166,9 @@ function M.code_action_fix_all()
         return
       end
       for _, result in pairs(results_lsp) do
-        if
-          result
-          and result.command
-          and result.command.command == "edit.fixAll"
+        if result
+            and result.command
+            and result.command.command == "edit.fixAll"
         then
           lsp_execute_command(result)
         end

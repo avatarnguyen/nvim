@@ -1,3 +1,5 @@
+local M = {}
+
 local status_ok, telescope = pcall(require, "telescope")
 if not status_ok then
   return
@@ -140,7 +142,8 @@ telescope.setup {
     frecency = {
       show_scores = false,
       show_unindexed = true,
-      ignore_patterns = { "*.git/*", "*/tmp/*",  '*.pub-cache/*',  '*packages/*', 'pub.dartlang.org/*', '*/ios/*', '*/windows/*', '*/web/*', '*/android/*', '*/assets/*', '*/fonts/*', '*/doc/*', '*/l10n/*' },
+      ignore_patterns = { "*.git/*", "*/tmp/*", '*.pub-cache/*', '*packages/*', 'pub.dartlang.org/*', '*/ios/*',
+        '*/windows/*', '*/web/*', '*/android/*', '*/assets/*', '*/fonts/*', '*/doc/*', '*/l10n/*' },
       disable_devicons = false,
       search_dirs = 'CWD',
       workspaces = {
@@ -153,7 +156,7 @@ telescope.setup {
       theme = "dropdown",
       -- disables netrw and use telescope-file-browser in its place
       hijack_netrw = false,
-      search_dirs = 'CWD',
+      search_dirs = 'PWD',
       --[[ mappings = { ]]
       --[[   ["i"] = { ]]
       --[[     -- your custom insert mode mappings ]]
@@ -163,13 +166,24 @@ telescope.setup {
       --[[   }, ]]
       --[[ }, ]]
     },
+    recent_files = {
+      only_cwd = true,
+      -- ignore_patterns = {"/tmp/"}
+    }
+
   },
 }
 
---[[ telescope.load_extension("git_worktree") ]]
+M.getMyToDos = function()
+
+end
+
 telescope.load_extension('neoclip')
 telescope.load_extension('harpoon')
 telescope.load_extension('fzf')
 telescope.load_extension('file_browser')
-telescope.load_extension("frecency")
---[[ return telescope ]]
+telescope.load_extension("noice")
+telescope.load_extension("recent_files")
+telescope.load_extension("git_worktree")
+
+return M

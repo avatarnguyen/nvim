@@ -22,7 +22,6 @@ vim.g.maplocalleader = " "
 --   term_mode = "t",
 --   command_mode = "c",
 
--- Normal --
 -- Better window navigation
 keymap("n", "<Left>", "<C-w>h", opts)
 keymap("n", "<Down>", "<C-w>j", opts)
@@ -33,20 +32,21 @@ keymap("n", "]q", "<cmd>cnext<cr>zz", opts)
 keymap("n", "[q", "<cmd>cprev<cr>zz", opts)
 
 
-keymap("n", "<C-Enter>", "<cmd>w!<CR><cmd>!tmux send-keys -t flutter 'r'<CR><CR>", opts)
+keymap("n", "<C-Enter>", "<cmd>w!<CR><cmd>!tmux send-keys -t flutter 'r'<CR>", opts)
+keymap("n", "<C-s>", "<cmd>wa<CR><cmd>!tmux send-keys -t flutter 'r'<CR>", opts)
+keymap("i", "<C-s>", "<cmd>wa<CR><cmd>!tmux send-keys -t flutter 'r'<CR>", opts)
 keymap("n", "<Enter>", "<cmd>w!<CR>", opts)
-keymap("n", "<C-s>", "<cmd>wa<CR>", opts)
+--[[ keymap("n", "<C-s>", "<cmd>wa<CR>", opts) ]]
 
 -- TMUX Flutter
-keymap("n", "ga", "<cmd>!tmux send-keys -t flutter 'r'<CR><CR>", opts)
-keymap("n", "gs", "<cmd>!tmux send-keys -t flutter 'R'<CR><CR>", opts)
+-- keymap("n", "ga", "<cmd>!tmux send-keys -t flutter 'r'<CR>", opts)
+-- keymap("n", "gs", "<cmd>!tmux send-keys -t flutter 'R'<CR>", opts)
 
 -- Telescope
-keymap("n", "<leader>b",
-  "<cmd>lua require('telescope.builtin').buffers(require('telescope.themes').get_dropdown{previewer = false, sort_mru = true})<cr>"
-  , opts)
+-- keymap("n", "<C-p>",
+--   "<cmd>lua require('telescope').extensions.neoclip.default(require('telescope.themes').get_dropdown{})<CR>", opts)
 keymap("n", "<C-p>",
-  "<Cmd>lua require('telescope').extensions.frecency.frecency({ workspace = 'CWD', debounce = 150, })<CR>", opts)
+  "<cmd>lua require('telescope').extensions.recent_files.pick()<CR>", opts)
 keymap("n", "<C-f>", "<cmd>Telescope resume<CR>", opts)
 
 -- Explorer
@@ -54,20 +54,21 @@ keymap("", "<C-1>", "<cmd>NvimTreeToggle<cr>", opts)
 keymap("", "<C-S-1>", "<cmd>NvimTreeFocus<cr>", opts)
 
 -- Flutter
-keymap("", "<C-2>", "<cmd>lua require('flutter-tools.outline').toggle()<cr>", opts)
-keymap("", "<C-0>", "<cmd>require('user.lsp.handlers').code_action_fix_all()<cr>", opts)
+keymap("", "<C-0>", "<cmd>lua require('flutter-tools.outline').toggle()<cr>", opts)
+keymap("", "<C-k>", "<cmd>lua require('user.lsp.handlers').code_action_fix_all()<cr><cmd>w!<cr>", opts)
 
-keymap("", "<C-3>", "<CMD>lua require('harpoon.ui').toggle_quick_menu()<CR>", opts)
+keymap("", "<C-2>", "<CMD>lua require('harpoon.ui').toggle_quick_menu()<CR>", opts)
 
 -- copy and paste
 keymap("n", "<leader>p", '"0p', opts)
 keymap("v", "<leader>p", '"_dP', opts)
-keymap("", "<C-S-v>", "<cmd>lua require('telescope').extensions.neoclip.default(require('telescope.themes').get_dropdown{})<CR>", opts)
+keymap("", ";c",
+  "<cmd>lua require('telescope').extensions.neoclip.default(require('telescope.themes').get_dropdown{})<CR>", opts)
 
 -- Clear highlights
 keymap("n", "<C-n>", "<cmd>nohlsearch<CR>", opts)
 
--- Close buffers
+-- Close Window
 keymap("n", "<S-q>", "<cmd>q<CR>", opts)
 
 -- LSP Mapping
@@ -85,31 +86,32 @@ keymap("v", "gl", "<esc><cmd>lua require('lsp-fastaction').range_code_action()<C
 keymap("n", "s", "<cmd>lua require('substitute').operator()<cr>", { noremap = true })
 keymap("x", "s", "<cmd>lua require('substitute').visual()<cr>", { noremap = true })
 keymap("n", "ss", "<cmd>lua require('substitute').line()<cr>", { noremap = true })
-keymap("n", "<S-s>", "<cmd>lua require('substitute').eol()<cr>", { noremap = true })
-keymap("v", "<S-s>", "<cmd>lua require('substitute').visual()<cr>", { noremap = true })
-keymap("n", "<leader>s", "<cmd>lua require('substitute.range').operator()<cr>", { noremap = true })
-keymap("x", "<leader>s", "<cmd>lua require('substitute.range').visual()<cr>", {})
-keymap("n", "<leader>ss", "<cmd>lua require('substitute.range').word()<cr>", {})
+keymap("n", "<C-S-s>", "<cmd>lua require('substitute').eol()<cr>", { noremap = true })
+keymap("v", "<C-S-s>", "<cmd>lua require('substitute').visual()<cr>", { noremap = true })
+keymap("n", "<leader>r", "<cmd>lua require('substitute.range').operator()<cr>", { noremap = true })
+keymap("x", "<leader>r", "<cmd>lua require('substitute.range').visual()<cr>", {})
+keymap("n", "<leader>rr", "<cmd>lua require('substitute.range').word()<cr>", {})
 --}}}
 
 -- keymap("n", "<leader>r", ":%s///g<Left><Left>", {})
 -- keymap("x", "<leader>r", ":s///g<Left><Left>", opts)
 
 -- Code Navigation {{{
+-- HOP
 local hop = require('hop')
 local directions = require('hop.hint').HintDirection
 vim.keymap.set('', 'f', function()
   hop.hint_char1({ direction = directions.AFTER_CURSOR, current_line_only = true })
-end, { remap = true })
+end, { remap = true, silent = true })
 vim.keymap.set('', 'F', function()
   hop.hint_char1({ direction = directions.BEFORE_CURSOR, current_line_only = true })
-end, { remap = true })
+end, { remap = true, silent = true })
 vim.keymap.set('', 't', function()
   hop.hint_char1({ direction = directions.AFTER_CURSOR, current_line_only = true, hint_offset = -1 })
-end, { remap = true })
+end, { remap = true, silent = true })
 vim.keymap.set('', 'T', function()
   hop.hint_char1({ direction = directions.BEFORE_CURSOR, current_line_only = true, hint_offset = 1 })
-end, { remap = true })
+end, { remap = true, silent = true })
 
 keymap('n', "<C-l>", "<cmd>lua require'hop'.hint_lines()<cr>", opts)
 keymap('v', "<C-l>", "<cmd>lua require'hop'.hint_lines()<cr>", opts)
@@ -119,7 +121,13 @@ end, { remap = true, silent = true })
 vim.keymap.set('', '<C-S-h>', function()
   hop.hint_char1({ direction = directions.BEFORE_CURSOR, current_line_only = false })
 end, { remap = true, silent = true })
+
+keymap('v', "<C-S-h>", "<cmd><C-U>lua require('tsht').nodes()<cr>", opts)
+keymap('i', "<C-S-h>", "<cmd>lua require('tsht').nodes()<cr>", opts)
+-- Tree Hopper
 --}}}
+
+-- require('tsht').move({ side = "start" })
 
 -- Resize with arrows
 keymap("n", "<A-Up>", ":resize -2<CR>", opts)
@@ -164,8 +172,12 @@ keymap("n", "\\d", "<CMD> lua require'dap'.step_over()<CR>", opts)
 -- }}}
 
 -- Buffer
-keymap("n", "<C-k>", "<cmd>Bdelete!<CR>", opts)
-keymap("n", "<C-b>", "<cmd>lua require('telescope.builtin').buffers(require('telescope.themes').get_dropdown{previewer = false, sort_mru = true})<cr>", opts)
+keymap("n", "<leader>c", "<cmd>Bdelete!<CR>", opts)
+keymap("n", "<C-ESC>", "<cmd>Bdelete!<CR>", opts)
+keymap("n", "<C-b>",
+  "<cmd>lua require('telescope.builtin').buffers(require('telescope.themes').get_dropdown{sort_mru = true})<cr>", opts)
+keymap("n", "<leader>b",
+  "<cmd>lua require('telescope.builtin').buffers(require('telescope.themes').get_dropdown{sort_mru = true})<cr>", opts)
 
 keymap("n", "<leader>1", "<Cmd>BufferLineGoToBuffer 1<CR>", opts)
 keymap("n", "<leader>2", "<Cmd>BufferLineGoToBuffer 2<CR>", opts)

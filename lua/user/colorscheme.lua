@@ -1,11 +1,10 @@
 -- local colorscheme = "kanagawa"
---[[ local colorscheme = "tokyonight" ]]
-local colorscheme = "cobalt2"
---[[ local colorscheme = "catppuccin" ]]
+-- local colorscheme = "tokyonight"
+-- local colorscheme = "cobalt2"
+-- local colorscheme = "catppuccin"
 -- local colorscheme = "material"
---[[ local colorscheme = "nightfly" ]]
---[[ local colorscheme = "NeoSolarized" ]]
---[[ local colorscheme = "night-owl" ]]
+local colorscheme = "nightfly"
+-- local colorscheme = "NeoSolarized"
 
 -- NeoSolarized
 if colorscheme == "NeoSolarized" then
@@ -113,7 +112,7 @@ end
 
 -- nightfly
 if colorscheme == "nightfly" then
-  vim.g.nightflyTransparent = 0
+  vim.g.nightflyTransparent = 1
   vim.g.nightflyTerminalColors = 1
   vim.g.nightflyItalics = 1
   vim.g.nightflyNormalFloat = 1
@@ -155,6 +154,7 @@ if colorscheme == "tokyonight" then
     -- your configuration comes here
     -- or leave it empty to use the default settings
     style = "storm", -- The theme comes in three styles, `storm`, `moon`, a darker variant `night` and `day`
+    -- style = "night",
     transparent = false, -- Enable this to disable setting the background color
     terminal_colors = true, -- Configure the colors used when opening a `:terminal` in Neovim
     styles = {

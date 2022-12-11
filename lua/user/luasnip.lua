@@ -1,6 +1,6 @@
 local snip_status_ok, ls = pcall(require, "luasnip")
 if not snip_status_ok then
-  vim.api.nvim_err_writeln "Failed to load luasnip"
+  -- vim.api.nvim_err_writeln "Failed to load luasnip"
   return
 end
 

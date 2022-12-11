@@ -199,10 +199,6 @@ noice.setup {
   },
   --[[ ---@type NoiceRouteConfig[] ]]
   routes = {
-    --[[ { ]]
-    --[[   view = "notify", ]]
-    --[[   filter = { event = "msg_showmode" }, ]]
-    --[[ }, ]]
     {
       filter = {
         event = "msg_show",
@@ -232,6 +228,14 @@ noice.setup {
         event = "msg_show",
         kind = "",
         find = "fewer",
+      },
+      opts = { skip = true },
+    },
+    {
+      filter = {
+        event = "msg_show",
+        kind = "",
+        find = "Hop",
       },
       opts = { skip = true },
     }
