@@ -32,6 +32,7 @@ end
 local compare = require "cmp.config.compare"
 
 luasnip.filetype_extend("dart", { "flutter" })
+luasnip.filetype_extend("go", { "go" })
 require("luasnip/loaders/from_vscode").load()
 require("luasnip/loaders/from_vscode").lazy_load({ paths = { "~/.config/nvim/vscodesnips" } })
 
@@ -105,8 +106,8 @@ cmp.setup {
     ["<Right>"] = cmp.mapping(function(fallback)
       if luasnip.jumpable(1) then
         luasnip.jump(1)
-      elseif cmp.visible() then
-        cmp.select_next_item()
+      -- elseif cmp.visible() then
+      --   cmp.select_next_item()
       else
         fallback()
       end
