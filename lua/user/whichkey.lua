@@ -85,7 +85,7 @@ local knowunity_file_ignore = { 'pub.dartlang.org/', '.pub-cache/', 'ios/', 'win
   'fonts/', 'packages/', 'doc/', 'l10n/' }
 
 local mappings = {
-  ["a"] = { "<cmd>Telescope file_browser<cr>", "File Browser" },
+  ["a"] = { "<cmd>Neotree float<cr>", "File Browser" },
 
   ["e"] = { "<cmd>NvimTreeToggle<cr>", "Explorer" },
   ["E"] = { "<cmd>NvimTreeFocus<cr>", "Explorer" },
@@ -101,7 +101,7 @@ local mappings = {
   --   "Find files",
   -- },
   ["f"] = {
-    "<cmd>lua require('telescope.builtin').find_files({ debounce = 150, sort_last_used = true, file_ignore_patterns = {'windows/', 'web/', 'ios/', 'android/', 'fonts/', 'assets/', 'packages/', 'doc/'}})<cr>",
+    "<cmd>lua require('telescope.builtin').find_files({ debounce = 150, sort_last_used = true, file_ignore_patterns = {'windows/', 'web/', 'ios/', 'android/', 'fonts/', 'assets/', 'doc/'}})<cr>",
     "Find files",
   },
   ["j"] = { "<cmd>lua require('telescope.builtin').grep_string({file_ignore_patterns = {'ios/', 'android/', 'assets/', 'fonts/', 'packages/', 'doc/'}})<cr>",
@@ -151,12 +151,12 @@ local mappings = {
       "Clipboard" },
     b = { "<Cmd>lua require('telescope.builtin').current_buffer_fuzzy_find(require('telescope.themes').get_dropdown{})<CR>",
       "Find in Buffer" },
-    o = { "<cmd>lua require('telescope.builtin').oldfiles( { search_dirs = 'CWD' , file_ignore_patterns = {'ios/', 'android/', 'assets/', 'fonts/', 'packages/', 'doc/'} } )<cr>",
+    o = { "<cmd>lua require('telescope.builtin').oldfiles( { search_dirs = 'PWD' , file_ignore_patterns = {'ios/', 'android/', 'assets/', 'fonts/', 'packages/', 'doc/'} } )<cr>",
       "Open Recent File" },
   },
 
 
-  c = {
+  C = {
     -- bdelete
     name = "Close Buffer Option",
     c = { "<cmd>lua require('close_buffers').delete({ type = 'hidden', force = true }) <cr>", "Delete all non-visible" }, -- Delete all non-visible buffers
@@ -190,27 +190,26 @@ local mappings = {
     h = { "<cmd>DiffviewFileHistory<cr>", "File History" },
     C = { "<cmd>DiffviewClose<cr>", "Close Diffview" },
     t = { "<cmd>lua require('telescope').extensions.git_worktree.git_worktrees() <cr>", "Show All Git Worktrees" },
-    w = { "<cmd>lua require('telescope').extensions.git_worktree.create_git_worktree()<cr>", "Add Git Worktree" },
+    w = { "<cmd>lua require('telescope').extensions.git_worktree.create_git_worktree()<cr>", "Create Git Worktree" },
   },
 
   l = {
     name = "LSP",
     c = { "<cmd>TSContextToggle<cr>", "Treesitter Context" },
     d = { "<cmd>Trouble document_diagnostics<cr>", "Document Diagnostics" },
-    --[[ e = { "<cmd>lua vim.diagnostic.open_float()<cr>", "Diagnostics Float" }, ]]
-    --[[ e = { ]]
-    --[[   "<cmd>lua require('telescope.builtin').diagnostics({file_ignore_patterns = {'packages/'}, })<cr>", ]]
-    --[[   "Error Diagnostics", ]]
-    --[[ }, ]]
+    -- t = {
+    --   "<cmd>lua require('telescope.builtin').diagnostics({file_ignore_patterns = {'packages/'}})<cr>",
+    --   "Current TODO",
+    -- },
     w = {
-      "<cmd>lua require('telescope.builtin').diagnostics({file_ignore_patterns = {'packages/'}})<cr>",
+      "<cmd>lua require('telescope.builtin').diagnostics({file_ignore_patterns = {'windows/', 'web/'}})<cr>",
       "Workspace Diagnostics Popup",
     },
-    W = {
-      "<cmd>lua require('telescope.builtin').diagnostics({file_ignore_patterns = {'packages/'}, severity=2})<cr>",
+    e = {
+      "<cmd>lua require('telescope.builtin').diagnostics({file_ignore_patterns = {'windows/', 'web/'}, severity = 1})<cr>",
       "Workspace Error Popup",
     },
-    --[[ W = { "<cmd>Trouble workspace_diagnostics<cr>", "Workspace Diagnostics" }, ]]
+    W = { "<cmd>Trouble workspace_diagnostics<cr>", "Workspace Diagnostics" },
     f = { "<cmd>lua vim.lsp.buf.format()<cr>", "Format" },
     -- i = { "<cmd>LspInfo<cr>", "Info" },
     I = { "<cmd>LspInstallInfo<cr>", "Installer Info" },
@@ -218,7 +217,7 @@ local mappings = {
     q = { "<cmd>lua vim.lsp.diagnostic.set_loclist()<cr>", "Quickfix" },
     -- r = { "<cmd>lua require('renamer').rename()<cr>", "Rename" }, -- not working well with cmp-tabnine
     --[[ r = { "<cmd>lua vim.lsp.buf.rename()<cr>", "Rename" }, ]]
-    --[[ R = { "<cmd>Trouble lsp_references<cr>", "References" }, ]]
+    u = { "<cmd>Trouble lsp_references<cr>", "References" },
   },
 
   o = {
@@ -226,7 +225,8 @@ local mappings = {
     o = { "<cmd>OverseerToggle<cr>", "Toggle Command Window" },
     g = { "<cmd>OverseerRunCmd flutter pub get<cr>", "Run Flutter Get" },
     f = { "<cmd>OverseerRunCmd flutter pub run ota_translation && flutter pub get<cr>", "Run Flutter Translation" },
-    b = { "<cmd>OverseerRunCmd flutter pub run build_runner build --delete-conflicting-outputs<cr>", "Run Flutter Build" },
+    r = { "<cmd>OverseerRunCmd flutter pub run build_runner build --delete-conflicting-outputs<cr>",
+      "Run Flutter ReBuild" },
   },
 
   t = {
@@ -261,23 +261,38 @@ local mappings = {
     t = { "<cmd>lua _RUN_TRANSLATION()<cr>", "Run Flutter Translation" },
   },
 
+  n = {
+    name = "Noice",
+    l = { "<cmd>lua require('noice').cmd('last')<cr>", "Last Command" },
+    h = { "<cmd>lua require('noice').cmd('history')<cr>", "History" },
+    e = { "<cmd>NoiceError<cr>", "Last Error" },
+    f = { "<cmd>Notifications<cr>", "Noice Notifications" },
+    t = { "<cmd>Noice telescope<cr>", "Noice Telescope" },
+    m = { "<cmd>messages<cr>", "Last Messsages" },
+  },
+
   d = {
     name = "Flutter",
-    d = { "<cmd>lua require('flutter-tools.commands').run_command()<cr>", "Run" },
-    D = { "<cmd>lua require('flutter-tools.commands').run_command('--profile')<cr>", "Run Profile Mode" },
-    r = { "<cmd>lua require('flutter-tools.commands').run_command('--flavor dev --debug')<cr>", "Run Dev Flavor" },
+    j = { "<cmd>!tmux send-keys -t flutter 'frd' Enter<CR>", "run flutter on samsung" },
+    s = { "<cmd>!tmux send-keys -t flutter 'R'<CR>", "Restart Flutter" },
+    d = { "<cmd>!tmux send-keys -t flutter 'r'<CR>", "Reload Flutter " },
+    q = { "<cmd>!tmux send-keys -t flutter 'q'<CR>", "Quit Flutter" },
+    v = { "<cmd>!tmux send-keys -t flutter 'v'<CR>", "Start Dev Tool" },
+    --[[ d = { "<cmd>lua require('flutter-tools.commands').run_command()<cr>", "Run" }, ]]
+    --[[ D = { "<cmd>lua require('flutter-tools.commands').run_command('--profile')<cr>", "Run Profile Mode" }, ]]
+    --[[ r = { "<cmd>lua require('flutter-tools.commands').run_command('--flavor dev --debug')<cr>", "Run Dev Flavor" }, ]]
     l = { "<cmd>lua require('flutter-tools.devices').list_devices()<cr>", "Show Devices" },
-    v = { "<cmd>lua require('flutter-tools.commands').visual_debug()<cr>", "Start Visual Debugger" },
+    --[[ v = { "<cmd>lua require('flutter-tools.commands').visual_debug()<cr>", "Start Visual Debugger" }, ]]
     e = { "<cmd>lua require('flutter-tools.devices').list_emulators()<cr>", "Show Emulators" },
-    t = { "<cmd>lua require('flutter-tools.dev_tools').start()<cr>", "Show Dev Tools" },
-    c = { "<cmd>lua require('flutter-tools.log').clear()<cr>", "Clear Logs" },
-    C = { "<cmd>lua require('flutter-tools.commands').copy_profiler_url()<cr>", "Copy Profile Url" },
+    --[[ R = { "<cmd>lua require('flutter-tools.dev_tools').start()<cr>", "Show Dev Tools" }, ]]
+    --[[ c = { "<cmd>lua require('flutter-tools.log').clear()<cr>", "Clear Logs" }, ]]
+    --[[ C = { "<cmd>lua require('flutter-tools.commands').copy_profiler_url()<cr>", "Copy Profile Url" }, ]]
     -- h = { "<cmd>ColorHighlight<cr>", "Highlight Log" },
-    p = { "<cmd>lua require('flutter-tools.commands').pub_get()<cr>", "Run Pub Get" },
-    q = { "<cmd>lua require('flutter-tools.commands').quit()<cr>", "Quit Flutter" },
-    S = { "<cmd>lua require('flutter-tools.commands').restart()<cr> <cmd>lua require('flutter-tools.log').clear()<cr>",
-      "Restart Flutter" },
-    s = { "<cmd>lua require('flutter-tools.commands').reload()<cr>", "Reload Flutter" },
+    g = { "<cmd>lua require('flutter-tools.commands').pub_get()<cr>", "Run Pub Get" },
+    --[[ q = { "<cmd>lua require('flutter-tools.commands').quit()<cr>", "Quit Flutter" }, ]]
+    --[[ S = { "<cmd>lua require('flutter-tools.commands').restart()<cr> <cmd>lua require('flutter-tools.log').clear()<cr>", ]]
+    --[[   "Restart Flutter" }, ]]
+    --[[ s = { "<cmd>lua require('flutter-tools.commands').reload()<cr>", "Reload Flutter" }, ]]
     f = { "<cmd>lua require('telescope').extensions.flutter.fvm()<cr>", "Change Flutter Version" },
     o = { "<cmd>lua require('flutter-tools.outline').toggle()<cr>", "Flutter Outlines" },
   },
