@@ -1,24 +1,22 @@
 local M = {}
 -- local colorscheme = "kanagawa"
-local colorscheme = "tokyonight"
+-- local colorscheme = "tokyonight"
 -- local colorscheme = "cobalt2"
--- local colorscheme = "nightfly"
+local colorscheme = "nightfly"
 -- local colorscheme = "catppuccin"
--- local colorscheme = "material"
--- local colorscheme = "NeoSolarized"
 
 -- NeoSolarized
-if colorscheme == "NeoSolarized" then
-  vim.g.NeoSolarized_italics = 1 -- 0 or 1
-  vim.g.NeoSolarized_visibility = 'normal' -- low, normal, high
-  vim.g.NeoSolarized_diffmode = 'normal' -- low, normal, high
-  vim.g.NeoSolarized_termtrans = 1 -- 0(default) or 1 -> Transparency
-  vim.g.NeoSolarized_lineNr = 0 -- 0 or 1 (default) -> To Show backgroung in LineNr
-end
+-- if colorscheme == "NeoSolarized" then
+--   vim.g.NeoSolarized_italics = 1 -- 0 or 1
+--   vim.g.NeoSolarized_visibility = 'normal' -- low, normal, high
+--   vim.g.NeoSolarized_diffmode = 'normal' -- low, normal, high
+--   vim.g.NeoSolarized_termtrans = 1 -- 0(default) or 1 -> Transparency
+--   vim.g.NeoSolarized_lineNr = 0 -- 0 or 1 (default) -> To Show backgroung in LineNr
+-- end
 
 -- catppuccin
 if colorscheme == "catppuccin" then
-  vim.g.catppuccin_flavour = "mocha" -- latte, frappe, macchiato, mocha
+  vim.g.catppuccin_flavour = "latte" -- latte, frappe, macchiato, mocha
 
   require("catppuccin").setup({
     -- dim_inactive = {
@@ -154,7 +152,9 @@ if colorscheme == "tokyonight" then
   require("tokyonight").setup({
     -- your configuration comes here
     -- or leave it empty to use the default settings
-    style = "storm", -- The theme comes in three styles, `storm`, `moon`, a darker variant `night` and `day`
+    -- The theme comes in three styles, `storm`, `moon`, a darker variant `night` and `day`
+    -- style = "moon",
+    style = "storm",
     -- style = "night",
     transparent = false, -- Enable this to disable setting the background color
     terminal_colors = true, -- Configure the colors used when opening a `:terminal` in Neovim
