@@ -7,7 +7,8 @@ local hide_in_width = function()
   return vim.fn.winwidth(0) > 80
 end
 
-local noice = require("user.noice").noice;
+-- FIXME: caused ui freezed
+--local noice = require("user.noice").noice;
 
 local diagnostics = {
   "diagnostics",
@@ -18,6 +19,15 @@ local diagnostics = {
   update_in_insert = false,
   always_visible = false,
 }
+
+local function show_macro_recording()
+  local recording_register = vim.fn.reg_recording()
+  if recording_register == "" then
+    return ""
+  else
+    return "Recording @" .. recording_register
+  end
+end
 
 local function workspace_diagnostic()
   local error_count, warning_count, info_count, hint_count, todo_count, anh_todo
@@ -124,8 +134,8 @@ local fileName = {
   'filename',
   file_status = true, -- displays file status (readonly status, modified status)
   path = 0, -- 0 = just filename, 1 = relative path, 2 = absolute path
-  shorting_target = 100,
-  colored = true,
+  shorting_target = 40,
+  colored = false,
 }
 
 --[[ local tabs = { ]]
@@ -141,6 +151,9 @@ local winbar_symbol = function()
     ['NvimTree'] = true,
     ['lualine'] = true,
     ['help'] = true,
+    ['dap_ui'] = false,
+    ['dapui_scopes'] = false,
+    ['dap-repl'] = false,
   }
   if vim.api.nvim_win_get_config(0).zindex or exclude[vim.bo.filetype] then
     return ""
@@ -182,7 +195,8 @@ local config = {
     disabled_filetypes = {
       statusline = { "alpha", "dashboard" },
       winbar = { "alpha", "dashboard", "neotree", "neo-tree", "NvimTree", "Telescope", "StartupTime", "term",
-        "toggleterm" },
+        "toggleterm", 'dap_ui', 'dapui_scopes', 'dap-repl',
+      },
       tabline = { "alpha", "dashboard", "neotree", "neo-tree", "NvimTree", "NvimTree_1", "Telescope", "nvim_lsp",
         "fidget", "No name", "No Name" },
     },
@@ -202,20 +216,25 @@ local config = {
       --   noice.api.status.command.get,
       --   cond = noice.api.status.command.has,
       -- },
+      -- {
+      --   noice.api.status.message.get_hl,
+      --   cond = noice.api.status.message.has,
+      -- },
+      -- {
+      --   noice.api.statusline.mode.get,
+      --   cond = noice.api.statusline.mode.has,
+      --   color = { fg = "#ff9e64" },
+      -- },
+      -- {
+      --   noice.api.status.search.get,
+      --   cond = noice.api.status.search.has,
+      --   color = { fg = "#ff9e64" },
+      -- },
       {
-        noice.api.status.message.get_hl,
-        cond = noice.api.status.message.has,
+        "macro-recording",
+        fmt = show_macro_recording,
       },
-      {
-        noice.api.statusline.mode.get,
-        cond = noice.api.statusline.mode.has,
-        color = { fg = "#ff9e64" },
-      },
-      {
-        noice.api.status.search.get,
-        cond = noice.api.status.search.has,
-        color = { fg = "#ff9e64" },
-      },
+      -- 'lsp_progress',
       workspace_diagnostic,
     },
     lualine_y = { filetype, location },
@@ -251,7 +270,7 @@ local config = {
   --[[ }, ]]
   winbar = {
     lualine_a = {},
-    lualine_b = { },
+    lualine_b = {},
     lualine_c = { fileName, winbar_symbol },
     lualine_x = {},
     lualine_y = { diagnostics },
@@ -320,3 +339,32 @@ local config = {
 -- }
 
 lualine.setup(config)
+
+vim.api.nvim_create_autocmd("RecordingEnter", {
+  callback = function()
+    lualine.refresh({
+      place = { "statusline" },
+    })
+  end,
+})
+
+vim.api.nvim_create_autocmd("RecordingLeave", {
+  callback = function()
+    -- This is going to seem really weird!
+    -- Instead of just calling refresh we need to wait a moment because of the nature of
+    -- `vim.fn.reg_recording`. If we tell lualine to refresh right now it actually will
+    -- still show a recording occuring because `vim.fn.reg_recording` hasn't emptied yet.
+    -- So what we need to do is wait a tiny amount of time (in this instance 50 ms) to
+    -- ensure `vim.fn.reg_recording` is purged before asking lualine to refresh.
+    local timer = vim.loop.new_timer()
+    timer:start(
+      50,
+      0,
+      vim.schedule_wrap(function()
+        lualine.refresh({
+          place = { "statusline" },
+        })
+      end)
+    )
+  end,
+})
