@@ -109,9 +109,9 @@ local mappings = {
   ["P"] = { "<cmd>Telescope projects<cr>", "Projects" },
   -- ["p"] = { "<cmd>:lua require('telescope').extensions.neoclip.default(require('telescope.themes').get_dropdown{})<CR>",
   --   "Clipboard" },
-  ["D"] = { "<cmd>:lua require('telescope').extensions.flutter.commands()<CR>", "Flutter Commands" },
+  ["D"] = { "<cmd>lua require('telescope').extensions.flutter.commands()<CR>", "Flutter Commands" },
 
-  ["M"] = { "<cmd>:lua require('telescope').extensions.macroscope.default()<CR>", "Macros" },
+  ["M"] = { "<cmd>lua require('telescope').extensions.macroscope.default()<CR>", "Macros" },
 
   s = {
     name = "pickers",
@@ -273,11 +273,11 @@ local mappings = {
 
   d = {
     name = "Flutter",
-    j = { "<cmd>!tmux send-keys -t flutter 'frd' Enter<CR>", "run flutter on samsung" },
-    s = { "<cmd>!tmux send-keys -t flutter 'R'<CR>", "Restart Flutter" },
-    d = { "<cmd>!tmux send-keys -t flutter 'r'<CR>", "Reload Flutter " },
-    q = { "<cmd>!tmux send-keys -t flutter 'q'<CR>", "Quit Flutter" },
-    v = { "<cmd>!tmux send-keys -t flutter 'v'<CR>", "Start Dev Tool" },
+    j = { "<cmd>!tmux send-keys -t flutter 'frd' Enter<CR><CR>", "run flutter on samsung" },
+    s = { "<cmd>!tmux send-keys -t flutter 'R'<CR><CR>", "Restart Flutter" },
+    d = { "<cmd>!tmux send-keys -t flutter 'r'<CR><CR>", "Reload Flutter " },
+    q = { "<cmd>!tmux send-keys -t flutter 'q'<CR><CR>", "Quit Flutter" },
+    v = { "<cmd>!tmux send-keys -t flutter 'v'<CR><CR>", "Start Dev Tool" },
     --[[ d = { "<cmd>lua require('flutter-tools.commands').run_command()<cr>", "Run" }, ]]
     --[[ D = { "<cmd>lua require('flutter-tools.commands').run_command('--profile')<cr>", "Run Profile Mode" }, ]]
     --[[ r = { "<cmd>lua require('flutter-tools.commands').run_command('--flavor dev --debug')<cr>", "Run Dev Flavor" }, ]]
@@ -336,9 +336,9 @@ local mappings = {
 
   k = {
     name = "Debugger",
-    c = { "<CMD> lua require'dap'.continue()<CR>", "Continue or Start" },
-    w = { "<CMD> lua require'dap'.step_over()<CR>", "Step Over" },
-    e = { "<CMD> lua require'dap'.step_out()<CR>", "Step Out" },
+    d = { "<CMD> lua require'dap'.continue()<CR>", "Continue or Start" },
+    f = { "<CMD> lua require'dap'.step_over()<CR>", "Step Over" },
+    s = { "<CMD> lua require'dap'.step_out()<CR>", "Step Out" },
     a = { "<CMD> lua require'dap'.step_into()<CR>", "Step Into" },
     u = { "<CMD> lua require('dapui').toggle()<CR>", "Toggle Dap UI" },
     b = { "<CMD> lua require'dap'.toggle_breakpoint()<CR>", "Toggle Breakpoint" },

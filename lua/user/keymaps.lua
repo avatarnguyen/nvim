@@ -34,9 +34,9 @@ keymap("n", "[q", "<cmd>cprev<cr>zz", opts)
 keymap("n", "<C-d>", "<C-d>zz", opts)
 keymap("n", "<C-u>", "<C-u>zz", opts)
 
-keymap("n", "<C-Enter>", "<cmd>w!<CR><cmd>!tmux send-keys -t flutter 'r'<CR>", opts)
-keymap("n", "<C-s>", "<cmd>wa<CR><cmd>!tmux send-keys -t flutter 'r'<CR>", opts)
-keymap("i", "<C-s>", "<cmd>wa<CR><cmd>!tmux send-keys -t flutter 'r'<CR>", opts)
+keymap("n", "<C-Enter>", "<cmd>w!<CR><cmd>!tmux send-keys -t flutter 'r'<CR><CR>", opts)
+keymap("n", "<C-s>", "<cmd>wa<CR><cmd>!tmux send-keys -t flutter 'r'<CR><CR>", opts)
+keymap("i", "<C-s>", "<cmd>wa<CR><cmd>!tmux send-keys -t flutter 'r'<CR><CR>", opts)
 keymap("n", "<Enter>", "<cmd>w!<CR>", opts)
 --[[ keymap("n", "<C-s>", "<cmd>wa<CR>", opts) ]]
 
@@ -88,8 +88,8 @@ keymap("v", "gl", "<esc><cmd>lua require('lsp-fastaction').range_code_action()<C
 keymap("n", "s", "<cmd>lua require('substitute').operator()<cr>", { noremap = true })
 keymap("x", "s", "<cmd>lua require('substitute').visual()<cr>", { noremap = true })
 keymap("n", "ss", "<cmd>lua require('substitute').line()<cr>", { noremap = true })
-keymap("n", "<C-S-s>", "<cmd>lua require('substitute').eol()<cr>", { noremap = true })
-keymap("v", "<C-S-s>", "<cmd>lua require('substitute').visual()<cr>", { noremap = true })
+keymap("n", "<S-s>", "<cmd>lua require('substitute').eol()<cr>", { noremap = true })
+keymap("v", "<S-s>", "<cmd>lua require('substitute').visual()<cr>", { noremap = true })
 keymap("n", "<leader>r", "<cmd>lua require('substitute.range').operator()<cr>", { noremap = true })
 keymap("x", "<leader>r", "<cmd>lua require('substitute.range').visual()<cr>", {})
 keymap("n", "<leader>rr", "<cmd>lua require('substitute.range').word()<cr>", {})
@@ -97,6 +97,9 @@ keymap("n", "<leader>rr", "<cmd>lua require('substitute.range').word()<cr>", {})
 
 -- keymap("n", "<leader>r", ":%s///g<Left><Left>", {})
 -- keymap("x", "<leader>r", ":s///g<Left><Left>", opts)
+-- keymap("x", "<leader><leader>r", ":s/\\(\\w.*\\)//<Left><Left>", opts)
+-- FIXME: keymap not working 
+keymap("v", "<leader>R", ":'<,'>s/\\(\\w.*\\)//<Left><Left>", opts)
 
 -- Code Navigation {{{
 -- HOP
@@ -164,9 +167,7 @@ keymap("i", "jk", "<ESC>", opts)
 
 
 -- DEBUGGER {{{
---[[ keymap("n", ";b", "<CMD> lua require'dap'.toggle_breakpoint()<CR>", opts) ]]
---[[ keymap("n", "[d", "<CMD> lua require'dap'.continue()<CR>", opts) ]]
-
+keymap("n", ";b", "<CMD> lua require'dap'.toggle_breakpoint()<CR>", opts)
 keymap("n", "[d", "<CMD> lua require'dap'.step_into()<CR>", opts)
 keymap("n", "]d", "<CMD> lua require'dap'.step_out()<CR>", opts)
 keymap("n", "\\d", "<CMD> lua require'dap'.step_over()<CR>", opts)
