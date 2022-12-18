@@ -70,7 +70,7 @@ local function lsp_keymaps(bufnr)
 
   keymap(bufnr, "n", "gm", "<cmd>lua vim.lsp.buf.implementation()<CR>", opts)
   -- keymap(bufnr, "n", "gr", "<cmd>lua vim.lsp.buf.references()<CR>", opts)
-  keymap(bufnr, "n", "gu", "<cmd>lua require('telescope.builtin').lsp_references()<cr>", opts)
+  keymap(bufnr, "n", "gu", "<cmd>lua require('telescope.builtin').lsp_references(require('telescope.themes').get_dropdown{layout_config = {width = 0.9}})<cr>", opts)
   keymap(bufnr, "n", "gF", "<cmd>Lspsaga lsp_finder<cr>", opts)
   keymap(bufnr, "n", "gL", "<cmd>lua vim.diagnostic.open_float()<CR>", opts)
   keymap(
@@ -129,6 +129,8 @@ M.on_attach = function(client, bufnr)
   if require("user.colorscheme").colorscheme ~= "nightfly" then
     require "user.illuminate".on_attach(client)
   end
+
+  require 'user.fidget'
 
 end
 
