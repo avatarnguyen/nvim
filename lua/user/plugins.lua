@@ -51,7 +51,7 @@ return packer.startup(function(use)
   use { 'akinsho/bufferline.nvim', tag = "v2.*", requires = 'kyazdani42/nvim-web-devicons' }
   use({ "moll/vim-bbye" })
   use({ "nvim-lualine/lualine.nvim" })
-  --[[ use({ 'arkav/lualine-lsp-progress' }) ]]
+  -- use({ 'arkav/lualine-lsp-progress' })
   use { "akinsho/toggleterm.nvim" }
   use({ "ahmedkhalf/project.nvim" })
   use({ "lewis6991/impatient.nvim" })
@@ -59,6 +59,8 @@ return packer.startup(function(use)
   use({ "goolord/alpha-nvim" })
   use "b0o/schemastore.nvim"
   use { "ray-x/lsp_signature.nvim" }
+
+  use 'j-hui/fidget.nvim'
 
   -- Colorschemes
   use({ "folke/tokyonight.nvim" })
@@ -68,8 +70,6 @@ return packer.startup(function(use)
     'lalitmee/cobalt2.nvim',
     requires = 'tjdevries/colorbuddy.nvim',
   }
-
-  use("Tsuzat/NeoSolarized.nvim")
   use({
     "catppuccin/nvim",
     as = "catppuccin"
@@ -122,7 +122,15 @@ return packer.startup(function(use)
     "williamboman/mason.nvim",
     "williamboman/mason-lspconfig.nvim",
     "jayp0521/mason-null-ls.nvim",
+    "jayp0521/mason-nvim-dap.nvim",
   }
+  -- DAP
+  use({ "mfussenegger/nvim-dap" })
+  use({
+    "rcarriga/nvim-dap-ui",
+    "theHamsta/nvim-dap-virtual-text",
+  })
+
   use({ "RRethy/vim-illuminate" })
   use({
     "rmagatti/goto-preview",
@@ -139,8 +147,8 @@ return packer.startup(function(use)
   use({ "akinsho/flutter-tools.nvim", requires = "nvim-lua/plenary.nvim" })
   use "sidlatau/lsp-fastaction.nvim"
   use "dart-lang/dart-vim-plugin"
-  -- use({ "chrisbra/Colorizer", as = "ansicolor" })
-  --[[ use 'MTDL9/vim-log-highlighting' ]]
+  use({ "chrisbra/Colorizer", as = "ansicolor" })
+  use 'MTDL9/vim-log-highlighting'
 
   -- GO
   use 'ray-x/go.nvim'
@@ -233,16 +241,6 @@ return packer.startup(function(use)
     end
   })
 
-  -- DAP
-  -- use({
-  --   "mfussenegger/nvim-dap",
-  --   module = "dap",
-  --   config = function()
-  --     require "user.dap-config"
-  --   end
-  -- })
-  -- use({ "rcarriga/nvim-dap-ui" })
-  --[--[[ [ use({ "Pocco81/dap-buddy.nvim" }) ] ]]]
 
   -- Frontend
   use "windwp/nvim-ts-autotag"
@@ -290,6 +288,7 @@ return packer.startup(function(use)
       }
     end,
   }
+  use 'mbbill/undotree'
   use 'karb94/neoscroll.nvim'
   use({
     "folke/noice.nvim",
@@ -312,7 +311,6 @@ return packer.startup(function(use)
   }
   use {
     'mfussenegger/nvim-treehopper',
-    -- after = { "phaazon/hop.nvim" },
     config = function()
       require("tsht").config.hint_keys = { "h", "j", "f", "d", "n", "v", "s", "l", "a" }
     end
