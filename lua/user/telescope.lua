@@ -36,6 +36,8 @@ end
 
 local actions = require "telescope.actions"
 
+M.telescope = telescope
+
 telescope.setup {
   defaults = {
 
@@ -44,11 +46,13 @@ telescope.setup {
     prompt_prefix = " ",
     selection_caret = " ",
     path_display = { "smart" },
-    file_ignore_patterns = { ".git/", "node_modules", "gen_l10n/", "analytics", ".pub-cache/", "flutter/packages/" },
+    file_ignore_patterns = { "%.g.dart", "%.freezed.dart", ".git/", "node_modules", "gen_l10n/", "analytics",
+      ".pub-cache/", "flutter/packages/" },
 
     sorting_strategy = "ascending",
     layout_config = {
       prompt_position = "top",
+      width = 0.9,
     },
 
     buffer_previewer_maker = new_maker,
@@ -119,7 +123,23 @@ telescope.setup {
   pickers = {
     -- Default configuration for builtin pickers goes here:
     -- Now the picker_config_key will be applied every time you call this
-    -- builtin picker
+    live_grep = {
+      --@usage don't include the filename in the search results
+      only_sort_text = true,
+    },
+    grep_string = {
+      only_sort_text = true,
+    },
+    buffers = {
+      mappings = {
+        i = {
+          ["<C-d>"] = actions.delete_buffer,
+        },
+        n = {
+          ["dd"] = actions.delete_buffer,
+        },
+      },
+    },
     lsp_references = {
       search_dirs = 'CWD',
     },
@@ -155,20 +175,46 @@ telescope.setup {
     recent_files = {
       only_cwd = true,
       -- ignore_patterns = {"/tmp/"}
-    }
-
+    },
+    undo = {
+      side_by_side = true,
+      layout_strategy = "vertical",
+      layout_config = {
+        preview_height = 0.7,
+      },
+    },
   },
 }
 
-M.getMyToDos = function()
+-- M.getMyToDos = function()
+--
+-- end
 
-end
-
-telescope.load_extension('neoclip')
-telescope.load_extension('harpoon')
-telescope.load_extension('fzf')
-telescope.load_extension("noice")
+-- telescope.load_extension("noice")
 telescope.load_extension("recent_files")
-telescope.load_extension("git_worktree")
+telescope.load_extension('fzf')
+
+local action_state = require "telescope.actions.state"
+
+M.sorted_buffers = function(opts)
+  opts = opts or {}
+  opts.attach_mappings = function(prompt_bufnr, map)
+    local delete_buf = function()
+      local selection = action_state.get_selected_entry()
+      actions.close(prompt_bufnr)
+      vim.api.nvim_buf_delete(selection.bufnr, { force = true })
+    end
+    map("i", "<c-x>", delete_buf)
+    return true
+  end
+  opts.previewer = false
+  -- define more opts here
+  -- opts.show_all_buffers = true
+  opts.sort_mru = true
+  -- opts.shorten_path = false
+  require("telescope.builtin").buffers(
+    require("telescope.themes").get_dropdown(opts)
+  )
+end
 
 return M

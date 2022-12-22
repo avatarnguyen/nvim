@@ -10,3 +10,6 @@ git_worktree.setup({
     -- clearjumps_on_change = <boolean> -- default: true,
     -- autopush = <boolean> -- default: false,
 })
+
+local telescope = require('user.telescope').telescope
+telescope.load_extension("git_worktree")

@@ -48,3 +48,6 @@ neoclip.setup({
     custom = {},
   }
 })
+
+local telescope = require('user.telescope').telescope
+telescope.load_extension('neoclip')
