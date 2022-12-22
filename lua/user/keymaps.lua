@@ -98,8 +98,8 @@ keymap("n", "<leader>rr", "<cmd>lua require('substitute.range').word()<cr>", {})
 -- keymap("n", "<leader>r", ":%s///g<Left><Left>", {})
 -- keymap("x", "<leader>r", ":s///g<Left><Left>", opts)
 -- keymap("x", "<leader><leader>r", ":s/\\(\\w.*\\)//<Left><Left>", opts)
--- FIXME: keymap not working 
-keymap("v", "<leader>R", ":'<,'>s/\\(\\w.*\\)//<Left><Left>", opts)
+-- FIXME: keymap not working
+-- keymap("v", "<leader>R", ":'<,'>s/\\(\\w.*\\)//<Left><Left>", opts)
 
 -- Code Navigation {{{
 -- HOP
@@ -134,6 +134,42 @@ keymap('i', "<C-S-h>", "<cmd>lua require('tsht').nodes()<cr>", opts)
 
 -- require('tsht').move({ side = "start" })
 
+-- Unimpaired Keymapping {{{
+
+-- to do keymapping
+vim.keymap.set("n", "]t", function()
+  require("todo-comments").jump_next()
+end, { desc = "Next todo comment" })
+
+vim.keymap.set("n", "[t", function()
+  require("todo-comments").jump_prev()
+end, { desc = "Previous todo comment" })
+
+-- You can also specify a list of valid jump keywords
+-- vim.keymap.set("n", "]t", function()
+--   require("todo-comments").jump_next({keywords = { "ERROR", "WARNING" }})
+-- end, { desc = "Next error/warning todo comment" })
+
+-- DEBUGGER {{{
+keymap("n", ";b", "<CMD> lua require'dap'.toggle_breakpoint()<CR>", opts)
+keymap("n", "[d", "<CMD> lua require'dap'.step_into()<CR>", opts)
+keymap("n", "]d", "<CMD> lua require'dap'.step_out()<CR>", opts)
+keymap("n", "\\d", "<CMD> lua require'dap'.step_over()<CR>", opts)
+-- }}}
+
+-- Harpoon 
+keymap("n", "]o", "<CMD>lua require('harpoon.ui').nav_next() <CR>", opts)
+keymap("n", "[o", "<CMD>lua require('harpoon.ui').nav_next() <CR>", opts)
+
+-- }}}
+
+keymap("n", "<leader>1", "<CMD>lua require('harpoon.ui').nav_file(1)<CR>", opts)
+keymap("n", "<leader>2", "<CMD>lua require('harpoon.ui').nav_file(2)<CR>", opts)
+keymap("n", "<leader>3", "<CMD>lua require('harpoon.ui').nav_file(3)<CR>", opts)
+keymap("n", "<leader>4", "<CMD>lua require('harpoon.ui').nav_file(4)<CR>", opts)
+keymap("n", "<leader>5", "<CMD>lua require('harpoon.ui').nav_file(5)<CR>", opts)
+keymap("n", "<leader>6", "<CMD>lua require('harpoon.ui').nav_file(6)<CR>", opts)
+
 -- Resize with arrows
 keymap("n", "<A-Up>", ":resize -2<CR>", opts)
 keymap("n", "<A-Down>", ":resize +2<CR>", opts)
@@ -155,24 +191,10 @@ keymap("v", ">", ">gv", opts)
 -- Move text up and down
 keymap("x", "J", ":move '>+1<CR>gv-gv", opts)
 keymap("x", "K", ":move '<-2<CR>gv-gv", opts)
--- keymap("x", "<A-j>", ":move '>+1<CR>gv-gv", opts) -- does not work
--- keymap("x", "<A-k>", ":move '<-2<CR>gv-gv", opts)
--- -- Move text up and down
--- keymap("n", "<A-j>", "<Esc>:m .+1<CR>==gi", opts)
--- keymap("n", "<A-k>", "<Esc>:m .-2<CR>==gi", opts)
 
 -- Insert --
 -- Press jk fast to enter
 keymap("i", "jk", "<ESC>", opts)
-
-
--- DEBUGGER {{{
-keymap("n", ";b", "<CMD> lua require'dap'.toggle_breakpoint()<CR>", opts)
-keymap("n", "[d", "<CMD> lua require'dap'.step_into()<CR>", opts)
-keymap("n", "]d", "<CMD> lua require'dap'.step_out()<CR>", opts)
-keymap("n", "\\d", "<CMD> lua require'dap'.step_over()<CR>", opts)
-
--- }}}
 
 -- Buffer
 keymap("n", "<leader>c", "<cmd>Bdelete!<CR>", opts)
@@ -180,17 +202,9 @@ keymap("n", "<leader>c", "<cmd>Bdelete!<CR>", opts)
 keymap("n", "<C-b>",
   "<cmd>lua require('telescope.builtin').buffers(require('telescope.themes').get_dropdown{sort_mru = true})<cr>", opts)
 keymap("n", "<leader>b",
-  "<cmd>Neotree buffers right toggle<cr>", opts)
-keymap("n", "<leader>B",
-  "<cmd>Neotree buffers focus<cr>", opts)
-
-keymap("n", "<leader>1", "<Cmd>BufferLineGoToBuffer 1<CR>", opts)
-keymap("n", "<leader>2", "<Cmd>BufferLineGoToBuffer 2<CR>", opts)
-keymap("n", "<leader>3", "<Cmd>BufferLineGoToBuffer 3<CR>", opts)
-keymap("n", "<leader>4", "<Cmd>BufferLineGoToBuffer 4<CR>", opts)
-keymap("n", "<leader>5", "<Cmd>BufferLineGoToBuffer 5<CR>", opts)
-keymap("n", "<leader>6", "<Cmd>BufferLineGoToBuffer 6<CR>", opts)
-keymap("n", "<leader>7", "<Cmd>BufferLineGoToBuffer 7<CR>", opts)
+  "<cmd>Neotree buffers float<cr>", opts)
+-- keymap("n", "<leader>B",
+--   "<cmd>Neotree buffers focus<cr>", opts)
 
 -- Dial
 keymap("n", "<C-a>", require("dial.map").inc_normal())
