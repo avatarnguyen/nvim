@@ -20,14 +20,14 @@ local diagnostics = {
   always_visible = false,
 }
 
-local function show_macro_recording()
-  local recording_register = vim.fn.reg_recording()
-  if recording_register == "" then
-    return ""
-  else
-    return "Recording @" .. recording_register
-  end
-end
+-- local function show_macro_recording()
+--   local recording_register = vim.fn.reg_recording()
+--   if recording_register == "" then
+--     return ""
+--   else
+--     return "Recording @" .. recording_register
+--   end
+-- end
 
 local function workspace_diagnostic()
   local error_count, warning_count, info_count, hint_count, todo_count, anh_todo
@@ -40,7 +40,7 @@ local function workspace_diagnostic()
     )
     then
       if string.find(diagnostic.message, 'TODO') then
-        count[5] = count[5] + 1
+        -- count[5] = count[5] + 1
         if string.find(diagnostic.message, '@anh') then
           count[6] = count[6] + 1
         end
@@ -53,7 +53,7 @@ local function workspace_diagnostic()
   warning_count = count[vim.diagnostic.severity.WARN]
   info_count = count[vim.diagnostic.severity.INFO]
   hint_count = count[vim.diagnostic.severity.HINT]
-  todo_count = count[5]
+  -- todo_count = count[5]
   anh_todo = count[6]
 
   local str = ""
@@ -81,17 +81,17 @@ local function workspace_diagnostic()
     end
     str = str .. " " .. hint_count
   end
-  if todo_count > 0 then
-    if string.len(str) > 0 then
-      str = str .. " "
-    end
-    str = str .. " " .. todo_count
-  end
+  -- if todo_count > 0 then
+  --   if string.len(str) > 0 then
+  --     str = str .. " "
+  --   end
+  --   str = str .. " " .. todo_count
+  -- end
   if anh_todo > 0 then
     if string.len(str) > 0 then
       str = str .. " "
     end
-    str = str .. " " .. anh_todo
+    str = str .. " " .. anh_todo
   end
 
   return str
@@ -132,7 +132,8 @@ local filepath = {
 
 local fileName = {
   'filename',
-  file_status = true, -- displays file status (readonly status, modified status)
+  padding = 0,
+  file_status = false, -- displays file status (readonly status, modified status)
   path = 0, -- 0 = just filename, 1 = relative path, 2 = absolute path
   shorting_target = 40,
   colored = false,
@@ -230,10 +231,10 @@ local config = {
       --   cond = noice.api.status.search.has,
       --   color = { fg = "#ff9e64" },
       -- },
-      {
-        "macro-recording",
-        fmt = show_macro_recording,
-      },
+      -- {
+      --   "macro-recording",
+      --   fmt = show_macro_recording,
+      -- },
       -- 'lsp_progress',
       workspace_diagnostic,
     },
@@ -340,31 +341,31 @@ local config = {
 
 lualine.setup(config)
 
-vim.api.nvim_create_autocmd("RecordingEnter", {
-  callback = function()
-    lualine.refresh({
-      place = { "statusline" },
-    })
-  end,
-})
-
-vim.api.nvim_create_autocmd("RecordingLeave", {
-  callback = function()
-    -- This is going to seem really weird!
-    -- Instead of just calling refresh we need to wait a moment because of the nature of
-    -- `vim.fn.reg_recording`. If we tell lualine to refresh right now it actually will
-    -- still show a recording occuring because `vim.fn.reg_recording` hasn't emptied yet.
-    -- So what we need to do is wait a tiny amount of time (in this instance 50 ms) to
-    -- ensure `vim.fn.reg_recording` is purged before asking lualine to refresh.
-    local timer = vim.loop.new_timer()
-    timer:start(
-      50,
-      0,
-      vim.schedule_wrap(function()
-        lualine.refresh({
-          place = { "statusline" },
-        })
-      end)
-    )
-  end,
-})
+-- vim.api.nvim_create_autocmd("RecordingEnter", {
+--   callback = function()
+--     lualine.refresh({
+--       place = { "statusline" },
+--     })
+--   end,
+-- })
+--
+-- vim.api.nvim_create_autocmd("RecordingLeave", {
+--   callback = function()
+--     -- This is going to seem really weird!
+--     -- Instead of just calling refresh we need to wait a moment because of the nature of
+--     -- `vim.fn.reg_recording`. If we tell lualine to refresh right now it actually will
+--     -- still show a recording occuring because `vim.fn.reg_recording` hasn't emptied yet.
+--     -- So what we need to do is wait a tiny amount of time (in this instance 50 ms) to
+--     -- ensure `vim.fn.reg_recording` is purged before asking lualine to refresh.
+--     local timer = vim.loop.new_timer()
+--     timer:start(
+--       50,
+--       0,
+--       vim.schedule_wrap(function()
+--         lualine.refresh({
+--           place = { "statusline" },
+--         })
+--       end)
+--     )
+--   end,
+-- })
