@@ -16,7 +16,7 @@ local colorscheme = "nightfly"
 
 -- catppuccin
 if colorscheme == "catppuccin" then
-  vim.g.catppuccin_flavour = "latte" -- latte, frappe, macchiato, mocha
+  vim.g.catppuccin_flavour = "mocha" -- latte, frappe, macchiato, mocha
 
   require("catppuccin").setup({
     -- dim_inactive = {
@@ -62,7 +62,7 @@ if colorscheme == "catppuccin" then
         },
       },
       coc_nvim = false,
-      lsp_trouble = false,
+      lsp_trouble = true,
       cmp = true,
       lsp_saga = true,
       gitgutter = true,
@@ -96,7 +96,7 @@ if colorscheme == "catppuccin" then
       bufferline = true,
       markdown = true,
       lightspeed = false,
-      ts_rainbow = false,
+      ts_rainbow = true,
       hop = true,
       notify = true,
       telekasten = false,
