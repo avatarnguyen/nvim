@@ -10,10 +10,10 @@ configs.setup({
   incremental_selection = {
     enable = true,
     keymaps = {
-      init_selection = "gnn", -- set to `false` to disable one of the mappings
-      node_incremental = "grn",
-      scope_incremental = "grc",
-      node_decremental = "grm",
+      init_selection = "gn", -- set to `false` to disable one of the mappings
+      node_incremental = "]v",
+      node_decremental = "[v",
+      scope_incremental = ";n",
     },
   },
   highlight = {
