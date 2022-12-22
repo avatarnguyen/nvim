@@ -41,6 +41,18 @@ if vim.fn.has "mac" == 1 or vim.g.use_nerd_icons then
       TypeParameter = "",
       Tab9 = "ﮧ",
     },
+    dap = {
+      Play = "",
+      Pause = "",
+      Forward = "",
+      Backward = "",
+      Into = "",
+      Out = "",
+      Over = "",
+      Stop = "",
+      Last = "",
+      Pointer = "",
+    },
     type = {
       Array = "",
       Number = "",
