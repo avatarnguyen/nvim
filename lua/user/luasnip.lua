@@ -61,9 +61,44 @@ ls.add_snippets(nil, {
     ls.parser.parse_snippet("_th", "final theme = AppTheme.of(context);"),
     ls.parser.parse_snippet("ssi", "final screenSize = MediaQuery.of(context).size;"),
     ls.parser.parse_snippet("_si", "final screenSize = MediaQuery.of(context).size;"),
+    ls.parser.parse_snippet("tda", "//TODO(@anh): "),
     ls.parser.parse_snippet("tdr", "//TODO(@anh): remove before push"),
     ls.parser.parse_snippet("tdn", "//TODO(@anh): implement on next mr"),
     ls.parser.parse_snippet("tiu", "// ignore: unused-code"),
+
+    ls.parser.parse_snippet(".bs4", "BricksSizes.s4"),
+    ls.parser.parse_snippet(".bs8", "BricksSizes.s8"),
+    ls.parser.parse_snippet(".bs12", "BricksSizes.s12"),
+    ls.parser.parse_snippet(".bs16", "BricksSizes.s16"),
+    ls.parser.parse_snippet(".bs24", "BricksSizes.s24"),
+    ls.parser.parse_snippet(".bs32", "BricksSizes.s32"),
+    ls.parser.parse_snippet(".bs40", "BricksSizes.s40"),
+    ls.parser.parse_snippet(".bs64", "BricksSizes.s64"),
+    -- Icon Sizes
+    ls.parser.parse_snippet(".bis4", "BricksIconSizes.s4"),
+    ls.parser.parse_snippet(".bis8", "BricksIconSizes.s8"),
+    ls.parser.parse_snippet(".bis12", "BricksIconSizes.s12"),
+    ls.parser.parse_snippet(".bis16", "BricksIconSizes.s16"),
+    ls.parser.parse_snippet(".bis24", "BricksIconSizes.s24"),
+    ls.parser.parse_snippet(".bis32", "BricksIconSizes.s32"),
+    ls.parser.parse_snippet(".bis40", "BricksIconSizes.s40"),
+    ls.parser.parse_snippet(".bis64", "BricksIconSizes.s64"),
+
+    -- Spacer
+    ls.parser.parse_snippet("bv4", "const BricksSpacer.v4();"),
+    ls.parser.parse_snippet("bv8", "const BricksSpacer.v8();"),
+    ls.parser.parse_snippet("bv16", "const BricksSpacer.v16();"),
+    ls.parser.parse_snippet("bv32", "const BricksSpacer.v32();"),
+    ls.parser.parse_snippet("bv40", "const BricksSpacer.v40();"),
+    ls.parser.parse_snippet("bv48", "const BricksSpacer.v48();"),
+    ls.parser.parse_snippet("bv64", "const BricksSpacer.v64();"),
+    ls.parser.parse_snippet("bh4", "const BricksSpacer.h4();"),
+    ls.parser.parse_snippet("bh8", "const BricksSpacer.h8();"),
+    ls.parser.parse_snippet("bh16", "const BricksSpacer.h16();"),
+    ls.parser.parse_snippet("bh32", "const BricksSpacer.h32();"),
+    ls.parser.parse_snippet("bh40", "const BricksSpacer.h40();"),
+    ls.parser.parse_snippet("bh48", "const BricksSpacer.h48();"),
+    ls.parser.parse_snippet("bh64", "const BricksSpacer.h64();"),
     ls.parser.parse_snippet("rcon", "ColoredBox(color: Colors.red,);"),
     snip("csl",
       fmta("class <> extends ConsumerWidget {\n\tconst <>({super.key});\n\t@override\tWidget build(BuildContext context, WidgetRef ref) {\n\t\treturn Container();\n\t}\n}"
@@ -73,12 +108,7 @@ ls.add_snippets(nil, {
     snip("logd", fmta("Log.d('<>');", { insert(1, "message") })),
     snip("cloc", fmta("context.loc.<>", { insert(1, "key") })),
     snip("_cloc", fmta("context.loc.<>", { insert(1, "key") })),
-    snip("tsub1", fmta("Text( context.loc.<>, style: theme.subtitle1,)", { insert(1, "key") })),
-    snip("tsub2", fmta("Text( context.loc.<>, style: theme.subtitle2,)", { insert(1, "key") })),
-    snip("tbody1", fmta("Text( context.loc.<>, style: theme.body1,)", { insert(1, "key") })),
-    snip("tbody2", fmta("Text( context.loc.<>, style: theme.body2,)", { insert(1, "key") })),
-    snip("tcaption", fmta("Text( context.loc.<>, style: theme.caption,)", { insert(1, "key") })),
-    snip("theadline5", fmta("Text( context.loc.<>, style: theme.headline5,)", { insert(1, "key") })),
+    snip("textwidget", fmta("Text( context.loc.<>, style: theme.<>,)", { insert(1, "key"), insert(2, "style") })),
   },
 })
 
@@ -88,7 +118,7 @@ ls.add_snippets(nil, {
 --[[ inoremap <silent> <S-Tab> <cmd>lua require'luasnip'.jump(-1)<Cr> ]]
 --[[ snoremap <silent> <S-Tab> <cmd>lua require('luasnip').jump(-1)<Cr> ]]
 -- vim.cmd [[
--- imap <silent><expr> <ENTER> luasnip#expand_or_jumpable() ? <cmd>lua require'luasnip'.jump(-1)<Cr> : '<Enter>' 
+-- imap <silent><expr> <ENTER> luasnip#expand_or_jumpable() ? <cmd>lua require'luasnip'.jump(-1)<Cr> : '<Enter>'
 --
 -- snoremap <silent> <Enter> <cmd>lua require('luasnip').jump(1)<Cr>
 -- ]]
