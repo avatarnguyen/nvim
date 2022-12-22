@@ -114,6 +114,14 @@ return packer.startup(function(use)
       require "user.trouble"
     end
   })
+  -- Lua
+  use {
+    "folke/todo-comments.nvim",
+    requires = "nvim-lua/plenary.nvim",
+    config = function()
+      require("user.todo-comment")
+    end
+  }
 
   -- LSP
   use({ "neovim/nvim-lspconfig" }) -- enable LSP
@@ -149,6 +157,12 @@ return packer.startup(function(use)
   use "dart-lang/dart-vim-plugin"
   use({ "chrisbra/Colorizer", as = "ansicolor" })
   use 'MTDL9/vim-log-highlighting'
+  use({
+    "norcalli/nvim-colorizer.lua",
+    config = function()
+      require "user.colorizer"
+    end,
+  })
 
   -- GO
   use 'ray-x/go.nvim'
@@ -161,25 +175,20 @@ return packer.startup(function(use)
       "antoinemadec/FixCursorHold.nvim",
       "sidlatau/neotest-dart",
     },
-    config = function()
-      require('neotest').setup({
-        adapters = {
-          require('neotest-dart') {
-            command = 'flutter',
-          },
-        }
-      })
-    end
   }
 
   use {
     "nvim-neo-tree/neo-tree.nvim",
     branch = "v2.x",
+    cmd = "Neotree",
     requires = {
       "nvim-lua/plenary.nvim",
       "nvim-tree/nvim-web-devicons",
       "MunifTanjim/nui.nvim",
-    }
+    },
+    config = function()
+      require "user.neotree"
+    end
   }
 
   -- Telescope
@@ -200,6 +209,13 @@ return packer.startup(function(use)
     end
   })
   use { "smartpde/telescope-recent-files" }
+  use {
+    'debugloop/telescope-undo.nvim',
+    requires = { 'nvim-telescope/telescope.nvim' },
+    config = function()
+      require("user.telescope").telescope.load_extension("undo")
+    end,
+  }
 
   -- Treesitter
   use {
@@ -288,7 +304,7 @@ return packer.startup(function(use)
       }
     end,
   }
-  use 'mbbill/undotree'
+  -- use 'mbbill/undotree'
   use 'karb94/neoscroll.nvim'
   use({
     "folke/noice.nvim",
@@ -320,6 +336,9 @@ return packer.startup(function(use)
   use({
     "ThePrimeagen/harpoon",
     after = { "telescope.nvim" },
+    config = function()
+      require "user.harpoon"
+    end,
   })
   use({
     "Shatur/neovim-session-manager",
@@ -331,12 +350,6 @@ return packer.startup(function(use)
     "chentoast/marks.nvim",
     config = function()
       require "user.marks"
-    end,
-  })
-  use({
-    "norcalli/nvim-colorizer.lua",
-    config = function()
-      require "user.colorizer"
     end,
   })
   use({
@@ -356,6 +369,7 @@ return packer.startup(function(use)
   })
   use {
     'stevearc/overseer.nvim',
+    cmd = { 'OverseerToggle', 'OverseerRunCmd' },
     config = function()
       require('user.overseer')
     end

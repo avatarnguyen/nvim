@@ -153,6 +153,8 @@ local mappings = {
       "Find in Buffer" },
     o = { "<cmd>lua require('telescope.builtin').oldfiles( { search_dirs = 'PWD' , file_ignore_patterns = {'ios/', 'android/', 'assets/', 'fonts/', 'packages/', 'doc/'} } )<cr>",
       "Open Recent File" },
+    u = { "<cmd>Telescope undo<cr>",
+      "Search Undo" },
   },
 
 
@@ -180,15 +182,16 @@ local mappings = {
       "Undo Stage Hunk",
     },
     -- e = { "<cmd>Neotree left git_status<cr>", "Git Status Tree" },
-    o = { "<cmd>Telescope git_status<cr>", "Open changed file" },
+    f = { "<cmd>Telescope git_status<cr>", "Open changed file" },
     b = { "<cmd>Telescope git_branches<cr>", "Checkout branch" },
-    c = { "<cmd>Telescope git_commits<cr>", "Checkout commit" },
+    C = { "<cmd>Telescope git_commits<cr>", "Checkout commit" },
     d = {
       "<cmd>Gitsigns diffthis HEAD<cr>",
-      "Diff",
+      "Diff with HEAD",
     },
     h = { "<cmd>DiffviewFileHistory<cr>", "File History" },
-    C = { "<cmd>DiffviewClose<cr>", "Close Diffview" },
+    o = { "<cmd>DiffviewOpen<cr>", "Open DiffView" },
+    c = { "<cmd>DiffviewClose<cr>", "Close Diffview" },
     t = { "<cmd>lua require('telescope').extensions.git_worktree.git_worktrees() <cr>", "Show All Git Worktrees" },
     w = { "<cmd>lua require('telescope').extensions.git_worktree.create_git_worktree()<cr>", "Create Git Worktree" },
   },
@@ -197,10 +200,6 @@ local mappings = {
     name = "LSP",
     c = { "<cmd>TSContextToggle<cr>", "Treesitter Context" },
     d = { "<cmd>Trouble document_diagnostics<cr>", "Document Diagnostics" },
-    -- t = {
-    --   "<cmd>lua require('telescope.builtin').diagnostics({file_ignore_patterns = {'packages/'}})<cr>",
-    --   "Current TODO",
-    -- },
     w = {
       "<cmd>lua require('telescope.builtin').diagnostics({file_ignore_patterns = {'windows/', 'web/'}})<cr>",
       "Workspace Diagnostics Popup",
@@ -218,6 +217,7 @@ local mappings = {
     -- r = { "<cmd>lua require('renamer').rename()<cr>", "Rename" }, -- not working well with cmp-tabnine
     --[[ r = { "<cmd>lua vim.lsp.buf.rename()<cr>", "Rename" }, ]]
     u = { "<cmd>Trouble lsp_references<cr>", "References" },
+    t = { "<cmd>TodoTelescope keywords=TODO,FIX<cr>", "TODO" },
   },
 
   o = {
@@ -232,13 +232,14 @@ local mappings = {
   t = {
     name = "Run Test",
     r = { "<cmd>lua require('neotest').run.run()<cr>", "Test Nearest" },
-    f = { "<cmd>require('neotest').run.run(vim.fn.expand('%'))<cr>", "Test File" },
-    s = { "<cmd>require('neotest').run.stop()<cr>", "Stop Nearest Test" },
-    a = { "<cmd>require('neotest').run.attach()<cr>", "Attach Nearest Test" },
-    l = { "<cmd>require('neotest').run.run_last()<cr>", "Run Last Test" },
+    d = { "<cmd>lua require('neotest').run.run({strategy = 'dap'})<cr>", "Run Test Debugger" },
+    f = { "<cmd>lua require('neotest').run.run(vim.fn.expand('%'))<cr>", "Test File" },
+    s = { "<cmd>lua require('neotest').run.stop()<cr>", "Stop Nearest Test" },
+    a = { "<cmd>lua require('neotest').run.attach()<cr>", "Attach Nearest Test" },
+    l = { "<cmd>lua require('neotest').run.run_last()<cr>", "Run Last Test" },
     j = { "<cmd>lua require('neotest').output.open({ enter = true })<cr>", "Open Output" },
-    o = { "<cmd>lua require('neotest').summary.open()<cr>", "Open Summary" },
-    e = { "<cmd>lua require('neotest').summary.toggle()<cr>", "Toggle Summary" },
+    -- o = { "<cmd>lua require('neotest').summary.open()<cr>", "Open Summary" },
+    o = { "<cmd>lua require('neotest').summary.toggle()<cr>", "Toggle Summary" },
   },
   S = {
     name = "Search",
