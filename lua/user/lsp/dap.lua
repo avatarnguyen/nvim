@@ -40,29 +40,31 @@ mason_dap.setup_handlers {
   -- end,
 }
 
--- M.register_dart = function(_)
-  dap.adapters.dart = {
-    type = "executable",
-    command = "node",
-    args = { os.getenv('HOME') .. "/.config/dap/Dart-Code/out/dist/debug.js", "flutter" }
+dap.adapters.dart = {
+  type = "executable",
+  command = "node",
+  args = { os.getenv('HOME') .. "/.config/dap/Dart-Code/out/dist/debug.js", "flutter" }
+}
+dap.configurations.dart = {
+  {
+    type = "dart",
+    request = "launch",
+    name = "Launch flutter",
+    dartSdkPath = os.getenv('HOME') .. "/flutter/bin/cache/dart-sdk/",
+    flutterSdkPath = os.getenv('HOME') .. "/flutter",
+    program = "${workspaceFolder}/lib/main.dart",
+    cwd = "${workspaceFolder}",
   }
-  dap.configurations.dart = {
-    {
-      type = "dart",
-      request = "launch",
-      name = "Launch flutter",
-      dartSdkPath = os.getenv('HOME') .. "/flutter/bin/cache/dart-sdk/",
-      flutterSdkPath = os.getenv('HOME') .. "/flutter",
-      program = "${workspaceFolder}/lib/main.dart",
-      cwd = "${workspaceFolder}",
-    }
-  }
+}
 -- end
 
 local dap_ui_status_ok, dapui = pcall(require, "dapui")
 if not dap_ui_status_ok then
   return
 end
+
+local dap_icon = require('user.icons').dap
+
 
 dapui.setup({
   icons = { expanded = "▾", collapsed = "▸" },
@@ -80,18 +82,18 @@ dapui.setup({
     {
       elements = {
         -- Elements can be strings or table with id and size keys.
-        { id = "scopes", size = 0.35 },
-        "breakpoints",
-        "stacks",
-        { id = "watches", size = 0.1 },
+        { id = "scopes", size = 0.45 },
+        { id = "breakpoints", size = 0.15 },
+        { id = "stacks", size = 0.35 },
+        { id = "watches", size = 0.05 },
       },
-      size = 50, -- columns
+      size = 60, -- columns
       position = "left",
     },
     {
       elements = {
-        { id = "repl", size = 0.80 },
-        { id = "console", size = 0.10 },
+        { id = "repl", size = 0.95 },
+        -- { id = "console", size = 0.05 },
         -- "repl",
         -- "console",
       },
@@ -100,19 +102,17 @@ dapui.setup({
     },
   },
   controls = {
-    -- Requires Neovim nightly (or 0.8 when released)
     enabled = true,
-    -- Display controls in this element
     element = "repl",
     icons = {
-      pause = "Pause",
-      play = "Play",
-      step_into = "",
-      step_over = "Over",
-      step_out = "Out",
-      step_back = "<-",
-      run_last = "Last",
-      terminate = "",
+      pause = dap_icon.Pause,
+      play = dap_icon.Play,
+      step_into = dap_icon.Into,
+      step_over = dap_icon.Over,
+      step_out = dap_icon.Out,
+      step_back = dap_icon.Backward,
+      run_last = dap_icon.Last,
+      terminate = dap_icon.Stop,
     },
   },
   floating = {
@@ -129,10 +129,10 @@ dapui.setup({
     max_value_lines = 100, -- Can be integer or nil.
   }
 })
-
+--texthl = "debugBreakpoint"
 vim.fn.sign_define(
   "DapBreakpoint",
-  { text = " ", texthl = "debugBreakpoint", linehl = "", numhl = "" }
+  { text = " ", texthl = "DiagnosticError", linehl = "", numhl = "" }
 )
 vim.fn.sign_define(
   "DapBreakpointCondition",
@@ -151,9 +151,9 @@ vim.fn.sign_define(
   { text = "", texthl = "debugBreakpoint", linehl = "debugPC", numhl = "" }
 )
 
-dap.listeners.after.event_initialized["dapui_config"] = function()
-  dapui.open()
-end
+-- dap.listeners.after.event_initialized["dapui_config"] = function()
+--   dapui.open()
+-- end
 dap.listeners.before.event_terminated["dapui_config"] = function()
   dapui.close()
 end
@@ -175,7 +175,7 @@ require("nvim-dap-virtual-text").setup {
   -- experimental features:
   virt_text_pos = 'eol', -- position of virtual text, see `:h nvim_buf_set_extmark()`
   all_frames = false, -- show virtual text for all stack frames not only current. Only works for debugpy on my machine.
-  virt_lines = false, -- show virtual lines instead of virtual text (will flicker!)
+  virt_lines = true, -- show virtual lines instead of virtual text (will flicker!)
   virt_text_win_col = nil -- position the virtual text at a fixed window column (starting from the first text column) ,
   -- e.g. 80 to position at column 80, see `:h nvim_buf_set_extmark()`
 }

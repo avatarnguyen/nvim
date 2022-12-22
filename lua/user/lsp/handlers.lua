@@ -70,7 +70,7 @@ local function lsp_keymaps(bufnr)
 
   keymap(bufnr, "n", "gm", "<cmd>lua vim.lsp.buf.implementation()<CR>", opts)
   -- keymap(bufnr, "n", "gr", "<cmd>lua vim.lsp.buf.references()<CR>", opts)
-  keymap(bufnr, "n", "gu", "<cmd>lua require('telescope.builtin').lsp_references()<cr>", opts)
+  keymap(bufnr, "n", "gu", "<cmd>lua require('telescope.builtin').lsp_references(require('telescope.themes').get_dropdown{layout_config = {width = 0.8}})<cr>", opts)
   keymap(bufnr, "n", "gF", "<cmd>Lspsaga lsp_finder<cr>", opts)
   keymap(bufnr, "n", "gL", "<cmd>lua vim.diagnostic.open_float()<CR>", opts)
   keymap(
@@ -98,10 +98,19 @@ end
 
 M.on_attach = function(client, bufnr)
 
-  -- if client.name == "tsserver" then
-  --   client.server_capabilities.document_formatting = false
-  --   client.server_capabilities.documentFormattingProvider = false
-  -- end
+  if client.name == "gopls" then
+    require "user.lsp.go"
+    require "user.lsp.lsp-signature"
+
+    local format_sync_grp = vim.api.nvim_create_augroup("GoImport", {})
+    vim.api.nvim_create_autocmd("BufWritePre", {
+      pattern = "*.go",
+      callback = function()
+        require('go.format').goimport()
+      end,
+      group = format_sync_grp,
+    })
+  end
   --
   if client.name == "jsonls" or client.name == "json" then
     -- client.server_capabilities.document_highlight = false
@@ -116,11 +125,24 @@ M.on_attach = function(client, bufnr)
   end
 
   if client.name == "dartls" then
+
+    vim.api.nvim_create_autocmd({ "BufWinEnter", "FileType" }, {
+      pattern = { "log", "*.log" },
+      callback = function()
+        vim.opt.lazyredraw = true
+        vim.opt_local.cursorline = false
+        vim.opt.relativenumber = false
+        vim.opt_local.wrap = true
+        vim.opt_local.spell = false
+      end,
+    })
+
     client.server_capabilities.document_formatting = false
   end
 
   if client.name == "sumneko_lua" then
     client.server_capabilities.document_formatting = true
+    require "user.lsp.null-ls"
   end
 
   lsp_keymaps(bufnr)
@@ -130,7 +152,7 @@ M.on_attach = function(client, bufnr)
     require "user.illuminate".on_attach(client)
   end
 
-  require 'user.fidget'
+  -- require 'user.fidget'
 
 end
 

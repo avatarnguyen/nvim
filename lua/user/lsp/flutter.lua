@@ -11,7 +11,7 @@ flutter.setup({
   -- flutter_path = "$HOME/flutter/bin/flutter/", -- <-- this takes priority over the lookup
   fvm = false, -- takes priority over path, uses <workspace>/.fvm/flutter_sdk if enabled
   dev_log = {
-    enabled = false,
+    enabled = true,
     open_cmd = "tabedit",
   },
   dev_tools = {
@@ -39,23 +39,6 @@ flutter.setup({
     run_via_dap = true, -- use dap instead of a plenary job to run flutter apps
     register_configurations = function(_)
       require('user.lsp.dap')
-      -- dap.adapters.dart = {
-      --   type = "executable",
-      --   command = "node",
-      --   args = { os.getenv('HOME') .. "/.config/dap/Dart-Code/out/dist/debug.js", "flutter" }
-      -- }
-      -- dap.configurations.dart = {
-      --   {
-      --     type = "dart",
-      --     request = "launch",
-      --     name = "Launch flutter",
-      --     dartSdkPath = os.getenv('HOME') .. "/flutter/bin/cache/dart-sdk/",
-      --     flutterSdkPath = os.getenv('HOME') .. "/flutter",
-      --     program = "${workspaceFolder}/lib/main.dart",
-      --     cwd = "${workspaceFolder}",
-      --   }
-      -- }
-      --[[ require("dap.ext.vscode").load_launchjs() ]]
     end,
   },
   lsp = {
@@ -75,6 +58,8 @@ flutter.setup({
       else
         vim.cmd "highlight FlutterWidgetGuides ctermfg=9 guifg=cyan"
       end
+
+      require('user.neotest')
 
       --[[ vim.cmd "highlight FlutterWidgetGuides ctermfg=9 guifg=#72A7BC" ]]
     end,
