@@ -34,9 +34,16 @@ keymap("n", "[q", "<cmd>cprev<cr>zz", opts)
 keymap("n", "<C-d>", "<C-d>zz", opts)
 keymap("n", "<C-u>", "<C-u>zz", opts)
 
-keymap("n", "<C-Enter>", "<cmd>w!<CR><cmd>!tmux send-keys -t flutter 'r'<CR><CR>", opts)
-keymap("n", "<C-s>", "<cmd>wa<CR><cmd>!tmux send-keys -t flutter 'r'<CR><CR>", opts)
-keymap("i", "<C-s>", "<cmd>wa<CR><cmd>!tmux send-keys -t flutter 'r'<CR><CR>", opts)
+-- withnoice
+keymap("n", "<C-Enter>", "<cmd>w!<CR><cmd>!tmux send-keys -t flutter 'r'<CR>", opts)
+keymap("n", "<C-s>", "<cmd>wa<CR><cmd>!tmux send-keys -t flutter 'r'<CR>", opts)
+keymap("i", "<C-s>", "<cmd>wa<CR><cmd>!tmux send-keys -t flutter 'r'<CR>", opts)
+
+-- without noice
+-- keymap("n", "<C-Enter>", "<cmd>w!<CR><cmd>!tmux send-keys -t flutter 'r'<CR><CR>", opts)
+-- keymap("n", "<C-s>", "<cmd>wa<CR><cmd>!tmux send-keys -t flutter 'r'<CR><CR>", opts)
+-- keymap("i", "<C-s>", "<cmd>wa<CR><cmd>!tmux send-keys -t flutter 'r'<CR><CR>", opts)
+
 keymap("n", "<Enter>", "<cmd>w!<CR>", opts)
 --[[ keymap("n", "<C-s>", "<cmd>wa<CR>", opts) ]]
 
