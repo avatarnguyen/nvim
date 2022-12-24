@@ -20,30 +20,13 @@ mason_dap.setup_handlers {
     -- Keep original functionality of `automatic_setup = true`
     require('mason-nvim-dap.automatic_setup')(source_name)
   end,
-  -- python = function(source_name)
-  --     dap.adapters.python = {
-  --      type = "executable",
-  --      command = "/usr/bin/python3",
-  --      args = {
-  --       "-m",
-  --       "debugpy.adapter",
-  --      },
-  --     }
-  --     dap.configurations.python = {
-  --      {
-  --       type = "python",
-  --       request = "launch",
-  --       name = "Launch file",
-  --       program = "${file}", -- This configuration will launch the current file if used.
-  --      },
-  --     }
-  -- end,
 }
 
 dap.adapters.dart = {
   type = "executable",
   command = "node",
-  args = { os.getenv('HOME') .. "/.config/dap/Dart-Code/out/dist/debug.js", "flutter" }
+  -- args = { os.getenv('HOME') .. "/.config/dap/Dart-Code/out/dist/debug.js", "flutter" }
+  args = { os.getenv('HOME') .. "/.local/share/nvim/mason/packages/dart-debug-adapter/extension/out/dist/debug.js", "flutter" }
 }
 dap.configurations.dart = {
   {
@@ -87,7 +70,7 @@ dapui.setup({
         { id = "stacks", size = 0.35 },
         { id = "watches", size = 0.05 },
       },
-      size = 60, -- columns
+      size = 50, -- columns
       position = "left",
     },
     {
