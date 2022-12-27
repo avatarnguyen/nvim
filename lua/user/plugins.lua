@@ -325,12 +325,6 @@ return packer.startup(function(use)
       require 'hop'.setup { keys = 'etovxqpdygfblzhckisuran' }
     end
   }
-  use {
-    'mfussenegger/nvim-treehopper',
-    config = function()
-      require("tsht").config.hint_keys = { "h", "j", "f", "d", "n", "v", "s", "l", "a" }
-    end
-  }
   use("folke/which-key.nvim")
   use("p00f/nvim-ts-rainbow")
   use({
