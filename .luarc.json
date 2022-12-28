@@ -5,6 +5,7 @@
         "event",
         "require",
         "os",
-        "pcall"
+        "pcall",
+        "print"
     ]
 }
