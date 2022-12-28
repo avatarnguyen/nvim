@@ -1,6 +1,6 @@
 local status_ok, noice = pcall(require, "noice")
 if not status_ok then
-  vim.api.nvim_err_writeln "Failed to load luasnip"
+  vim.api.nvim_err_writeln "Failed to load noice"
   return
 end
 

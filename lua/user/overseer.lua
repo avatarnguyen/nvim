@@ -1,6 +1,6 @@
 local status_ok, overseer = pcall(require, "overseer")
 if not status_ok then
-  vim.api.nvim_err_writeln "Failed to load notify"
+  vim.api.nvim_err_writeln "Failed to load overseer"
   return
 end
 
