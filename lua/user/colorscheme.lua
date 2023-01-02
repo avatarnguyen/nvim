@@ -1,10 +1,10 @@
 -- vim:fileencoding=utf-8:foldmethod=marker
 
 local M = {}
-local colorscheme = "kanagawa"
+-- local colorscheme = "kanagawa"
 -- local colorscheme = "tokyonight"
 -- local colorscheme = "cobalt2"
--- local colorscheme = "nightfly"
+local colorscheme = "nightfly"
 -- local colorscheme = "catppuccin"
 
 -- catppuccin {{{
