@@ -85,13 +85,14 @@ local knowunity_file_ignore = { 'pub.dartlang.org/', '.pub-cache/', 'ios/', 'win
   'fonts/', 'packages/', 'doc/', 'l10n/' }
 
 local mappings = {
-  ["a"] = { "<cmd>Neotree float<cr>", "File Browser" },
+  ["a"] = { "<cmd>Neotree float reveal<cr>", "File Browser" },
 
   ["e"] = { "<cmd>NvimTreeToggle<cr>", "Explorer" },
   ["E"] = { "<cmd>NvimTreeFocus<cr>", "Explorer" },
 
-  -- ["E"] = { "<cmd>Neotree reveal left<cr>", "Explorer" },
-  -- ["e"] = { "<cmd>Neotree toggle reveal left<cr>", "Explorer" },
+  -- ["E"] = { "<cmd>Neotree close<cr>", "Close Explorer" },
+  -- ["e"] = { "<cmd>Neotree<cr>", "Explorer" },
+
   ["A"] = { "<cmd>wa<CR>", "Save All" },
   ["Q"] = { "<cmd>q<CR>", "Quit" },
   --[[ ["c"] = { "<cmd>Bdelete!<CR>", "Close Buffer" }, ]]
@@ -123,8 +124,8 @@ local mappings = {
       "<cmd>lua require('telescope.builtin').find_files(require('telescope.themes').get_dropdown{search_dirs = { '~/Developer/app-flutter/assets/' }})<cr>",
       "Find Assets",
     },
-    f = { "<cmd>Telescope file_browser<cr>",
-      "File Browser" },
+    f = { "<cmd>lua require('telescope').extensions.frecency.frecency({ debounce = 200, workspace = 'CWD' })<CR>",
+      "Search Recent files" },
     d = { "<cmd>lua require('telescope.builtin').lsp_document_symbols(require('telescope.themes').get_dropdown{})<cr>",
       "Document Symbols" },
     h = {
@@ -238,7 +239,7 @@ local mappings = {
     a = { "<cmd>lua require('neotest').run.attach()<cr>", "Attach Nearest Test" },
     l = { "<cmd>lua require('neotest').run.run_last()<cr>", "Run Last Test" },
     j = { "<cmd>lua require('neotest').output.open({ enter = true })<cr>", "Open Output" },
-    -- o = { "<cmd>lua require('neotest').summary.open()<cr>", "Open Summary" },
+    m = { "<cmd>lua require('neotest').summary.open()<cr>", "Open Summary" },
     o = { "<cmd>lua require('neotest').summary.toggle()<cr>", "Toggle Summary" },
   },
   S = {
@@ -274,14 +275,22 @@ local mappings = {
 
   d = {
     name = "Flutter",
-    j = { "<cmd>!tmux send-keys -t flutter 'frd' Enter<CR><CR>", "run flutter on samsung" },
-    s = { "<cmd>!tmux send-keys -t flutter 'R'<CR><CR>", "Restart Flutter" },
-    d = { "<cmd>!tmux send-keys -t flutter 'r'<CR><CR>", "Reload Flutter " },
-    q = { "<cmd>!tmux send-keys -t flutter 'q'<CR><CR>", "Quit Flutter" },
-    v = { "<cmd>!tmux send-keys -t flutter 'v'<CR><CR>", "Start Dev Tool" },
+    j = { "<cmd>!tmux send-keys -t flutter 'frd' Enter<CR>", "run flutter on samsung" },
+    k = { "<cmd>!tmux send-keys -t flutter 'fr' Enter<CR>", "run flutter default" },
+    s = { "<cmd>!tmux send-keys -t flutter 'R'<CR>", "Restart Flutter" },
+    d = { "<cmd>!tmux send-keys -t flutter 'r'<CR>", "Reload Flutter " },
+    q = { "<cmd>!tmux send-keys -t flutter 'q'<CR>", "Quit Flutter" },
+    v = { "<cmd>!tmux send-keys -t flutter 'v'<CR>", "Start Dev Tool" },
+    -- j = { "<cmd>!tmux send-keys -t flutter 'frd' Enter<CR><CR>", "run flutter on samsung" },
+    -- k = { "<cmd>!tmux send-keys -t flutter 'fr' Enter<CR><CR>", "run flutter default" },
+    -- s = { "<cmd>!tmux send-keys -t flutter 'R'<CR><CR>", "Restart Flutter" },
+    -- d = { "<cmd>!tmux send-keys -t flutter 'r'<CR><CR>", "Reload Flutter " },
+    -- q = { "<cmd>!tmux send-keys -t flutter 'q'<CR><CR>", "Quit Flutter" },
+    -- v = { "<cmd>!tmux send-keys -t flutter 'v'<CR><CR>", "Start Dev Tool" },
+
     --[[ d = { "<cmd>lua require('flutter-tools.commands').run_command()<cr>", "Run" }, ]]
     --[[ D = { "<cmd>lua require('flutter-tools.commands').run_command('--profile')<cr>", "Run Profile Mode" }, ]]
-    --[[ r = { "<cmd>lua require('flutter-tools.commands').run_command('--flavor dev --debug')<cr>", "Run Dev Flavor" }, ]]
+    r = { "<cmd>lua require('dart-lsp-refactorings').rename()<cr>", "Rename Dart Class" },
     l = { "<cmd>lua require('flutter-tools.devices').list_devices()<cr>", "Show Devices" },
     --[[ v = { "<cmd>lua require('flutter-tools.commands').visual_debug()<cr>", "Start Visual Debugger" }, ]]
     e = { "<cmd>lua require('flutter-tools.devices').list_emulators()<cr>", "Show Emulators" },
