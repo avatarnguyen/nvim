@@ -80,7 +80,6 @@ keymap("v", ">", function() vim.fn.VSCodeNotifyVisual("editor.action.indentLines
 vim.keymap.set("n", "<leader>a", function() vim.fn.VSCodeNotify("workbench.action.showCommands") end)
 vim.keymap.set("n", "<leader>e", function() vim.fn.VSCodeNotify("workbench.action.problems.focus") end)
 vim.keymap.set("n", "<leader>g", function() vim.fn.VSCodeNotify("workbench.view.scm") end)
-keymap("n", "<C-n>", "<cmd>nohl<cr>", { noremap = true })
 
 -- Folding
 vim.keymap.set("n", "za", function() vim.fn.VSCodeNotify("editor.toggleFold") end)
@@ -199,7 +198,7 @@ vim.cmd [[
   nnoremap <C-w><C-c> <Cmd>call VSCodeNotify('workbench.action.closeActiveEditor')<CR>
   xnoremap <C-w><C-c> <Cmd>call VSCodeNotify('workbench.action.closeActiveEditor')<CR>
 
-  " window/splits management 
+  " window/splits management
   nnoremap <C-w>s <Cmd>call <SID>split('h')<CR>
   xnoremap <C-w>s <Cmd>call <SID>split('h')<CR>
   nnoremap <C-w><C-s> <Cmd>call <SID>split('h')<CR>
