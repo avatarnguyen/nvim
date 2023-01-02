@@ -3,6 +3,8 @@ if not status_ok then
   return
 end
 
+local M = {}
+
 --[[ local icons = require "user.icons" ]]
 
 local cfg = {
@@ -23,9 +25,9 @@ local cfg = {
   noice = false, -- set to true if you using noice to render markdown
   wrap = true, -- allow doc/signature text wrap inside floating_window, useful if your lsp return doc/sig is too long
 
-  floating_window = true, -- show hint in a floating window, set to false for virtual text only mode
+  floating_window = false, -- show hint in a floating window, set to false for virtual text only mode
 
-  floating_window_above_cur_line = true, -- try to place the floating above the current line when possible Note:
+  floating_window_above_cur_line = false, -- try to place the floating above the current line when possible Note:
   -- will set to true when fully tested, set to false will use whichever side has more space
   -- this setting will be helpful if you do not want the PUM and floating win overlap
 
@@ -61,9 +63,13 @@ local cfg = {
 }
 
 -- recommanded:
-signature.setup(cfg) -- no need to specify bufnr if you don't use toggle_key
+-- signature.setup(cfg) -- no need to specify bufnr if you don't use toggle_key
 
 -- You can also do this inside lsp on_attach
 -- note: on_attach deprecated
--- require("lsp_signature").on_attach(cfg, bufnr) -- no need to specify bufnr if you don't use toggle_key
+M.on_attach = function ()
+  signature.on_attach(cfg)
+end
 --[[ signature.on_attach(cfg) -- no need to specify bufnr if you don't use toggle_key ]]
+
+return M

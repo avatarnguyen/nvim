@@ -1,3 +1,5 @@
+-- local capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities())
+
 require('go').setup({
 
   disable_defaults = false, -- true|false when true set false to all boolean settings and replace all table
@@ -15,6 +17,9 @@ require('go').setup({
   icons = { breakpoint = '🧘', currentpos = '🏃' }, -- setup to `false` to disable icons setup
   verbose = false, -- output loginf in messages
   lsp_cfg = false, -- true: use non-default gopls setup specified in go/lsp.lua
+  -- lsp_cfg = {
+  --   capabilities = capabilities,
+  -- },
   -- false: do nothing
   -- if lsp_cfg is a table, merge table with with non-default gopls setup in go/lsp.lua, e.g.
   --   lsp_cfg = {settings={gopls={matcher='CaseInsensitive', ['local'] = 'your_local_module_path', gofumpt = true }}}
