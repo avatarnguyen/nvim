@@ -46,6 +46,25 @@ vim.keymap.set('', 'T', function()
   hop.hint_char1({ direction = directions.BEFORE_CURSOR, current_line_only = true, hint_offset = 1 })
 end, { remap = true, silent = true })
 
+-- Dial
+keymap("n", "<C-a>", require("dial.map").inc_normal())
+keymap("n", "<C-x>", require("dial.map").dec_normal())
+keymap("v", "<C-a>", require("dial.map").inc_visual())
+keymap("v", "<C-x>", require("dial.map").dec_visual())
+keymap("v", "g<C-a>", require("dial.map").inc_gvisual())
+keymap("v", "g<C-x>", require("dial.map").dec_gvisual())
+
+-- SUBSTITUTE plugin  {{{
+keymap("n", "s", "<cmd>lua require('substitute').operator()<cr>", { noremap = true })
+--keymap("x", "s", "<cmd>lua require('substitute').visual()<cr>", { noremap = true })
+keymap("n", "ss", "<cmd>lua require('substitute').line()<cr>", { noremap = true })
+--keymap("n", "<S-s>", "<cmd>lua require('substitute').eol()<cr>", { noremap = true })
+--keymap("v", "<S-s>", "<cmd>lua require('substitute').visual()<cr>", { noremap = true })
+--keymap("n", "<leader>r", "<cmd>lua require('substitute.range').operator()<cr>", { noremap = true })
+--keymap("x", "<leader>r", "<cmd>lua require('substitute.range').visual()<cr>", {})
+--keymap("n", "<leader>rr", "<cmd>lua require('substitute.range').word()<cr>", {})
+--}}}
+
 -- Comment
 keymap("v", "gc",
   function()
@@ -57,6 +76,11 @@ keymap("n", "gcc", function() vim.fn.VSCodeNotify("editor.action.commentLine", t
 -- keymap("v", "gs", function() vim.fn.VSCodeNotifyVisual("codesnap.start", true) end)
 keymap("v", "<", function() vim.fn.VSCodeNotifyVisual("editor.action.outdentLines", false) end)
 keymap("v", ">", function() vim.fn.VSCodeNotifyVisual("editor.action.indentLines", false) end)
+
+vim.keymap.set("n", "<leader>a", function() vim.fn.VSCodeNotify("workbench.action.showCommands") end)
+vim.keymap.set("n", "<leader>e", function() vim.fn.VSCodeNotify("workbench.action.problems.focus") end)
+vim.keymap.set("n", "<leader>g", function() vim.fn.VSCodeNotify("workbench.view.scm") end)
+keymap("n", "<C-n>", "<cmd>nohl<cr>", { noremap = true })
 
 -- Folding
 vim.keymap.set("n", "za", function() vim.fn.VSCodeNotify("editor.toggleFold") end)
