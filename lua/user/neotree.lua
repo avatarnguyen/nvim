@@ -134,6 +134,9 @@ neotree.setup({
       ["ESC"] = "close_window",
       ["R"] = "refresh",
       ["?"] = "show_help",
+      ["e"] = function() vim.api.nvim_exec("Neotree focus filesystem left", true) end,
+      ["b"] = function() vim.api.nvim_exec("Neotree focus buffers left", true) end,
+      ["g"] = function() vim.api.nvim_exec("Neotree focus git_status left", true) end,
     }
   },
   nesting_rules = {},
@@ -155,16 +158,28 @@ neotree.setup({
       },
     },
     follow_current_file = true, -- This will find and focus the file in the active buffer every
-                                 -- time the current file is changed while the tree is open.
+    -- time the current file is changed while the tree is open.
     group_empty_dirs = true, -- when true, empty folders will be grouped together
     hijack_netrw_behavior = "disabled", -- netrw disabled, opening a directory opens neo-tree
-                                            -- in whatever position is specified in window.position
-                          -- "open_current",  -- netrw disabled, opening a directory opens within the
-                                            -- window like netrw would, regardless of window.position
-                          -- "disabled",    -- netrw left alone, neo-tree does not handle opening dirs
-    use_libuv_file_watcher = false, -- This will use the OS level file watchers to detect changes
-                                    -- instead of relying on nvim autocmd events.
+    -- in whatever position is specified in window.position
+    -- "open_current",  -- netrw disabled, opening a directory opens within the
+    -- window like netrw would, regardless of window.position
+    -- "disabled",    -- netrw left alone, neo-tree does not handle opening dirs
+    use_libuv_file_watcher = true, -- This will use the OS level file watchers to detect changes
+    -- instead of relying on nvim autocmd events.
     window = {
+      popup = {
+        position = { col = "100%", row = "2" },
+        size = function(state)
+          local root_name = vim.fn.fnamemodify(state.path, ":~")
+          local root_len = string.len(root_name) + 4
+          return {
+            width = math.max(root_len, 50),
+            height = vim.o.lines - 6
+          }
+        end,
+        follow_current_file = true, -- This will find and focus the file in the active buffer every
+      },
       mappings = {
         ["<bs>"] = "navigate_up",
         ["."] = "set_root",
@@ -175,8 +190,21 @@ neotree.setup({
         ["<c-x>"] = "clear_filter",
         ["[g"] = "prev_git_modified",
         ["]g"] = "next_git_modified",
+        ["o"] = "system_open",
       }
     },
+    commands = {
+      system_open = function(state)
+        local node = state.tree:get_node()
+        local path = node:get_id()
+        -- macOs: open file in default application in the background.
+        -- Probably you need to adapt the Linux recipe for manage path with spaces. I don't have a mac to try.
+        vim.api.nvim_command("silent !open -g " .. path)
+        -- Linux: open file in default application
+        vim.api.nvim_command(string.format("silent !xdg-open '%s'", path))
+      end,
+    },
+
     components = {
       harpoon_index = function(config, node, state)
         local Marked = require("harpoon.mark")
@@ -228,5 +256,27 @@ neotree.setup({
         ["gg"] = "git_commit_and_push",
       }
     }
-  }
+  },
+  event_handlers = {
+    {
+      event = "before_file_rename",
+      handler = function(args)
+        local ok, refact = pcall(require, "dart-lsp-refactorings")
+        if ok then
+          refact.on_rename_file(args)
+          return { handled = true }
+        end
+      end,
+    },
+    {
+      event = "before_file_move",
+      handler = function(args)
+        local ok, refact = pcall(require, "dart-lsp-refactorings")
+        if ok then
+          refact.on_rename_file(args)
+          return { handled = true }
+        end
+      end,
+    },
+  },
 })

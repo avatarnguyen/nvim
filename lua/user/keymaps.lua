@@ -34,7 +34,7 @@ keymap("n", "[q", "<cmd>cprev<cr>zz", opts)
 keymap("n", "<C-d>", "<C-d>zz", opts)
 keymap("n", "<C-u>", "<C-u>zz", opts)
 
--- withnoice
+-- with noice
 keymap("n", "<C-Enter>", "<cmd>w!<CR><cmd>!tmux send-keys -t flutter 'r'<CR>", opts)
 keymap("n", "<C-s>", "<cmd>wa<CR><cmd>!tmux send-keys -t flutter 'r'<CR>", opts)
 keymap("i", "<C-s>", "<cmd>wa<CR><cmd>!tmux send-keys -t flutter 'r'<CR>", opts)
@@ -205,11 +205,12 @@ keymap("i", "jk", "<ESC>", opts)
 
 -- Buffer
 keymap("n", "<leader>c", "<cmd>Bdelete!<CR>", opts)
+keymap("n", "<leader>w", "<cmd>Bdelete!<CR>", opts)
 -- keymap("n", "<C-ESC>", "<cmd>Bdelete!<CR>", opts)
 keymap("n", "<C-b>",
   "<cmd>lua require('telescope.builtin').buffers(require('telescope.themes').get_dropdown{sort_mru = true})<cr>", opts)
 keymap("n", "<leader>b",
-  "<cmd>Neotree buffers float<cr>", opts)
+  "<cmd>Neotree buffers float reveal<cr>", opts)
 -- keymap("n", "<leader>B",
 --   "<cmd>Neotree buffers focus<cr>", opts)
 
