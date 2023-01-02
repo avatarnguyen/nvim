@@ -165,7 +165,6 @@ telescope.setup {
       ignore_patterns = { "*.git/*", "*/tmp/*", '*.pub-cache/*', '*packages/*', 'pub.dartlang.org/*', '*/ios/*',
         '*/windows/*', '*/web/*', '*/android/*', '*/assets/*', '*/fonts/*', '*/doc/*', '*/l10n/*' },
       disable_devicons = false,
-      search_dirs = 'CWD',
       workspaces = {
         --[[ 'CWD', ]]
         --[[ ["project"] = "/home/my_username/projects", ]]
@@ -191,8 +190,8 @@ telescope.setup {
 -- end
 
 -- telescope.load_extension("noice")
-telescope.load_extension("recent_files")
-telescope.load_extension('fzf')
+-- telescope.load_extension("recent_files")
+-- telescope.load_extension('fzf')
 
 local action_state = require "telescope.actions.state"
 
