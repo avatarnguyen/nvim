@@ -1,61 +1,90 @@
 -- Use 'q' to quit from common plugins
-vim.api.nvim_create_autocmd({ "FileType" }, {
-  pattern = { "qf", "help", "man", "lspinfo", "spectre_panel", "lir" },
-  callback = function()
-    vim.cmd [[
-      nnoremap <silent> <buffer> q :close<CR> 
-      set nobuflisted 
-    ]]
-  end,
-})
+if vim.g.vscode then
+  vim.cmd [[
+    augroup highlight_yank
+      autocmd!
+      autocmd TextYankPost * silent! lua vim.highlight.on_yank { higroup="IncSearch", timeout=200 }
+    augroup END
+  ]]
 
--- Remove statusline and tabline when in Alpha
-vim.api.nvim_create_autocmd({ "User" }, {
-  pattern = { "AlphaReady" },
-  callback = function()
-    vim.cmd [[
+else
+  vim.api.nvim_create_autocmd({ "FileType" }, {
+    pattern = { "qf", "help", "man", "lspinfo", "spectre_panel", "lir" },
+    callback = function()
+      vim.cmd [[
+      nnoremap <silent> <buffer> q :close<CR> 
+    ]]
+    end,
+  })
+
+  -- Remove statusline and tabline when in Alpha
+  vim.api.nvim_create_autocmd({ "User" }, {
+    pattern = { "AlphaReady" },
+    callback = function()
+      vim.cmd [[
       set showtabline=0 | autocmd BufUnload <buffer> set showtabline=2
       set laststatus=0 | autocmd BufUnload <buffer> set laststatus=3
     ]]
-  end,
-})
+    end,
+  })
 
--- Set wrap and spell in markdown and gitcommit
-vim.api.nvim_create_autocmd({ "FileType" }, {
-  pattern = { "gitcommit", "markdown" },
-  callback = function()
-    vim.opt_local.wrap = true
-    vim.opt_local.spell = true
-  end,
-})
+  -- Set wrap and spell in markdown and gitcommit
+  vim.api.nvim_create_autocmd({ "FileType" }, {
+    pattern = { "gitcommit", "markdown" },
+    callback = function()
+      vim.opt_local.wrap = true
+      vim.opt_local.spell = true
+    end,
+  })
 
-vim.cmd "autocmd BufEnter * ++nested if winnr('$') == 1 && bufname() == 'NvimTree_' . tabpagenr() | quit | endif"
-vim.cmd "autocmd BufEnter * ++nested if bufname() == 'neo-tree' . tabpagenr() | quit | endif"
+  vim.cmd "autocmd BufEnter * ++nested if winnr('$') == 1 && bufname() == 'NvimTree_' . tabpagenr() | quit | endif"
+  vim.cmd "autocmd BufEnter * ++nested if bufname() == 'neo-tree' . tabpagenr() | quit | endif"
 
--- Fixes Autocomment
-vim.api.nvim_create_autocmd({ "BufWinEnter" }, {
-  callback = function()
-    vim.cmd "set formatoptions-=cro"
-  end,
-})
+  -- Fixes Autocomment
+  vim.api.nvim_create_autocmd({ "BufWinEnter" }, {
+    callback = function()
+      vim.cmd "set formatoptions-=cro"
+    end,
+  })
 
--- Highlight Yanked Text
-vim.api.nvim_create_autocmd({ "TextYankPost" }, {
-  callback = function()
-    vim.highlight.on_yank { higroup = "Visual", timeout = 200 }
-  end,
-})
+  -- Highlight Yanked Text
+  vim.api.nvim_create_autocmd({ "TextYankPost" }, {
+    callback = function()
+      vim.highlight.on_yank { higroup = "Visual", timeout = 200 }
+    end,
+  })
 
--- FileType Autocommand
-vim.api.nvim_create_autocmd({ "BufWinEnter", "FileType" }, {
-  pattern = { "arb", "*.arb" },
-  callback = function()
-    vim.cmd [[
+  -- FileType Autocommand
+  vim.api.nvim_create_autocmd({ "BufWinEnter", "FileType" }, {
+    pattern = { "arb", "*.arb" },
+    callback = function()
+      vim.cmd [[
       set filetype=json
     ]]
+    end,
+  })
+
+end
+
+local format_sync_grp = vim.api.nvim_create_augroup("GoImport", {})
+vim.api.nvim_create_autocmd("BufWritePre", {
+  pattern = "*.go",
+  callback = function()
+    require('go.format').goimport()
   end,
+  group = format_sync_grp,
 })
 
+vim.api.nvim_create_autocmd({ "BufWinEnter", "FileType" }, {
+  pattern = { "log", "*.log" },
+  callback = function()
+    vim.opt.lazyredraw = true
+    vim.opt_local.cursorline = false
+    vim.opt.relativenumber = false
+    vim.opt_local.wrap = true
+    vim.opt_local.spell = false
+  end,
+})
 
 -- vim.api.nvim_create_autocmd({ "BufWritePost" }, {
 --   pattern = "*.dart",
