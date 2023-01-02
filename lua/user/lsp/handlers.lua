@@ -32,7 +32,7 @@ M.setup = function()
     signs = {
       active = signs, -- show signs
     },
-    update_in_insert = false,
+    update_in_insert = true,
     underline = true,
     severity_sort = true,
     float = {
@@ -71,7 +71,7 @@ local function lsp_keymaps(bufnr)
   keymap(bufnr, "n", "gm", "<cmd>lua vim.lsp.buf.implementation()<CR>", opts)
   -- keymap(bufnr, "n", "gr", "<cmd>lua vim.lsp.buf.references()<CR>", opts)
   keymap(bufnr, "n", "gu",
-    "<cmd>lua require('telescope.builtin').lsp_references(require('telescope.themes').get_dropdown{layout_config = {width = 0.8}})<cr>"
+    "<cmd>lua require('telescope.builtin').lsp_references(require('telescope.themes').get_dropdown{layout_config = {width = 0.7}})<cr>"
     , opts)
   keymap(bufnr, "n", "gF", "<cmd>Lspsaga lsp_finder<cr>", opts)
   keymap(bufnr, "n", "gL", "<cmd>lua vim.diagnostic.open_float()<CR>", opts)
@@ -117,6 +117,7 @@ M.on_attach = function(client, bufnr)
 
   if client.name == "dartls" then
     client.server_capabilities.document_formatting = false
+    -- require "user.lsp.lsp-signature".on_attach()
   end
 
   if client.name == "sumneko_lua" then
@@ -126,13 +127,9 @@ M.on_attach = function(client, bufnr)
 
   lsp_keymaps(bufnr)
 
-  require "user.illuminate"
   if require("user.colorscheme").colorscheme ~= "nightfly" then
     require "user.illuminate".on_attach(client)
   end
-
-  -- require 'user.fidget'
-
 end
 
 local function lsp_execute_command(val)
