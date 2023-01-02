@@ -142,6 +142,9 @@ telescope.setup {
     },
     lsp_references = {
       search_dirs = 'CWD',
+      -- layout_config = {
+      --   width = 0.7,
+      -- }
     },
     old_files = {
       search_dirs = 'CWD',
@@ -190,7 +193,7 @@ telescope.setup {
 --
 -- end
 
--- telescope.load_extension("noice")
+telescope.load_extension("noice")
 telescope.load_extension("recent_files")
 telescope.load_extension('fzf')
 
