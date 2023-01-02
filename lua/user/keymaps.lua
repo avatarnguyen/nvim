@@ -204,12 +204,13 @@ keymap("x", "K", ":move '<-2<CR>gv-gv", opts)
 keymap("i", "jk", "<ESC>", opts)
 
 -- Buffer
-keymap("n", "<leader>c", "<cmd>Bdelete!<CR>", opts)
+-- keymap("n", "<leader>c", "<cmd>Bdelete!<CR>", opts)
 keymap("n", "<leader>w", "<cmd>Bdelete!<CR>", opts)
--- keymap("n", "<C-ESC>", "<cmd>Bdelete!<CR>", opts)
 keymap("n", "<C-b>",
-  "<cmd>lua require('telescope.builtin').buffers(require('telescope.themes').get_dropdown{sort_mru = true})<cr>", opts)
-keymap("n", "<leader>b",
+  "<cmd>lua require('telescope.builtin').buffers(require('telescope.themes').get_dropdown{sort_mru = true, layout_config = {width = 0.6}})<cr>", opts)
+keymap("n", ";;",
+  "<cmd>lua require('telescope.builtin').buffers(require('telescope.themes').get_dropdown{sort_mru = true, layout_config = {width = 0.6}})<cr>", opts)
+keymap("n", "<leader>;",
   "<cmd>Neotree buffers float reveal<cr>", opts)
 -- keymap("n", "<leader>B",
 --   "<cmd>Neotree buffers focus<cr>", opts)
