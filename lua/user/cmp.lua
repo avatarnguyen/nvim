@@ -267,7 +267,7 @@ cmp.setup {
       compare.recently_used,
       compare.locality,
       require('cmp_tabnine.compare'),
-      -- compare.kind,
+      compare.kind,
       compare.sort_text,
       compare.length,
       compare.order,

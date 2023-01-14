@@ -25,7 +25,7 @@ todo.setup(
       before = "",
       keyword = "wide",
       after = "fg",
-      pattern = [[.*<(KEYWORDS)\s*\(\@anh\):]],
+      pattern = [[.*<(KEYWORDS)\s*:]],
       comments_only = true,
       max_line_len = 400,
       exclude = {},
@@ -48,7 +48,7 @@ todo.setup(
         --[[ "--glob=!node_modules, !packages, !l10n, !ios, !android, !windows", ]]
         "--glob=!packages",
       },
-      pattern = [[\b(KEYWORDS)\s*\(.*anh\):]],
+      pattern = [[\b(KEYWORDS):]],
     },
   }
 )

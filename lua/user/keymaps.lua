@@ -31,8 +31,8 @@ keymap("n", "<Right>", "<C-w>l", opts)
 keymap("n", "]q", "<cmd>cnext<cr>zz", opts)
 keymap("n", "[q", "<cmd>cprev<cr>zz", opts)
 
-keymap("n", "<C-d>", "<C-d>zz", opts)
-keymap("n", "<C-u>", "<C-u>zz", opts)
+-- keymap("n", "<C-d>", "<C-d>zz", opts)
+-- keymap("n", "<C-u>", "<C-u>zz", opts)
 
 -- with noice
 keymap("n", "<C-Enter>", "<cmd>w!<CR><cmd>!tmux send-keys -t flutter 'r'<CR>", opts)
@@ -97,9 +97,9 @@ keymap("x", "s", "<cmd>lua require('substitute').visual()<cr>", { noremap = true
 keymap("n", "ss", "<cmd>lua require('substitute').line()<cr>", { noremap = true })
 keymap("n", "<S-s>", "<cmd>lua require('substitute').eol()<cr>", { noremap = true })
 keymap("v", "<S-s>", "<cmd>lua require('substitute').visual()<cr>", { noremap = true })
-keymap("n", "<leader>r", "<cmd>lua require('substitute.range').operator()<cr>", { noremap = true })
-keymap("x", "<leader>r", "<cmd>lua require('substitute.range').visual()<cr>", {})
-keymap("n", "<leader>rr", "<cmd>lua require('substitute.range').word()<cr>", {})
+-- keymap("n", "<leader>r", "<cmd>lua require('substitute.range').operator()<cr>", { noremap = true })
+keymap("x", "<leader>rr", "<cmd>lua require('substitute.range').visual()<cr>", {})
+-- keymap("n", "<leader>rr", "<cmd>lua require('substitute.range').word()<cr>", {})
 --}}}
 
 -- keymap("n", "<leader>r", ":%s///g<Left><Left>", {})

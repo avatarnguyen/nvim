@@ -164,13 +164,13 @@ telescope.setup {
     -- },
     frecency = {
       show_scores = false,
-      show_unindexed = true,
+      show_unindexed = false,
       ignore_patterns = { "*.git/*", "*/tmp/*", '*.pub-cache/*', '*packages/*', 'pub.dartlang.org/*', '*/ios/*',
         '*/windows/*', '*/web/*', '*/android/*', '*/assets/*', '*/fonts/*', '*/doc/*', '*/l10n/*' },
       disable_devicons = false,
       search_dirs = 'CWD',
       workspaces = {
-        --[[ 'CWD', ]]
+        'CWD',
         --[[ ["project"] = "/home/my_username/projects", ]]
         --[[ ["wiki"]    = "/home/my_username/wiki" ]]
       }

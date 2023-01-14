@@ -51,7 +51,6 @@ return packer.startup(function(use)
   use { 'akinsho/bufferline.nvim', tag = "v2.*", requires = 'kyazdani42/nvim-web-devicons' }
   use({ "moll/vim-bbye" })
   use({ "nvim-lualine/lualine.nvim" })
-  -- use({ 'arkav/lualine-lsp-progress' })
   use { "akinsho/toggleterm.nvim" }
   use({ "ahmedkhalf/project.nvim" })
   use({ "lewis6991/impatient.nvim" })
@@ -60,10 +59,11 @@ return packer.startup(function(use)
   use "b0o/schemastore.nvim"
   use { "ray-x/lsp_signature.nvim" }
 
+  -- use({ 'arkav/lualine-lsp-progress' })
   use 'j-hui/fidget.nvim'
 
   -- Colorschemes
-  use({ "folke/tokyonight.nvim" })
+  -- use({ "folke/tokyonight.nvim" })
   use("bluz71/vim-nightfly-guicolors")
   use("rebelot/kanagawa.nvim")
   use {
@@ -74,6 +74,7 @@ return packer.startup(function(use)
     "catppuccin/nvim",
     as = "catppuccin"
   })
+  use({ "Shatur/neovim-ayu" })
 
   use({
     "kyazdani42/nvim-tree.lua",
@@ -115,13 +116,13 @@ return packer.startup(function(use)
     end
   })
   -- Lua
-  use {
-    "folke/todo-comments.nvim",
-    requires = "nvim-lua/plenary.nvim",
-    config = function()
-      require("user.todo-comment")
-    end
-  }
+  -- use {
+  --   "folke/todo-comments.nvim",
+  --   requires = "nvim-lua/plenary.nvim",
+  --   config = function()
+  --     require("user.todo-comment")
+  --   end
+  -- }
 
   -- LSP
   use({ "neovim/nvim-lspconfig" }) -- enable LSP
@@ -155,7 +156,7 @@ return packer.startup(function(use)
   use({ "akinsho/flutter-tools.nvim", requires = "nvim-lua/plenary.nvim" })
   use "sidlatau/lsp-fastaction.nvim"
   use "dart-lang/dart-vim-plugin"
-  use({ "chrisbra/Colorizer", as = "ansicolor" })
+  -- use({ "chrisbra/Colorizer", as = "ansicolor" })
   use 'MTDL9/vim-log-highlighting'
   use({
     "norcalli/nvim-colorizer.lua",
@@ -165,8 +166,10 @@ return packer.startup(function(use)
   })
 
   -- GO
-  use 'ray-x/go.nvim'
-  use 'ray-x/guihua.lua'
+  -- use 'ray-x/go.nvim'
+  -- use 'ray-x/guihua.lua'
+  use('crispgm/nvim-go')
+  use('simrat39/inlay-hints.nvim')
 
   use {
     "nvim-neotest/neotest",
@@ -214,6 +217,14 @@ return packer.startup(function(use)
     requires = { 'nvim-telescope/telescope.nvim' },
     config = function()
       require("user.telescope").telescope.load_extension("undo")
+    end,
+  }
+  use {
+    "nvim-telescope/telescope-frecency.nvim",
+    after = { "telescope.nvim" },
+    requires = { "kkharji/sqlite.lua" },
+    config = function()
+      require("user.telescope").telescope.load_extension("frecency")
     end,
   }
 
@@ -311,9 +322,6 @@ return packer.startup(function(use)
     requires = {
       -- if you lazy-load any plugin below, make sure to add proper `module="..."` entries
       "MunifTanjim/nui.nvim",
-      -- OPTIONAL:
-      --   `nvim-notify` is only needed, if you want to use the notification view.
-      --   If not available, we use `mini` as the fallback
       "rcarriga/nvim-notify",
     }
   })
