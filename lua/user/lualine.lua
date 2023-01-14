@@ -29,8 +29,8 @@ local diagnostics = {
 -- end
 
 local function workspace_diagnostic()
-  local error_count, warning_count, info_count, hint_count, todo_count, anh_todo
-  local count = { 0, 0, 0, 0, 0, 0 }
+  local error_count, warning_count, info_count, hint_count,  anh_todo
+  local count = { 0, 0, 0, 0, 0 }
   local lsp_diagnostics = vim.diagnostic.get(nil)
   for _, diagnostic in ipairs(lsp_diagnostics) do
     if vim.startswith(
@@ -52,8 +52,7 @@ local function workspace_diagnostic()
   warning_count = count[vim.diagnostic.severity.WARN]
   info_count = count[vim.diagnostic.severity.INFO]
   hint_count = count[vim.diagnostic.severity.HINT]
-  -- todo_count = count[5]
-  anh_todo = count[6]
+  anh_todo = count[5]
 
   local str = ""
   if error_count > 0 then
@@ -143,6 +142,8 @@ local fileName = {
 --[[   mode = 1, ]]
 --[[ } ]]
 
+--local winbar_symbol = require('lspsaga.symbolwinbar'):get_winbar()
+
 local winbar_symbol = function()
   local exclude = {
     ['teminal'] = true,
@@ -160,7 +161,7 @@ local winbar_symbol = function()
   else
     local ok, lspsaga = pcall(require, 'lspsaga.symbolwinbar')
     local sym
-    if ok then sym = lspsaga.get_symbol_node() end
+    if ok then sym = lspsaga:get_winbar() end
     local win_val = ''
     if sym ~= nil then win_val = win_val .. ' ' .. sym end
     return win_val
@@ -208,7 +209,7 @@ local config = {
     },
   },
   sections = {
-    lualine_a = { branch },
+    lualine_a = { branch, workspace_diagnostic },
     lualine_b = { filepath },
     lualine_c = { diff },
     lualine_x = {
@@ -231,7 +232,7 @@ local config = {
         color = { fg = "#ff9e64" },
       },
       -- 'lsp_progress',
-      workspace_diagnostic,
+      -- workspace_diagnostic,
     },
     lualine_y = { filetype, location },
     -- lualine_z = { { "progress", separator = { right = "" }, } },
@@ -266,8 +267,8 @@ local config = {
   --[[ }, ]]
   winbar = {
     lualine_a = {},
-    lualine_b = {},
-    lualine_c = { fileName, winbar_symbol },
+    lualine_b = { fileName },
+    lualine_c = { winbar_symbol },
     lualine_x = {},
     lualine_y = { diagnostics },
     lualine_z = {}
