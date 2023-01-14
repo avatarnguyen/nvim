@@ -76,14 +76,6 @@ else
 
 end
 
-local format_sync_grp = vim.api.nvim_create_augroup("GoImport", {})
-vim.api.nvim_create_autocmd("BufWritePre", {
-  pattern = "*.go",
-  callback = function()
-    require('go.format').goimport()
-  end,
-  group = format_sync_grp,
-})
 
 vim.api.nvim_create_autocmd({ "BufWinEnter", "FileType" }, {
   pattern = { "log", "*.log" },
@@ -94,6 +86,30 @@ vim.api.nvim_create_autocmd({ "BufWinEnter", "FileType" }, {
     vim.opt_local.wrap = true
     vim.opt_local.spell = false
   end,
+})
+
+-- GO 
+local format_sync_grp = vim.api.nvim_create_augroup("GoImport", {})
+local function go_org_imports(wait_ms)
+  local params = vim.lsp.util.make_range_params()
+  params.context = { only = { "source.organizeImports" } }
+  local result = vim.lsp.buf_request_sync(0, "textDocument/codeAction", params, wait_ms)
+  for cid, res in pairs(result or {}) do
+    for _, r in pairs(res.result or {}) do
+      if r.edit then
+        local enc = (vim.lsp.get_client_by_id(cid) or {}).offset_encoding or "utf-16"
+        vim.lsp.util.apply_workspace_edit(r.edit, enc)
+      end
+    end
+  end
+end
+
+vim.api.nvim_create_autocmd("BufWritePre", {
+  pattern = "*.go",
+  callback = function()
+    go_org_imports(100)
+  end,
+  group = format_sync_grp,
 })
 
 -- vim.api.nvim_create_autocmd({ "BufWritePost" }, {
