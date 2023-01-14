@@ -4,8 +4,9 @@ local M = {}
 -- local colorscheme = "kanagawa"
 -- local colorscheme = "tokyonight"
 -- local colorscheme = "cobalt2"
-local colorscheme = "nightfly"
+-- local colorscheme = "nightfly"
 -- local colorscheme = "catppuccin"
+local colorscheme = "ayu"
 
 -- catppuccin {{{
 if colorscheme == "catppuccin" then
@@ -190,6 +191,20 @@ end
 ---}}}
 
 
+if colorscheme == "ayu" then
+  -- local colors = require('ayu.colors')
+  -- colors.generate() --
+  require('ayu').setup({
+    mirage = false, -- Set to `true` to use `mirage` variant instead of `dark` for dark background.
+    overrides = {
+      -- illuminatedWord = { bg = colors.selection_inactive },
+      -- illuminatedCurWord = { bg = colors.selection_inactive },
+      -- IlluminatedWordText = { bg = colors.selection_inactive },
+      -- IlluminatedWordRead = { bg = colors.selection_inactive },
+      -- IlluminatedWordWrite = { bg = colors.selection_inactive },
+    }, -- A dictionary of group names, each associated with a dictionary of parameters (`bg`, `fg`, `sp` and `style`) and colors in hex.
+  })
+end
 
 if colorscheme ~= "cobalt2" then
   local status_ok, _ = pcall(vim.cmd, "colorscheme " .. colorscheme)
