@@ -11,11 +11,11 @@ flutter.setup({
   -- flutter_path = "$HOME/flutter/bin/flutter/", -- <-- this takes priority over the lookup
   fvm = false, -- takes priority over path, uses <workspace>/.fvm/flutter_sdk if enabled
   dev_log = {
-    enabled = true,
+    enabled = false,
     open_cmd = "tabedit",
   },
   dev_tools = {
-    autostart = false, -- autostart devtools server if not detected
+    autostart = true, -- autostart devtools server if not detected
     auto_open_browser = false, -- Automatically opens devtools in the browser
   },
   widget_guides = {

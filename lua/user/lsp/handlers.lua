@@ -79,12 +79,18 @@ local function lsp_keymaps(bufnr)
     bufnr, "n", "<leader>ls",
     '<cmd>lua vim.lsp.diagnostic.show_line_diagnostics({ border = "rounded" })<CR>', opts)
 
-  keymap(bufnr, 'n', 'E', '<Cmd>lua vim.diagnostic.open_float()<CR>', opts)
+  -- keymap(bufnr, 'n', 'E', '<Cmd>lua vim.diagnostic.open_float()<CR>', opts)
+  -- Show line diagnostics
+  keymap(bufnr, "n", "E", "<cmd>Lspsaga show_line_diagnostics<CR>", opts)
+  -- Show cursor diagnostics
+  keymap(bufnr, "n", "E", "<cmd>Lspsaga show_cursor_diagnostics<CR>", opts)
+
   -- Standard LSP
   --[[ keymap(bufnr, "n", "ge", '<cmd>lua vim.diagnostic.goto_next({ border = "rounded" })<CR>', opts) ]]
   --[[ keymap(bufnr, "n", "g[", '<cmd>lua vim.diagnostic.goto_prev({ border = "rounded" })<CR>', opts) ]]
 
   keymap(bufnr, 'n', 'gs', '<cmd>lua vim.lsp.buf.signature_help()<CR>', opts)
+  keymap(bufnr, 'i', '<C-;>', '<cmd>lua vim.lsp.buf.signature_help()<CR>', opts)
   keymap(bufnr, 'n', 'gy', '<cmd>lua vim.lsp.buf.type_definition()<CR>', opts)
 
   keymap(bufnr, "n", "<leader>q", '<cmd>vim.diagnostic.setloclist()<CR>', opts)
@@ -101,6 +107,7 @@ end
 M.on_attach = function(client, bufnr)
   if client.name == "gopls" then
     require "user.lsp.lsp-signature".on_attach()
+    require("user.lsp.inlay").on_attach(client, bufnr)
   end
 
   if client.name == "jsonls" or client.name == "json" then
@@ -123,11 +130,13 @@ M.on_attach = function(client, bufnr)
   if client.name == "sumneko_lua" then
     client.server_capabilities.document_formatting = true
     require "user.lsp.lsp-signature".on_attach()
+    require("user.lsp.inlay").on_attach(client, bufnr)
   end
 
   lsp_keymaps(bufnr)
 
-  if require("user.colorscheme").colorscheme ~= "nightfly" then
+  local colorscheme = require("user.colorscheme").colorscheme
+  if colorscheme ~= "nightfly" and colorscheme ~= "ayu" then
     require "user.illuminate".on_attach(client)
   end
 end

@@ -55,7 +55,7 @@ local cfg = {
   transparency = nil, -- nil,  disabled by default, allow floating win transparent value 1~100
   shadow_blend = 36, -- if you using shadow as border use this set the opacity
   shadow_guibg = 'Black', -- if you using shadow as border use this set the color e.g. 'Green' or '#121315'
-  timer_interval = 3000, -- default timer check interval set to lower value if you want to reduce latency
+  timer_interval = 300, -- default timer check interval set to lower value if you want to reduce latency
   toggle_key = '<C-ESC>', -- toggle signature on and off in insert mode,  e.g. toggle_key = '<M-x>'
 
   select_signature_key = '<A-S-n>', -- cycle to next signature, e.g. '<M-n>' function overloading
