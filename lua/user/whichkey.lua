@@ -120,30 +120,10 @@ local mappings = {
       "<cmd>lua require('telescope.builtin').lsp_dynamic_workspace_symbols({ debounce = 150, search_dirs = 'CWD', file_ignore_patterns = knowunity_file_ignore , opts = {symbols = {'info', 'error'}}})<cr>",
       "Workspace Symbols",
     },
-    a = {
-      "<cmd>lua require('telescope.builtin').find_files(require('telescope.themes').get_dropdown{search_dirs = { '~/Developer/app-flutter/assets/' }})<cr>",
-      "Find Assets",
-    },
     f = { "<cmd>lua require('telescope').extensions.frecency.frecency({ debounce = 200, workspace = 'CWD' })<CR>",
       "Search Recent files" },
     d = { "<cmd>lua require('telescope.builtin').lsp_document_symbols(require('telescope.themes').get_dropdown{})<cr>",
       "Document Symbols" },
-    h = {
-      "<cmd>lua require('telescope.builtin').find_files({search_dirs = { '~/Developer/app-flutter/lib/constants/' }})<cr>",
-      "Find App Constants",
-    },
-    t = {
-      "<cmd>lua require('telescope.builtin').live_grep({ search_dirs = { '~/Developer/app-flutter/packages/bricks/lib/src/' }})<cr>",
-      "Find App Theme",
-    },
-    n = {
-      "<cmd>lua require('telescope.builtin').live_grep({ search_dirs = { '~/Developer/app-flutter/lib/interfaces/analytics_event.dart' }})<cr>",
-      "Find Analytics",
-    },
-    y = {
-      "<cmd>lua require('telescope.builtin').live_grep({ search_dirs = { '~/Developer/app-flutter/lib/l10n/app_en_GB.arb' }})<cr>",
-      "Find Translation Key",
-    },
     l = { "<cmd>lua require('telescope.builtin').live_grep({ debounce = 200, file_ignore_patterns = {'ios/', 'android/', 'assets/', 'fonts/', 'packages/', 'doc/', 'l10n/'} })<cr>",
       "Find Text" },
     c = { "<cmd>lua require('telescope').extensions.neoclip.default(require('telescope.themes').get_dropdown{})<CR>",
@@ -152,13 +132,31 @@ local mappings = {
       "Clipboard" },
     b = { "<Cmd>lua require('telescope.builtin').current_buffer_fuzzy_find(require('telescope.themes').get_dropdown{})<CR>",
       "Find in Buffer" },
-    o = { "<cmd>lua require('telescope.builtin').oldfiles( { search_dirs = 'PWD' , file_ignore_patterns = {'ios/', 'android/', 'assets/', 'fonts/', 'packages/', 'doc/'} } )<cr>",
+    o = { "<cmd>lua require('telescope.builtin').oldfiles( { search_dirs = 'CWD' , file_ignore_patterns = {'ios/', 'android/', 'assets/', 'fonts/', 'packages/', 'doc/'} } )<cr>",
       "Open Recent File" },
     u = { "<cmd>Telescope undo<cr>",
       "Search Undo" },
   },
+  r = {
+    name = "Search & Replace",
+    o = { "<cmd>lua require('substitute.range').operator()<cr>", "Substitute Range Operator" },
+    w = { "<cmd>lua require('substitute.range').word()<cr>", "Substitute Range Word" },
+    s =
+    { "<CMD>SearchReplaceSingleBufferSelections<CR>", "SearchReplaceSingleBuffer [s]elction list" },
+    a = { "<CMD>SearchReplaceSingleBufferOpen<CR>", "open" },
+    d = { "<CMD>SearchReplaceSingleBufferCWord<CR>", "[w]ord" },
+    W = { "<CMD>SearchReplaceSingleBufferCWORD<CR>", "[W]ORD" },
+    e = { "<CMD>SearchReplaceSingleBufferCExpr<CR>", "[e]xpr" },
+    f = { "<CMD>SearchReplaceSingleBufferCFile<CR>", "[f]ile" },
 
-
+    -- keymap["r"]["b"]["s"] =
+    --   { "<CMD>SearchReplaceMultiBufferSelections<CR>","SearchReplaceMultiBuffer [s]elction list" }
+    -- keymap["r"]["b"]["o"] = { "<CMD>SearchReplaceMultiBufferOpen<CR>", "[o]pen" }
+    -- keymap["r"]["b"]["w"] = { "<CMD>SearchReplaceMultiBufferCWord<CR>", "[w]ord" }
+    -- keymap["r"]["b"]["W"] = { "<CMD>SearchReplaceMultiBufferCWORD<CR>", "[W]ORD" }
+    -- keymap["r"]["b"]["e"] = { "<CMD>SearchReplaceMultiBufferCExpr<CR>", "[e]xpr" }
+    -- keymap["r"]["b"]["f"] = { "<CMD>SearchReplaceMultiBufferCFile<CR>", "[f]ile" }
+  },
   C = {
     -- bdelete
     name = "Close Buffer Option",
@@ -218,7 +216,11 @@ local mappings = {
     -- r = { "<cmd>lua require('renamer').rename()<cr>", "Rename" }, -- not working well with cmp-tabnine
     --[[ r = { "<cmd>lua vim.lsp.buf.rename()<cr>", "Rename" }, ]]
     u = { "<cmd>Trouble lsp_references<cr>", "References" },
-    t = { "<cmd>TodoTelescope keywords=TODO,FIX<cr>", "TODO" },
+    -- t = { "<cmd>TodoTelescope keywords=TODO,FIX<cr>", "TODO" },
+    t = {
+      "<cmd>lua require('telescope.builtin').diagnostics({file_ignore_patterns = {'windows/', 'web/'}, default_text = '@anh)'})<cr>",
+      "Personal TODOs",
+    },
   },
 
   o = {
@@ -238,7 +240,7 @@ local mappings = {
     s = { "<cmd>lua require('neotest').run.stop()<cr>", "Stop Nearest Test" },
     a = { "<cmd>lua require('neotest').run.attach()<cr>", "Attach Nearest Test" },
     l = { "<cmd>lua require('neotest').run.run_last()<cr>", "Run Last Test" },
-    j = { "<cmd>lua require('neotest').output.open({ enter = true })<cr>", "Open Output" },
+    j = { "<cmd>lua require('neotest').output_panel.toggle()<cr>", "Open Output" },
     m = { "<cmd>lua require('neotest').summary.open()<cr>", "Open Summary" },
     o = { "<cmd>lua require('neotest').summary.toggle()<cr>", "Toggle Summary" },
   },
