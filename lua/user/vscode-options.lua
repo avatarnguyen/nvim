@@ -5,14 +5,17 @@ vim.opt.hlsearch = true -- highlight all matches on previous search pattern
 vim.opt.ignorecase = true -- ignore case in search patterns
 vim.opt.smartcase = true -- smart case
 vim.opt.smartindent = true -- make indenting smarter again
-vim.opt.timeoutlen = 200 -- time to wait for a mapped sequence to complete (in milliseconds)
-vim.opt.updatetime = 100 -- faster completion (4000ms default)
+vim.opt.timeoutlen = 500 -- time to wait for a mapped sequence to complete (in milliseconds)
+vim.opt.updatetime = 700 -- faster completion (4000ms default)
 vim.opt.lazyredraw = true
 vim.opt.tabstop = 2 -- insert 2 spaces for a tab
-vim.opt.scrolloff = 8 -- is one of my fav
-vim.opt.sidescrolloff = 8
+-- vim.opt.scrolloff = 8 -- is one of my fav
+-- vim.opt.sidescrolloff = 8
 vim.opt.number = false
 vim.opt.relativenumber = false -- set relative numbered lines
 vim.opt.mouse = "a"
 vim.opt.syntax = "enable"
+
+vim.opt_local.cursorline = false
+vim.opt_local.spell = false
 

@@ -1,12 +1,14 @@
 -- Use 'q' to quit from common plugins
-if vim.g.vscode then
-  vim.cmd [[
-    augroup highlight_yank
-      autocmd!
-      autocmd TextYankPost * silent! lua vim.highlight.on_yank { higroup="IncSearch", timeout=200 }
-    augroup END
-  ]]
 
+-- Highlight Yanked Text
+vim.api.nvim_create_autocmd({ "TextYankPost" }, {
+  callback = function()
+    vim.highlight.on_yank { higroup = "Visual", timeout = 200 }
+  end,
+})
+
+if vim.g.vscode then
+  -- VSCODE NEOVIM only auto commands
 else
   vim.api.nvim_create_autocmd({ "FileType" }, {
     pattern = { "qf", "help", "man", "lspinfo", "spectre_panel", "lir" },
@@ -47,12 +49,6 @@ else
     end,
   })
 
-  -- Highlight Yanked Text
-  vim.api.nvim_create_autocmd({ "TextYankPost" }, {
-    callback = function()
-      vim.highlight.on_yank { higroup = "Visual", timeout = 200 }
-    end,
-  })
 
   -- FileType Autocommand
   vim.api.nvim_create_autocmd({ "BufWinEnter", "FileType" }, {

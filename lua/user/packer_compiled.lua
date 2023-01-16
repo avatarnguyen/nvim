@@ -90,6 +90,12 @@ _G.packer_plugins = {
     path = "/Users/anhknowunity/.local/share/nvim/site/pack/packer/opt/bufferline.nvim",
     url = "https://github.com/akinsho/bufferline.nvim"
   },
+  camelcasemotion = {
+    config = { "\27LJ\2\n7\0\0\2\0\4\0\0056\0\0\0009\0\1\0'\1\3\0=\1\2\0K\0\1\0\6\\\24camelcasemotion_key\6g\bvim\0" },
+    loaded = true,
+    path = "/Users/anhknowunity/.local/share/nvim/site/pack/packer/start/camelcasemotion",
+    url = "https://github.com/bkad/camelcasemotion"
+  },
   ["cmp-buffer"] = {
     after_files = { "/Users/anhknowunity/.local/share/nvim/site/pack/packer/opt/cmp-buffer/after/plugin/cmp_buffer.lua" },
     cond = { "\27LJ\2\n(\0\0\1\0\3\0\0056\0\0\0009\0\1\0009\0\2\0\19\0\0\0L\0\2\0\vvscode\6g\bvim\0" },
@@ -179,22 +185,17 @@ _G.packer_plugins = {
     path = "/Users/anhknowunity/.local/share/nvim/site/pack/packer/opt/lualine.nvim",
     url = "https://github.com/nvim-lualine/lualine.nvim"
   },
-  ["neovim-session-manager"] = {
-    cond = { "\27LJ\2\n(\0\0\1\0\3\0\0056\0\0\0009\0\1\0009\0\2\0\19\0\0\0L\0\2\0\vvscode\6g\bvim\0" },
-    loaded = false,
-    needs_bufread = false,
-    only_cond = true,
-    path = "/Users/anhknowunity/.local/share/nvim/site/pack/packer/opt/neovim-session-manager",
-    url = "https://github.com/Shatur/neovim-session-manager"
-  },
   ["nvim-cmp"] = {
     loaded = true,
     path = "/Users/anhknowunity/.local/share/nvim/site/pack/packer/start/nvim-cmp",
     url = "https://github.com/hrsh7th/nvim-cmp"
   },
   ["nvim-notify"] = {
-    loaded = true,
-    path = "/Users/anhknowunity/.local/share/nvim/site/pack/packer/start/nvim-notify",
+    cond = { "\27LJ\2\n(\0\0\1\0\3\0\0056\0\0\0009\0\1\0009\0\2\0\19\0\0\0L\0\2\0\vvscode\6g\bvim\0" },
+    loaded = false,
+    needs_bufread = false,
+    only_cond = true,
+    path = "/Users/anhknowunity/.local/share/nvim/site/pack/packer/opt/nvim-notify",
     url = "https://github.com/rcarriga/nvim-notify"
   },
   ["nvim-tree.lua"] = {
@@ -264,10 +265,22 @@ _G.packer_plugins = {
 }
 
 time([[Defining packer_plugins]], false)
--- Setup for: neovim-session-manager
-time([[Setup for neovim-session-manager]], true)
-try_loadstring("\27LJ\2\n,\0\0\3\0\2\0\0046\0\0\0'\2\1\0B\0\2\1K\0\1\0\17user.session\frequire\0", "setup", "neovim-session-manager")
-time([[Setup for neovim-session-manager]], false)
+-- Config for: hop.nvim
+time([[Config for hop.nvim]], true)
+try_loadstring("\27LJ\2\nU\0\0\3\0\4\0\a6\0\0\0'\2\1\0B\0\2\0029\0\2\0005\2\3\0B\0\2\1K\0\1\0\1\0\1\tkeys\28etovxqpdygfblzhckisuran\nsetup\bhop\frequire\0", "config", "hop.nvim")
+time([[Config for hop.nvim]], false)
+-- Config for: telescope.nvim
+time([[Config for telescope.nvim]], true)
+try_loadstring("\27LJ\2\n.\0\0\3\0\2\0\0046\0\0\0'\2\1\0B\0\2\1K\0\1\0\19user.telescope\frequire\0", "config", "telescope.nvim")
+time([[Config for telescope.nvim]], false)
+-- Config for: dial.nvim
+time([[Config for dial.nvim]], true)
+try_loadstring("\27LJ\2\nÙ\1\0\0\a\0\r\0\0266\0\0\0'\2\1\0B\0\2\0026\1\0\0'\3\2\0B\1\2\0029\1\3\1\18\3\1\0009\1\4\0015\4\v\0004\5\4\0009\6\5\0009\6\6\0069\6\a\6>\6\1\0059\6\5\0009\6\6\0069\6\b\6>\6\2\0059\6\t\0009\6\6\0069\6\n\6>\6\3\5=\5\f\4B\1\3\1K\0\1\0\fdefault\1\0\0\tbool\rconstant\bhex\fdecimal\nalias\finteger\19register_group\faugends\16dial.config\16dial.augend\frequire\0", "config", "dial.nvim")
+time([[Config for dial.nvim]], false)
+-- Config for: camelcasemotion
+time([[Config for camelcasemotion]], true)
+try_loadstring("\27LJ\2\n7\0\0\2\0\4\0\0056\0\0\0009\0\1\0'\1\3\0=\1\2\0K\0\1\0\6\\\24camelcasemotion_key\6g\bvim\0", "config", "camelcasemotion")
+time([[Config for camelcasemotion]], false)
 -- Config for: substitute.nvim
 time([[Config for substitute.nvim]], true)
 try_loadstring("\27LJ\2\n8\0\0\3\0\3\0\0066\0\0\0'\2\1\0B\0\2\0029\0\2\0B\0\1\1K\0\1\0\nsetup\15substitute\frequire\0", "config", "substitute.nvim")
@@ -276,61 +289,49 @@ time([[Config for substitute.nvim]], false)
 time([[Config for surround.nvim]], true)
 try_loadstring("\27LJ\2\n-\0\0\3\0\2\0\0046\0\0\0'\2\1\0B\0\2\1K\0\1\0\18user.surround\frequire\0", "config", "surround.nvim")
 time([[Config for surround.nvim]], false)
--- Config for: hop.nvim
-time([[Config for hop.nvim]], true)
-try_loadstring("\27LJ\2\nU\0\0\3\0\4\0\a6\0\0\0'\2\1\0B\0\2\0029\0\2\0005\2\3\0B\0\2\1K\0\1\0\1\0\1\tkeys\28etovxqpdygfblzhckisuran\nsetup\bhop\frequire\0", "config", "hop.nvim")
-time([[Config for hop.nvim]], false)
--- Config for: dial.nvim
-time([[Config for dial.nvim]], true)
-try_loadstring("\27LJ\2\nÙ\1\0\0\a\0\r\0\0266\0\0\0'\2\1\0B\0\2\0026\1\0\0'\3\2\0B\1\2\0029\1\3\1\18\3\1\0009\1\4\0015\4\v\0004\5\4\0009\6\5\0009\6\6\0069\6\a\6>\6\1\0059\6\5\0009\6\6\0069\6\b\6>\6\2\0059\6\t\0009\6\6\0069\6\n\6>\6\3\5=\5\f\4B\1\3\1K\0\1\0\fdefault\1\0\0\tbool\rconstant\bhex\fdecimal\nalias\finteger\19register_group\faugends\16dial.config\16dial.augend\frequire\0", "config", "dial.nvim")
-time([[Config for dial.nvim]], false)
--- Config for: telescope.nvim
-time([[Config for telescope.nvim]], true)
-try_loadstring("\27LJ\2\n.\0\0\3\0\2\0\0046\0\0\0'\2\1\0B\0\2\1K\0\1\0\19user.telescope\frequire\0", "config", "telescope.nvim")
-time([[Config for telescope.nvim]], false)
 -- Conditional loads
-time([[Conditional loading of which-key.nvim]], true)
-  require("packer.load")({"which-key.nvim"}, {}, _G.packer_plugins)
-time([[Conditional loading of which-key.nvim]], false)
-time([[Conditional loading of nvim-tree.lua]], true)
-  require("packer.load")({"nvim-tree.lua"}, {}, _G.packer_plugins)
-time([[Conditional loading of nvim-tree.lua]], false)
-time([[Conditional loading of cmp-nvim-lsp]], true)
-  require("packer.load")({"cmp-nvim-lsp"}, {}, _G.packer_plugins)
-time([[Conditional loading of cmp-nvim-lsp]], false)
-time([[Conditional loading of LuaSnip]], true)
-  require("packer.load")({"LuaSnip"}, {}, _G.packer_plugins)
-time([[Conditional loading of LuaSnip]], false)
-time([[Conditional loading of cmp_luasnip]], true)
-  require("packer.load")({"cmp_luasnip"}, {}, _G.packer_plugins)
-time([[Conditional loading of cmp_luasnip]], false)
-time([[Conditional loading of bufferline.nvim]], true)
-  require("packer.load")({"bufferline.nvim"}, {}, _G.packer_plugins)
-time([[Conditional loading of bufferline.nvim]], false)
-time([[Conditional loading of cmp-buffer]], true)
-  require("packer.load")({"cmp-buffer"}, {}, _G.packer_plugins)
-time([[Conditional loading of cmp-buffer]], false)
-time([[Conditional loading of cmp-cmdline]], true)
-  require("packer.load")({"cmp-cmdline"}, {}, _G.packer_plugins)
-time([[Conditional loading of cmp-cmdline]], false)
 time([[Conditional loading of cmp-path]], true)
   require("packer.load")({"cmp-path"}, {}, _G.packer_plugins)
 time([[Conditional loading of cmp-path]], false)
-time([[Conditional loading of lualine.nvim]], true)
-  require("packer.load")({"lualine.nvim"}, {}, _G.packer_plugins)
-time([[Conditional loading of lualine.nvim]], false)
-time([[Conditional loading of cmp-nvim-lua]], true)
-  require("packer.load")({"cmp-nvim-lua"}, {}, _G.packer_plugins)
-time([[Conditional loading of cmp-nvim-lua]], false)
-time([[Conditional loading of nvim-treesitter]], true)
-  require("packer.load")({"nvim-treesitter"}, {}, _G.packer_plugins)
-time([[Conditional loading of nvim-treesitter]], false)
-time([[Conditional loading of neovim-session-manager]], true)
-  require("packer.load")({"neovim-session-manager"}, {}, _G.packer_plugins)
-time([[Conditional loading of neovim-session-manager]], false)
+time([[Conditional loading of cmp_luasnip]], true)
+  require("packer.load")({"cmp_luasnip"}, {}, _G.packer_plugins)
+time([[Conditional loading of cmp_luasnip]], false)
+time([[Conditional loading of nvim-notify]], true)
+  require("packer.load")({"nvim-notify"}, {}, _G.packer_plugins)
+time([[Conditional loading of nvim-notify]], false)
+time([[Conditional loading of cmp-buffer]], true)
+  require("packer.load")({"cmp-buffer"}, {}, _G.packer_plugins)
+time([[Conditional loading of cmp-buffer]], false)
+time([[Conditional loading of LuaSnip]], true)
+  require("packer.load")({"LuaSnip"}, {}, _G.packer_plugins)
+time([[Conditional loading of LuaSnip]], false)
+time([[Conditional loading of bufferline.nvim]], true)
+  require("packer.load")({"bufferline.nvim"}, {}, _G.packer_plugins)
+time([[Conditional loading of bufferline.nvim]], false)
+time([[Conditional loading of nvim-tree.lua]], true)
+  require("packer.load")({"nvim-tree.lua"}, {}, _G.packer_plugins)
+time([[Conditional loading of nvim-tree.lua]], false)
+time([[Conditional loading of cmp-cmdline]], true)
+  require("packer.load")({"cmp-cmdline"}, {}, _G.packer_plugins)
+time([[Conditional loading of cmp-cmdline]], false)
 time([[Conditional loading of kanagawa.nvim]], true)
   require("packer.load")({"kanagawa.nvim"}, {}, _G.packer_plugins)
 time([[Conditional loading of kanagawa.nvim]], false)
+time([[Conditional loading of lualine.nvim]], true)
+  require("packer.load")({"lualine.nvim"}, {}, _G.packer_plugins)
+time([[Conditional loading of lualine.nvim]], false)
+time([[Conditional loading of which-key.nvim]], true)
+  require("packer.load")({"which-key.nvim"}, {}, _G.packer_plugins)
+time([[Conditional loading of which-key.nvim]], false)
+time([[Conditional loading of cmp-nvim-lsp]], true)
+  require("packer.load")({"cmp-nvim-lsp"}, {}, _G.packer_plugins)
+time([[Conditional loading of cmp-nvim-lsp]], false)
+time([[Conditional loading of nvim-treesitter]], true)
+  require("packer.load")({"nvim-treesitter"}, {}, _G.packer_plugins)
+time([[Conditional loading of nvim-treesitter]], false)
+time([[Conditional loading of cmp-nvim-lua]], true)
+  require("packer.load")({"cmp-nvim-lua"}, {}, _G.packer_plugins)
+time([[Conditional loading of cmp-nvim-lua]], false)
 vim.cmd [[augroup packer_load_aucmds]]
 vim.cmd [[au!]]
   -- Event lazy-loads

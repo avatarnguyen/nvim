@@ -61,27 +61,27 @@ use({ "wbthomason/packer.nvim" }) -- Have packer manage itself
 -- return packer.startup(function(use)
   -- My plugins here
   use({ "nvim-lua/plenary.nvim" }) -- Useful lua functions used by lots of plugins
---  use({ 
+--  use({
 --    "windwp/nvim-autopairs",
 --    cond = is_nvim,
 --  }) -- Autopairs, integrates with both cmp and treesitter
---  use({ 
+--  use({
 --    "numToStr/Comment.nvim",
 --    cond = is_nvim,
 --  })
---  use({ 
+--  use({
 --    "JoosepAlviste/nvim-ts-context-commentstring",
 --    cond = is_nvim,
 --  })
   use({ "kyazdani42/nvim-web-devicons" })
-  use { 
+  use {
     'akinsho/bufferline.nvim',
-    tag = "v2.*", 
+    tag = "v2.*",
     requires = 'kyazdani42/nvim-web-devicons',
     cond = is_nvim,
   }
   -- use({ "moll/vim-bbye" })
-  use({ 
+  use({
     "nvim-lualine/lualine.nvim",
     cond = is_nvim,
   })
@@ -126,7 +126,7 @@ use({ "wbthomason/packer.nvim" }) -- Have packer manage itself
 -- use({
 --   'tzachar/cmp-tabnine',
 --   after = 'nvim-cmp',
---   cond = is_nvim, 
+--   cond = is_nvim,
 --   run = './install.sh',
 --   requires = 'hrsh7th/nvim-cmp',
 --   config = function()
@@ -134,33 +134,33 @@ use({ "wbthomason/packer.nvim" }) -- Have packer manage itself
 --   end
 -- })
   use({
-    'hrsh7th/cmp-cmdline', 
-    cond = is_nvim, 
-  }) 
-  use({ 
-    "hrsh7th/cmp-buffer", 
-    cond = is_nvim, 
-  }) -- buffer completions
-  use({ 
-    "hrsh7th/cmp-path",   
-    cond = is_nvim, 
-  }) -- path completions
-  use({ 
-    "saadparwaiz1/cmp_luasnip",   
-    cond = is_nvim, 
-  }) -- snippet completions
-  use({ 
-    "hrsh7th/cmp-nvim-lsp",  
-    cond = is_nvim, 
+    'hrsh7th/cmp-cmdline',
+    cond = is_nvim,
   })
-  use({ 
-    "hrsh7th/cmp-nvim-lua",  
-    cond = is_nvim, 
+  use({
+    "hrsh7th/cmp-buffer",
+    cond = is_nvim,
+  }) -- buffer completions
+  use({
+    "hrsh7th/cmp-path",
+    cond = is_nvim,
+  }) -- path completions
+  use({
+    "saadparwaiz1/cmp_luasnip",
+    cond = is_nvim,
+  }) -- snippet completions
+  use({
+    "hrsh7th/cmp-nvim-lsp",
+    cond = is_nvim,
+  })
+  use({
+    "hrsh7th/cmp-nvim-lua",
+    cond = is_nvim,
   })
   -- -- snippets
-  use({ 
-    "L3MON4D3/LuaSnip",   
-    cond = is_nvim, 
+  use({
+    "L3MON4D3/LuaSnip",
+    cond = is_nvim,
   }) --snippet engine
   use({
     "rafamadriz/friendly-snippets",
@@ -182,7 +182,7 @@ use({ "wbthomason/packer.nvim" }) -- Have packer manage itself
   -- }
   --
   -- -- LSP
-  -- use { 
+  -- use {
   --    "ray-x/lsp_signature.nvim",
   --    cond = is_nvim,
    -- }
@@ -364,12 +364,12 @@ use({ "wbthomason/packer.nvim" }) -- Have packer manage itself
   -- -- use('MunifTanjim/prettier.nvim')
   --
   -- -- Editing {{{
-  -- use {
-  --   "bkad/camelcasemotion",
-  --   config = function()
-  --     vim.g["camelcasemotion_key"] = "\\"
-  --   end,
-  -- }
+  use {
+    "bkad/camelcasemotion",
+    config = function()
+      vim.g["camelcasemotion_key"] = "\\"
+    end,
+  }
   use({
     "Mephistophiles/surround.nvim",
     config = function()
@@ -429,13 +429,13 @@ use({ "wbthomason/packer.nvim" }) -- Have packer manage itself
   --     require "user.harpoon"
   --   end,
   -- })
-  use({
-    "Shatur/neovim-session-manager",
-    cond = is_nvim,
-    setup = function()
-      require "user.session"
-    end,
-  })
+--  use({
+--    "Shatur/neovim-session-manager",
+--    cond = is_nvim,
+--    setup = function()
+--      require "user.session"
+--    end,
+--  })
   -- use({
   --   "chentoast/marks.nvim",
   --   config = function()
@@ -450,7 +450,8 @@ use({ "wbthomason/packer.nvim" }) -- Have packer manage itself
   })
   use({
     "rcarriga/nvim-notify",
-  }) 
+      cond = is_nvim,
+  })
   -- use { "dstein64/vim-startuptime" }
   --
   -- use({

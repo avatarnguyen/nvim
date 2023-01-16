@@ -14,15 +14,28 @@ keymap("n", "<Down>", function() vim.fn.VSCodeNotify("workbench.action.focusBelo
 keymap("n", "<Up>", function() vim.fn.VSCodeNotify("workbench.action.focusAboveGroup") end, opts)
 keymap("n", "<Right>", function() vim.fn.VSCodeNotify("workbench.action.focusRightGroup") end, opts)
 
+keymap("n", "gj", function() vim.fn.VSCodeNotify("editor.action.peekDefinition") end, opts)
+keymap("n", "gs", function() vim.fn.VSCodeNotify("editor.action.triggerParameterHints") end, opts)
+keymap("n", "gk", function() vim.fn.VSCodeNotify("editor.action.revealDefinitionAside") end, opts)
+keymap("n", "gl", function() vim.fn.VSCodeNotify("editor.action.peakDeclaration") end, opts)
+keymap("n", "gu", function() vim.fn.VSCodeNotify("editor.action.goToReferences") end, opts)
+keymap("n", "gm", function() vim.fn.VSCodeNotify("editor.action.goToImplementation") end, opts)
+
 keymap("n", "ge", function() vim.fn.VSCodeNotify("editor.action.marker.nextInFiles") end, opts)
 keymap("n", "gE", function() vim.fn.VSCodeNotify("editor.action.marker.prevInFiles") end, opts)
-keymap("n", "E", function() vim.fn.VSCodeNotify("workbench.actions.workbench.panel.markers.view.toggleErrors") end, opts)
+keymap("n", "]e", function() vim.fn.VSCodeNotify("editor.action.marker.next") end, opts)
+keymap("n", "[e", function() vim.fn.VSCodeNotify("editor.action.marker.prev") end, opts)
+-- keymap("n", "E", function() vim.fn.VSCodeNotify("workbench.actions.workbench.panel.markers.view.toggleErrors") end, opts)
 
+keymap("n", "<leader>r", function() vim.fn.VSCodeNotify("editor.action.rename") end, opts)
+keymap("n", "<leader>n", function() vim.fn.VSCodeNotify("fileutils.renameFile") end, opts)
 keymap("n", "<leader>f", function() vim.fn.VSCodeNotify("workbench.action.quickOpen") end, opts)
 keymap("n", "<leader>a", function() vim.fn.VSCodeNotify("workbench.action.showCommands") end, opts)
+vim.keymap.set("n", "<leader>e", function() vim.fn.VSCodeNotify("workbench.action.problems.focus") end)
+vim.keymap.set("n", "<leader>g", function() vim.fn.VSCodeNotify("workbench.view.scm") end)
 
-keymap("n", "<C-d>", "<C-d>zz", opts)
-keymap("n", "<C-u>", "<C-u>zz", opts)
+-- keymap("n", "<C-d>", "<C-d>zz", opts)
+-- keymap("n", "<C-u>", "<C-u>zz", opts)
 
 -- Clear highlights
 keymap("n", "<C-n>", "<cmd>nohlsearch<CR>", opts)
@@ -77,9 +90,6 @@ keymap("n", "gcc", function() vim.fn.VSCodeNotify("editor.action.commentLine", t
 keymap("v", "<", function() vim.fn.VSCodeNotifyVisual("editor.action.outdentLines", false) end)
 keymap("v", ">", function() vim.fn.VSCodeNotifyVisual("editor.action.indentLines", false) end)
 
-vim.keymap.set("n", "<leader>a", function() vim.fn.VSCodeNotify("workbench.action.showCommands") end)
-vim.keymap.set("n", "<leader>e", function() vim.fn.VSCodeNotify("workbench.action.problems.focus") end)
-vim.keymap.set("n", "<leader>g", function() vim.fn.VSCodeNotify("workbench.view.scm") end)
 
 -- Folding
 vim.keymap.set("n", "za", function() vim.fn.VSCodeNotify("editor.toggleFold") end)
@@ -89,13 +99,109 @@ vim.keymap.set("n", "zO", function() vim.fn.VSCodeNotify("editor.unfoldAll") end
 vim.keymap.set("n", "zo", function() vim.fn.VSCodeNotify("editor.unfoldRecursively") end)
 vim.keymap.set("n", "zp", function() vim.fn.VSCodeNotify("editor.gotoParentFold") end)
 
--- Visual Block --
--- Move text up and down
--- keymap("x", "J", ":move '>+1<CR>gv-gv", opts)
--- keymap("x", "K", ":move '<-2<CR>gv-gv", opts)
+-- FILE COMMANDS
+--
+vim.cmd [[
+function! s:editOrNew(...)
+  let file = a:1
+  let bang = a:2
 
--- keymap("n", "<Enter>", "<cmd>w!<CR>", opts)
+  if empty(file)
+      if bang ==# '!'
+          call VSCodeNotify('workbench.action.files.revert')
+      else
+          call VSCodeNotify('workbench.action.quickOpen')
+      endif
+  else
+      " Last arg is to close previous file, e.g. e! ~/blah.txt will open blah.txt instead the current file
+      call VSCodeExtensionNotify('open-file', expand(file), bang ==# '!' ? 1 : 0)
+  endif
+endfunction
 
+function! s:saveAndClose() abort
+  call VSCodeCall('workbench.action.files.save')
+  call VSCodeNotify('workbench.action.closeActiveEditor')
+endfunction
+
+function! s:saveAllAndClose() abort
+  call VSCodeCall('workbench.action.files.saveAll')
+  call VSCodeNotify('workbench.action.closeAllEditors')
+endfunction
+
+" command! -bang -nargs=? Edit call VSCodeCall('workbench.action.quickOpen')
+command! -complete=file -bang -nargs=? Edit call <SID>editOrNew(<q-args>, <q-bang>)
+command! -bang -nargs=? Ex call <SID>editOrNew(<q-args>, <q-bang>)
+command! -bang Enew call <SID>editOrNew('__vscode_new__', <q-bang>)
+command! -bang Find call VSCodeNotify('workbench.action.quickOpen')
+
+command! -complete=file -bang -nargs=? Write if <q-bang> ==# '!' | call VSCodeNotify('workbench.action.files.saveAs') | else | call VSCodeNotify('workbench.action.files.save') | endif
+command! -bang Saveas call VSCodeNotify('workbench.action.files.saveAs')
+
+command! -bang Wall call VSCodeNotify('workbench.action.files.saveAll')
+command! -bang Quit if <q-bang> ==# '!' | call VSCodeNotify('workbench.action.revertAndCloseActiveEditor') | else | call VSCodeNotify('workbench.action.closeActiveEditor') | endif
+
+command! -bang Wq call <SID>saveAndClose()
+command! -bang Xit call <SID>saveAndClose()
+
+command! -bang Qall call VSCodeNotify('workbench.action.closeAllEditors')
+
+command! -bang Wqall call <SID>saveAllAndClose()
+command! -bang Xall call <SID>saveAllAndClose()
+
+AlterCommand e[dit] Edit
+AlterCommand ex Ex
+AlterCommand ene[w] Enew
+AlterCommand fin[d] Find
+AlterCommand w[rite] Write
+AlterCommand sav[eas] Saveas
+AlterCommand wa[ll] Wall
+AlterCommand q[uit] Quit
+AlterCommand wq Wq
+AlterCommand x[it] Xit
+AlterCommand qa[ll] Qall
+AlterCommand wqa[ll] Wqall
+AlterCommand xa[ll] Xall
+
+nnoremap ZZ <Cmd>Wq<CR>
+nnoremap ZQ <Cmd>Quit!<CR>
+
+]]
+
+-- SCROLLING COMMANDS
+vim.cmd [[
+function s:reveal(direction, resetCursor)
+  call VSCodeExtensionNotify('reveal', a:direction, a:resetCursor)
+endfunction
+
+nnoremap z<CR> <Cmd>call <SID>reveal('top', 1)<CR>
+xnoremap z<CR> <Cmd>call <SID>reveal('top', 1)<CR>
+nnoremap zt <Cmd>call <SID>reveal('top', 0)<CR>
+xnoremap zt <Cmd>call <SID>reveal('top', 0)<CR>
+nnoremap z. <Cmd>call <SID>reveal('center', 1)<CR>
+xnoremap z. <Cmd>call <SID>reveal('center', 1)<CR>
+nnoremap zz <Cmd>call <SID>reveal('center', 0)<CR>
+xnoremap zz <Cmd>call <SID>reveal('center', 0)<CR>
+nnoremap z- <Cmd>call <SID>reveal('bottom', 1)<CR>
+xnoremap z- <Cmd>call <SID>reveal('bottom', 1)<CR>
+nnoremap zb <Cmd>call <SID>reveal('bottom', 0)<CR>
+xnoremap zb <Cmd>call <SID>reveal('bottom', 0)<CR>
+
+
+function s:moveCursor(to)
+  " Native VSCode commands don't register jumplist. Fix by registering jumplist in Vim e.g. for subsequent use of <C-o>
+  normal! m'
+  call VSCodeExtensionNotify('move-cursor', a:to)
+endfunction
+
+nnoremap H <Cmd>call <SID>moveCursor('top')<CR>
+xnoremap H <Cmd>call <SID>moveCursor('top')<CR>
+nnoremap M <Cmd>call <SID>moveCursor('middle')<CR>
+xnoremap M <Cmd>call <SID>moveCursor('middle')<CR>
+nnoremap L <Cmd>call <SID>moveCursor('bottom')<CR>
+xnoremap L <Cmd>call <SID>moveCursor('bottom')<CR>
+]]
+
+-- TAB COMMANDS
 vim.cmd [[
 function! s:switchEditor(...) abort
     let count = a:1
@@ -139,6 +245,7 @@ nnoremap <S-Tab> <Cmd>call <SID>switchEditor(v:count, 'prev')<CR>
 xnoremap gT <Cmd>call <SID>switchEditor(v:count, 'prev')<CR>
 ]]
 
+-- WINDOWS COMMANDS
 vim.cmd [[
   function! s:split(...) abort
       let direction = a:1
