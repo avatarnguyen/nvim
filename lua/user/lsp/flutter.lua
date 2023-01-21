@@ -3,6 +3,8 @@ if not status_ok then
   return
 end
 
+local colorscheme =  require("user.colorscheme").colorscheme
+
 flutter.setup({
   ui = {
     border = "shadow",
@@ -53,10 +55,12 @@ flutter.setup({
       require("user.lsp.handlers").on_attach(client, bufnr)
       vim.g.dart_style_guide = 2
       vim.g.dart_format_on_save = 1
-      if require("user.colorscheme").colorscheme == "nightfly" then
+      if colorscheme == "nightfly" then
         vim.cmd "highlight FlutterWidgetGuides ctermfg=9 guifg=#82aaff"
+      elseif colorscheme == "github" then
+        vim.cmd "highlight FlutterWidgetGuides ctermfg=9 guifg=#56d4dd"
       else
-        vim.cmd "highlight FlutterWidgetGuides ctermfg=9 guifg=cyan"
+         vim.cmd "highlight FlutterWidgetGuides ctermfg=9 guifg=cyan"
       end
 
       require('user.neotest')
