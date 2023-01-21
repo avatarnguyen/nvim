@@ -207,7 +207,7 @@ local mappings = {
       "<cmd>lua require('telescope.builtin').diagnostics({file_ignore_patterns = {'windows/', 'web/'}, severity = 1})<cr>",
       "Workspace Error Popup",
     },
-    W = { "<cmd>Trouble workspace_diagnostics<cr>", "Workspace Diagnostics" },
+    a = { "<cmd>Trouble workspace_diagnostics<cr>", "Workspace Diagnostics" },
     f = { "<cmd>lua vim.lsp.buf.format()<cr>", "Format" },
     -- i = { "<cmd>LspInfo<cr>", "Info" },
     I = { "<cmd>LspInstallInfo<cr>", "Installer Info" },

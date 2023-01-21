@@ -64,7 +64,7 @@ local function lsp_keymaps(bufnr)
   local opts = { noremap = true, silent = true }
   local keymap = vim.api.nvim_buf_set_keymap
   keymap(bufnr, "n", "gD", "<cmd>lua vim.lsp.buf.declaration()<CR>", opts)
-  -- keymap(bufnr, "n", "gr", "<cmd>Lspsaga peek_definition<CR>", opts)
+  keymap(bufnr, "n", "gr", "<cmd>Trouble lsp_references<CR>", opts)
   keymap(bufnr, "n", "gd", "<cmd>lua vim.lsp.buf.definition()<CR>", opts)
   keymap(bufnr, "n", "K", "<cmd>lua vim.lsp.buf.hover()<CR>", opts)
 
@@ -85,9 +85,6 @@ local function lsp_keymaps(bufnr)
   -- Show cursor diagnostics
   keymap(bufnr, "n", "E", "<cmd>Lspsaga show_cursor_diagnostics<CR>", opts)
 
-  -- Standard LSP
-  --[[ keymap(bufnr, "n", "ge", '<cmd>lua vim.diagnostic.goto_next({ border = "rounded" })<CR>', opts) ]]
-  --[[ keymap(bufnr, "n", "g[", '<cmd>lua vim.diagnostic.goto_prev({ border = "rounded" })<CR>', opts) ]]
 
   keymap(bufnr, 'n', 'gs', '<cmd>lua vim.lsp.buf.signature_help()<CR>', opts)
   keymap(bufnr, 'i', '<C-;>', '<cmd>lua vim.lsp.buf.signature_help()<CR>', opts)
@@ -96,8 +93,11 @@ local function lsp_keymaps(bufnr)
   keymap(bufnr, "n", "<leader>q", '<cmd>vim.diagnostic.setloclist()<CR>', opts)
 
   -- LSP Saga
-  keymap(bufnr, "n", "ge", "<cmd>Lspsaga diagnostic_jump_next<CR>", opts)
-  keymap(bufnr, "n", "gE", "<cmd>Lspsaga diagnostic_jump_prev<CR>", opts)
+  -- keymap(bufnr, "n", "ge", "<cmd>Lspsaga diagnostic_jump_next<CR>", opts)
+  -- keymap(bufnr, "n", "gE", "<cmd>Lspsaga diagnostic_jump_prev<CR>", opts)
+  -- Standard LSP
+  keymap(bufnr, "n", "ge", '<cmd>lua vim.diagnostic.goto_next({ border = "rounded" })<CR>', opts)
+  keymap(bufnr, "n", "gE", '<cmd>lua vim.diagnostic.goto_prev({ border = "rounded" })<CR>', opts)
 
   keymap(bufnr, "i", "<C-space>", "<Cmd>Lspsaga signature_help<CR>", { silent = true })
   keymap(bufnr, "n", "<leader>lr", "<cmd>Lspsaga rename<CR>", opts)
