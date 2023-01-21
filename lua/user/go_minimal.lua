@@ -3,17 +3,17 @@ require('go').setup({
   notify = true,
   -- auto commands
   auto_format = true,
-  auto_lint = false,
+  auto_lint = true,
   -- linters: revive, errcheck, staticcheck, golangci-lint
   linter = 'golangci-lint',
   -- linter_flags: e.g., {revive = {'-config', '/path/to/config.yml'}}
   linter_flags = {},
   -- lint_prompt_style: qf (quickfix), vt (virtual text)
-  lint_prompt_style = 'qf',
+  lint_prompt_style = 'vt',
   -- formatter: goimports, gofmt, gofumpt, lsp
   formatter = 'gofumpt',
   -- maintain cursor position after formatting loaded buffer
-  maintain_cursor_pos = false,
+  maintain_cursor_pos = true,
   -- test flags: -count=1 will disable cache
   test_flags = { '-v' },
   test_timeout = '30s',
