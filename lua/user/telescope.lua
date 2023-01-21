@@ -133,7 +133,7 @@ telescope.setup {
     buffers = {
       mappings = {
         i = {
-          ["<C-d>"] = actions.delete_buffer,
+          ["<C-x>"] = actions.delete_buffer,
         },
         n = {
           ["dd"] = actions.delete_buffer,
@@ -159,9 +159,6 @@ telescope.setup {
       -- case_mode = "smart_case", -- or "ignore_case" or "respect_case"
       -- the default case_mode is "smart_case"
     },
-    -- ["ui-select"] = {
-    --   require("telescope.themes").get_cursor({}),
-    -- },
     frecency = {
       show_scores = false,
       show_unindexed = false,
