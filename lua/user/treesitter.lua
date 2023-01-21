@@ -40,7 +40,7 @@ configs.setup({
       "DodgerBlue",
       -- "Cornsilk",
       -- "Salmon",
-      "LawnGreen",
+      -- "LawnGreen",
     },
     -- disable = { "html" },
   },
