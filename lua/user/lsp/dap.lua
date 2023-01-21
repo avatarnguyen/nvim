@@ -11,7 +11,7 @@ end
 
 mason_dap.setup({
   ensure_installed = {},
-  automatic_setup = false,
+  automatic_setup = true,
 })
 
 mason_dap.setup_handlers {
