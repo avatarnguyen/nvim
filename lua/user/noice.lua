@@ -240,6 +240,22 @@ noice.setup {
         find = "Hop",
       },
       opts = { skip = true },
+    },
+    {
+      filter = {
+        event = "msg_show",
+        kind = "",
+        find = "Flutter tools",
+      },
+      opts = { skip = true },
+    },
+    {
+      filter = {
+        event = "msg_show",
+        kind = "",
+        find = "Flutter tools error drawing label",
+      },
+      opts = { skip = true },
     }
   },
   --[[ ---@type table<string, NoiceFilter> ]]
