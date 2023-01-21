@@ -63,13 +63,15 @@ return packer.startup(function(use)
   use 'j-hui/fidget.nvim'
 
   -- Colorschemes
-  -- use({ "folke/tokyonight.nvim" })
+  use({ "folke/tokyonight.nvim" })
   use("bluz71/vim-nightfly-guicolors")
   use("rebelot/kanagawa.nvim")
   use {
     'lalitmee/cobalt2.nvim',
     requires = 'tjdevries/colorbuddy.nvim',
   }
+  use ({ 'projekt0n/github-nvim-theme', tag = '0.0.x' })
+
   use({
     "catppuccin/nvim",
     as = "catppuccin"
@@ -115,14 +117,6 @@ return packer.startup(function(use)
       require "user.trouble"
     end
   })
-  -- Lua
-  -- use {
-  --   "folke/todo-comments.nvim",
-  --   requires = "nvim-lua/plenary.nvim",
-  --   config = function()
-  --     require("user.todo-comment")
-  --   end
-  -- }
 
   -- LSP
   use({ "neovim/nvim-lspconfig" }) -- enable LSP
@@ -166,8 +160,6 @@ return packer.startup(function(use)
   })
 
   -- GO
-  -- use 'ray-x/go.nvim'
-  -- use 'ray-x/guihua.lua'
   use('crispgm/nvim-go')
   use('simrat39/inlay-hints.nvim')
 

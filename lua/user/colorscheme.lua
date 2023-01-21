@@ -7,6 +7,7 @@ local M = {}
 -- local colorscheme = "nightfly"
 -- local colorscheme = "catppuccin"
 local colorscheme = "ayu"
+-- local colorscheme = "github"
 
 -- catppuccin {{{
 if colorscheme == "catppuccin" then
@@ -197,16 +198,34 @@ if colorscheme == "ayu" then
   require('ayu').setup({
     mirage = false, -- Set to `true` to use `mirage` variant instead of `dark` for dark background.
     overrides = {
-      -- illuminatedWord = { bg = colors.selection_inactive },
-      -- illuminatedCurWord = { bg = colors.selection_inactive },
-      -- IlluminatedWordText = { bg = colors.selection_inactive },
-      -- IlluminatedWordRead = { bg = colors.selection_inactive },
-      -- IlluminatedWordWrite = { bg = colors.selection_inactive },
     }, -- A dictionary of group names, each associated with a dictionary of parameters (`bg`, `fg`, `sp` and `style`) and colors in hex.
   })
 end
 
-if colorscheme ~= "cobalt2" then
+if colorscheme == "github" then
+  require("github-theme").setup({
+    theme_style = "dark_default",
+    function_style = "italic",
+    comment_style = "italic",
+    keyword_style = "italic",
+    -- variable_style = "italic",
+    sidebars = { "qf", "vista_kind", "terminal", "packer" },
+    -- Change the "hint" color to the "orange" color, and make the "error" color bright red
+    colors = { hint = "orange", error = "#ff0000" },
+
+    -- Overwrite the highlight groups
+    overrides = function(c)
+      return {
+        htmlTag = { fg = c.red, bg = "#282c34", sp = c.hint, style = "underline" },
+        DiagnosticHint = { link = "LspDiagnosticsDefaultHint" },
+        -- this will remove the highlight groups
+        TSField = {},
+      }
+    end
+  })
+end
+
+if colorscheme ~= "cobalt2" and colorscheme ~= "github" then
   local status_ok, _ = pcall(vim.cmd, "colorscheme " .. colorscheme)
   if not status_ok then
     return
