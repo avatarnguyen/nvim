@@ -4,8 +4,8 @@ if not cmp_status_ok then
 end
 
 tabnine:setup({
-	max_lines = 300;
-	max_num_results = 4;
+	max_lines = 500;
+	max_num_results = 5;
 	sort = true;
 	run_on_every_keystroke = true;
 	snippet_placeholder = '..';
