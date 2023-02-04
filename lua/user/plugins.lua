@@ -72,10 +72,6 @@ return packer.startup(function(use)
   }
   use ({ 'projekt0n/github-nvim-theme', tag = '0.0.x' })
 
-  use({
-    "catppuccin/nvim",
-    as = "catppuccin"
-  })
   use({ "Shatur/neovim-ayu" })
 
   use({
@@ -251,6 +247,7 @@ return packer.startup(function(use)
   end
   }
   -- Git
+  use "tpope/vim-fugitive"
   use({ "lewis6991/gitsigns.nvim" })
   use({ "sindrets/diffview.nvim", requires = "nvim-lua/plenary.nvim" })
   use({
@@ -352,16 +349,6 @@ return packer.startup(function(use)
       require("substitute").setup()
     end,
   })
-  use {
-    "roobert/search-replace.nvim",
-    config = function()
-      require("search-replace").setup({
-        -- optionally override defaults
-        default_replace_single_buffer_options = "gcI",
-        default_replace_multi_buffer_options = "egcI",
-      })
-    end,
-  }
   use "rcarriga/nvim-notify"
   use { "dstein64/vim-startuptime" }
 
