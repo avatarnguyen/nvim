@@ -93,6 +93,10 @@ ls.add_snippets(nil, {
     ls.parser.parse_snippet("_bis40", "BricksIconSizes.s40"),
     ls.parser.parse_snippet("_bis64", "BricksIconSizes.s64"),
 
+    snip("bsh", fmta("BricksSpacer.h<>(),", { insert(1, "amount") })),
+    snip("bsv", fmta("BricksSpacer.v<>(),", { insert(1, "amount") })),
+    snip("bss", fmta("BricksSizes.s<>", { insert(1, "amount") })),
+
     -- Spacer
     ls.parser.parse_snippet("rcon", "ColoredBox(color: Colors.red,);"),
     snip("csl",
