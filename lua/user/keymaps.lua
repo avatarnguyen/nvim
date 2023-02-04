@@ -31,8 +31,8 @@ keymap("n", "<Right>", "<C-w>l", opts)
 keymap("n", "]q", "<cmd>cnext<cr>zz", opts)
 keymap("n", "[q", "<cmd>cprev<cr>zz", opts)
 
--- keymap("n", "<C-d>", "<C-d>zz", opts)
--- keymap("n", "<C-u>", "<C-u>zz", opts)
+keymap("n", "<C-d>", "<C-d>zz", opts)
+keymap("n", "<C-u>", "<C-u>zz", opts)
 
 -- with noice
 keymap("n", "<C-Enter>", "<cmd>w!<CR><cmd>!tmux send-keys -t flutter 'r'<CR>", opts)
@@ -186,8 +186,10 @@ keymap("n", "<A-=>", ":vertical resize -2<CR>", opts)
 keymap("n", "<A-->", ":vertical resize +2<CR>", opts)
 
 -- Navigate buffers
-keymap("n", "<Tab>", ":bnext<CR>", opts)
-keymap("n", "<S-Tab>", ":bprevious<CR>", opts)
+-- keymap("n", "<Tab>", ":bnext<CR>", opts)
+-- keymap("n", "<S-Tab>", ":bprevious<CR>", opts)
+keymap("n", "<S-l>", ":bnext<CR>", opts)
+keymap("n", "<S-h>", ":bprevious<CR>", opts)
 
 -- Visual --
 -- Stay in indent mode
