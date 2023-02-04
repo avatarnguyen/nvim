@@ -230,6 +230,7 @@ local mappings = {
     f = { "<cmd>OverseerRunCmd flutter pub run ota_translation && flutter pub get<cr>", "Run Flutter Translation" },
     r = { "<cmd>OverseerRunCmd flutter pub run build_runner build --delete-conflicting-outputs<cr>",
       "Run Flutter ReBuild" },
+    c = { "<cmd>OverseerRunCmd flutter pub run dart_code_metrics:metrics check-unused-l10n . --class-pattern='AppLocalizations' --fatal-unused && flutter pub run dart_code_metrics:metrics check-unused-code lib --monorepo --fatal-unused<cr>", "Run App Check up" },
   },
 
   t = {
