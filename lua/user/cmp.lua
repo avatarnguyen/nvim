@@ -180,10 +180,10 @@ cmp.setup {
 
       -- NOTE: order matters
       vim_item.menu = ({
+        luasnip = "SNIP",
         nvim_lsp = "LSP",
         cmp_tabnine = "TN",
         nvim_lua = "LSP",
-        luasnip = "SNIP",
         buffer = "BUF",
         path = "PATH",
         emoji = "E",

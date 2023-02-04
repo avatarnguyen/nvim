@@ -41,7 +41,7 @@ local function workspace_diagnostic()
       if string.find(diagnostic.message, 'TODO') then
         -- count[5] = count[5] + 1
         if string.find(diagnostic.message, '@anh') then
-          count[6] = count[6] + 1
+          count[5] = count[5] + 1
         end
       else
         count[diagnostic.severity] = count[diagnostic.severity] + 1
@@ -79,12 +79,6 @@ local function workspace_diagnostic()
     end
     str = str .. " " .. hint_count
   end
-  -- if todo_count > 0 then
-  --   if string.len(str) > 0 then
-  --     str = str .. " "
-  --   end
-  --   str = str .. " " .. todo_count
-  -- end
   if anh_todo > 0 then
     if string.len(str) > 0 then
       str = str .. " "
@@ -210,7 +204,7 @@ local config = {
   },
   sections = {
     lualine_a = { branch, workspace_diagnostic },
-    lualine_b = { filepath },
+    lualine_b = { }, -- filepath 
     lualine_c = { diff },
     lualine_x = {
       {

@@ -51,7 +51,7 @@ saga.setup {
     },
   },
   diagnostic = {
-    twice_into = false,
+    twice_into = true,
     show_code_action = true,
     show_source = true,
     keys = {

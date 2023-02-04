@@ -4,14 +4,14 @@ local M = {}
 -- local colorscheme = "kanagawa"
 -- local colorscheme = "tokyonight"
 -- local colorscheme = "cobalt2"
--- local colorscheme = "nightfly"
+local colorscheme = "nightfly"
 -- local colorscheme = "catppuccin"
-local colorscheme = "ayu"
+-- local colorscheme = "ayu"
 -- local colorscheme = "github"
 
 -- catppuccin {{{
 if colorscheme == "catppuccin" then
-  vim.g.catppuccin_flavour = "mocha" -- latte, frappe, macchiato, mocha
+  vim.g.catppuccin_flavour = "macchiato" -- latte, frappe, macchiato, mocha
 
   require("catppuccin").setup({
     -- dim_inactive = {
