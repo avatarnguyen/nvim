@@ -97,7 +97,7 @@ local function lsp_keymaps(bufnr)
   keymap(bufnr, "n", "ge", '<cmd>lua vim.diagnostic.goto_next({ border = "rounded" })<CR>', opts)
   keymap(bufnr, "n", "gE", '<cmd>lua vim.diagnostic.goto_prev({ border = "rounded" })<CR>', opts)
 
-  keymap(bufnr, "i", "<C-space>", "<Cmd>Lspsaga signature_help<CR>", { silent = true })
+  -- keymap(bufnr, "i", "<C-space>", "<Cmd>Lspsaga signature_help<CR>", { silent = true })
   keymap(bufnr, "n", "<leader>lr", "<cmd>Lspsaga rename<CR>", opts)
 
 end
