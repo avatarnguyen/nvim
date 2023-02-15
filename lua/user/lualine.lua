@@ -161,18 +161,6 @@ local winbar_symbol = function()
   end
 end
 
---[[ local spaces = function() ]]
---[[   return "spaces: " .. vim.api.nvim_buf_get_option(0, "shiftwidth") ]]
---[[ end ]]
--- local nvim_tree_shift = {
---   function()
---     return string.rep(' ',
---       vim.api.nvim_win_get_width(require 'nvim-tree.view'.get_winnr()) - 1)
---   end,
---   cond = require('nvim-tree.view').is_visible,
---   color = 'NvimTreeNormal'
--- }
-
 local config = {
     options = {
         globalstatus = true,
