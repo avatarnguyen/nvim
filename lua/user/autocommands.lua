@@ -88,7 +88,7 @@ vim.api.nvim_create_autocmd({ "BufWinEnter", "FileType" }, {
   end,
 })
 
--- GO 
+-- GO
 local format_sync_grp = vim.api.nvim_create_augroup("GoImport", {})
 local function go_org_imports(wait_ms)
   local params = vim.lsp.util.make_range_params()

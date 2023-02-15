@@ -296,15 +296,15 @@ cmp.setup {
 }
 
 -- prefetch Dart files
-local prefetch = vim.api.nvim_create_augroup("prefetch", { clear = true })
+-- local prefetch = vim.api.nvim_create_augroup("prefetch", { clear = true })
 
-vim.api.nvim_create_autocmd('BufRead', {
-  group = prefetch,
-  pattern = '*.dart',
-  callback = function()
-    require('cmp_tabnine'):prefetch(vim.fn.expand('%:p'))
-  end
-})
+-- vim.api.nvim_create_autocmd('BufRead', {
+--   group = prefetch,
+--   pattern = '*.dart',
+--   callback = function()
+--     require('cmp_tabnine'):prefetch(vim.fn.expand('%:p'))
+--   end
+-- })
 
 -- Use buffer source for `/` and `?` (if you enabled `native_menu`, this won't work anymore).
 cmp.setup.cmdline({ '/', '?' }, {
