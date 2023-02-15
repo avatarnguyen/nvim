@@ -22,41 +22,18 @@ vim.g.maplocalleader = " "
 --   term_mode = "t",
 --   command_mode = "c",
 
--- Better window navigation
--- keymap("n", "<Left>", "<C-w>h", opts)
--- keymap("n", "<Down>", "<C-w>j", opts)
--- keymap("n", "<Up>", "<C-w>k", opts)
--- keymap("n", "<Right>", "<C-w>l", opts)
-
 keymap("n", "]q", "<cmd>cnext<cr>zz", opts)
 keymap("n", "[q", "<cmd>cprev<cr>zz", opts)
 
-keymap("n", "<C-d>", "<C-d>zz", opts)
-keymap("n", "<C-u>", "<C-u>zz", opts)
+keymap("n", "<C-q>", ":<cr>", opts)
 
--- with noice
--- keymap("n", "<C-Enter>", "<cmd>w!<CR><cmd>!tmux send-keys -t flutter 'r'<CR>", opts)
--- keymap("n", "<C-s>", "<cmd>wa<CR><cmd>!tmux send-keys -t flutter 'r'<CR>", opts)
--- keymap("i", "<C-s>", "<cmd>wa<CR><cmd>!tmux send-keys -t flutter 'r'<CR>", opts)
+keymap("n", "<Enter>", ":w<cr>", opts)
 
--- without noice
-keymap("n", "<C-Enter>", "<cmd>w!<CR><cmd>!tmux send-keys -t flutter 'r'<CR><CR>", opts)
-keymap("n", "<C-s>", "<cmd>wa<CR><cmd>!tmux send-keys -t flutter 'r'<CR><CR>", opts)
-keymap("i", "<C-s>", "<cmd>wa<CR><cmd>!tmux send-keys -t flutter 'r'<CR><CR>", opts)
+keymap("n", "<C-p>", ":VtrSendKeysRaw r<CR>", opts)
+keymap("n", "<C-q>", ":call QuickFixToggle()<CR>", opts)
 
-keymap("n", "<Enter>", "<cmd>w!<CR>", opts)
---[[ keymap("n", "<C-s>", "<cmd>wa<CR>", opts) ]]
-
--- TMUX Flutter
--- keymap("n", "ga", "<cmd>!tmux send-keys -t flutter 'r'<CR>", opts)
--- keymap("n", "gs", "<cmd>!tmux send-keys -t flutter 'R'<CR>", opts)
-
--- Telescope
--- keymap("n", "<C-p>",
---   "<cmd>lua require('telescope').extensions.neoclip.default(require('telescope.themes').get_dropdown{})<CR>", opts)
-keymap("n", "<C-p>",
-  "<cmd>lua require('telescope').extensions.recent_files.pick()<CR>", opts)
-keymap("n", "<C-f>", "<cmd>Telescope resume<CR>", opts)
+--FIXME
+-- keymap("n", "<C-f>", "<cmd>Telescope resume<CR>", opts)
 
 -- Explorer
 keymap("", "<C-1>", "<cmd>NvimTreeToggle<cr>", opts)
@@ -64,7 +41,8 @@ keymap("", "<C-S-1>", "<cmd>NvimTreeFocus<cr>", opts)
 
 -- Flutter
 keymap("", "<C-0>", "<cmd>lua require('flutter-tools.outline').toggle()<cr>", opts)
-keymap("", "<C-k>", "<cmd>lua require('user.lsp.handlers').code_action_fix_all()<cr><cmd>w!<cr>", opts)
+--FIXME
+-- keymap("", "<C-k>", "<cmd>lua require('user.lsp.handlers').code_action_fix_all()<cr><cmd>w!<cr>", opts)
 
 keymap("", "<C-2>", "<CMD>lua require('harpoon.ui').toggle_quick_menu()<CR>", opts)
 
@@ -85,11 +63,12 @@ keymap("n", "<leader>la", "<Cmd>Lspsaga code_action<CR>", opts)
 keymap("v", "<leader>la", ":<C-U>lua vim.lsp.buf.range_code_action()<CR>", opts)
 
 -- fastaction
-keymap("n", "<C-j>", "<cmd>lua require('lsp-fastaction').code_action()<CR>", opts)
-keymap("i", "<C-j>", "<cmd>lua require('lsp-fastaction').code_action()<CR>", opts)
-keymap("v", "<C-j>", "<esc><cmd>lua require('lsp-fastaction').range_code_action()<CR>", opts)
-keymap("n", "gl", "<cmd>lua require('lsp-fastaction').code_action()<CR>", opts)
-keymap("v", "gl", "<esc><cmd>lua require('lsp-fastaction').range_code_action()<CR>", opts)
+-- keymap("n", "<C-j>", "<cmd>lua require('lsp-fastaction').code_action()<CR>", opts)
+-- keymap("i", "<C-j>", "<cmd>lua require('lsp-fastaction').code_action()<CR>", opts)
+-- keymap("v", "<C-j>", "<esc><cmd>lua require('lsp-fastaction').range_code_action()<CR>", opts)
+
+keymap("n", "ga", "<cmd>lua require('lsp-fastaction').code_action()<CR>", opts)
+keymap("v", "ga", "<esc><cmd>lua require('lsp-fastaction').range_code_action()<CR>", opts)
 
 -- SUBSTITUTE plugin  {{{
 keymap("n", "s", "<cmd>lua require('substitute').operator()<cr>", { noremap = true })
@@ -105,8 +84,6 @@ keymap("x", "<leader>rr", "<cmd>lua require('substitute.range').visual()<cr>", {
 -- keymap("n", "<leader>r", ":%s///g<Left><Left>", {})
 -- keymap("x", "<leader>r", ":s///g<Left><Left>", opts)
 -- keymap("x", "<leader><leader>r", ":s/\\(\\w.*\\)//<Left><Left>", opts)
--- FIXME: keymap not working
--- keymap("v", "<leader>R", ":'<,'>s/\\(\\w.*\\)//<Left><Left>", opts)
 
 -- Code Navigation {{{
 -- HOP
@@ -125,17 +102,17 @@ vim.keymap.set('', 'T', function()
   hop.hint_char1({ direction = directions.BEFORE_CURSOR, current_line_only = true, hint_offset = 1 })
 end, { remap = true, silent = true })
 
-keymap('n', "<C-l>", "<cmd>lua require'hop'.hint_lines()<cr>", opts)
-keymap('v', "<C-l>", "<cmd>lua require'hop'.hint_lines()<cr>", opts)
-vim.keymap.set('', '<C-h>', function()
-  hop.hint_char1({ direction = directions.AFTER_CURSOR, current_line_only = false })
-end, { remap = true, silent = true })
-vim.keymap.set('', '<C-S-h>', function()
-  hop.hint_char1({ direction = directions.BEFORE_CURSOR, current_line_only = false })
-end, { remap = true, silent = true })
+-- keymap('n', "<C-l>", "<cmd>lua require'hop'.hint_lines()<cr>", opts)
+-- keymap('v', "<C-l>", "<cmd>lua require'hop'.hint_lines()<cr>", opts)
+-- vim.keymap.set('', '<C-h>', function()
+--   hop.hint_char1({ direction = directions.AFTER_CURSOR, current_line_only = false })
+-- end, { remap = true, silent = true })
+-- vim.keymap.set('', '<C-S-h>', function()
+--   hop.hint_char1({ direction = directions.BEFORE_CURSOR, current_line_only = false })
+-- end, { remap = true, silent = true })
 
-keymap('v', "<C-S-h>", "<cmd><C-U>lua require('tsht').nodes()<cr>", opts)
-keymap('i', "<C-S-h>", "<cmd>lua require('tsht').nodes()<cr>", opts)
+-- keymap('v', "<C-S-h>", "<cmd><C-U>lua require('tsht').nodes()<cr>", opts)
+-- keymap('i', "<C-S-h>", "<cmd>lua require('tsht').nodes()<cr>", opts)
 -- Tree Hopper
 --}}}
 
@@ -208,8 +185,8 @@ keymap("i", "jk", "<ESC>", opts)
 -- Buffer
 -- keymap("n", "<leader>c", "<cmd>Bdelete!<CR>", opts)
 keymap("n", "<leader>w", "<cmd>Bdelete!<CR>", opts)
-keymap("n", "<C-b>",
-  "<cmd>lua require('telescope.builtin').buffers(require('telescope.themes').get_dropdown{sort_mru = true, layout_config = {width = 0.6}})<cr>", opts)
+-- keymap("n", "<C-b>",
+--   "<cmd>lua require('telescope.builtin').buffers(require('telescope.themes').get_dropdown{sort_mru = true, layout_config = {width = 0.6}})<cr>", opts)
 keymap("n", ";;",
   "<cmd>lua require('telescope.builtin').buffers(require('telescope.themes').get_dropdown{sort_mru = true, layout_config = {width = 0.6}})<cr>", opts)
 keymap("n", "<leader>;",
@@ -245,3 +222,13 @@ keymap("v", "g<C-x>", require("dial.map").dec_gvisual())
 
 keymap("n", "<leader>/", "<cmd>lua require('Comment.api').toggle.linewise.current()<CR>", opts)
 keymap("v", "<leader>/", "<esc><cmd>lua require('Comment.api').toggle.linewise(vim.fn.visualmode())<CR>", opts)
+
+vim.cmd [[
+  function! QuickFixToggle()
+    if empty(filter(getwininfo(), 'v:val.quickfix'))
+      copen
+    else
+      cclose
+    endif
+  endfunction
+]]

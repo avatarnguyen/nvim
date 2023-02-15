@@ -1,5 +1,5 @@
 require('bqf').setup({
-    auto_enable = false,
+    auto_enable = true,
     auto_resize_height = true, -- highly recommended enable
     preview = {
         win_height = 12,

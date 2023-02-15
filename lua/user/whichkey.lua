@@ -148,18 +148,9 @@ local mappings = {
     W = { "<CMD>SearchReplaceSingleBufferCWORD<CR>", "[W]ORD" },
     e = { "<CMD>SearchReplaceSingleBufferCExpr<CR>", "[e]xpr" },
     f = { "<CMD>SearchReplaceSingleBufferCFile<CR>", "[f]ile" },
-
-    -- keymap["r"]["b"]["s"] =
-    --   { "<CMD>SearchReplaceMultiBufferSelections<CR>","SearchReplaceMultiBuffer [s]elction list" }
-    -- keymap["r"]["b"]["o"] = { "<CMD>SearchReplaceMultiBufferOpen<CR>", "[o]pen" }
-    -- keymap["r"]["b"]["w"] = { "<CMD>SearchReplaceMultiBufferCWord<CR>", "[w]ord" }
-    -- keymap["r"]["b"]["W"] = { "<CMD>SearchReplaceMultiBufferCWORD<CR>", "[W]ORD" }
-    -- keymap["r"]["b"]["e"] = { "<CMD>SearchReplaceMultiBufferCExpr<CR>", "[e]xpr" }
-    -- keymap["r"]["b"]["f"] = { "<CMD>SearchReplaceMultiBufferCFile<CR>", "[f]ile" }
   },
-  C = {
-    -- bdelete
-    name = "Close Buffer Option",
+  b = {
+    name = "Buffer Option",
     c = { "<cmd>lua require('close_buffers').delete({ type = 'hidden', force = true }) <cr>", "Delete all non-visible" }, -- Delete all non-visible buffers
     n = { "<cmd>lua require('close_buffers').delete({ type = 'nameless' })<cr>", "Delete all buffers without name" },
     t = { "<cmd>lua require('close_buffers').delete({ type = 'this' })<cr>", "Delete the current buffer" },
@@ -213,7 +204,6 @@ local mappings = {
     I = { "<cmd>LspInstallInfo<cr>", "Installer Info" },
     l = { "<cmd>lua vim.lsp.codelens.run()<cr>", "CodeLens Action" },
     q = { "<cmd>lua vim.lsp.diagnostic.set_loclist()<cr>", "Quickfix" },
-    -- r = { "<cmd>lua require('renamer').rename()<cr>", "Rename" }, -- not working well with cmp-tabnine
     --[[ r = { "<cmd>lua vim.lsp.buf.rename()<cr>", "Rename" }, ]]
     u = { "<cmd>Trouble lsp_references<cr>", "References" },
     -- t = { "<cmd>TodoTelescope keywords=TODO,FIX<cr>", "TODO" },
@@ -256,7 +246,6 @@ local mappings = {
     K = { "<cmd>Telescope keymaps<cr>", "Keymaps" },
     C = { "<cmd>Telescope commands<cr>", "Commands" },
   },
-
   m = {
     name = "Terminal",
     T = { "<cmd>lua _HTOP_TOGGLE()<cr>", "Htop" },
@@ -265,74 +254,39 @@ local mappings = {
     v = { "<cmd>ToggleTerm size=80 direction=vertical<cr>", "Vertical" },
     t = { "<cmd>lua _RUN_TRANSLATION()<cr>", "Run Flutter Translation" },
   },
-
-  n = {
-    name = "Noice",
-    l = { "<cmd>lua require('noice').cmd('last')<cr>", "Last Command" },
-    h = { "<cmd>lua require('noice').cmd('history')<cr>", "History" },
-    e = { "<cmd>NoiceError<cr>", "Last Error" },
-    f = { "<cmd>Notifications<cr>", "Noice Notifications" },
-    t = { "<cmd>Noice telescope<cr>", "Noice Telescope" },
-    m = { "<cmd>messages<cr>", "Last Messsages" },
-  },
-
+  -- n = {
+  --   name = "Noice",
+  --   l = { "<cmd>lua require('noice').cmd('last')<cr>", "Last Command" },
+  --   h = { "<cmd>lua require('noice').cmd('history')<cr>", "History" },
+  --   e = { "<cmd>NoiceError<cr>", "Last Error" },
+  --   f = { "<cmd>Notifications<cr>", "Noice Notifications" },
+  --   t = { "<cmd>Noice telescope<cr>", "Noice Telescope" },
+  --   m = { "<cmd>messages<cr>", "Last Messsages" },
+  -- },
   d = {
     name = "Flutter",
-    j = { "<cmd>!tmux send-keys -t flutter 'frd' Enter<CR>", "run flutter on samsung" },
-    k = { "<cmd>!tmux send-keys -t flutter 'fr' Enter<CR>", "run flutter default" },
-    s = { "<cmd>!tmux send-keys -t flutter 'R'<CR>", "Restart Flutter" },
-    d = { "<cmd>!tmux send-keys -t flutter 'r'<CR>", "Reload Flutter " },
-    q = { "<cmd>!tmux send-keys -t flutter 'q'<CR>", "Quit Flutter" },
-    v = { "<cmd>!tmux send-keys -t flutter 'v'<CR>", "Start Dev Tool" },
-    -- j = { "<cmd>!tmux send-keys -t flutter 'frd' Enter<CR><CR>", "run flutter on samsung" },
-    -- k = { "<cmd>!tmux send-keys -t flutter 'fr' Enter<CR><CR>", "run flutter default" },
-    -- s = { "<cmd>!tmux send-keys -t flutter 'R'<CR><CR>", "Restart Flutter" },
-    -- d = { "<cmd>!tmux send-keys -t flutter 'r'<CR><CR>", "Reload Flutter " },
-    -- q = { "<cmd>!tmux send-keys -t flutter 'q'<CR><CR>", "Quit Flutter" },
-    -- v = { "<cmd>!tmux send-keys -t flutter 'v'<CR><CR>", "Start Dev Tool" },
-
-    --[[ d = { "<cmd>lua require('flutter-tools.commands').run_command()<cr>", "Run" }, ]]
-    --[[ D = { "<cmd>lua require('flutter-tools.commands').run_command('--profile')<cr>", "Run Profile Mode" }, ]]
+    a = { ":VtrAttachToPane<CR>", "Attach Tmux" },
+    j = { ":VtrSendCommandToRunner frd<CR>", "run flutter on samsung" },
+    k = { ":VtrSendCommandToRunner flutter run<CR>", "run flutter default" },
+    s = { ":VtrSendKeysRaw R<CR>", "Restart Flutter" },
+    d = { ":VtrSendKeysRaw r<CR>", "Reload Flutter " },
+    q = { ":VtrSendKeysRaw q<CR>", "Quit Flutter" },
+    v = { ":VtrSendKeysRaw v<CR>", "Start Dev Tool" },
     r = { "<cmd>lua require('dart-lsp-refactorings').rename()<cr>", "Rename Dart Class" },
     l = { "<cmd>lua require('flutter-tools.devices').list_devices()<cr>", "Show Devices" },
-    --[[ v = { "<cmd>lua require('flutter-tools.commands').visual_debug()<cr>", "Start Visual Debugger" }, ]]
     e = { "<cmd>lua require('flutter-tools.devices').list_emulators()<cr>", "Show Emulators" },
-    --[[ R = { "<cmd>lua require('flutter-tools.dev_tools').start()<cr>", "Show Dev Tools" }, ]]
-    --[[ c = { "<cmd>lua require('flutter-tools.log').clear()<cr>", "Clear Logs" }, ]]
-    --[[ C = { "<cmd>lua require('flutter-tools.commands').copy_profiler_url()<cr>", "Copy Profile Url" }, ]]
-    -- h = { "<cmd>ColorHighlight<cr>", "Highlight Log" },
     g = { "<cmd>lua require('flutter-tools.commands').pub_get()<cr>", "Run Pub Get" },
-    --[[ q = { "<cmd>lua require('flutter-tools.commands').quit()<cr>", "Quit Flutter" }, ]]
-    --[[ S = { "<cmd>lua require('flutter-tools.commands').restart()<cr> <cmd>lua require('flutter-tools.log').clear()<cr>", ]]
-    --[[   "Restart Flutter" }, ]]
-    --[[ s = { "<cmd>lua require('flutter-tools.commands').reload()<cr>", "Reload Flutter" }, ]]
-    f = { "<cmd>lua require('telescope').extensions.flutter.fvm()<cr>", "Change Flutter Version" },
+    f = { "<cmd>lua require('avatar.lsp.languagues.flutter').code_action_fix_all()<cr>", "Fix All" },
     o = { "<cmd>lua require('flutter-tools.outline').toggle()<cr>", "Flutter Outlines" },
+    x = { "<cmd>lua require('flutter-tools.commands').quit()<cr>", "Quit Flutter" },
+    h = { "<cmd>lua require('flutter-tools.commands').run_command()<cr>", "Run" },
   },
-
-  --[[ x = { ]]
-  --[[   name = "Trouble", ]]
-  --[[   r = { "<cmd>Trouble references<cr>", "References" }, ]]
-  --[[   f = { "<cmd>Trouble definitions<cr>", "Definitions" }, ]]
-  --[[   d = { "<cmd>Trouble document_diagnostics<cr>", "Diagnostics" }, ]]
-  --[[   q = { "<cmd>Trouble quickfix<cr>", "QuickFix" }, ]]
-  --[[   l = { "<cmd>Trouble loclist<cr>", "LocationList" }, ]]
-  --[[   w = { "<cmd>Trouble workspace_diagnostics<cr>", "Workspace Diagnostics" }, ]]
-  --[[ }, ]]
-
   i = {
     name = "Session",
     l = { "<cmd>SessionManager load_session<CR>", "Load Sessions" },
     s = { "<cmd>SessionManager save_current_session<cr>", "Save current session" },
     d = { "<cmd>SessionManager load_current_dir_session<cr>", "Load current Dir session" },
   },
-
-  --[[ m = { ]]
-  --[[   name = "Plantuml", ]]
-  --[[   o = { "<cmd>PlantumlOpen<CR>", "Open UML" }, ]]
-  --[[   s = { "<cmd>PlantumlSave ", "Save Diagram" }, ]]
-  --[[ }, ]]
-
   h = {
     name = "Harpoon",
     a = { "<CMD>lua require('harpoon.mark').add_file()<CR>", "Add File" },
