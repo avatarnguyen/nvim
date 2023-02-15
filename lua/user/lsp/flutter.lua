@@ -3,7 +3,7 @@ if not status_ok then
   return
 end
 
-local colorscheme =  require("user.colorscheme").colorscheme
+local colorscheme = require("user.colorscheme").colorscheme
 
 flutter.setup({
   ui = {
@@ -47,8 +47,8 @@ flutter.setup({
     color = { -- show the derived colours for dart variables
       enabled = true,
       background = false, -- highlight the background
-      -- background_color = nil, -- required, when background is transparent 
-      background_color = { r = 19, g = 17, b = 24},
+      -- background_color = nil, -- required, when background is transparent
+      background_color = { r = 19, g = 17, b = 24 },
       foreground = false, -- highlight the foreground
       virtual_text = true, -- show the highlight using virtual text
       virtual_text_str = "■■", -- the virtual text character to highlight
@@ -62,7 +62,7 @@ flutter.setup({
       elseif colorscheme == "github" then
         vim.cmd "highlight FlutterWidgetGuides ctermfg=9 guifg=#56d4dd"
       else
-         vim.cmd "highlight FlutterWidgetGuides ctermfg=9 guifg=cyan"
+        vim.cmd "highlight FlutterWidgetGuides ctermfg=9 guifg=cyan"
       end
 
       require('user.neotest')
