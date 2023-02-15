@@ -70,7 +70,7 @@ return packer.startup(function(use)
     'lalitmee/cobalt2.nvim',
     requires = 'tjdevries/colorbuddy.nvim',
   }
-  use ({ 'projekt0n/github-nvim-theme', tag = '0.0.x' })
+  use({ 'projekt0n/github-nvim-theme', tag = '0.0.x' })
 
   use({ "Shatur/neovim-ayu" })
 
@@ -156,8 +156,13 @@ return packer.startup(function(use)
   })
 
   -- GO
-  use('crispgm/nvim-go')
-  use('simrat39/inlay-hints.nvim')
+      ------------------------
+    -- GO
+    ------------------------
+  use "olexsmir/gopher.nvim"
+  use "leoluz/nvim-dap-go"
+  -- use('crispgm/nvim-go')
+  use "lvimuser/lsp-inlayhints.nvim"
 
   use {
     "nvim-neotest/neotest",
@@ -305,15 +310,18 @@ return packer.startup(function(use)
     end,
   }
   -- use 'mbbill/undotree'
-  use 'karb94/neoscroll.nvim'
-  use({
-    "folke/noice.nvim",
-    requires = {
-      -- if you lazy-load any plugin below, make sure to add proper `module="..."` entries
-      "MunifTanjim/nui.nvim",
-      "rcarriga/nvim-notify",
-    }
-  })
+  -- use 'karb94/neoscroll.nvim'
+  use "opalmay/vim-smoothie"
+  use "alexghergh/nvim-tmux-navigation"
+  use 'christoomey/vim-tmux-runner'
+  -- use({
+  --   "folke/noice.nvim",
+  --   requires = {
+  --     -- if you lazy-load any plugin below, make sure to add proper `module="..."` entries
+  --     "MunifTanjim/nui.nvim",
+  --     "rcarriga/nvim-notify",
+  --   }
+  -- })
   use {
     'phaazon/hop.nvim',
     branch = 'v2',
