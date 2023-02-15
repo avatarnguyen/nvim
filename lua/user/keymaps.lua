@@ -110,32 +110,32 @@ keymap("n", "<leader>rr", "<cmd>lua require('substitute.range').word()<cr>", {})
 
 -- Code Navigation {{{
 -- HOP
-local hop = require('hop')
-local directions = require('hop.hint').HintDirection
-vim.keymap.set('', 'f', function()
-  hop.hint_char1({ direction = directions.AFTER_CURSOR, current_line_only = true })
-end, { remap = true, silent = true })
-vim.keymap.set('', 'F', function()
-  hop.hint_char1({ direction = directions.BEFORE_CURSOR, current_line_only = true })
-end, { remap = true, silent = true })
-vim.keymap.set('', 't', function()
-  hop.hint_char1({ direction = directions.AFTER_CURSOR, current_line_only = true, hint_offset = -1 })
-end, { remap = true, silent = true })
-vim.keymap.set('', 'T', function()
-  hop.hint_char1({ direction = directions.BEFORE_CURSOR, current_line_only = true, hint_offset = 1 })
-end, { remap = true, silent = true })
-
-keymap('n', "<C-l>", "<cmd>lua require'hop'.hint_lines()<cr>", opts)
-keymap('v', "<C-l>", "<cmd>lua require'hop'.hint_lines()<cr>", opts)
-vim.keymap.set('', '<C-h>', function()
-  hop.hint_char1({ direction = directions.AFTER_CURSOR, current_line_only = false })
-end, { remap = true, silent = true })
-vim.keymap.set('', '<C-S-h>', function()
-  hop.hint_char1({ direction = directions.BEFORE_CURSOR, current_line_only = false })
-end, { remap = true, silent = true })
-
-keymap('v', "<C-S-h>", "<cmd><C-U>lua require('tsht').nodes()<cr>", opts)
-keymap('i', "<C-S-h>", "<cmd>lua require('tsht').nodes()<cr>", opts)
+--local hop = require('hop')
+--local directions = require('hop.hint').HintDirection
+--vim.keymap.set('', 'f', function()
+--  hop.hint_char1({ direction = directions.AFTER_CURSOR, current_line_only = true })
+--end, { remap = true, silent = true })
+--vim.keymap.set('', 'F', function()
+--  hop.hint_char1({ direction = directions.BEFORE_CURSOR, current_line_only = true })
+--end, { remap = true, silent = true })
+--vim.keymap.set('', 't', function()
+--  hop.hint_char1({ direction = directions.AFTER_CURSOR, current_line_only = true, hint_offset = -1 })
+--end, { remap = true, silent = true })
+--vim.keymap.set('', 'T', function()
+--  hop.hint_char1({ direction = directions.BEFORE_CURSOR, current_line_only = true, hint_offset = 1 })
+--end, { remap = true, silent = true })
+--
+--keymap('n', "<C-l>", "<cmd>lua require'hop'.hint_lines()<cr>", opts)
+--keymap('v', "<C-l>", "<cmd>lua require'hop'.hint_lines()<cr>", opts)
+--vim.keymap.set('', '<C-h>', function()
+--  hop.hint_char1({ direction = directions.AFTER_CURSOR, current_line_only = false })
+--end, { remap = true, silent = true })
+--vim.keymap.set('', '<C-S-h>', function()
+--  hop.hint_char1({ direction = directions.BEFORE_CURSOR, current_line_only = false })
+--end, { remap = true, silent = true })
+--
+--keymap('v', "<C-S-h>", "<cmd><C-U>lua require('tsht').nodes()<cr>", opts)
+--keymap('i', "<C-S-h>", "<cmd>lua require('tsht').nodes()<cr>", opts)
 -- Tree Hopper
 --}}}
 
@@ -144,13 +144,13 @@ keymap('i', "<C-S-h>", "<cmd>lua require('tsht').nodes()<cr>", opts)
 -- Unimpaired Keymapping {{{
 
 -- to do keymapping
-vim.keymap.set("n", "]t", function()
-  require("todo-comments").jump_next()
-end, { desc = "Next todo comment" })
-
-vim.keymap.set("n", "[t", function()
-  require("todo-comments").jump_prev()
-end, { desc = "Previous todo comment" })
+--vim.keymap.set("n", "]t", function()
+--  require("todo-comments").jump_next()
+--end, { desc = "Next todo comment" })
+--
+--vim.keymap.set("n", "[t", function()
+--  require("todo-comments").jump_prev()
+--end, { desc = "Previous todo comment" })
 
 -- You can also specify a list of valid jump keywords
 -- vim.keymap.set("n", "]t", function()

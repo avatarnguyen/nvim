@@ -9,10 +9,10 @@ vim.g.mapleader = " "
 vim.g.maplocalleader = " "
 
 -- Better window navigation
-keymap("n", "<Left>", function() vim.fn.VSCodeNotify("workbench.action.focusLeftGroup") end, opts)
-keymap("n", "<Down>", function() vim.fn.VSCodeNotify("workbench.action.focusBelowGroup") end, opts)
-keymap("n", "<Up>", function() vim.fn.VSCodeNotify("workbench.action.focusAboveGroup") end, opts)
-keymap("n", "<Right>", function() vim.fn.VSCodeNotify("workbench.action.focusRightGroup") end, opts)
+keymap("n", "<C-h>", function() vim.fn.VSCodeNotify("workbench.action.focusLeftGroup") end, opts)
+keymap("n", "<C-j>", function() vim.fn.VSCodeNotify("workbench.action.focusBelowGroup") end, opts)
+keymap("n", "<C-k>", function() vim.fn.VSCodeNotify("workbench.action.focusAboveGroup") end, opts)
+keymap("n", "<C-l>", function() vim.fn.VSCodeNotify("workbench.action.focusRightGroup") end, opts)
 
 keymap("n", "gj", function() vim.fn.VSCodeNotify("editor.action.peekDefinition") end, opts)
 keymap("n", "gs", function() vim.fn.VSCodeNotify("editor.action.triggerParameterHints") end, opts)
@@ -44,20 +44,6 @@ keymap("n", "<C-n>", "<cmd>nohlsearch<CR>", opts)
 keymap("n", "<leader>p", '"0p', opts)
 keymap("v", "<leader>p", '"_dP', opts)
 
-local hop = require('hop')
-local directions = require('hop.hint').HintDirection
-vim.keymap.set('', 'f', function()
-  hop.hint_char1({ direction = directions.AFTER_CURSOR, current_line_only = true })
-end, { remap = true, silent = true })
-vim.keymap.set('', 'F', function()
-  hop.hint_char1({ direction = directions.BEFORE_CURSOR, current_line_only = true })
-end, { remap = true, silent = true })
-vim.keymap.set('', 't', function()
-  hop.hint_char1({ direction = directions.AFTER_CURSOR, current_line_only = true, hint_offset = -1 })
-end, { remap = true, silent = true })
-vim.keymap.set('', 'T', function()
-  hop.hint_char1({ direction = directions.BEFORE_CURSOR, current_line_only = true, hint_offset = 1 })
-end, { remap = true, silent = true })
 
 -- Dial
 keymap("n", "<C-a>", require("dial.map").inc_normal())
@@ -68,9 +54,9 @@ keymap("v", "g<C-a>", require("dial.map").inc_gvisual())
 keymap("v", "g<C-x>", require("dial.map").dec_gvisual())
 
 -- SUBSTITUTE plugin  {{{
-keymap("n", "s", "<cmd>lua require('substitute').operator()<cr>", { noremap = true })
+--keymap("n", "s", "<cmd>lua require('substitute').operator()<cr>", { noremap = true })
 --keymap("x", "s", "<cmd>lua require('substitute').visual()<cr>", { noremap = true })
-keymap("n", "ss", "<cmd>lua require('substitute').line()<cr>", { noremap = true })
+--keymap("n", "ss", "<cmd>lua require('substitute').line()<cr>", { noremap = true })
 --keymap("n", "<S-s>", "<cmd>lua require('substitute').eol()<cr>", { noremap = true })
 --keymap("v", "<S-s>", "<cmd>lua require('substitute').visual()<cr>", { noremap = true })
 --keymap("n", "<leader>r", "<cmd>lua require('substitute.range').operator()<cr>", { noremap = true })
@@ -239,9 +225,9 @@ AlterCommand tabfir[st] Tabfirst
 AlterCommand tabl[ast] Tablast
 AlterCommand tabm[ove] Tabmove
 
-nnoremap <Tab> <Cmd>call <SID>switchEditor(v:count, 'next')<CR>
+nnoremap <S-l> <Cmd>call <SID>switchEditor(v:count, 'next')<CR>
 xnoremap gt <Cmd>call <SID>switchEditor(v:count, 'next')<CR>
-nnoremap <S-Tab> <Cmd>call <SID>switchEditor(v:count, 'prev')<CR>
+nnoremap <S-h> <Cmd>call <SID>switchEditor(v:count, 'prev')<CR>
 xnoremap gT <Cmd>call <SID>switchEditor(v:count, 'prev')<CR>
 ]]
 
