@@ -31,7 +31,7 @@ end
 
 -- Have packer use a popup window
 packer.init({
-  max_jobs = 10,
+  max_jobs = 20,
   display = {
     open_fn = function()
       return require("packer.util").float({ border = "rounded" })
@@ -281,18 +281,18 @@ return packer.startup(function(use)
     end
   })
   use("tpope/vim-repeat")
-  use({
-    "petertriho/nvim-scrollbar",
-    config = function()
-      require("user.scrollbar")
-    end
-  })
-  use({
-    'kevinhwang91/nvim-hlslens',
-    config = function()
-      require("scrollbar.handlers.search").setup()
-    end
-  })
+  -- use({
+  --   "petertriho/nvim-scrollbar",
+  --   config = function()
+  --     require("user.scrollbar")
+  --   end
+  -- })
+  -- use({
+  --   'kevinhwang91/nvim-hlslens',
+  --   config = function()
+  --     require("scrollbar.handlers.search").setup()
+  --   end
+  -- })
 
   -- Misc
   use {
