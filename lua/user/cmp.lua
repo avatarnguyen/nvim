@@ -13,6 +13,100 @@ if not tabnine_status_ok then
   return
 end
 
+local has_words_before = function()
+---@diagnostic disable-next-line: deprecated
+  local line, col = unpack(vim.api.nvim_win_get_cursor(0))
+  return col ~= 0 and vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]:sub(col, col):match "%s" == nil
+end
+
+-- M.methods.has_words_before = has_words_before
+
+local function jumpable(dir)
+
+  local win_get_cursor = vim.api.nvim_win_get_cursor
+  local get_current_buf = vim.api.nvim_get_current_buf
+
+  ---sets the current buffer's luasnip to the one nearest the cursor
+  ---@return boolean true if a node is found, false otherwise
+  local function seek_luasnip_cursor_node()
+    -- TODO(kylo252): upstream this
+    -- for outdated versions of luasnip
+    if not luasnip.session.current_nodes then
+      return false
+    end
+
+    local node = luasnip.session.current_nodes[get_current_buf()]
+    if not node then
+      return false
+    end
+
+    local snippet = node.parent.snippet
+    local exit_node = snippet.insert_nodes[0]
+
+    local pos = win_get_cursor(0)
+    pos[1] = pos[1] - 1
+
+    -- exit early if we're past the exit node
+    if exit_node then
+      local exit_pos_end = exit_node.mark:pos_end()
+      if (pos[1] > exit_pos_end[1]) or (pos[1] == exit_pos_end[1] and pos[2] > exit_pos_end[2]) then
+        snippet:remove_from_jumplist()
+        luasnip.session.current_nodes[get_current_buf()] = nil
+
+        return false
+      end
+    end
+
+    node = snippet.inner_first:jump_into(1, true)
+    while node ~= nil and node.next ~= nil and node ~= snippet do
+      local n_next = node.next
+      local next_pos = n_next and n_next.mark:pos_begin()
+      local candidate = n_next ~= snippet and next_pos and (pos[1] < next_pos[1])
+          or (pos[1] == next_pos[1] and pos[2] < next_pos[2])
+
+      -- Past unmarked exit node, exit early
+      if n_next == nil or n_next == snippet.next then
+        snippet:remove_from_jumplist()
+        luasnip.session.current_nodes[get_current_buf()] = nil
+
+        return false
+      end
+
+      if candidate then
+        luasnip.session.current_nodes[get_current_buf()] = node
+        return true
+      end
+
+      local ok
+      ok, node = pcall(node.jump_from, node, 1, true) -- no_move until last stop
+      if not ok then
+        snippet:remove_from_jumplist()
+        luasnip.session.current_nodes[get_current_buf()] = nil
+
+        return false
+      end
+    end
+
+    -- No candidate, but have an exit node
+    if exit_node then
+      -- to jump to the exit node, seek to snippet
+      luasnip.session.current_nodes[get_current_buf()] = snippet
+      return true
+    end
+
+    -- No exit node, exit from snippet
+    snippet:remove_from_jumplist()
+    luasnip.session.current_nodes[get_current_buf()] = nil
+    return false
+  end
+
+  if dir == -1 then
+    return luasnip.in_snippet() and luasnip.jumpable( -1)
+  else
+    return luasnip.in_snippet() and seek_luasnip_cursor_node() and luasnip.jumpable(1)
+  end
+end
+
 local buffer_fts = {
   "markdown",
   "toml",
@@ -37,15 +131,10 @@ require("luasnip/loaders/from_vscode").load()
 require("luasnip/loaders/from_vscode").lazy_load({ paths = { "~/.config/nvim/vscodesnips" } })
 
 -- local check_backspace = function()
---   local col = vim.fn.col "." - 1
---   return col == 0 or vim.fn.getline("."):sub(col, col):match "%s"
+--   ---@diagnostic disable-next-line: deprecated
+--   local line, col = unpack(vim.api.nvim_win_get_cursor(0))
+--   return col ~= 0 and vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]:sub(col, col):match "%s" == nil
 -- end
-
-local check_backspace = function()
-  ---@diagnostic disable-next-line: deprecated
-  local line, col = unpack(vim.api.nvim_win_get_cursor(0))
-  return col ~= 0 and vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]:sub(col, col):match "%s" == nil
-end
 
 local icons = require "user.icons"
 
@@ -75,35 +164,45 @@ cmp.setup {
   mapping = cmp.mapping.preset.insert {
     ["<C-k>"] = cmp.mapping(cmp.mapping.select_prev_item(), { "i", "c" }),
     ["<C-j>"] = cmp.mapping(cmp.mapping.select_next_item(), { "i", "c" }),
-    ["<C-b>"] = cmp.mapping(cmp.mapping.scroll_docs(-1), { "i", "c" }),
-    ["<C-f>"] = cmp.mapping(cmp.mapping.scroll_docs(1), { "i", "c" }),
-    ["<C-Space>"] = cmp.mapping(cmp.mapping.complete(), { "i", "c" }),
-    ["<m-o>"] = cmp.mapping(cmp.mapping.complete(), { "i", "c" }),
-    -- ["<C-y>"] = cmp.config.disable, -- Specify `cmp.config.disable` if you want to remove the default `<C-y>` mapping.
-    ["<C-c>"] = cmp.mapping {
-      i = cmp.mapping.abort(),
-      c = cmp.mapping.close(),
+    ["<Down>"] = cmp.mapping(cmp.mapping.select_next_item { behavior = cmp.SelectBehavior.Select }, { "i" }),
+    ["<Up>"] = cmp.mapping(cmp.mapping.select_prev_item { behavior = cmp.SelectBehavior.Select }, { "i" }),
+    ["<C-d>"] = cmp.mapping.scroll_docs( -4),
+    ["<C-f>"] = cmp.mapping.scroll_docs(4),
+    ["<C-y>"] = cmp.mapping {
+      i = cmp.mapping.confirm { behavior = cmp.ConfirmBehavior.Replace, select = false },
+      c = function(fallback)
+        if cmp.visible() then
+          cmp.confirm { behavior = cmp.ConfirmBehavior.Replace, select = false }
+        else
+          fallback()
+        end
+      end,
     },
-    ["<m-j>"] = cmp.mapping {
-      i = cmp.mapping.abort(),
-      c = cmp.mapping.close(),
-    },
-    ["<m-k>"] = cmp.mapping {
-      i = cmp.mapping.abort(),
-      c = cmp.mapping.close(),
-    },
-    ["<m-c>"] = cmp.mapping {
-      i = cmp.mapping.abort(),
-      c = cmp.mapping.close(),
-    },
-    ["<S-CR>"] = cmp.mapping {
-      i = cmp.mapping.abort(),
-      c = cmp.mapping.close(),
-    },
-    -- Accept currently selected item. If none selected, `select` first item.
-    -- Set `select` to `false` to only confirm explicitly selected items.
-    -- ["<Right>"] = cmp.mapping.confirm { select = true },
-    ["<CR>"] = cmp.mapping.confirm { select = false },
+    ["<Tab>"] = cmp.mapping(function(fallback)
+      if cmp.visible() then
+        cmp.select_next_item()
+      elseif luasnip.expand_or_locally_jumpable() then
+        luasnip.expand_or_jump()
+      elseif jumpable(1) then
+        luasnip.jump(1)
+      elseif has_words_before() then
+        -- cmp.complete()
+        fallback()
+      else
+        fallback()
+      end
+    end, { "i", "s" }),
+    ["<S-Tab>"] = cmp.mapping(function(fallback)
+      if cmp.visible() then
+        cmp.select_prev_item()
+      elseif luasnip.jumpable( -1) then
+        luasnip.jump( -1)
+      else
+        fallback()
+      end
+    end, { "i", "s" }),
+    ["<C-Space>"] = cmp.mapping.complete(),
+    ["<C-e>"] = cmp.mapping.abort(),
     ["<C-CR>"] = cmp.mapping(function(fallback)
       if luasnip.jumpable(1) then
         luasnip.jump(1)
@@ -116,37 +215,22 @@ cmp.setup {
       "i",
       "s",
     }),
-    ["<Tab>"] = cmp.mapping(function(fallback)
+    ["<CR>"] = cmp.mapping(function(fallback)
       if cmp.visible() then
-        cmp.select_next_item()
-      elseif luasnip.jumpable(1) then
-        luasnip.jump(1)
-      elseif luasnip.expand_or_jumpable() then
-        luasnip.expand_or_jump()
-      elseif luasnip.expandable() then
-        luasnip.expand()
-      elseif check_backspace() then
-        -- cmp.complete()
-        fallback()
-      else
-        fallback()
+        local confirm_opts = {}
+        local is_insert_mode = function()
+          return vim.api.nvim_get_mode().mode:sub(1, 1) == "i"
+        end
+        if is_insert_mode() then -- prevent overwriting brackets
+          confirm_opts.behavior = cmp.ConfirmBehavior.Insert
+        end
+        if cmp.confirm(confirm_opts) then
+          return -- success, exit early
+        end
       end
-    end, {
-      "i",
-      "s",
-    }),
-    ["<S-Tab>"] = cmp.mapping(function(fallback)
-      if cmp.visible() then
-        cmp.select_prev_item()
-      elseif luasnip.jumpable(-1) then
-        luasnip.jump(-1)
-      else
-        fallback()
-      end
-    end, {
-      "i",
-      "s",
-    }),
+
+      fallback() -- if not exited early, always fallback
+    end),
   },
   formatting = {
     fields = { "kind", "abbr", "menu" },
@@ -180,19 +264,19 @@ cmp.setup {
 
       -- NOTE: order matters
       vim_item.menu = ({
-        luasnip = "SNIP",
-        nvim_lsp = "LSP",
-        cmp_tabnine = "TN",
-        nvim_lua = "LSP",
-        buffer = "BUF",
-        path = "PATH",
-        emoji = "E",
-      })[entry.source.name]
+            luasnip = "SNIP",
+            nvim_lsp = "LSP",
+            cmp_tabnine = "TN",
+            nvim_lua = "LSP",
+            buffer = "BUF",
+            path = "PATH",
+            emoji = "E",
+          })[entry.source.name]
       return vim_item
     end,
   },
   sources = {
-    { name = "crates", group_index = 1 },
+    { name = "crates",   group_index = 1 },
     -- {
     --   name = "copilot",
     --   -- keyword_length = 0,
@@ -239,7 +323,7 @@ cmp.setup {
       group_index = 2,
     },
     { name = "nvim_lua", group_index = 2 },
-    { name = "luasnip", group_index = 2 },
+    { name = "luasnip",  group_index = 2 },
     {
       name = "buffer",
       group_index = 2,
@@ -250,9 +334,9 @@ cmp.setup {
         end
       end,
     },
-    { name = "cmp_tabnine", group_index = 2 },
-    { name = "path", group_index = 2 },
-    { name = "emoji", group_index = 2 },
+    { name = "cmp_tabnine",    group_index = 2 },
+    { name = "path",           group_index = 2 },
+    { name = "emoji",          group_index = 2 },
     { name = "lab.quick_data", keyword_length = 4, group_index = 2 },
   },
   sorting = {
@@ -291,20 +375,10 @@ cmp.setup {
     },
   },
   experimental = {
-    ghost_text = true,
+    ghost_text = false,
+    native_menu = false,
   },
 }
-
--- prefetch Dart files
--- local prefetch = vim.api.nvim_create_augroup("prefetch", { clear = true })
-
--- vim.api.nvim_create_autocmd('BufRead', {
---   group = prefetch,
---   pattern = '*.dart',
---   callback = function()
---     require('cmp_tabnine'):prefetch(vim.fn.expand('%:p'))
---   end
--- })
 
 -- Use buffer source for `/` and `?` (if you enabled `native_menu`, this won't work anymore).
 cmp.setup.cmdline({ '/', '?' }, {
@@ -324,46 +398,3 @@ cmp.setup.cmdline(':', {
   })
 })
 
---    format = lspkind.cmp_format({
---      -- options: 'text', 'text_symbol', 'symbol_text', 'symbol'
---      mode = 'symbol_text', -- show only symbol annotations
---      maxwidth = 50, -- prevent the popup from showing more than provided characters (e.g 50 will not show more than 50 characters)
---      before = function(entry, vim_item)
---        vim_item.menu = source_mapping[entry.source.name]
---        if entry.source.name == "cmp_tabnine" then
---          local detail = (entry.completion_item.data or {}).detail
---          vim_item.kind = ""
---          if detail and detail:find('.*%%.*') then
---            vim_item.kind = vim_item.kind .. ' ' .. detail
---          end
---
---          if (entry.completion_item.data or {}).multiline then
---            vim_item.kind = vim_item.kind .. ' ' .. '[ML]'
---          end
---        end
---
---        -- Get the full snippet (and only keep first line)
---        local word = entry:get_insert_text()
---        if entry.completion_item.insertTextFormat == types.lsp.InsertTextFormat.Snippet then
---          word = vim.lsp.util.parse_snippet(word)
---        end
---        word = str.oneline(word)
---
---        -- concatenates the string
---        -- local max = 50
---        -- if string.len(word) >= max then
---        -- 	local before = string.sub(word, 1, math.floor((max - 3) / 2))
---        -- 	word = before .. "..."
---        -- end
---
---        if entry.completion_item.insertTextFormat == types.lsp.InsertTextFormat.Snippet
---            and string.sub(vim_item.abbr, -1, -1) == "~"
---        then
---          word = word .. "~"
---        end
---        vim_item.abbr = word
---        --[[ local maxwidth = 80 ]]
---        --[[ vim_item.abbr = string.sub(vim_item.abbr, 1, maxwidth) ]]
---        return vim_item
---      end
---    }),

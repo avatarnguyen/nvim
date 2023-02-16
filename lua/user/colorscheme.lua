@@ -1,6 +1,7 @@
 -- vim:fileencoding=utf-8:foldmethod=marker
 
 local M = {}
+
 -- local colorscheme = "kanagawa"
 -- local colorscheme = "tokyonight"
 -- local colorscheme = "cobalt2"

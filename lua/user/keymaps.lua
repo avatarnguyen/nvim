@@ -32,17 +32,12 @@ keymap("n", "<Enter>", ":w<cr>", opts)
 keymap("n", "<C-p>", ":VtrSendKeysRaw r<CR>", opts)
 keymap("n", "<C-q>", ":call QuickFixToggle()<CR>", opts)
 
---FIXME
--- keymap("n", "<C-f>", "<cmd>Telescope resume<CR>", opts)
-
 -- Explorer
 keymap("", "<C-1>", "<cmd>NvimTreeToggle<cr>", opts)
 keymap("", "<C-S-1>", "<cmd>NvimTreeFocus<cr>", opts)
 
 -- Flutter
 keymap("", "<C-0>", "<cmd>lua require('flutter-tools.outline').toggle()<cr>", opts)
---FIXME
--- keymap("", "<C-k>", "<cmd>lua require('user.lsp.handlers').code_action_fix_all()<cr><cmd>w!<cr>", opts)
 
 keymap("", "<C-2>", "<CMD>lua require('harpoon.ui').toggle_quick_menu()<CR>", opts)
 
@@ -183,8 +178,8 @@ keymap("x", "K", ":move '<-2<CR>gv-gv", opts)
 keymap("i", "jk", "<ESC>", opts)
 
 -- Buffer
--- keymap("n", "<leader>c", "<cmd>Bdelete!<CR>", opts)
-keymap("n", "<leader>w", "<cmd>Bdelete!<CR>", opts)
+keymap("n", "<leader>c", "<cmd>Bdelete!<CR>", opts)
+keymap("n", "<leader>w", "<cmd>w!<CR><cmd>VtrSendKeysRaw r<CR>", opts)
 -- keymap("n", "<C-b>",
 --   "<cmd>lua require('telescope.builtin').buffers(require('telescope.themes').get_dropdown{sort_mru = true, layout_config = {width = 0.6}})<cr>", opts)
 keymap("n", ";;",
@@ -195,11 +190,11 @@ keymap("n", "<leader>;",
 --   "<cmd>Neotree buffers focus<cr>", opts)
 
 -- Dial
-keymap("n", "<C-a>", require("dial.map").inc_normal())
+keymap("n", "<C-y>", require("dial.map").inc_normal())
 keymap("n", "<C-x>", require("dial.map").dec_normal())
-keymap("v", "<C-a>", require("dial.map").inc_visual())
+keymap("v", "<C-y>", require("dial.map").inc_visual())
 keymap("v", "<C-x>", require("dial.map").dec_visual())
-keymap("v", "g<C-a>", require("dial.map").inc_gvisual())
+keymap("v", "g<C-y>", require("dial.map").inc_gvisual())
 keymap("v", "g<C-x>", require("dial.map").dec_gvisual())
 
 -- Terminal --

@@ -3,6 +3,49 @@ if not status_ok then
   return
 end
 
+local icons = require("user.icons")
+
+
+local function diagnostics_indicator(num, _, diagnostics, _)
+  local result = {}
+  local symbols = {
+    error = icons.diagnostics.Error,
+    warning = icons.diagnostics.Warning,
+    info = icons.diagnostics.Information,
+  }
+  -- if not icons.use_icons then
+  --   return "(" .. num .. ")"
+  -- end
+  for name, count in pairs(diagnostics) do
+    if symbols[name] and count > 0 then
+      table.insert(result, symbols[name] .. " " .. count)
+    end
+  end
+  result = table.concat(result, " ")
+  return #result > 0 and result or ""
+end
+
+-- local function is_ft(b, ft)
+--   return vim.bo[b].filetype == ft
+-- end
+
+-- local function custom_filter(buf, buf_nums)
+--   local logs = vim.tbl_filter(function(b)
+--     return is_ft(b, "log")
+--   end, buf_nums)
+--   if vim.tbl_isempty(logs) then
+--     return true
+--   end
+--   local tab_num = vim.fn.tabpagenr()
+--   local last_tab = vim.fn.tabpagenr "$"
+--   local is_log = is_ft(buf, "log")
+--   if last_tab == 1 then
+--     return true
+--   end
+--   -- only show log buffers in secondary tabs
+--   return (tab_num == last_tab and is_log) or (tab_num ~= last_tab and not is_log)
+-- end
+
 bufferline.setup {
   options = {
     numbers = "none", -- | "ordinal" | "buffer_id" | "both" | function({ ordinal, id, lower, raise }): string,
@@ -20,6 +63,14 @@ bufferline.setup {
     -- close_icon = '',
     left_trunc_marker = "",
     right_trunc_marker = "",
+    highlights = {
+      background = {
+        italic = true,
+      },
+      buffer_selected = {
+        bold = true,
+      },
+    },
     --- name_formatter can be used to change the buffer's label in the bufferline.
     --- Please note some names can/will break the
     --- bufferline so use this at your discretion knowing that it has
@@ -30,16 +81,19 @@ bufferline.setup {
     --     return vim.fn.fnamemodify(buf.name, ':t:r')
     --   end
     -- end,
+
     max_name_length = 30,
-    max_prefix_length = 30, -- prefix used when a buffer is de-duplicated
+    max_prefix_length = 20, -- prefix used when a buffer is de-duplicated
     tab_size = 21,
+    truncate_names = true, -- whether or not tab names should be truncated
     diagnostics = "nvim_lsp", -- | "nvim_lsp" | "coc",
     diagnostics_update_in_insert = false,
-    diagnostics_indicator = function(count, level, diagnostics_dict, context)
-      return "("..count..")"
-    end,
+    -- diagnostics_indicator = function(count, level, diagnostics_dict, context)
+    --   return "(" .. count .. ")"
+    -- end,
+    diagnostics_indicator = diagnostics_indicator,
     -- NOTE: this will be called a lot so don't do any heavy processing here
-    -- custom_filter = function(buf_number)
+    -- custom_filter = custom_filter,
     --   -- filter out filetypes you don't want to see
     --   if vim.bo[buf_number].filetype ~= "<i-dont-want-to-see-this>" then
     --     return true
@@ -54,7 +108,6 @@ bufferline.setup {
     --     return true
     --   end
     -- end,
-    offsets = { { filetype = "NvimTree", text = "", padding = 1 } },
     show_buffer_icons = false,
     show_buffer_close_icons = false,
     show_close_icon = true,
@@ -66,9 +119,40 @@ bufferline.setup {
     enforce_regular_tabs = true,
     always_show_bufferline = true,
     --[[ sort_by = 'relative_directory' -- 'id' | 'extension' | 'relative_directory' | 'directory' | 'tabs' | function(buffer_a, buffer_b) ]]
-      --   -- add custom logic
-      --[[ return buffer_a.modified > buffer_b.modified ]]
+    --   -- add custom logic
+    --[[ return buffer_a.modified > buffer_b.modified ]]
     --[[ end ]]
+    offsets = {
+      {
+        filetype = "undotree",
+        text = "Undotree",
+        highlight = "PanelHeading",
+        padding = 1,
+      },
+      {
+        filetype = "NvimTree",
+        text = "Explorer",
+        highlight = "PanelHeading",
+        padding = 1,
+      },
+      {
+        filetype = "DiffviewFiles",
+        text = "Diff View",
+        highlight = "PanelHeading",
+        padding = 1,
+      },
+      {
+        filetype = "flutterToolsOutline",
+        text = "Flutter Outline",
+        highlight = "PanelHeading",
+      },
+      {
+        filetype = "packer",
+        text = "Packer",
+        highlight = "PanelHeading",
+        padding = 1,
+      },
+    },
   },
   -- highlights = {
   --   fill = {

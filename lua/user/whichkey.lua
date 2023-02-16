@@ -86,21 +86,12 @@ local knowunity_file_ignore = { 'pub.dartlang.org/', '.pub-cache/', 'ios/', 'win
 
 local mappings = {
   ["a"] = { "<cmd>Neotree float reveal<cr>", "File Browser" },
-
   ["e"] = { "<cmd>NvimTreeToggle<cr>", "Explorer" },
   ["E"] = { "<cmd>NvimTreeFocus<cr>", "Explorer" },
-
-  -- ["E"] = { "<cmd>Neotree close<cr>", "Close Explorer" },
-  -- ["e"] = { "<cmd>Neotree<cr>", "Explorer" },
-
   ["A"] = { "<cmd>wa<CR>", "Save All" },
   ["Q"] = { "<cmd>q<CR>", "Quit" },
   --[[ ["c"] = { "<cmd>Bdelete!<CR>", "Close Buffer" }, ]]
   ["F"] = { "<cmd>Telescope resume<CR>", "Last Telescope command" },
-  -- ["f"] = {
-  --   "<cmd>lua require('telescope.builtin').find_files(require('telescope.themes').get_dropdown{ debounce = 150, file_ignore_patterns = {'ios/', 'android/', 'fonts/', 'assets/', 'packages/', 'doc/'}})<cr>",
-  --   "Find files",
-  -- },
   ["f"] = {
     "<cmd>lua require('telescope.builtin').find_files({ debounce = 150, sort_last_used = true, file_ignore_patterns = {'windows/', 'web/', 'ios/', 'android/', 'fonts/', 'assets/', 'doc/'}})<cr>",
     "Find files",
@@ -111,11 +102,11 @@ local mappings = {
   -- ["p"] = { "<cmd>:lua require('telescope').extensions.neoclip.default(require('telescope.themes').get_dropdown{})<CR>",
   --   "Clipboard" },
   ["D"] = { "<cmd>lua require('telescope').extensions.flutter.commands()<CR>", "Flutter Commands" },
-
   ["M"] = { "<cmd>lua require('telescope').extensions.macroscope.default()<CR>", "Macros" },
 
   s = {
     name = "pickers",
+    j = { "<cmd>Telescope resume<CR>", "Last Picker" },
     s = {
       "<cmd>lua require('telescope.builtin').lsp_dynamic_workspace_symbols({ debounce = 150, search_dirs = 'CWD', file_ignore_patterns = knowunity_file_ignore , opts = {symbols = {'info', 'error'}}})<cr>",
       "Workspace Symbols",
@@ -137,25 +128,24 @@ local mappings = {
     u = { "<cmd>Telescope undo<cr>",
       "Search Undo" },
   },
-  r = {
-    name = "Search & Replace",
-    o = { "<cmd>lua require('substitute.range').operator()<cr>", "Substitute Range Operator" },
-    w = { "<cmd>lua require('substitute.range').word()<cr>", "Substitute Range Word" },
-    s =
-    { "<CMD>SearchReplaceSingleBufferSelections<CR>", "SearchReplaceSingleBuffer [s]elction list" },
-    a = { "<CMD>SearchReplaceSingleBufferOpen<CR>", "open" },
-    d = { "<CMD>SearchReplaceSingleBufferCWord<CR>", "[w]ord" },
-    W = { "<CMD>SearchReplaceSingleBufferCWORD<CR>", "[W]ORD" },
-    e = { "<CMD>SearchReplaceSingleBufferCExpr<CR>", "[e]xpr" },
-    f = { "<CMD>SearchReplaceSingleBufferCFile<CR>", "[f]ile" },
-  },
+  -- r = {
+  --   name = "Search & Replace",
+  --   o = { "<cmd>lua require('substitute.range').operator()<cr>", "Substitute Range Operator" },
+  --   w = { "<cmd>lua require('substitute.range').word()<cr>", "Substitute Range Word" },
+  --   s =
+  --   { "<CMD>SearchReplaceSingleBufferSelections<CR>", "SearchReplaceSingleBuffer [s]elction list" },
+  --   a = { "<CMD>SearchReplaceSingleBufferOpen<CR>", "open" },
+  --   d = { "<CMD>SearchReplaceSingleBufferCWord<CR>", "[w]ord" },
+  --   W = { "<CMD>SearchReplaceSingleBufferCWORD<CR>", "[W]ORD" },
+  --   e = { "<CMD>SearchReplaceSingleBufferCExpr<CR>", "[e]xpr" },
+  --   f = { "<CMD>SearchReplaceSingleBufferCFile<CR>", "[f]ile" },
+  -- },
   b = {
     name = "Buffer Option",
     c = { "<cmd>lua require('close_buffers').delete({ type = 'hidden', force = true }) <cr>", "Delete all non-visible" }, -- Delete all non-visible buffers
     n = { "<cmd>lua require('close_buffers').delete({ type = 'nameless' })<cr>", "Delete all buffers without name" },
     t = { "<cmd>lua require('close_buffers').delete({ type = 'this' })<cr>", "Delete the current buffer" },
   },
-
   g = {
     name = "Git",
     g = { "<cmd>lua _LAZYGIT_TOGGLE()<CR>", "Lazygit" },
@@ -172,7 +162,7 @@ local mappings = {
       "Undo Stage Hunk",
     },
     -- e = { "<cmd>Neotree left git_status<cr>", "Git Status Tree" },
-    f = { "<cmd>Telescope git_status<cr>", "Open changed file" },
+    f = { "<cmd>lua require('user.telescope').delta_git_status()<cr>", "Git Status" },
     b = { "<cmd>Telescope git_branches<cr>", "Checkout branch" },
     C = { "<cmd>Telescope git_commits<cr>", "Checkout commit" },
     d = {
@@ -185,7 +175,6 @@ local mappings = {
     t = { "<cmd>lua require('telescope').extensions.git_worktree.git_worktrees() <cr>", "Show All Git Worktrees" },
     w = { "<cmd>lua require('telescope').extensions.git_worktree.create_git_worktree()<cr>", "Create Git Worktree" },
   },
-
   l = {
     name = "LSP",
     c = { "<cmd>TSContextToggle<cr>", "Treesitter Context" },
@@ -194,7 +183,7 @@ local mappings = {
       "<cmd>lua require('telescope.builtin').diagnostics({file_ignore_patterns = {'windows/', 'web/'}})<cr>",
       "Workspace Diagnostics Popup",
     },
-    e = {
+    x = {
       "<cmd>lua require('telescope.builtin').diagnostics({file_ignore_patterns = {'windows/', 'web/'}, severity = 1})<cr>",
       "Workspace Error Popup",
     },
@@ -212,7 +201,6 @@ local mappings = {
       "Personal TODOs",
     },
   },
-
   o = {
     name = "Run Command",
     o = { "<cmd>OverseerToggle<cr>", "Toggle Command Window" },
@@ -222,7 +210,6 @@ local mappings = {
       "Run Flutter ReBuild" },
     c = { "<cmd>OverseerRunCmd flutter pub run dart_code_metrics:metrics check-unused-l10n . --class-pattern='AppLocalizations' --fatal-unused && flutter pub run dart_code_metrics:metrics check-unused-code lib --monorepo --fatal-unused<cr>", "Run App Check up" },
   },
-
   t = {
     name = "Run Test",
     n = { "<cmd>lua require('neotest').run.run()<cr>", "Test Nearest" },
@@ -276,7 +263,7 @@ local mappings = {
     l = { "<cmd>lua require('flutter-tools.devices').list_devices()<cr>", "Show Devices" },
     e = { "<cmd>lua require('flutter-tools.devices').list_emulators()<cr>", "Show Emulators" },
     g = { "<cmd>lua require('flutter-tools.commands').pub_get()<cr>", "Run Pub Get" },
-    f = { "<cmd>lua require('avatar.lsp.languagues.flutter').code_action_fix_all()<cr>", "Fix All" },
+    f = { "<cmd>lua require('user.lsp.handlers').code_action_fix_all()<cr><cmd>w!<cr>", "Fix All" },
     o = { "<cmd>lua require('flutter-tools.outline').toggle()<cr>", "Flutter Outlines" },
     x = { "<cmd>lua require('flutter-tools.commands').quit()<cr>", "Quit Flutter" },
     h = { "<cmd>lua require('flutter-tools.commands').run_command()<cr>", "Run" },
@@ -300,7 +287,6 @@ local mappings = {
     ['4'] = { "<CMD>lua require('harpoon.ui').nav_file(4)<CR>", "Go To File 4" },
     ['5'] = { "<CMD>lua require('harpoon.ui').nav_file(5)<CR>", "Go To File 5" },
   },
-
   k = {
     name = "Debugger",
     d = { "<CMD> lua require'dap'.continue()<CR>", "Continue or Start" },

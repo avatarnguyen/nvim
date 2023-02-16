@@ -79,11 +79,11 @@ saga.setup {
   },
   rename_action_quit = "<C-c>",
   symbol_in_winbar = {
-    enable = false,
+    enable = true,
     separator = ' ',
     hide_keyword = true,
-    show_file = false,
-    folder_level = 2,
+    show_file = true,
+    folder_level = 1,
   },
 }
 -- vim.wo.winbar = require('lspsaga.symbolwinbar'):get_winbar()

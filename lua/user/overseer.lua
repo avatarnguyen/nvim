@@ -4,7 +4,35 @@ if not status_ok then
   return
 end
 
-overseer.setup()
+overseer.setup({
+  -- Configure the floating window used for confirmation prompts
+  confirm = {
+    border = "rounded",
+    zindex = 40,
+    -- Dimensions can be integers or a float between 0 and 1 (e.g. 0.4 for 40%)
+    -- min_X and max_X can be a single value or a list of mixed integer/float types.
+    min_width = 20,
+    max_width = 0.5,
+    width = nil,
+    min_height = 6,
+    max_height = 0.9,
+    height = nil,
+    -- Set any window options here (e.g. winhighlight)
+    win_opts = {
+      winblend = 10,
+    },
+  },
+  -- Configuration for task floating windows
+  task_win = {
+    -- How much space to leave around the floating window
+    padding = 2,
+    border = "rounded",
+    -- Set any window options here (e.g. winhighlight)
+    win_opts = {
+      winblend = 10,
+    },
+  },
+})
 
 -- TODO: set up template
 -- overseer.register_template({

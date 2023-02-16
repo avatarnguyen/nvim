@@ -18,9 +18,9 @@ M.setup = function()
   local signs = {
 
     { name = "DiagnosticSignError", text = "" },
-    { name = "DiagnosticSignWarn", text = "" },
-    { name = "DiagnosticSignHint", text = "" },
-    { name = "DiagnosticSignInfo", text = "" },
+    { name = "DiagnosticSignWarn",  text = "" },
+    { name = "DiagnosticSignHint",  text = "" },
+    { name = "DiagnosticSignInfo",  text = "" },
   }
 
   for _, sign in ipairs(signs) do
@@ -64,24 +64,27 @@ local function lsp_keymaps(bufnr)
   local opts = { noremap = true, silent = true }
   local keymap = vim.api.nvim_buf_set_keymap
   keymap(bufnr, "n", "gD", "<cmd>lua vim.lsp.buf.declaration()<CR>", opts)
-  keymap(bufnr, "n", "gd", "<cmd>lua vim.lsp.buf.definition()<CR>", opts)
+  keymap(bufnr, "n", "gr", "<cmd>lua vim.lsp.buf.references()<CR>", opts)
   keymap(bufnr, "n", "K", "<cmd>lua vim.lsp.buf.hover()<CR>", opts)
-
   keymap(bufnr, "n", "gm", "<cmd>lua vim.lsp.buf.implementation()<CR>", opts)
+
+  -- Definition
+  -- keymap(bufnr, "n", "gd", "<cmd>lua vim.lsp.buf.definition()<CR>", opts)
+  keymap(bufnr, "n", "gd",
+    "<cmd>lua require('telescope.builtin').lsp_definitions()<cr>", opts)
+
+  -- References
   keymap(bufnr, "n", "gu",
-    "<cmd>lua require('telescope.builtin').lsp_references(require('telescope.themes').get_dropdown{layout_config = {width = 0.7}})<cr>"
-    , opts)
-  keymap(bufnr, "n", "gF", "<cmd>Lspsaga lsp_finder<cr>", opts)
-  keymap(bufnr, "n", "gL", "<cmd>lua vim.diagnostic.open_float()<CR>", opts)
+    "<cmd>lua require('telescope.builtin').lsp_references()<cr>", opts)
+
+  -- Show line diagnostics
   keymap(
     bufnr, "n", "<leader>ls",
-    '<cmd>lua vim.lsp.diagnostic.show_line_diagnostics({ border = "rounded" })<CR>', opts)
-
-  -- keymap(bufnr, 'n', 'E', '<Cmd>lua vim.diagnostic.open_float()<CR>', opts)
-  -- Show line diagnostics
-  keymap(bufnr, "n", "E", "<cmd>Lspsaga show_line_diagnostics<CR>", opts)
+    '<cmd>lua vim.lsp.diagnostic.show_line_diagnostics()<CR>', opts)
+  keymap(bufnr, "n", "<leader>le", "<cmd>Lspsaga show_line_diagnostics<CR>", opts)
+  -- keymap(bufnr, "n", "gL", "<cmd>lua vim.diagnostic.open_float()<CR>", opts)
   -- Show cursor diagnostics
-  keymap(bufnr, "n", "E", "<cmd>Lspsaga show_cursor_diagnostics<CR>", opts)
+  -- keymap(bufnr, "n", "E", "<cmd>Lspsaga show_cursor_diagnostics<CR>", opts)
 
 
   keymap(bufnr, 'n', 'gs', '<cmd>lua vim.lsp.buf.signature_help()<CR>', opts)
@@ -91,15 +94,14 @@ local function lsp_keymaps(bufnr)
   keymap(bufnr, "n", "<leader>q", '<cmd>vim.diagnostic.setloclist()<CR>', opts)
 
   -- LSP Saga
-  -- keymap(bufnr, "n", "ge", "<cmd>Lspsaga diagnostic_jump_next<CR>", opts)
-  -- keymap(bufnr, "n", "gE", "<cmd>Lspsaga diagnostic_jump_prev<CR>", opts)
+  keymap(bufnr, "n", "ge", "<cmd>Lspsaga diagnostic_jump_next<CR>", opts)
+  keymap(bufnr, "n", "gE", "<cmd>Lspsaga diagnostic_jump_prev<CR>", opts)
   -- Standard LSP
-  keymap(bufnr, "n", "ge", '<cmd>lua vim.diagnostic.goto_next({ border = "rounded" })<CR>', opts)
-  keymap(bufnr, "n", "gE", '<cmd>lua vim.diagnostic.goto_prev({ border = "rounded" })<CR>', opts)
+  -- keymap(bufnr, "n", "ge", '<cmd>lua vim.diagnostic.goto_next({ border = "rounded" })<CR>', opts)
+  -- keymap(bufnr, "n", "gE", '<cmd>lua vim.diagnostic.goto_prev({ border = "rounded" })<CR>', opts)
 
   -- keymap(bufnr, "i", "<C-space>", "<Cmd>Lspsaga signature_help<CR>", { silent = true })
   keymap(bufnr, "n", "<leader>lr", "<cmd>Lspsaga rename<CR>", opts)
-
 end
 
 M.on_attach = function(client, bufnr)
