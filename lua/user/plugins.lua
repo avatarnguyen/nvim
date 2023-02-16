@@ -59,9 +59,6 @@ return packer.startup(function(use)
   use "b0o/schemastore.nvim"
   use { "ray-x/lsp_signature.nvim" }
 
-  -- use({ 'arkav/lualine-lsp-progress' })
-  use 'j-hui/fidget.nvim'
-
   -- Colorschemes
   use({ "folke/tokyonight.nvim" })
   use("bluz71/vim-nightfly-guicolors")
@@ -80,9 +77,6 @@ return packer.startup(function(use)
       require "user.nvim-tree"
     end
   })
-
-  -- Vim Wiki
-  --[[ use "vimwiki/vimwiki" ]]
 
   -- cmp plugins
   use({ "hrsh7th/nvim-cmp" }) -- The completion plugin
@@ -114,7 +108,9 @@ return packer.startup(function(use)
     end
   })
 
+  ------------------------
   -- LSP
+  ------------------------
   use({ "neovim/nvim-lspconfig" }) -- enable LSP
   use 'tamago324/nlsp-settings.nvim'
   use {
@@ -123,13 +119,11 @@ return packer.startup(function(use)
     "jayp0521/mason-null-ls.nvim",
     "jayp0521/mason-nvim-dap.nvim",
   }
-  -- DAP
-  use({ "mfussenegger/nvim-dap" })
-  use({
-    "rcarriga/nvim-dap-ui",
-    "theHamsta/nvim-dap-virtual-text",
-  })
 
+  ------------------------
+  -- LSP Extra
+  ------------------------
+  use 'j-hui/fidget.nvim'
   use({ "RRethy/vim-illuminate" })
   use({
     "rmagatti/goto-preview",
@@ -142,11 +136,21 @@ return packer.startup(function(use)
   })
   use "onsails/lspkind.nvim"
 
+  ------------------------
+  -- DAP
+  ------------------------
+  use({ "mfussenegger/nvim-dap" })
+  use({
+    "rcarriga/nvim-dap-ui",
+    "theHamsta/nvim-dap-virtual-text",
+  })
+
+  ------------------------
   -- Flutter
+  ------------------------
   use({ "akinsho/flutter-tools.nvim", requires = "nvim-lua/plenary.nvim" })
   use "sidlatau/lsp-fastaction.nvim"
   use "dart-lang/dart-vim-plugin"
-  -- use({ "chrisbra/Colorizer", as = "ansicolor" })
   use 'MTDL9/vim-log-highlighting'
   use({
     "norcalli/nvim-colorizer.lua",
@@ -155,10 +159,9 @@ return packer.startup(function(use)
     end,
   })
 
+  ------------------------
   -- GO
-      ------------------------
-    -- GO
-    ------------------------
+  ------------------------
   use "olexsmir/gopher.nvim"
   use "leoluz/nvim-dap-go"
   -- use('crispgm/nvim-go')
@@ -212,16 +215,18 @@ return packer.startup(function(use)
       require("user.telescope").telescope.load_extension("undo")
     end,
   }
-  use {
-    "nvim-telescope/telescope-frecency.nvim",
-    after = { "telescope.nvim" },
-    requires = { "kkharji/sqlite.lua" },
-    config = function()
-      require("user.telescope").telescope.load_extension("frecency")
-    end,
-  }
+  -- use {
+  --   "nvim-telescope/telescope-frecency.nvim",
+  --   after = { "telescope.nvim" },
+  --   requires = { "kkharji/sqlite.lua" },
+  --   config = function()
+  --     require("user.telescope").telescope.load_extension("frecency")
+  --   end,
+  -- }
 
+  --------------------
   -- Treesitter
+  --------------------
   use {
     'nvim-treesitter/nvim-treesitter',
     run = ':TSUpdate',
@@ -255,15 +260,17 @@ return packer.startup(function(use)
   use "tpope/vim-fugitive"
   use({ "lewis6991/gitsigns.nvim" })
   use({ "sindrets/diffview.nvim", requires = "nvim-lua/plenary.nvim" })
-  use({
-    "ThePrimeagen/git-worktree.nvim",
-    config = function()
-      require "user.git-worktree"
-    end
-  })
+  -- use({
+  --   "ThePrimeagen/git-worktree.nvim",
+  --   config = function()
+  --     require "user.git-worktree"
+  --   end
+  -- })
 
 
+  --------------------
   -- Frontend
+  --------------------
   use "windwp/nvim-ts-autotag"
   -- use('MunifTanjim/prettier.nvim')
 
@@ -310,7 +317,6 @@ return packer.startup(function(use)
     end,
   }
   -- use 'mbbill/undotree'
-  -- use 'karb94/neoscroll.nvim'
   use "opalmay/vim-smoothie"
   use "alexghergh/nvim-tmux-navigation"
   use 'christoomey/vim-tmux-runner'
