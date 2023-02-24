@@ -54,8 +54,10 @@ keymap("n", "<C-n>", "<cmd>nohlsearch<CR>", opts)
 keymap("n", "<S-q>", "<cmd>q<CR>", opts)
 
 -- LSP Mapping
-keymap("n", "<leader>la", "<Cmd>Lspsaga code_action<CR>", opts)
-keymap("v", "<leader>la", ":<C-U>lua vim.lsp.buf.range_code_action()<CR>", opts)
+keymap("n", "<leader>a", "<Cmd>Lspsaga code_action<CR>", opts)
+keymap("v", "<leader>a", "<Cmd>Lspsaga code_action<CR>", opts)
+-- keymap("n", "<leader>la", "<Cmd>Lspsaga code_action<CR>", opts)
+-- keymap("v", "<leader>la", "<Cmd>Lspsaga code_action<CR>", opts)
 
 -- fastaction
 -- keymap("n", "<C-j>", "<cmd>lua require('lsp-fastaction').code_action()<CR>", opts)
