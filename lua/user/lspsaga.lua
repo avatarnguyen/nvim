@@ -6,6 +6,8 @@ end
 
 saga.setup {
   ui = {
+    -- This option only works in Neovim 0.9
+    -- title = true,
     -- currently only round theme
     theme = 'round',
     -- border type can be single,double,rounded,solid,shadow.
@@ -44,19 +46,29 @@ saga.setup {
     virtual_text = false,
   },
   code_action = {
-    num_shortcut = false,
+    num_shortcut = true,
     keys = {
       quit = 'q',
       exec = '<CR>',
     },
   },
   diagnostic = {
-    twice_into = true,
+    on_insert = false,
+    on_insert_follow = false,
+    insert_winblend = 0,
     show_code_action = true,
-    show_source = true,
+    show_source = false,
+    jump_num_shortcut = true,
+    --1 is max
+    max_width = 0.7,
+    custom_fix = nil,
+    custom_msg = nil,
+    text_hl_follow = true,
+    border_follow = true,
     keys = {
-      exec_action = 'o',
-      quit = 'q',
+      exec_action = "o",
+      quit = "q",
+      go_action = "g"
     },
   },
   -- preview lines of lsp_finder and definition preview
@@ -80,10 +92,28 @@ saga.setup {
   rename_action_quit = "<C-c>",
   symbol_in_winbar = {
     enable = true,
-    separator = ' ',
+    separator = " ",
+    ignore_patterns = {},
     hide_keyword = true,
     show_file = true,
     folder_level = 1,
+    respect_root = false,
+    color_mode = true,
+  },
+  callhierarchy = {
+    show_detail = false,
+    keys = {
+      edit = "e",
+      vsplit = "s",
+      split = "i",
+      tabe = "t",
+      jump = "o",
+      quit = "q",
+      expand_collapse = "u",
+    },
+  },
+  beacon = {
+    enable = true,
+    frequency = 7,
   },
 }
--- vim.wo.winbar = require('lspsaga.symbolwinbar'):get_winbar()
