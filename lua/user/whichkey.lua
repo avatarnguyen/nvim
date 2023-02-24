@@ -85,7 +85,6 @@ local knowunity_file_ignore = { 'pub.dartlang.org/', '.pub-cache/', 'ios/', 'win
   'fonts/', 'packages/', 'doc/', 'l10n/' }
 
 local mappings = {
-  ["a"] = { "<cmd>Neotree float reveal<cr>", "File Browser" },
   ["e"] = { "<cmd>NvimTreeToggle<cr>", "Explorer" },
   ["E"] = { "<cmd>NvimTreeFocus<cr>", "Explorer" },
   ["A"] = { "<cmd>wa<CR>", "Save All" },
@@ -103,16 +102,18 @@ local mappings = {
   --   "Clipboard" },
   ["D"] = { "<cmd>lua require('telescope').extensions.flutter.commands()<CR>", "Flutter Commands" },
   ["M"] = { "<cmd>lua require('telescope').extensions.macroscope.default()<CR>", "Macros" },
-
   s = {
     name = "pickers",
+    a = { "<cmd>Neotree float reveal<cr>", "File Browser" },
     j = { "<cmd>Telescope resume<CR>", "Last Picker" },
     s = {
       "<cmd>lua require('telescope.builtin').lsp_dynamic_workspace_symbols({ debounce = 150, search_dirs = 'CWD', file_ignore_patterns = knowunity_file_ignore , opts = {symbols = {'info', 'error'}}})<cr>",
       "Workspace Symbols",
     },
-    f = { "<cmd>lua require('telescope').extensions.frecency.frecency({ debounce = 200, workspace = 'CWD' })<CR>",
-      "Search Recent files" },
+    -- f = { "<cmd>lua require('telescope').extensions.recent_files({ debounce = 200, workspace = 'CWD' })<CR>",
+    --   "Search Recent files" },
+    -- f = { "<cmd>lua require('telescope').extensions.frecency.frecency({ debounce = 200, workspace = 'CWD' })<CR>",
+    --   "Search Recent files" },
     d = { "<cmd>lua require('telescope.builtin').lsp_document_symbols(require('telescope.themes').get_dropdown{})<cr>",
       "Document Symbols" },
     l = { "<cmd>lua require('telescope.builtin').live_grep({ debounce = 200, file_ignore_patterns = {'ios/', 'android/', 'assets/', 'fonts/', 'packages/', 'doc/', 'l10n/'} })<cr>",
@@ -187,7 +188,7 @@ local mappings = {
       "<cmd>lua require('telescope.builtin').diagnostics({file_ignore_patterns = {'windows/', 'web/'}, severity = 1})<cr>",
       "Workspace Error Popup",
     },
-    a = { "<cmd>Trouble workspace_diagnostics<cr>", "Workspace Diagnostics" },
+    s = { "<cmd>Trouble workspace_diagnostics<cr>", "Workspace Diagnostics" },
     f = { "<cmd>lua vim.lsp.buf.format()<cr>", "Format" },
     -- i = { "<cmd>LspInfo<cr>", "Info" },
     I = { "<cmd>LspInstallInfo<cr>", "Installer Info" },
