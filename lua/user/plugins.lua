@@ -59,7 +59,9 @@ return packer.startup(function(use)
   use "b0o/schemastore.nvim"
   use { "ray-x/lsp_signature.nvim" }
 
+  -----------------
   -- Colorschemes
+  -----------------
   use({ "folke/tokyonight.nvim" })
   use("bluz71/vim-nightfly-guicolors")
   use("rebelot/kanagawa.nvim")
@@ -67,8 +69,10 @@ return packer.startup(function(use)
     'lalitmee/cobalt2.nvim',
     requires = 'tjdevries/colorbuddy.nvim',
   }
-  use({ 'projekt0n/github-nvim-theme', tag = '0.0.x' })
-
+  use {
+    'svrana/neosolarized.nvim',
+    requires = { 'tjdevries/colorbuddy.nvim' }
+  }
   use({ "Shatur/neovim-ayu" })
 
   use({
@@ -101,7 +105,8 @@ return packer.startup(function(use)
     "rafamadriz/friendly-snippets",
     event = "InsertCharPre"
   }) -- a bunch of snippets to use
-  use({ "folke/trouble.nvim",
+  use({
+    "folke/trouble.nvim",
     cmd = "TroubleToggle",
     config = function()
       require "user.trouble"
@@ -179,7 +184,7 @@ return packer.startup(function(use)
   use {
     "nvim-neo-tree/neo-tree.nvim",
     branch = "v2.x",
-    cmd = "Neotree",
+    -- cmd = "Neotree",
     requires = {
       "nvim-lua/plenary.nvim",
       "nvim-tree/nvim-web-devicons",
@@ -207,7 +212,13 @@ return packer.startup(function(use)
       require("user.neoclip")
     end
   })
-  use { "smartpde/telescope-recent-files" }
+  use {
+    "smartpde/telescope-recent-files",
+    requires = { 'nvim-telescope/telescope.nvim' },
+    config = function()
+      require("user.telescope").telescope.load_extension("recent_files")
+    end,
+  }
   use {
     'debugloop/telescope-undo.nvim',
     requires = { 'nvim-telescope/telescope.nvim' },
@@ -257,15 +268,9 @@ return packer.startup(function(use)
   end
   }
   -- Git
-  use "tpope/vim-fugitive"
+  -- use "tpope/vim-fugitive"
   use({ "lewis6991/gitsigns.nvim" })
   use({ "sindrets/diffview.nvim", requires = "nvim-lua/plenary.nvim" })
-  -- use({
-  --   "ThePrimeagen/git-worktree.nvim",
-  --   config = function()
-  --     require "user.git-worktree"
-  --   end
-  -- })
 
 
   --------------------
