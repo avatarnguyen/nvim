@@ -28,7 +28,10 @@ M.setup = function()
   end
 
   local config = {
-    virtual_text = true, -- disable virtual text
+    -- virtual_text = true, -- disable virtual text
+    virtual_text = {
+      prefix = '●'
+    },
     signs = {
       active = signs, -- show signs
     },
@@ -39,13 +42,22 @@ M.setup = function()
       focusable = true,
       style = "minimal",
       border = "rounded", --"rounded",
-      source = "always",
+      source = "if_many", -- "always"
       header = "",
       prefix = "",
     },
   }
 
   vim.diagnostic.config(config)
+
+  vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
+    vim.lsp.diagnostic.on_publish_diagnostics, {
+    underline = true,
+    update_in_insert = true,
+    virtual_text = { spacing = 4, prefix = "●" },
+    severity_sort = true,
+  }
+  )
 
   vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, {
     border = "rounded",
@@ -97,8 +109,8 @@ local function lsp_keymaps(bufnr)
   keymap(bufnr, "n", "ge", "<cmd>Lspsaga diagnostic_jump_next<CR>", opts)
   keymap(bufnr, "n", "gE", "<cmd>Lspsaga diagnostic_jump_prev<CR>", opts)
   -- Standard LSP
-  -- keymap(bufnr, "n", "ge", '<cmd>lua vim.diagnostic.goto_next({ border = "rounded" })<CR>', opts)
-  -- keymap(bufnr, "n", "gE", '<cmd>lua vim.diagnostic.goto_prev({ border = "rounded" })<CR>', opts)
+  keymap(bufnr, "n", "]d", '<cmd>lua vim.diagnostic.goto_next({ border = "rounded" })<CR>', opts)
+  keymap(bufnr, "n", "[d", '<cmd>lua vim.diagnostic.goto_prev({ border = "rounded" })<CR>', opts)
 
   -- keymap(bufnr, "i", "<C-space>", "<Cmd>Lspsaga signature_help<CR>", { silent = true })
   keymap(bufnr, "n", "<leader>lr", "<cmd>Lspsaga rename<CR>", opts)
@@ -124,7 +136,7 @@ M.on_attach = function(client, bufnr)
 
   if client.name == "dartls" then
     client.server_capabilities.document_formatting = false
-    require "user.lsp.lsp-signature".on_attach()
+    -- require "user.lsp.lsp-signature".on_attach()
   end
 
   if client.name == "sumneko_lua" then

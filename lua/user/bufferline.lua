@@ -6,7 +6,7 @@ end
 local icons = require("user.icons")
 
 
-local function diagnostics_indicator(num, _, diagnostics, _)
+local function diagnostics_indicator(_, _, diagnostics, _)
   local result = {}
   local symbols = {
     error = icons.diagnostics.Error,
@@ -84,7 +84,7 @@ bufferline.setup {
 
     max_name_length = 30,
     max_prefix_length = 20, -- prefix used when a buffer is de-duplicated
-    tab_size = 21,
+    tab_size = 24,
     truncate_names = true, -- whether or not tab names should be truncated
     diagnostics = "nvim_lsp", -- | "nvim_lsp" | "coc",
     diagnostics_update_in_insert = false,
