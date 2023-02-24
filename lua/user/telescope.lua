@@ -6,7 +6,7 @@ if not status_ok then
 end
 
 local builtin = require('telescope.builtin')
-local conf = require('telescope.config')
+-- local conf = require('telescope.config')
 local previewers = require("telescope.previewers")
 local Job = require("plenary.job")
 local new_maker = function(filepath, bufnr, opts)
@@ -50,12 +50,6 @@ telescope.setup {
     path_display = { "smart" },
     file_ignore_patterns = { "%.g.dart", "%.freezed.dart", ".git/", "node_modules", "gen_l10n/", "analytics",
       ".pub-cache/", "flutter/packages/" },
-
-    -- sorting_strategy = "ascending",
-    -- layout_config = {
-    --     prompt_position = "top",
-    --     width = 0.9,
-    -- },
 
     buffer_previewer_maker = new_maker,
 
@@ -180,19 +174,6 @@ telescope.setup {
       -- case_mode = "smart_case", -- or "ignore_case" or "respect_case"
       -- the default case_mode is "smart_case"
     },
-    frecency = {
-      show_scores = false,
-      show_unindexed = false,
-      ignore_patterns = { "*.git/*", "*/tmp/*", '*.pub-cache/*', '*packages/*', 'pub.dartlang.org/*', '*/ios/*',
-        '*/windows/*', '*/web/*', '*/android/*', '*/assets/*', '*/fonts/*', '*/doc/*', '*/l10n/*' },
-      disable_devicons = false,
-      search_dirs = 'CWD',
-      workspaces = {
-        'CWD',
-        --[[ ["project"] = "/home/my_username/projects", ]]
-        --[[ ["wiki"]    = "/home/my_username/wiki" ]]
-      }
-    },
     recent_files = {
       only_cwd = true,
       -- ignore_patterns = {"/tmp/"}
@@ -207,12 +188,7 @@ telescope.setup {
   },
 }
 
--- M.getMyToDos = function()
---
--- end
-
 -- telescope.load_extension("noice")
-telescope.load_extension("recent_files")
 telescope.load_extension('fzf')
 
 local action_state = require "telescope.actions.state"
@@ -273,14 +249,10 @@ M.delta_git_status = function(opts)
 
   opts.previewer = delta
   opts.initial_mode = "normal"
+  opts.layout_strategy = "vertical"
   opts.layout_config = {
-    horizontal = {
-      width = 0.95,
-      preview_width = function(_, cols, _)
-        return math.floor(cols * 0.8)
-      end,
-      mirror = false,
-    },
+    height = 0.98,
+    preview_height = 0.75,
   }
 
   builtin.git_status(opts)
@@ -296,5 +268,97 @@ M.delta_git_bcommits = function(opts)
 
   builtin.git_bcommits(opts)
 end
+
+-- local conf = require("telescope.config").values
+-- local themes = require("telescope.themes")
+-- local builtin = require("telescope.builtin")
+-- local action_state = require("telescope.actions.state")
+
+-- local function chained_live_grep(opts)
+--   opts = opts or themes.get_ivy {}
+--   builtin.live_grep(vim.tbl_deep_extend("force", {
+--     prompt_title = "Search",
+--     attach_mappings = function(_, map)
+--       local fuzzy_filter_results = function()
+--         local query = action_state.get_current_line()
+--         if not query then
+--           print "no matching results"
+--           return
+--         end
+--         opts.search = query
+--         opts.prompt_title = "Filter"
+--         opts.prompt_prefix = "/" .. query .. " >> "
+--         builtin.grep_string(opts)
+--       end
+--
+--       local dynamic_filetype = function()
+--         local entry = action_state.get_selected_entry()
+--         local onlytype = vim.fn.fnamemodify(entry.filename, ":e")
+--         opts.vimgrep_arguments = vim.deepcopy(conf.vimgrep_arguments)
+--         opts.prompt_prefix = opts.prompt_prefix or "*." .. onlytype .. " >> "
+--         opts.prompt_title = "Scoped Results"
+--         vim.list_extend(opts.vimgrep_arguments, { "--type=" .. onlytype })
+--         builtin.live_grep(opts)
+--       end
+--
+--       local dynamic_filetype_skip = function()
+--         local entry = action_state.get_selected_entry()
+--         local skiptype = vim.fn.fnamemodify(entry.filename, ":e")
+--         opts.vimgrep_arguments = vim.deepcopy(conf.vimgrep_arguments)
+--         opts.prompt_prefix = opts.prompt_prefix or "!*." .. skiptype .. " >> "
+--         opts.prompt_title = "Scoped Results"
+--         vim.list_extend(opts.vimgrep_arguments, { "--type-not=" .. skiptype })
+--         builtin.live_grep(opts)
+--       end
+--
+--       map("i", "<C-space>", fuzzy_filter_results)
+--       map("n", "<C-space>", fuzzy_filter_results)
+--       map("i", "<C-b>", dynamic_filetype)
+--       map("n", "<C-b>", dynamic_filetype)
+--       map("i", "<M-b>", dynamic_filetype_skip)
+--       map("n", "<M-b>", dynamic_filetype_skip)
+--       return true
+--     end,
+--   }, opts))
+-- end
+--
+-- chained_live_grep()
+
+-- Picker:new{
+--    prompt_title = "Prompt1",
+--    finder = finders.new_table {
+--      results = (function()
+--        return func1()
+--      end)()
+--    },
+--    sorter = sorters.get_generic_fuzzy_sorter(),
+--    attach_mappings = function(prompt_bufnr)
+--      actions.select_default:replace(function()
+--        local selection = action_state.get_selected_entry()
+--        local val1 = selection.value
+--        actions._close(prompt_bufnr, true)
+--        Picker:new{
+--          prompt_title = "Prompt2",
+--          finder = finders.new_table {
+--            results = (function()
+--              return func2()
+--            end)()
+--          },
+--          sorter = sorters.get_generic_fuzzy_sorter(),
+--          attach_mappings = function(prompt_bufnr)
+--            actions.select_default:replace(
+--                function()
+--                  selection = action_state.get_selected_entry()
+--                  actions._close(prompt_bufnr, true)
+--                  local val2 = selection.value
+--                  fun(val1, val2)
+--                end)
+--            return true
+--          end
+--        }:find()
+--      end)
+--      return true
+--    end
+--  }:find()
 
 return M
