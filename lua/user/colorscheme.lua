@@ -3,16 +3,16 @@
 local M = {}
 
 -- local colorscheme = "kanagawa"
--- local colorscheme = "tokyonight"
+local colorscheme = "tokyonight"
 -- local colorscheme = "cobalt2"
-local colorscheme = "nightfly"
+-- local colorscheme = "nightfly"
 -- local colorscheme = "catppuccin"
 -- local colorscheme = "ayu"
 -- local colorscheme = "github"
 
 -- catppuccin {{{
 if colorscheme == "catppuccin" then
-  vim.g.catppuccin_flavour = "macchiato" -- latte, frappe, macchiato, mocha
+  vim.g.catppuccin_flavour = "mocha" -- latte, frappe, macchiato, mocha
 
   require("catppuccin").setup({
     -- dim_inactive = {
@@ -20,7 +20,7 @@ if colorscheme == "catppuccin" then
     --   shade = "dark",
     --   percentage = 0.15,
     -- },
-    transparent_background = false,
+    transparent_background = true,
     --[[ term_colors = false, ]]
     compile = {
       enabled = true,
@@ -118,15 +118,9 @@ if colorscheme == "nightfly" then
 end
 -- }}}
 
--- cobalt2 {{{
 if colorscheme == "cobalt2" then
-  -- require('colorbuddy').setup()
-  require('colorbuddy').colorscheme('cobalt2')
-  require("cobalt2.utils").Group.new("Cursor", require("cobalt2.utils").colors.cobalt_bg,
-    require("cobalt2.utils").colors.yellow, nil)
-  -- Group.new('italicBoldFunction', colors.green, groups.Function, styles.bold + styles.italic)
+  require("user.cobalt")
 end
--- }}}
 
 -- Kanagawa: {{{
 if colorscheme == "kanagawa" then
@@ -140,7 +134,7 @@ if colorscheme == "kanagawa" then
     variablebuiltinStyle = { italic = true },
     specialReturn = true, -- special highlight for the return keyword
     specialException = true, -- special highlight for exception handling keywords
-    transparent = false, -- do not set background color
+    transparent = true, -- do not set background color
     dimInactive = false, -- dim inactive window `:h hl-NormalNC`
     globalStatus = true, -- adjust window separators highlight for laststatus=3
     colors = {},
@@ -156,10 +150,10 @@ if colorscheme == "tokyonight" then
     -- your configuration comes here
     -- or leave it empty to use the default settings
     -- The theme comes in three styles, `storm`, `moon`, a darker variant `night` and `day`
-    -- style = "moon",
+    style = "moon",
     -- style = "storm",
-    style = "night",
-    transparent = false, -- Enable this to disable setting the background color
+    -- style = "night",
+    transparent = true, -- Enable this to disable setting the background color
     terminal_colors = true, -- Configure the colors used when opening a `:terminal` in Neovim
     styles = {
       -- Style to be applied to different syntax groups
@@ -167,8 +161,7 @@ if colorscheme == "tokyonight" then
       comments = { italic = true },
       keywords = { italic = true },
       functions = { bold = true },
-      variables = {},
-      -- Background styles. Can be "dark", "transparent" or "normal"
+      variables = { italic = true },
       sidebars = "dark", -- style for sidebars, see below
       floats = "transparent", -- style for floating windows
     },
@@ -176,8 +169,7 @@ if colorscheme == "tokyonight" then
     day_brightness = 0.3, -- Adjusts the brightness of the colors of the **Day** style. Number between 0 and 1, from dull to vibrant colors
     hide_inactive_statusline = false, -- Enabling this option, will hide inactive statuslines and replace them with a thin border instead. Should work with the standard **StatusLine** and **LuaLine**.
     dim_inactive = false, -- dims inactive windows
-    lualine_bold = false, -- When `true`, section headers in the lualine theme will be bold
-
+    lualine_bold = true, -- When `true`, section headers in the lualine theme will be bold
     --- You can override specific color groups to use other groups or a hex color
     --- function will be called with a ColorScheme table
     --- param colors ColorScheme
@@ -192,17 +184,20 @@ if colorscheme == "tokyonight" then
 end
 ---}}}
 
-
+-- ayu {{{
 if colorscheme == "ayu" then
   -- local colors = require('ayu.colors')
   -- colors.generate() --
   require('ayu').setup({
     mirage = false, -- Set to `true` to use `mirage` variant instead of `dark` for dark background.
     overrides = {
+      -- NormalNC = { bg = nil, fg = '#808080' }
     }, -- A dictionary of group names, each associated with a dictionary of parameters (`bg`, `fg`, `sp` and `style`) and colors in hex.
   })
 end
+---}}}
 
+-- github {{{
 if colorscheme == "github" then
   require("github-theme").setup({
     theme_style = "dark_default",
@@ -213,7 +208,6 @@ if colorscheme == "github" then
     sidebars = { "qf", "vista_kind", "terminal", "packer" },
     -- Change the "hint" color to the "orange" color, and make the "error" color bright red
     colors = { hint = "orange", error = "#ff0000" },
-
     -- Overwrite the highlight groups
     overrides = function(c)
       return {
@@ -225,14 +219,18 @@ if colorscheme == "github" then
     end
   })
 end
+---}}}
 
+-- github {{{
 if colorscheme ~= "cobalt2" and colorscheme ~= "github" then
   local status_ok, _ = pcall(vim.cmd, "colorscheme " .. colorscheme)
   if not status_ok then
     return
   end
 end
+---}}}
 
+-- NeoSolarized {{{
 -- if colorscheme == "NeoSolarized" then
 --   vim.cmd [[
 --       highlight FloatBorder guibg=NONE ctermbg=NONE  " Removes the border of float menu (LSP and Autocompletion uses it)
@@ -241,6 +239,7 @@ end
 --       highlight Pmenu ctermbg=NONE guibg=NONE
 --   ]]
 -- end
+---}}}
 
 M.colorscheme = colorscheme
 
