@@ -43,8 +43,8 @@ packer.init({
 return packer.startup(function(use)
   -- My plugins here
   use({ "wbthomason/packer.nvim" }) -- Have packer manage itself
-  use({ "nvim-lua/plenary.nvim" }) -- Useful lua functions used by lots of plugins
-  use({ "windwp/nvim-autopairs" }) -- Autopairs, integrates with both cmp and treesitter
+  use({ "nvim-lua/plenary.nvim" })  -- Useful lua functions used by lots of plugins
+  use({ "windwp/nvim-autopairs" })  -- Autopairs, integrates with both cmp and treesitter
   use({ "numToStr/Comment.nvim" })
   use({ "JoosepAlviste/nvim-ts-context-commentstring" })
   use({ "kyazdani42/nvim-web-devicons" })
@@ -55,7 +55,7 @@ return packer.startup(function(use)
   use({ "ahmedkhalf/project.nvim" })
   use({ "lewis6991/impatient.nvim" })
   use({ "lukas-reineke/indent-blankline.nvim" })
-  use({ "goolord/alpha-nvim" })
+  -- use({ "goolord/alpha-nvim" })
   use "b0o/schemastore.nvim"
   use { "ray-x/lsp_signature.nvim" }
 
@@ -69,33 +69,40 @@ return packer.startup(function(use)
     'lalitmee/cobalt2.nvim',
     requires = 'tjdevries/colorbuddy.nvim',
   }
-  use {
-    'svrana/neosolarized.nvim',
-    requires = { 'tjdevries/colorbuddy.nvim' }
-  }
+  use { "catppuccin/nvim", as = "catppuccin" }
+  -- use {
+  --   'svrana/neosolarized.nvim',
+  --   requires = { 'tjdevries/colorbuddy.nvim' }
+  -- }
   use({ "Shatur/neovim-ayu" })
 
+  ------------------------
+  -- File Tree
+  ------------------------
   use({
     "kyazdani42/nvim-tree.lua",
     config = function()
       require "user.nvim-tree"
     end
   })
-
-  -- cmp plugins
-  use({ "hrsh7th/nvim-cmp" }) -- The completion plugin
-  use({
-    'tzachar/cmp-tabnine',
-    after = 'nvim-cmp',
-    run = './install.sh',
-    requires = 'hrsh7th/nvim-cmp',
+  use {
+    'antosha417/nvim-lsp-file-operations',
+    requires = {
+      { "nvim-lua/plenary.nvim" },
+      { "kyazdani42/nvim-tree.lua" },
+    },
     config = function()
-      require "user.tabnine"
+      require("lsp-file-operations").setup()
     end
-  })
+  }
+
+  ------------------------
+  -- CMP plugins
+  ------------------------
+  use({ "hrsh7th/nvim-cmp" })         -- The completion plugin
   use 'hrsh7th/cmp-cmdline'
-  use({ "hrsh7th/cmp-buffer" }) -- buffer completions
-  use({ "hrsh7th/cmp-path" }) -- path completions
+  use({ "hrsh7th/cmp-buffer" })       -- buffer completions
+  use({ "hrsh7th/cmp-path" })         -- path completions
   use({ "saadparwaiz1/cmp_luasnip" }) -- snippet completions
   use({ "hrsh7th/cmp-nvim-lsp" })
   use({ "hrsh7th/cmp-nvim-lua" })
@@ -112,12 +119,40 @@ return packer.startup(function(use)
       require "user.trouble"
     end
   })
+  -- TAB-NINE --
+  -- use({
+  --   'tzachar/cmp-tabnine',
+  --   after = 'nvim-cmp',
+  --   run = './install.sh',
+  --   requires = 'hrsh7th/nvim-cmp',
+  --   config = function()
+  --     require "user.tabnine"
+  --   end
+  -- })
+
+  -- CO-PILOT --
+  use "github/copilot.vim"
+  -- use {
+  --   "zbirenbaum/copilot.lua",
+  --   cmd = "Copilot",
+  --   -- event = "InsertEnter",
+  --   config = function()
+  --     require "user.copilot"
+  --   end,
+  -- }
+  -- use {
+  --   "zbirenbaum/copilot-cmp",
+  --   after = { "copilot.lua", "nvim-cmp" },
+  --   config = function()
+  --     require("copilot_cmp").setup()
+  --   end
+  -- }
 
   ------------------------
   -- LSP
   ------------------------
   use({ "neovim/nvim-lspconfig" }) -- enable LSP
-  use 'tamago324/nlsp-settings.nvim'
+  -- use 'tamago324/nlsp-settings.nvim'
   use {
     "williamboman/mason.nvim",
     "williamboman/mason-lspconfig.nvim",
@@ -128,7 +163,6 @@ return packer.startup(function(use)
   ------------------------
   -- LSP Extra
   ------------------------
-  use 'j-hui/fidget.nvim'
   use({ "RRethy/vim-illuminate" })
   use({
     "rmagatti/goto-preview",
@@ -157,6 +191,7 @@ return packer.startup(function(use)
   use "sidlatau/lsp-fastaction.nvim"
   use "dart-lang/dart-vim-plugin"
   use 'MTDL9/vim-log-highlighting'
+  -- use {'sidlatau/dart-lsp-refactorings.nvim' }
   use({
     "norcalli/nvim-colorizer.lua",
     config = function()
@@ -170,7 +205,8 @@ return packer.startup(function(use)
   use "olexsmir/gopher.nvim"
   use "leoluz/nvim-dap-go"
   -- use('crispgm/nvim-go')
-  use "lvimuser/lsp-inlayhints.nvim"
+  -- use "lvimuser/lsp-inlayhints.nvim"
+  use('simrat39/inlay-hints.nvim')
 
   use {
     "nvim-neotest/neotest",
@@ -181,26 +217,27 @@ return packer.startup(function(use)
     },
   }
 
-  use {
-    "nvim-neo-tree/neo-tree.nvim",
-    branch = "v2.x",
-    -- cmd = "Neotree",
-    requires = {
-      "nvim-lua/plenary.nvim",
-      "nvim-tree/nvim-web-devicons",
-      "MunifTanjim/nui.nvim",
-    },
-    config = function()
-      require "user.neotree"
-    end
-  }
+  -- use {
+  --   "nvim-neo-tree/neo-tree.nvim",
+  --   branch = "v2.x",
+  --   cmd = "Neotree",
+  --   requires = {
+  --     "nvim-lua/plenary.nvim",
+  --     "nvim-tree/nvim-web-devicons",
+  --     "MunifTanjim/nui.nvim",
+  --   },
+  --   config = function()
+  --     require "user.neotree"
+  --   end
+  -- }
 
   -- Telescope
   use({ "nvim-telescope/telescope.nvim" })
   use {
     'nvim-telescope/telescope-fzf-native.nvim',
     after = "telescope.nvim",
-    run = 'cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build',
+    run =
+    'cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build',
   }
   use({
     "AckslD/nvim-neoclip.lua",
@@ -226,14 +263,14 @@ return packer.startup(function(use)
       require("user.telescope").telescope.load_extension("undo")
     end,
   }
-  -- use {
-  --   "nvim-telescope/telescope-frecency.nvim",
-  --   after = { "telescope.nvim" },
-  --   requires = { "kkharji/sqlite.lua" },
-  --   config = function()
-  --     require("user.telescope").telescope.load_extension("frecency")
-  --   end,
-  -- }
+  use {
+    "nvim-telescope/telescope-frecency.nvim",
+    after = { "telescope.nvim" },
+    requires = { "kkharji/sqlite.lua" },
+    config = function()
+      require("user.telescope").telescope.load_extension("frecency")
+    end,
+  }
 
   --------------------
   -- Treesitter
@@ -248,9 +285,6 @@ return packer.startup(function(use)
 
   use({
     "nvim-treesitter/nvim-treesitter-context",
-    config = function()
-      require "user.treesitter-context"
-    end
   })
   use({ "nvim-treesitter/nvim-treesitter-textobjects" })
 
@@ -315,24 +349,29 @@ return packer.startup(function(use)
         -- default augends used when no group name is specified
         default = {
           augend.integer.alias.decimal, -- nonnegative decimal number (0, 1, 2, 3, ...)
-          augend.integer.alias.hex, -- nonnegative hex number  (0x01, 0x1a1f, etc.)
-          augend.constant.alias.bool, -- boolean value (true <-> false)
+          augend.integer.alias.hex,     -- nonnegative hex number  (0x01, 0x1a1f, etc.)
+          augend.constant.alias.bool,   -- boolean value (true <-> false)
         },
       }
     end,
   }
+
+  ------------------------
+  -- Extra UI Plugins
+  ------------------------
   -- use 'mbbill/undotree'
   use "opalmay/vim-smoothie"
   use "alexghergh/nvim-tmux-navigation"
   use 'christoomey/vim-tmux-runner'
-  -- use({
-  --   "folke/noice.nvim",
-  --   requires = {
-  --     -- if you lazy-load any plugin below, make sure to add proper `module="..."` entries
-  --     "MunifTanjim/nui.nvim",
-  --     "rcarriga/nvim-notify",
-  --   }
-  -- })
+  -- use 'j-hui/fidget.nvim'
+  use({
+    "folke/noice.nvim",
+    requires = {
+      -- if you lazy-load any plugin below, make sure to add proper `module="..."` entries
+      "MunifTanjim/nui.nvim",
+      "rcarriga/nvim-notify",
+    }
+  })
   use {
     'phaazon/hop.nvim',
     branch = 'v2',
@@ -341,8 +380,14 @@ return packer.startup(function(use)
       require 'hop'.setup { keys = 'etovxqpdygfblzhckisuran' }
     end
   }
+  use "rcarriga/nvim-notify"
+  use { "dstein64/vim-startuptime" }
+
+  use "folke/zen-mode.nvim"
+
   use("folke/which-key.nvim")
   use("p00f/nvim-ts-rainbow")
+
   use({
     "ThePrimeagen/harpoon",
     after = { "telescope.nvim" },
@@ -368,8 +413,13 @@ return packer.startup(function(use)
       require("substitute").setup()
     end,
   })
-  use "rcarriga/nvim-notify"
-  use { "dstein64/vim-startuptime" }
+  use {
+    "folke/todo-comments.nvim",
+    requires = "nvim-lua/plenary.nvim",
+    config = function()
+      require('user.todo-comment')
+    end
+  }
 
   use({
     'kazhala/close-buffers.nvim',
