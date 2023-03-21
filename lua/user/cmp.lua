@@ -8,21 +8,31 @@ if not snip_status_ok then
   return
 end
 
-local tabnine_status_ok, _ = pcall(require, "user.tabnine")
-if not tabnine_status_ok then
-  return
-end
+-- local tabnine_status_ok, _ = pcall(require, "user.tabnine")
+-- if not tabnine_status_ok then
+--   return
+-- end
 
 local has_words_before = function()
----@diagnostic disable-next-line: deprecated
+  ---@diagnostic disable-next-line: deprecated
   local line, col = unpack(vim.api.nvim_win_get_cursor(0))
   return col ~= 0 and vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]:sub(col, col):match "%s" == nil
 end
 
+local winhighlight = {
+  winhighlight = "Normal:NormalFloat,FloatBorder:FloatBorder,CursorLine:PmenuSel",
+}
+
+-- local has_words_before = function()
+--   if vim.api.nvim_buf_get_option(0, "buftype") == "prompt" then return false end
+--   ---@diagnostic disable-next-line: deprecated
+--   local line, col = unpack(vim.api.nvim_win_get_cursor(0))
+--   return col ~= 0 and vim.api.nvim_buf_get_text(0, line - 1, 0, line - 1, col, {})[1]:match("^%s*$") == nil
+-- end
+
 -- M.methods.has_words_before = has_words_before
 
 local function jumpable(dir)
-
   local win_get_cursor = vim.api.nvim_win_get_cursor
   local get_current_buf = vim.api.nvim_get_current_buf
 
@@ -101,7 +111,7 @@ local function jumpable(dir)
   end
 
   if dir == -1 then
-    return luasnip.in_snippet() and luasnip.jumpable( -1)
+    return luasnip.in_snippet() and luasnip.jumpable(-1)
   else
     return luasnip.in_snippet() and seek_luasnip_cursor_node() and luasnip.jumpable(1)
   end
@@ -144,6 +154,7 @@ vim.api.nvim_set_hl(0, "CmpItemKindCopilot", { fg = "#6CC644" })
 vim.api.nvim_set_hl(0, "CmpItemKindTabnine", { fg = "#CA42F0" })
 vim.api.nvim_set_hl(0, "CmpItemKindEmoji", { fg = "#FDE030" })
 vim.api.nvim_set_hl(0, "CmpItemKindCrate", { fg = "#F64D00" })
+vim.api.nvim_set_hl(0, "CmpItemKindCopilot", { fg = "#6CC644" })
 
 vim.g.cmp_active = true
 
@@ -162,11 +173,12 @@ cmp.setup {
     end,
   },
   mapping = cmp.mapping.preset.insert {
-    ["<C-k>"] = cmp.mapping(cmp.mapping.select_prev_item(), { "i", "c" }),
-    ["<C-j>"] = cmp.mapping(cmp.mapping.select_next_item(), { "i", "c" }),
+    -- ["<C-[>"] = cmp.mapping(cmp.mapping.select_prev_item(), { "i", "c" }),
+    -- ["<C-]>"] = cmp.mapping(cmp.mapping.select_next_item(), { "i", "c" }),
+    -- ['<Esc>'] = cmp.mapping(cmp.mapping.abort(), { 'c' }),
     ["<Down>"] = cmp.mapping(cmp.mapping.select_next_item { behavior = cmp.SelectBehavior.Select }, { "i" }),
     ["<Up>"] = cmp.mapping(cmp.mapping.select_prev_item { behavior = cmp.SelectBehavior.Select }, { "i" }),
-    ["<C-d>"] = cmp.mapping.scroll_docs( -4),
+    ["<C-d>"] = cmp.mapping.scroll_docs(-4),
     ["<C-f>"] = cmp.mapping.scroll_docs(4),
     ["<C-y>"] = cmp.mapping {
       i = cmp.mapping.confirm { behavior = cmp.ConfirmBehavior.Replace, select = false },
@@ -179,7 +191,9 @@ cmp.setup {
       end,
     },
     ["<Tab>"] = cmp.mapping(function(fallback)
-      if cmp.visible() then
+      if cmp.visible() and has_words_before() then
+        cmp.select_next_item({ behavior = cmp.SelectBehavior.Select })
+      elseif cmp.visible() then
         cmp.select_next_item()
       elseif luasnip.expand_or_locally_jumpable() then
         luasnip.expand_or_jump()
@@ -195,8 +209,8 @@ cmp.setup {
     ["<S-Tab>"] = cmp.mapping(function(fallback)
       if cmp.visible() then
         cmp.select_prev_item()
-      elseif luasnip.jumpable( -1) then
-        luasnip.jump( -1)
+      elseif luasnip.jumpable(-1) then
+        luasnip.jump(-1)
       else
         fallback()
       end
@@ -215,6 +229,12 @@ cmp.setup {
       "i",
       "s",
     }),
+    -- Copilot CMP
+    --    ["<CR>"] = cmp.mapping.confirm({
+    --      -- this is the important line
+    --      behavior = cmp.ConfirmBehavior.Replace,
+    --      select = false,
+    --    }),
     ["<CR>"] = cmp.mapping(function(fallback)
       if cmp.visible() then
         local confirm_opts = {}
@@ -243,7 +263,7 @@ cmp.setup {
         vim_item.kind_hl_group = "CmpItemKindTabnine"
       end
       if entry.source.name == "copilot" then
-        vim_item.kind = icons.git.Octoface
+        vim_item.kind = icons.misc.Copilot
         vim_item.kind_hl_group = "CmpItemKindCopilot"
       end
 
@@ -264,50 +284,26 @@ cmp.setup {
 
       -- NOTE: order matters
       vim_item.menu = ({
-            luasnip = "SNIP",
-            nvim_lsp = "LSP",
-            cmp_tabnine = "TN",
-            nvim_lua = "LSP",
-            buffer = "BUF",
-            path = "PATH",
-            emoji = "E",
-          })[entry.source.name]
+        luasnip = "SNIP",
+        nvim_lsp = "LSP",
+        cmp_tabnine = "TN",
+        copilot = "CP",
+        nvim_lua = "LSP",
+        buffer = "BUF",
+        path = "PATH",
+        emoji = "E",
+      })[entry.source.name]
       return vim_item
     end,
   },
   sources = {
     { name = "crates",   group_index = 1 },
-    -- {
-    --   name = "copilot",
-    --   -- keyword_length = 0,
-    --   max_item_count = 3,
-    --   trigger_characters = {
-    --     {
-    --       ".",
-    --       ":",
-    --       "(",
-    --       "'",
-    --       '"',
-    --       "[",
-    --       ",",
-    --       "#",
-    --       "*",
-    --       "@",
-    --       "|",
-    --       "=",
-    --       "-",
-    --       "{",
-    --       "/",
-    --       "\\",
-    --       "+",
-    --       "?",
-    --       " ",
-    --       -- "\t",
-    --       -- "\n",
-    --     },
-    --   },
-    --   group_index = 2,
-    -- },
+    --    {
+    --      name = "copilot",
+    --      -- keyword_length = 0,
+    --      -- max_item_count = 3,
+    --      group_index = 2,
+    --    },
     {
       name = "nvim_lsp",
       filter = function(entry, ctx)
@@ -334,7 +330,7 @@ cmp.setup {
         end
       end,
     },
-    { name = "cmp_tabnine",    group_index = 2 },
+    -- { name = "cmp_tabnine",    group_index = 2 },
     { name = "path",           group_index = 2 },
     { name = "emoji",          group_index = 2 },
     { name = "lab.quick_data", keyword_length = 4, group_index = 2 },
@@ -342,21 +338,19 @@ cmp.setup {
   sorting = {
     priority_weight = 2,
     comparators = {
-      -- require("copilot_cmp.comparators").prioritize,
-      -- require("copilot_cmp.comparators").score,
+      --  require("copilot_cmp.comparators").prioritize,
+      --  require("copilot_cmp.comparators").score,
       compare.offset,
       compare.exact,
       -- compare.scopes,
       compare.score,
       compare.recently_used,
       compare.locality,
-      require('cmp_tabnine.compare'),
+      --      require('cmp_tabnine.compare'),
       compare.kind,
       compare.sort_text,
       compare.length,
       compare.order,
-      -- require("copilot_cmp.comparators").prioritize,
-      -- require("copilot_cmp.comparators").score,
     },
   },
   confirm_opts = {
@@ -364,15 +358,18 @@ cmp.setup {
     select = false,
   },
   window = {
+    -- Nightfly Colorscheme
+    completion = cmp.config.window.bordered(winhighlight),
+    documentation = cmp.config.window.bordered(winhighlight),
     --[[ documentation = false, ]]
-    documentation = {
-      border = "rounded",
-      winhighlight = "NormalFloat:Pmenu,NormalFloat:Pmenu,CursorLine:PmenuSel,Search:None",
-    },
-    completion = {
-      border = "rounded",
-      winhighlight = "NormalFloat:Pmenu,NormalFloat:Pmenu,CursorLine:PmenuSel,Search:None",
-    },
+    -- documentation = {
+    --   border = "rounded",
+    --   winhighlight = "NormalFloat:Pmenu,NormalFloat:Pmenu,CursorLine:PmenuSel,Search:None",
+    -- },
+    -- completion = {
+    --   border = "rounded",
+    --   winhighlight = "NormalFloat:Pmenu,NormalFloat:Pmenu,CursorLine:PmenuSel,Search:None",
+    -- },
   },
   experimental = {
     ghost_text = false,
@@ -398,3 +395,10 @@ cmp.setup.cmdline(':', {
   })
 })
 
+--cmp.event:on("menu_opened", function()
+--  vim.b.copilot_suggestion_hidden = true
+--end)
+--
+--cmp.event:on("menu_closed", function()
+--  vim.b.copilot_suggestion_hidden = false
+--end)
