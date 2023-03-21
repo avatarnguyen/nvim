@@ -7,22 +7,22 @@ local setup = {
   show_help = false,
   show_keys = false,
   plugins = {
-    marks = true, -- shows a list of your marks on ' and `
-    registers = true, -- shows your registers on " in NORMAL or <C-r> in INSERT mode
+    marks = true,       -- shows a list of your marks on ' and `
+    registers = true,   -- shows your registers on " in NORMAL or <C-r> in INSERT mode
     spelling = {
-      enabled = true, -- enabling this will show WhichKey when pressing z= to select spelling suggestions
+      enabled = true,   -- enabling this will show WhichKey when pressing z= to select spelling suggestions
       suggestions = 20, -- how many suggestions should be shown in the list?
     },
     -- the presets plugin, adds help for a bunch of default keybindings in Neovim
     -- No actual key bindings are created
     presets = {
-      operators = false, -- adds help for operators like d, y, ... and registers them for motion / text object completion
-      motions = false, -- adds help for motions
+      operators = false,    -- adds help for operators like d, y, ... and registers them for motion / text object completion
+      motions = false,      -- adds help for motions
       text_objects = false, -- help for text objects triggered after entering an operator
-      windows = true, -- default bindings on <c-w>
-      nav = true, -- misc bindings to work with windows
-      z = true, -- bindings for folds, spelling and others prefixed with z
-      g = true, -- bindings for prefixed with g
+      windows = true,       -- default bindings on <c-w>
+      nav = true,           -- misc bindings to work with windows
+      z = true,             -- bindings for folds, spelling and others prefixed with z
+      g = true,             -- bindings for prefixed with g
     },
   },
   -- add operators that will trigger motion and text object completion
@@ -37,29 +37,29 @@ local setup = {
   },
   icons = {
     breadcrumb = "»", -- symbol used in the command line area that shows your active key combo
-    separator = "-", -- symbol used between a key and it's label
-    group = "+", -- symbol prepended to a group
+    separator = "-",  -- symbol used between a key and it's label
+    group = "+",      -- symbol prepended to a group
   },
   popup_mappings = {
     scroll_down = "<c-d>", -- binding to scroll down inside the popup
-    scroll_up = "<c-u>", -- binding to scroll up inside the popup
+    scroll_up = "<c-u>",   -- binding to scroll up inside the popup
   },
   window = {
-    border = "rounded", -- none, single, double, shadow
-    position = "bottom", -- bottom, top
-    margin = { 1, 0, 1, 0 }, -- extra window margin [top, right, bottom, left]
+    border = "rounded",       -- none, single, double, shadow
+    position = "bottom",      -- bottom, top
+    margin = { 1, 0, 1, 0 },  -- extra window margin [top, right, bottom, left]
     padding = { 2, 2, 2, 2 }, -- extra window padding [top, right, bottom, left]
     winblend = 0,
   },
   layout = {
-    height = { min = 4, max = 25 }, -- min and max height of the columns
-    width = { min = 20, max = 50 }, -- min and max width of the columns
-    spacing = 3, -- spacing between columns
-    align = "left", -- align columns left, center or right
+    height = { min = 4, max = 25 },                                             -- min and max height of the columns
+    width = { min = 20, max = 50 },                                             -- min and max width of the columns
+    spacing = 3,                                                                -- spacing between columns
+    align = "left",                                                             -- align columns left, center or right
   },
-  ignore_missing = true, -- enable this to hide mappings for which you didn't specify a label
+  ignore_missing = true,                                                        -- enable this to hide mappings for which you didn't specify a label
   hidden = { "<silent>", "<cmd>", "<Cmd>", "<CR>", "call", "lua", "^:", "^ " }, -- hide mapping boilerplate
-  triggers = "auto", -- automatically setup triggers
+  triggers = "auto",                                                            -- automatically setup triggers
   -- triggers = {"<leader>"} -- or specify a list manually
   triggers_blacklist = {
     -- list of mode / prefixes that should never be hooked by WhichKey
@@ -71,12 +71,12 @@ local setup = {
 }
 
 local opts = {
-  mode = "n", -- NORMAL mode
+  mode = "n",     -- NORMAL mode
   prefix = "<leader>",
-  buffer = nil, -- Global mappings. Specify a buffer number for buffer local mappings
-  silent = true, -- use `silent` when creating keymaps
+  buffer = nil,   -- Global mappings. Specify a buffer number for buffer local mappings
+  silent = true,  -- use `silent` when creating keymaps
   noremap = true, -- use `noremap` when creating keymaps
-  nowait = true, -- use `nowait` when creating keymaps
+  nowait = true,  -- use `nowait` when creating keymaps
 }
 
 
@@ -90,14 +90,23 @@ local mappings = {
   ["A"] = { "<cmd>wa<CR>", "Save All" },
   ["Q"] = { "<cmd>q<CR>", "Quit" },
   --[[ ["c"] = { "<cmd>Bdelete!<CR>", "Close Buffer" }, ]]
-  ["F"] = { "<cmd>Telescope resume<CR>", "Last Telescope command" },
+  ["r"] = { "<cmd>Telescope resume<CR>", "Last Telescope command" },
   ["f"] = {
-    "<cmd>lua require('telescope.builtin').find_files({ debounce = 150, sort_last_used = true, file_ignore_patterns = {'windows/', 'web/', 'ios/', 'android/', 'fonts/', 'assets/', 'doc/'}})<cr>",
+    "<cmd>lua require('telescope.builtin').find_files({ debounce = 150, sort_last_used = true, file_ignore_patterns = { 'linux/', 'windows/', 'web/', 'ios/', 'android/', 'fonts/', 'assets/', 'packages/', 'test/', 'doc/'}})<cr>",
     "Find files",
   },
-  ["j"] = { "<cmd>lua require('telescope.builtin').grep_string({file_ignore_patterns = {'ios/', 'android/', 'assets/', 'fonts/', 'packages/', 'doc/'}})<cr>",
+  ["F"] = {
+    "<cmd>lua require('telescope.builtin').find_files({ debounce = 150, sort_last_used = true, file_ignore_patterns = { 'linux/', 'windows/', 'web/', 'ios/', 'android/', 'fonts/', 'assets/', 'doc/'}})<cr>",
+    "Find files",
+  },
+  -- ["f"] = {
+  --   "<cmd>lua require('telescope').extensions.frecency.frecency({ debounce = 150, workspace = 'CWD' })<cr>",
+  --   "Find files",
+  -- },
+  ["j"] = {
+    "<cmd>lua require('telescope.builtin').grep_string({file_ignore_patterns = {'ios/', 'android/', 'assets/', 'fonts/', 'packages/', 'doc/'}})<cr>",
     "Find String" },
-  ["P"] = { "<cmd>Telescope projects<cr>", "Projects" },
+  -- ["P"] = { "<cmd>Telescope projects<cr>", "Projects" },
   -- ["p"] = { "<cmd>:lua require('telescope').extensions.neoclip.default(require('telescope.themes').get_dropdown{})<CR>",
   --   "Clipboard" },
   ["D"] = { "<cmd>lua require('telescope').extensions.flutter.commands()<CR>", "Flutter Commands" },
@@ -110,21 +119,28 @@ local mappings = {
       "<cmd>lua require('telescope.builtin').lsp_dynamic_workspace_symbols({ debounce = 150, search_dirs = 'CWD', file_ignore_patterns = knowunity_file_ignore , opts = {symbols = {'info', 'error'}}})<cr>",
       "Workspace Symbols",
     },
+    -- f = {
+    --   "<cmd>lua require('telescope.builtin').find_files({ debounce = 150, sort_last_used = true, file_ignore_patterns = {'windows/', 'web/', 'ios/', 'android/', 'fonts/', 'assets/', 'doc/'}})<cr>",
+    --   "Find files",
+    -- },
     -- f = { "<cmd>lua require('telescope').extensions.recent_files({ debounce = 200, workspace = 'CWD' })<CR>",
     --   "Search Recent files" },
-    -- f = { "<cmd>lua require('telescope').extensions.frecency.frecency({ debounce = 200, workspace = 'CWD' })<CR>",
-    --   "Search Recent files" },
+    f = { "<cmd>lua require('telescope').extensions.frecency.frecency({ debounce = 200, workspace = 'CWD' })<CR>",
+      "Search Recent files" },
     d = { "<cmd>lua require('telescope.builtin').lsp_document_symbols(require('telescope.themes').get_dropdown{})<cr>",
       "Document Symbols" },
-    l = { "<cmd>lua require('telescope.builtin').live_grep({ debounce = 200, file_ignore_patterns = {'ios/', 'android/', 'assets/', 'fonts/', 'packages/', 'doc/', 'l10n/'} })<cr>",
+    l = {
+      "<cmd>lua require('telescope.builtin').live_grep({ debounce = 200, file_ignore_patterns = {'ios/', 'android/', 'assets/', 'fonts/', 'packages/', 'doc/', 'l10n/'} })<cr>",
       "Find Text" },
     c = { "<cmd>lua require('telescope').extensions.neoclip.default(require('telescope.themes').get_dropdown{})<CR>",
       "Clipboard" },
     m = { "<cmd>lua require('telescope').extensions.macroscope.default(require('telescope.themes').get_dropdown{})<CR>",
       "Clipboard" },
-    b = { "<Cmd>lua require('telescope.builtin').current_buffer_fuzzy_find(require('telescope.themes').get_dropdown{})<CR>",
+    b = {
+      "<Cmd>lua require('telescope.builtin').current_buffer_fuzzy_find(require('telescope.themes').get_dropdown{})<CR>",
       "Find in Buffer" },
-    o = { "<cmd>lua require('telescope.builtin').oldfiles( { search_dirs = 'CWD' , file_ignore_patterns = {'ios/', 'android/', 'assets/', 'fonts/', 'packages/', 'doc/'} } )<cr>",
+    o = {
+      "<cmd>lua require('telescope.builtin').oldfiles( { search_dirs = 'CWD' , file_ignore_patterns = {'ios/', 'android/', 'assets/', 'fonts/', 'packages/', 'doc/'} } )<cr>",
       "Open Recent File" },
     u = { "<cmd>Telescope undo<cr>",
       "Search Undo" },
@@ -170,7 +186,7 @@ local mappings = {
       "<cmd>Gitsigns diffthis HEAD<cr>",
       "Diff with HEAD",
     },
-    h = { "<cmd>DiffviewFileHistory<cr>", "File History" },
+    h = { "<cmd>DiffviewFileHistory %<cr>", "Current File History" },
     o = { "<cmd>DiffviewOpen<cr>", "Open DiffView" },
     c = { "<cmd>DiffviewClose<cr>", "Close Diffview" },
     t = { "<cmd>lua require('telescope').extensions.git_worktree.git_worktrees() <cr>", "Show All Git Worktrees" },
@@ -209,7 +225,9 @@ local mappings = {
     f = { "<cmd>OverseerRunCmd flutter pub run ota_translation && flutter pub get<cr>", "Run Flutter Translation" },
     r = { "<cmd>OverseerRunCmd flutter pub run build_runner build --delete-conflicting-outputs<cr>",
       "Run Flutter ReBuild" },
-    c = { "<cmd>OverseerRunCmd flutter pub run dart_code_metrics:metrics check-unused-l10n . --class-pattern='AppLocalizations' --fatal-unused && flutter pub run dart_code_metrics:metrics check-unused-code lib --monorepo --fatal-unused<cr>", "Run App Check up" },
+    c = {
+      "<cmd>OverseerRunCmd flutter pub run dart_code_metrics:metrics check-unused-l10n . --class-pattern='AppLocalizations' --fatal-unused && flutter pub run dart_code_metrics:metrics check-unused-code lib --monorepo --fatal-unused<cr>",
+      "Run App Check up" },
   },
   t = {
     name = "Run Test",
@@ -242,25 +260,28 @@ local mappings = {
     v = { "<cmd>ToggleTerm size=80 direction=vertical<cr>", "Vertical" },
     t = { "<cmd>lua _RUN_TRANSLATION()<cr>", "Run Flutter Translation" },
   },
-  -- n = {
-  --   name = "Noice",
-  --   l = { "<cmd>lua require('noice').cmd('last')<cr>", "Last Command" },
-  --   h = { "<cmd>lua require('noice').cmd('history')<cr>", "History" },
-  --   e = { "<cmd>NoiceError<cr>", "Last Error" },
-  --   f = { "<cmd>Notifications<cr>", "Noice Notifications" },
-  --   t = { "<cmd>Noice telescope<cr>", "Noice Telescope" },
-  --   m = { "<cmd>messages<cr>", "Last Messsages" },
-  -- },
+  n = {
+    name = "Noice",
+    l = { "<cmd>lua require('noice').cmd('last')<cr>", "Last Command" },
+    h = { "<cmd>lua require('noice').cmd('history')<cr>", "History" },
+    e = { "<cmd>NoiceError<cr>", "Last Error" },
+    f = { "<cmd>Notifications<cr>", "Noice Notifications" },
+    t = { "<cmd>Noice telescope<cr>", "Noice Telescope" },
+    m = { "<cmd>messages<cr>", "Last Messsages" },
+  },
   d = {
     name = "Flutter",
+    n = { "<cmd>!tmux send-keys -t flutter 'fr' Enter<CR><CR>", "Flutter Tmux: Run" },
+    R = { "<cmd>!tmux send-keys -t flutter 'R'<CR><CR>", "Flutter Tmux: Restart" },
+    r = { "<cmd>!tmux send-keys -t flutter 'r'<CR><CR>", "Flutter Tmux: Refresh" },
     a = { ":VtrAttachToPane<CR>", "Attach Tmux" },
-    j = { ":VtrSendCommandToRunner frd<CR>", "run flutter on samsung" },
+    j = { ":VtrSendCommandToRunner frd<CR>", "run flutter device" },
     k = { ":VtrSendCommandToRunner flutter run<CR>", "run flutter default" },
     s = { ":VtrSendKeysRaw R<CR>", "Restart Flutter" },
     d = { ":VtrSendKeysRaw r<CR>", "Reload Flutter " },
     q = { ":VtrSendKeysRaw q<CR>", "Quit Flutter" },
     v = { ":VtrSendKeysRaw v<CR>", "Start Dev Tool" },
-    r = { "<cmd>lua require('dart-lsp-refactorings').rename()<cr>", "Rename Dart Class" },
+    -- r = { "<cmd>lua require('dart-lsp-refactorings').rename()<cr>", "Rename Dart Class" },
     l = { "<cmd>lua require('flutter-tools.devices').list_devices()<cr>", "Show Devices" },
     e = { "<cmd>lua require('flutter-tools.devices').list_emulators()<cr>", "Show Emulators" },
     g = { "<cmd>lua require('flutter-tools.commands').pub_get()<cr>", "Run Pub Get" },
@@ -279,9 +300,9 @@ local mappings = {
     name = "Harpoon",
     a = { "<CMD>lua require('harpoon.mark').add_file()<CR>", "Add File" },
     h = { "<CMD>lua require('harpoon.ui').toggle_quick_menu()<CR>", "Toggle Menu" },
-    l = { "<CMD>Telescope harpoon marks<CR>", "List" },
+    f = { "<CMD>Telescope harpoon marks<CR>", "List" },
     n = { "<CMD>lua require('harpoon.ui').nav_next() <CR>", "Next" },
-    b = { "<CMD>lua require('harpoon.ui').nav_prev() <CR>", "Prev" },
+    p = { "<CMD>lua require('harpoon.ui').nav_prev() <CR>", "Prev" },
     ['1'] = { "<CMD>lua require('harpoon.ui').nav_file(1)<CR>", "Go To File 1" },
     ['2'] = { "<CMD>lua require('harpoon.ui').nav_file(2)<CR>", "Go To File 2" },
     ['3'] = { "<CMD>lua require('harpoon.ui').nav_file(3)<CR>", "Go To File 3" },

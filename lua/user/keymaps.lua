@@ -29,7 +29,7 @@ keymap("n", "<C-q>", ":<cr>", opts)
 
 keymap("n", "<Enter>", ":w<cr>", opts)
 
-keymap("n", "<C-p>", ":VtrSendKeysRaw r<CR>", opts)
+keymap("n", "<C-p>", "<cmd>Telescope resume<CR>", opts)
 keymap("n", "<C-q>", ":call QuickFixToggle()<CR>", opts)
 
 -- Explorer
@@ -64,8 +64,8 @@ keymap("v", "<leader>a", "<Cmd>Lspsaga code_action<CR>", opts)
 -- keymap("i", "<C-j>", "<cmd>lua require('lsp-fastaction').code_action()<CR>", opts)
 -- keymap("v", "<C-j>", "<esc><cmd>lua require('lsp-fastaction').range_code_action()<CR>", opts)
 
-keymap("n", "ga", "<cmd>lua require('lsp-fastaction').code_action()<CR>", opts)
-keymap("v", "ga", "<esc><cmd>lua require('lsp-fastaction').range_code_action()<CR>", opts)
+keymap("n", "gj", "<cmd>lua require('lsp-fastaction').code_action()<CR>", opts)
+keymap("v", "gj", "<esc><cmd>lua require('lsp-fastaction').range_code_action()<CR>", opts)
 
 -- SUBSTITUTE plugin  {{{
 keymap("n", "s", "<cmd>lua require('substitute').operator()<cr>", { noremap = true })
@@ -77,10 +77,6 @@ keymap("v", "<S-s>", "<cmd>lua require('substitute').visual()<cr>", { noremap = 
 keymap("x", "<leader>rr", "<cmd>lua require('substitute.range').visual()<cr>", {})
 -- keymap("n", "<leader>rr", "<cmd>lua require('substitute.range').word()<cr>", {})
 --}}}
-
--- keymap("n", "<leader>r", ":%s///g<Left><Left>", {})
--- keymap("x", "<leader>r", ":s///g<Left><Left>", opts)
--- keymap("x", "<leader><leader>r", ":s/\\(\\w.*\\)//<Left><Left>", opts)
 
 -- Code Navigation {{{
 -- HOP
@@ -101,10 +97,10 @@ end, { remap = true, silent = true })
 
 -- keymap('n', "<C-l>", "<cmd>lua require'hop'.hint_lines()<cr>", opts)
 -- keymap('v', "<C-l>", "<cmd>lua require'hop'.hint_lines()<cr>", opts)
--- vim.keymap.set('', '<C-h>', function()
---   hop.hint_char1({ direction = directions.AFTER_CURSOR, current_line_only = false })
--- end, { remap = true, silent = true })
--- vim.keymap.set('', '<C-S-h>', function()
+vim.keymap.set('n', '<C-m>', function()
+  hop.hint_char1({ current_line_only = false })
+end, { remap = true, silent = true })
+-- vim.keymap.set('n', '<C-S-s>', function()
 --   hop.hint_char1({ direction = directions.BEFORE_CURSOR, current_line_only = false })
 -- end, { remap = true, silent = true })
 
@@ -115,7 +111,8 @@ end, { remap = true, silent = true })
 
 -- require('tsht').move({ side = "start" })
 
--- Unimpaired Keymapping {{{
+----------------------------------------
+-- Unimpaired/Brackets Keymapping {{{
 
 -- to do keymapping
 vim.keymap.set("n", "]t", function()
@@ -138,11 +135,16 @@ keymap("n", "]d", "<CMD> lua require'dap'.step_out()<CR>", opts)
 keymap("n", "\\d", "<CMD> lua require'dap'.step_over()<CR>", opts)
 -- }}}
 
--- Harpoon 
+-- Git
+keymap("n", "]c", "<cmd>lua require 'gitsigns'.next_hunk()<cr>", opts)
+keymap("n", "[c", "<cmd>lua require 'gitsigns'.prev_hunk()<cr>", opts)
+
+-- Harpoon
 keymap("n", "]o", "<CMD>lua require('harpoon.ui').nav_next() <CR>", opts)
 keymap("n", "[o", "<CMD>lua require('harpoon.ui').nav_next() <CR>", opts)
 
 -- }}}
+----------------------------------------
 
 keymap("n", "<leader>1", "<CMD>lua require('harpoon.ui').nav_file(1)<CR>", opts)
 keymap("n", "<leader>2", "<CMD>lua require('harpoon.ui').nav_file(2)<CR>", opts)
@@ -158,6 +160,9 @@ keymap("n", "<A-Left>", ":vertical resize -2<CR>", opts)
 keymap("n", "<A-Right>", ":vertical resize +2<CR>", opts)
 keymap("n", "<A-=>", ":vertical resize -2<CR>", opts)
 keymap("n", "<A-->", ":vertical resize +2<CR>", opts)
+
+keymap("n", "<A-l>", "<S-l>", opts)
+keymap("n", "<A-h>", "<S-h>", opts)
 
 -- Navigate buffers
 -- keymap("n", "<Tab>", ":bnext<CR>", opts)
@@ -185,7 +190,8 @@ keymap("n", "<leader>w", "<cmd>w!<CR><cmd>VtrSendKeysRaw r<CR>", opts)
 -- keymap("n", "<C-b>",
 --   "<cmd>lua require('telescope.builtin').buffers(require('telescope.themes').get_dropdown{sort_mru = true, layout_config = {width = 0.6}})<cr>", opts)
 keymap("n", ";;",
-  "<cmd>lua require('telescope.builtin').buffers(require('telescope.themes').get_dropdown{sort_mru = true, layout_config = {width = 0.6}})<cr>", opts)
+  "<cmd>lua require('telescope.builtin').buffers(require('telescope.themes').get_dropdown{sort_mru = true, layout_config = {width = 0.6}})<cr>",
+  opts)
 keymap("n", "<leader>;",
   "<cmd>Neotree buffers float reveal<cr>", opts)
 -- keymap("n", "<leader>B",

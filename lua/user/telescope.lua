@@ -42,39 +42,35 @@ M.telescope = telescope
 
 telescope.setup {
   defaults = {
-
     color_devicons = true,
-
     prompt_prefix = " ",
     selection_caret = " ",
     path_display = { "smart" },
     file_ignore_patterns = { "%.g.dart", "%.freezed.dart", ".git/", "node_modules", "gen_l10n/", "analytics",
       ".pub-cache/", "flutter/packages/" },
-
     buffer_previewer_maker = new_maker,
-
+    layout_config = {
+      prompt_position = "top"
+    },
+    sorting_strategy = "ascending",
     mappings = {
       i = {
         ["<C-n>"] = actions.cycle_history_next,
         ["<C-p>"] = actions.cycle_history_prev,
-
         ["<C-c>"] = actions.close,
         ["<Esc>"] = actions.close,
-
         ["<Down>"] = actions.move_selection_next,
         ["<Up>"] = actions.move_selection_previous,
-
+        ["<C-j>"] = actions.move_selection_next,
+        ["<C-k>"] = actions.move_selection_previous,
         ["<CR>"] = actions.select_default,
         ["<C-x>"] = actions.select_horizontal,
         ["<C-v>"] = actions.select_vertical,
         ["<C-t>"] = actions.select_tab,
-
         ["<C-u>"] = actions.preview_scrolling_up,
         ["<C-d>"] = actions.preview_scrolling_down,
-
         ["<PageUp>"] = actions.results_scrolling_up,
         ["<PageDown>"] = actions.results_scrolling_down,
-
         -- ["<Right>"] = actions.toggle_selection + actions.move_selection_worse,
         -- ["<Left>"] = actions.toggle_selection + actions.move_selection_better,
         ["<C-q>"] = actions.send_to_qflist + actions.open_qflist,
@@ -82,36 +78,29 @@ telescope.setup {
         ["<C-l>"] = actions.complete_tag,
         ["<C-_>"] = actions.which_key, -- keys from pressing <C-/>
       },
-
       n = {
         ["<esc>"] = actions.close,
         ["<CR>"] = actions.select_default,
         ["<C-x>"] = actions.select_horizontal,
         ["<C-v>"] = actions.select_vertical,
         ["<C-t>"] = actions.select_tab,
-
         ["Right"] = actions.toggle_selection + actions.move_selection_worse,
         ["Left"] = actions.toggle_selection + actions.move_selection_better,
         ["<C-q>"] = actions.send_to_qflist + actions.open_qflist,
         ["<M-q>"] = actions.send_selected_to_qflist + actions.open_qflist,
-
         ["j"] = actions.move_selection_next,
         ["k"] = actions.move_selection_previous,
         ["H"] = actions.move_to_top,
         ["M"] = actions.move_to_middle,
         ["L"] = actions.move_to_bottom,
-
         ["<Down>"] = actions.move_selection_next,
         ["<Up>"] = actions.move_selection_previous,
         ["gg"] = actions.move_to_top,
         ["G"] = actions.move_to_bottom,
-
         ["<C-u>"] = actions.preview_scrolling_up,
         ["<C-d>"] = actions.preview_scrolling_down,
-
         ["<PageUp>"] = actions.results_scrolling_up,
         ["<PageDown>"] = actions.results_scrolling_down,
-
         ["?"] = actions.which_key,
       },
     },
@@ -185,6 +174,26 @@ telescope.setup {
         preview_height = 0.7,
       },
     },
+    harpoon = {
+      theme = "dropdown",
+      initial_mode = "normal",
+      layout_config = {
+        width = 0.6,
+      },
+    },
+    frecency = {
+      -- db_root = "home/my_username/path/to/db_root",
+      show_scores = false,
+      show_unindexed = true,
+      ignore_patterns = {"*.git/*", "*/tmp/*", "*/packages/*", "*/test/*", "*/ios/*",  "*/android/*", "*/windows/*", "*/linux/*", "*/assets/*",  "*/macos/*",  "*/web/*"},
+      disable_devicons = false,
+      workspaces = {
+        -- ["conf"]    = "/home/my_username/.config",
+        -- ["data"]    = "/home/my_username/.local/share",
+        -- ["project"] = "/home/my_username/projects",
+        -- ["wiki"]    = "/home/my_username/wiki"
+      }
+    }
   },
 }
 
