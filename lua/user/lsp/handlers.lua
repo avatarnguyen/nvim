@@ -119,7 +119,7 @@ end
 M.on_attach = function(client, bufnr)
   if client.name == "gopls" then
     require "user.lsp.lsp-signature".on_attach()
-    -- require("user.lsp.inlay").on_attach(client, bufnr)
+    require("lsp-inlayhints").on_attach(client, bufnr)
   end
 
   if client.name == "jsonls" or client.name == "json" then
@@ -135,7 +135,9 @@ M.on_attach = function(client, bufnr)
   end
 
   if client.name == "dartls" then
-    client.server_capabilities.document_formatting = false
+    client.server_capabilities.document_formatting = true
+    require("user.lsp.inlay").on_attach(client, bufnr)
+    -- require("lsp-inlayhints").on_attach(client, bufnr)
     -- require "user.lsp.lsp-signature".on_attach()
   end
 
