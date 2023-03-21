@@ -3,104 +3,55 @@
 local M = {}
 
 -- local colorscheme = "kanagawa"
-local colorscheme = "tokyonight"
+-- local colorscheme = "tokyonight"
 -- local colorscheme = "cobalt2"
--- local colorscheme = "nightfly"
+local colorscheme = "nightfly"
 -- local colorscheme = "catppuccin"
 -- local colorscheme = "ayu"
 -- local colorscheme = "github"
 
 -- catppuccin {{{
 if colorscheme == "catppuccin" then
-  vim.g.catppuccin_flavour = "mocha" -- latte, frappe, macchiato, mocha
-
   require("catppuccin").setup({
-    -- dim_inactive = {
-    --   enabled = false,
-    --   shade = "dark",
-    --   percentage = 0.15,
-    -- },
-    transparent_background = true,
-    --[[ term_colors = false, ]]
-    compile = {
-      enabled = true,
-      path = vim.fn.stdpath "cache" .. "/catppuccin",
+    flavour = "mocha", -- latte, frappe, macchiato, mocha
+    background = { -- :h background
+      light = "mocha",
+      dark = "mocha",
     },
+    transparent_background = true,
+    show_end_of_buffer = true, -- show the '~' characters after the end of buffers
+    term_colors = true,
+    dim_inactive = {
+      enabled = false,
+      shade = "dark",
+      percentage = 0.15,
+    },
+    no_italic = false, -- Force no italic
+    no_bold = false, -- Force no bold
     styles = {
       comments = { "italic" },
-      --   conditionals = { "italic" },
-      --   loops = {},
-      --   functions = {},
-      --   keywords = {},
-      --   strings = {},
-      --   variables = {},
-      --   numbers = {},
-      --   booleans = {},
-      --   properties = {},
-      --   types = {},
-      --   operators = {},
+      conditionals = { "italic" },
+      loops = {},
+      functions = {},
+      keywords = {},
+      strings = {},
+      variables = {},
+      numbers = {},
+      booleans = {},
+      properties = {},
+      types = {},
+      operators = {},
     },
+    color_overrides = {},
+    custom_highlights = {},
     integrations = {
-      treesitter = true,
-      native_lsp = {
-        enabled = true,
-        virtual_text = {
-          -- errors = { "italic" },
-          hints = { "italic" },
-          warnings = { "italic" },
-          information = { "italic" },
-        },
-        underlines = {
-          errors = { "underline" },
-          hints = { "underline" },
-          warnings = { "underline" },
-          information = { "underline" },
-        },
-      },
-      coc_nvim = false,
-      lsp_trouble = true,
       cmp = true,
-      lsp_saga = true,
-      gitgutter = true,
       gitsigns = true,
-      -- leap = false,
+      nvimtree = true,
       telescope = true,
-      nvimtree = {
-        enabled = true,
-        show_root = true,
-        transparent_panel = false,
-      },
-      --[[ neotree = { ]]
-      --[[   enabled = false, ]]
-      --[[   show_root = true, ]]
-      --[[   transparent_panel = false, ]]
-      --[[ }, ]]
-      dap = {
-        enabled = true,
-        enable_ui = true,
-      },
-      which_key = true,
-      indent_blankline = {
-        enabled = true,
-        colored_indent_levels = true,
-      },
-      dashboard = true,
-      neogit = false,
-      vim_sneak = false,
-      fern = false,
-      barbar = false,
-      bufferline = true,
-      markdown = true,
-      lightspeed = false,
-      ts_rainbow = true,
-      hop = true,
       notify = true,
-      telekasten = false,
-      symbols_outline = true,
       mini = false,
-      aerial = false,
-      vimwiki = false,
-      beacon = false,
+      -- For more plugins integrations please scroll down (https://github.com/catppuccin/nvim#integrations)
     },
   })
 end
@@ -109,12 +60,14 @@ end
 -- nightfly {{{
 if colorscheme == "nightfly" then
   vim.g.nightflyTransparent = 1
-  vim.g.nightflyTerminalColors = 1
+  vim.g.nightflyTerminalColors = 2
   vim.g.nightflyItalics = 1
   vim.g.nightflyNormalFloat = 1
   vim.g.nightflyCursorColor = 1
+  vim.g.nightflyUndercurls = 1
   vim.g.nightflyUnderlineMatchParen = true
   vim.g.nightflyWinSeparator = 2
+  vim.g.nightflyVirtualTextColor = true
 end
 -- }}}
 
