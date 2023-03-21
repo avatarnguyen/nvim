@@ -7,7 +7,7 @@ local hide_in_width = function()
   return vim.fn.winwidth(0) > 80
 end
 
--- local noice = require("user.noice").noice;
+local noice = require("user.noice").noice;
 
 local diagnostics = {
   "diagnostics",
@@ -38,7 +38,7 @@ local function workspace_diagnostic()
           "vim.lsp"
         )
     then
-      if string.find(diagnostic.message, 'TODO') then
+      if string.find(diagnostic.message, 'TODO') or string.find(diagnostic.message, 'FIXME') then
         -- count[5] = count[5] + 1
         if string.find(diagnostic.message, '@anh') then
           count[5] = count[5] + 1
@@ -117,7 +117,7 @@ local location = {
 local filepath = {
   'filename',
   file_status = true, -- displays file status (readonly status, modified status)
-  path = 1, -- 0 = just filename, 1 = relative path, 2 = absolute path
+  path = 1,           -- 0 = just filename, 1 = relative path, 2 = absolute path
   shorting_target = 24,
   colored = true,
 }
@@ -126,7 +126,7 @@ local fileName = {
   'filename',
   padding = 0,
   file_status = false, -- displays file status (readonly status, modified status)
-  path = 0, -- 0 = just filename, 1 = relative path, 2 = absolute path
+  path = 0,            -- 0 = just filename, 1 = relative path, 2 = absolute path
   shorting_target = 40,
   colored = false,
 }
@@ -137,29 +137,29 @@ local fileName = {
 --[[ } ]]
 --local winbar_symbol = require('lspsaga.symbolwinbar'):get_winbar()
 
--- local winbar_symbol = function()
---   local exclude = {
---     ['teminal'] = true,
---     ['toggleterm'] = true,
---     ['prompt'] = true,
---     ['NvimTree'] = true,
---     ['lualine'] = true,
---     ['help'] = true,
---     ['dap_ui'] = false,
---     ['dapui_scopes'] = false,
---     ['dap-repl'] = false,
---   }
---   if vim.api.nvim_win_get_config(0).zindex or exclude[vim.bo.filetype] then
---     return ""
---   else
---     local ok, lspsaga = pcall(require, 'lspsaga.symbolwinbar')
---     local sym
---     if ok then sym = lspsaga:get_winbar() end
---     local win_val = ''
---     if sym ~= nil then win_val = win_val .. ' ' .. sym end
---     return win_val
---   end
--- end
+local winbar_symbol = function()
+  local exclude = {
+    ['teminal'] = true,
+    ['toggleterm'] = true,
+    ['prompt'] = true,
+    ['NvimTree'] = true,
+    ['lualine'] = true,
+    ['help'] = true,
+    ['dap_ui'] = false,
+    ['dapui_scopes'] = false,
+    ['dap-repl'] = false,
+  }
+  if vim.api.nvim_win_get_config(0).zindex or exclude[vim.bo.filetype] then
+    return ""
+  else
+    local ok, lspsaga = pcall(require, 'lspsaga.symbolwinbar')
+    local sym
+    if ok then sym = lspsaga:get_winbar() end
+    local win_val = ''
+    if sym ~= nil then win_val = win_val .. ' ' .. sym end
+    return win_val
+  end
+end
 
 local config = {
   options = {
@@ -190,27 +190,27 @@ local config = {
   },
   sections = {
     lualine_a = { branch, workspace_diagnostic },
-    lualine_b = { filepath }, -- filepath
-    lualine_c = { diff },
+    lualine_b = {},       -- { filepath },
+    lualine_c = { diff }, -- winbar_symbol
     lualine_x = {
-      --      {
-      --        noice.api.status.command.get,
-      --        cond = noice.api.status.command.has,
-      --      },
+      -- {
+      --   noice.api.status.command.get,
+      --   cond = noice.api.status.command.has,
+      -- },
       -- {
       --   noice.api.status.message.get_hl,
       --   cond = noice.api.status.message.has,
       -- },
-      --      {
-      --        noice.api.statusline.mode.get,
-      --        cond = noice.api.statusline.mode.has,
-      --        color = { fg = "#ff9e64" },
-      --      },
-      --      {
-      --        noice.api.status.search.get,
-      --        cond = noice.api.status.search.has,
-      --        color = { fg = "#ff9e64" },
-      --      },
+      {
+        noice.api.statusline.mode.get,
+        cond = noice.api.statusline.mode.has,
+        -- color = { fg = "#ff9e64" },
+      },
+      -- {
+      --   noice.api.status.search.get,
+      --   cond = noice.api.status.search.has,
+      --   color = { fg = "#ff9e64" },
+      -- },
       -- 'lsp_progress',
       -- workspace_diagnostic,
     },
@@ -245,22 +245,22 @@ local config = {
   --[[   lualine_x = { 'lsp_progress' }, ]]
   --[[   lualine_y = { workspace_diagnostic } ]]
   --[[ }, ]]
-  -- winbar = {
-  --   lualine_a = {},
-  --   lualine_b = {},
-  --   lualine_c = { winbar_symbol },
-  --   lualine_x = {},
-  --   lualine_y = { diagnostics },
-  --   lualine_z = {}
-  -- },
-  -- inactive_winbar = {
-  --   lualine_a = {},
-  --   lualine_b = { filepath },
-  --   lualine_c = {},
-  --   lualine_x = {},
-  --   lualine_y = {},
-  --   lualine_z = {}
-  -- },
+  winbar = {
+    lualine_a = {},
+    lualine_b = { filepath },
+    lualine_c = {},
+    lualine_x = {},
+    lualine_y = { diagnostics },
+    lualine_z = {}
+  },
+  inactive_winbar = {
+    lualine_a = {},
+    lualine_b = { filepath },
+    lualine_c = {},
+    lualine_x = {},
+    lualine_y = {},
+    lualine_z = {}
+  },
   extensions = { 'nvim-tree', 'toggleterm' }
 }
 -- Color for highlights
