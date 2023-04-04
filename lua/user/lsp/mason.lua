@@ -6,8 +6,9 @@ local servers = {
   -- "bashls",
   "lua_ls",
   "jsonls",
-  "gopls",
-  "yamlls",
+  -- "gopls",
+  -- "yamlls",
+  -- "ruby-lsp"
 }
 
 local settings = {
