@@ -11,6 +11,7 @@ local keymap = vim.keymap.set
 
 --Remap space as leader key
 keymap("", "<Space>", "<Nop>", opts)
+
 vim.g.mapleader = " "
 vim.g.maplocalleader = " "
 
@@ -54,18 +55,13 @@ keymap("n", "<C-n>", "<cmd>nohlsearch<CR>", opts)
 keymap("n", "<S-q>", "<cmd>q<CR>", opts)
 
 -- LSP Mapping
-keymap("n", "<leader>a", "<Cmd>Lspsaga code_action<CR>", opts)
-keymap("v", "<leader>a", "<Cmd>Lspsaga code_action<CR>", opts)
+keymap("n", "gj", "<Cmd>Lspsaga code_action<CR>", opts)
+keymap("v", "gj", "<Cmd>Lspsaga code_action<CR>", opts)
+-- fastaction
+keymap("n", "<leader>a", "<cmd>lua require('lsp-fastaction').code_action()<CR>", opts)
+keymap("v", "<leader>a", "<esc><cmd>lua require('lsp-fastaction').range_code_action()<CR>", opts)
 -- keymap("n", "<leader>la", "<Cmd>Lspsaga code_action<CR>", opts)
 -- keymap("v", "<leader>la", "<Cmd>Lspsaga code_action<CR>", opts)
-
--- fastaction
--- keymap("n", "<C-j>", "<cmd>lua require('lsp-fastaction').code_action()<CR>", opts)
--- keymap("i", "<C-j>", "<cmd>lua require('lsp-fastaction').code_action()<CR>", opts)
--- keymap("v", "<C-j>", "<esc><cmd>lua require('lsp-fastaction').range_code_action()<CR>", opts)
-
-keymap("n", "gj", "<cmd>lua require('lsp-fastaction').code_action()<CR>", opts)
-keymap("v", "gj", "<esc><cmd>lua require('lsp-fastaction').range_code_action()<CR>", opts)
 
 -- SUBSTITUTE plugin  {{{
 keymap("n", "s", "<cmd>lua require('substitute').operator()<cr>", { noremap = true })
@@ -78,38 +74,9 @@ keymap("x", "<leader>rr", "<cmd>lua require('substitute.range').visual()<cr>", {
 -- keymap("n", "<leader>rr", "<cmd>lua require('substitute.range').word()<cr>", {})
 --}}}
 
--- Code Navigation {{{
--- HOP
-local hop = require('hop')
-local directions = require('hop.hint').HintDirection
-vim.keymap.set('', 'f', function()
-  hop.hint_char1({ direction = directions.AFTER_CURSOR, current_line_only = true })
-end, { remap = true, silent = true })
-vim.keymap.set('', 'F', function()
-  hop.hint_char1({ direction = directions.BEFORE_CURSOR, current_line_only = true })
-end, { remap = true, silent = true })
-vim.keymap.set('', 't', function()
-  hop.hint_char1({ direction = directions.AFTER_CURSOR, current_line_only = true, hint_offset = -1 })
-end, { remap = true, silent = true })
-vim.keymap.set('', 'T', function()
-  hop.hint_char1({ direction = directions.BEFORE_CURSOR, current_line_only = true, hint_offset = 1 })
-end, { remap = true, silent = true })
-
--- keymap('n', "<C-l>", "<cmd>lua require'hop'.hint_lines()<cr>", opts)
--- keymap('v', "<C-l>", "<cmd>lua require'hop'.hint_lines()<cr>", opts)
-vim.keymap.set('n', '<C-m>', function()
-  hop.hint_char1({ current_line_only = false })
-end, { remap = true, silent = true })
--- vim.keymap.set('n', '<C-S-s>', function()
---   hop.hint_char1({ direction = directions.BEFORE_CURSOR, current_line_only = false })
--- end, { remap = true, silent = true })
-
--- keymap('v', "<C-S-h>", "<cmd><C-U>lua require('tsht').nodes()<cr>", opts)
--- keymap('i', "<C-S-h>", "<cmd>lua require('tsht').nodes()<cr>", opts)
--- Tree Hopper
---}}}
-
--- require('tsht').move({ side = "start" })
+-- GIT Merge
+vim.keymap.set("n", "[g", "3do", { noremap = true })
+vim.keymap.set("n", "]g", "1do", { noremap = true })
 
 ----------------------------------------
 -- Unimpaired/Brackets Keymapping {{{
@@ -169,6 +136,7 @@ keymap("n", "<A-h>", "<S-h>", opts)
 -- keymap("n", "<S-Tab>", ":bprevious<CR>", opts)
 keymap("n", "<S-l>", ":bnext<CR>", opts)
 keymap("n", "<S-h>", ":bprevious<CR>", opts)
+keymap("n", "<C-=>", "<C-w>=", opts)
 
 -- Visual --
 -- Stay in indent mode
@@ -183,27 +151,19 @@ keymap("x", "K", ":move '<-2<CR>gv-gv", opts)
 -- Insert --
 -- Press jk fast to enter
 keymap("i", "jk", "<ESC>", opts)
+keymap("i", "kj", "<ESC>", opts)
 
 -- Buffer
 keymap("n", "<leader>c", "<cmd>Bdelete!<CR>", opts)
-keymap("n", "<leader>w", "<cmd>w!<CR><cmd>VtrSendKeysRaw r<CR>", opts)
+keymap("n", "<leader>w", "<cmd>w!<CR><cmd>!tmux send-keys -t flutter 'r'<CR>", opts)
 -- keymap("n", "<C-b>",
 --   "<cmd>lua require('telescope.builtin').buffers(require('telescope.themes').get_dropdown{sort_mru = true, layout_config = {width = 0.6}})<cr>", opts)
-keymap("n", ";;",
+keymap("n", "<leader>;",
   "<cmd>lua require('telescope.builtin').buffers(require('telescope.themes').get_dropdown{sort_mru = true, layout_config = {width = 0.6}})<cr>",
   opts)
-keymap("n", "<leader>;",
-  "<cmd>Neotree buffers float reveal<cr>", opts)
--- keymap("n", "<leader>B",
---   "<cmd>Neotree buffers focus<cr>", opts)
-
--- Dial
-keymap("n", "<C-y>", require("dial.map").inc_normal())
-keymap("n", "<C-x>", require("dial.map").dec_normal())
-keymap("v", "<C-y>", require("dial.map").inc_visual())
-keymap("v", "<C-x>", require("dial.map").dec_visual())
-keymap("v", "g<C-y>", require("dial.map").inc_gvisual())
-keymap("v", "g<C-x>", require("dial.map").dec_gvisual())
+keymap("n", "<leader>u",
+  "<cmd>lua require('undotree').toggle()<cr>",
+  opts)
 
 -- Terminal --
 -- Better terminal navigation
