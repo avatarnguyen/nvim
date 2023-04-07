@@ -27,5 +27,3 @@ harpoon.setup({
     width = vim.api.nvim_win_get_width(0) - 80,
   }
 })
-local telescope = require('user.telescope').telescope
-telescope.load_extension('harpoon')

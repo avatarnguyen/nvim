@@ -33,7 +33,7 @@ return {
 		"folke/tokyonight.nvim",
 		lazy = true, -- make sure we load this during startup if it is your main colorscheme
 		priority = 1000, -- make sure to load this before all the other start plugins
-    enabled = false,
+		enabled = false,
 		config = function()
 			require("tokyonight").setup({
 				style = "moon",
@@ -114,10 +114,33 @@ return {
 	-- 		require("user.trouble")
 	-- 	end,
 	-- },
+
+	--------------
 	-- CO-PILOT --
+	--------------
+	-- {
+	-- 	"zbirenbaum/copilot.lua",
+	-- 	-- cmd = "Copilot",
+	-- 	event = "InsertEnter",
+	-- 	config = function()
+	-- 		require("user.copilot")
+	-- 	end,
+	-- dependencies = {
+	-- 	{
+	-- 		"zbirenbaum/copilot-cmp",
+	-- 		config = function()
+	-- 			require("copilot_cmp").setup({
+	-- 				formatters = {
+	-- 					insert_text = require("copilot_cmp.format").remove_existing,
+	-- 				},
+	-- 			})
+	-- 		end,
+	-- 	},
+	-- },
+	-- },
+
 	{
 		"github/copilot.vim",
-		lazy = false,
 		config = function()
 			require("user.copilot")
 		end,
@@ -202,7 +225,7 @@ return {
 	{
 		"nvim-telescope/telescope.nvim",
 		tag = "0.1.1",
-    lazy = false,
+		lazy = false,
 		dependencies = {
 			"nvim-lua/plenary.nvim",
 			"smartpde/telescope-recent-files",
@@ -214,22 +237,21 @@ return {
 					vim.fn["fzf#install"]()
 				end,
 			},
+			{
+				"AckslD/nvim-neoclip.lua",
+				dependencies = {
+					{ "tami5/sqlite.lua", module = "sqlite" },
+				},
+				config = function()
+					require("user.neoclip")
+				end,
+			},
 		},
 		build = "make",
 		config = function()
 			require("user.telescope")
 		end,
 	},
-	-- {
-	--   "AckslD/nvim-neoclip.lua",
-	--   dependencies = {
-	--     { "telescope.nvim" },
-	--     { "tami5/sqlite.lua", module = "sqlite" },
-	--   },
-	--  -- config = function()
-	--  --   require("user.neoclip")
-	--  -- end
-	-- },
 
 	--------------------
 	-- Treesitter
@@ -308,6 +330,7 @@ return {
 				},
 			})
 			keymap("n", "<C-y>", require("dial.map").inc_normal())
+			keymap("n", "<C-a>", require("dial.map").inc_normal())
 			keymap("n", "<C-x>", require("dial.map").dec_normal())
 			keymap("v", "<C-y>", require("dial.map").inc_visual())
 			keymap("v", "<C-x>", require("dial.map").dec_visual())
@@ -336,24 +359,60 @@ return {
 		end,
 	},
 	{
-		"alexghergh/nvim-tmux-navigation",
+		"numToStr/Navigator.nvim",
+		lazy = false,
 		config = function()
-			require("user.tmux-navigation")
+			require("Navigator").setup({
+				-- Save modified buffer(s) when moving to mux
+				-- nil - Don't save (default)
+				-- 'current' - Only save the current modified buffer
+				-- 'all' - Save all the buffers
+				auto_save = nil,
+				-- Disable navigation when the current mux pane is zoomed in
+				disable_on_zoom = true,
+				-- Multiplexer to use
+				-- 'auto' - Chooses mux based on priority (default)
+				-- table - Custom mux to use
+				mux = "auto",
+			})
+			vim.keymap.set({ "n", "t" }, "<C-h>", "<CMD>NavigatorLeft<CR>")
+			vim.keymap.set({ "n", "t" }, "<C-l>", "<CMD>NavigatorRight<CR>")
+			vim.keymap.set({ "n", "t" }, "<C-k>", "<CMD>NavigatorUp<CR>")
+			vim.keymap.set({ "n", "t" }, "<C-j>", "<CMD>NavigatorDown<CR>")
+			vim.keymap.set({ "n", "t" }, "<A-p>", "<CMD>NavigatorPrevious<CR>")
 		end,
 	},
-	"christoomey/vim-tmux-runner",
+	{
+		"alexghergh/nvim-tmux-navigation",
+		enabled = false,
+		-- config = function()
+		-- 	require("user.tmux-navigation")
+		-- end,
+	},
+	-- "christoomey/vim-tmux-runner",
+	{
+		"folke/noice.nvim",
+		lazy = false,
+		config = function()
+			require("user.noice")
+		end,
+		dependencies = {
+			"MunifTanjim/nui.nvim",
+			{
+				"rcarriga/nvim-notify",
+				config = function()
+					require("user.notify")
+				end,
+			},
+		},
+	},
 	{
 		"j-hui/fidget.nvim",
+		enabled = false,
 		config = function()
 			require("user.fidget")
 		end,
 	},
-	-- {
-	-- 	"rcarriga/nvim-notify",
-	-- 	config = function()
-	-- 		require("user.notify")
-	-- 	end,
-	-- },
 	{
 		"dstein64/vim-startuptime",
 		-- lazy-load on a command

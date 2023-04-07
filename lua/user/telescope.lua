@@ -5,7 +5,7 @@ if not status_ok then
   return
 end
 
-local builtin = require('telescope.builtin')
+local builtin = require("telescope.builtin")
 -- local conf = require('telescope.config')
 local previewers = require("telescope.previewers")
 local Job = require("plenary.job")
@@ -18,7 +18,9 @@ local new_maker = function(filepath, bufnr, opts)
       local mime_type = vim.split(j:result()[1], "/")[1]
       if mime_type == "text" then
         vim.loop.fs_stat(filepath, function(_, stat)
-          if not stat then return end
+          if not stat then
+            return
+          end
           if stat.size > 20000 then
             return
           else
@@ -32,25 +34,51 @@ local new_maker = function(filepath, bufnr, opts)
           vim.api.nvim_buf_set_lines(bufnr, 0, -1, false, { "BINARY" })
         end)
       end
-    end
+    end,
   }):sync()
 end
 
-local actions = require "telescope.actions"
+local actions = require("telescope.actions")
+
+local windows_picker = function(prompt_bufnr)
+          -- Use nvim-window-picker to choose the window by dynamically attaching a function
+          local action_set = require("telescope.actions.set")
+          local action_state = require("telescope.actions.state")
+
+          local picker = action_state.get_current_picker(prompt_bufnr)
+          ---@diagnostic disable-next-line: unused-local
+          picker.get_selection_window = function(picker, entry)
+            local picked_window_id = require("window-picker").pick_window()
+                or vim.api.nvim_get_current_win()
+            -- Unbind after using so next instance of the picker acts normally
+            picker.get_selection_window = nil
+            return picked_window_id
+          end
+
+          return action_set.edit(prompt_bufnr, "edit")
+        end
 
 M.telescope = telescope
 
-telescope.setup {
+telescope.setup({
   defaults = {
     color_devicons = true,
     prompt_prefix = " ",
     selection_caret = " ",
     path_display = { "smart" },
-    file_ignore_patterns = { "%.g.dart", "%.freezed.dart", ".git/", "node_modules", "gen_l10n/", "analytics",
-      ".pub-cache/", "flutter/packages/" },
+    file_ignore_patterns = {
+      "%.g.dart",
+      "%.freezed.dart",
+      ".git/",
+      "node_modules",
+      "gen_l10n/",
+      "analytics",
+      ".pub-cache/",
+      "flutter/packages/",
+    },
     buffer_previewer_maker = new_maker,
     layout_config = {
-      prompt_position = "top"
+      prompt_position = "top",
     },
     sorting_strategy = "ascending",
     mappings = {
@@ -77,10 +105,12 @@ telescope.setup {
         ["<M-q>"] = actions.send_selected_to_qflist + actions.open_qflist,
         ["<C-l>"] = actions.complete_tag,
         ["<C-_>"] = actions.which_key, -- keys from pressing <C-/>
+        ["<C-g>"] = windows_picker,
       },
       n = {
         ["<esc>"] = actions.close,
         ["<CR>"] = actions.select_default,
+        ["<C-g>"] = windows_picker,
         ["<C-x>"] = actions.select_horizontal,
         ["<C-v>"] = actions.select_vertical,
         ["<C-t>"] = actions.select_tab,
@@ -125,15 +155,14 @@ telescope.setup {
         },
       },
     },
-    lsp_definitions = {
+    lsp_document_symbols = {
       theme = "dropdown",
-      initial_mode = "normal",
       layout_config = {
         width = 0.6,
       },
     },
     lsp_references = {
-      search_dirs = 'CWD',
+      search_dirs = "CWD",
       theme = "dropdown",
       fname_width = 50,
       initial_mode = "normal",
@@ -142,7 +171,7 @@ telescope.setup {
       },
     },
     lsp_dynamic_workspace_symbols = {
-      search_dirs = 'CWD',
+      search_dirs = "CWD",
       theme = "dropdown",
       fname_width = 70,
       layout_config = {
@@ -150,9 +179,16 @@ telescope.setup {
       },
     },
     old_files = {
-      search_dirs = 'CWD',
+      search_dirs = "CWD",
       initial_mode = "normal",
-    }
+    },
+    current_buffer_fuzzy_find = {
+      theme = "dropdown",
+      fname_width = 50,
+      layout_config = {
+        width = 0.6,
+      },
+    },
   },
   extensions = {
     fzf = {
@@ -185,22 +221,36 @@ telescope.setup {
       -- db_root = "home/my_username/path/to/db_root",
       show_scores = false,
       show_unindexed = true,
-      ignore_patterns = {"*.git/*", "*/tmp/*", "*/packages/*", "*/test/*", "*/ios/*",  "*/android/*", "*/windows/*", "*/linux/*", "*/assets/*",  "*/macos/*",  "*/web/*"},
+      ignore_patterns = {
+        "*.git/*",
+        "*/tmp/*",
+        "*/packages/*",
+        "*/test/*",
+        "*/ios/*",
+        "*/android/*",
+        "*/windows/*",
+        "*/linux/*",
+        "*/assets/*",
+        "*/macos/*",
+        "*/web/*",
+      },
       disable_devicons = false,
       workspaces = {
         -- ["conf"]    = "/home/my_username/.config",
         -- ["data"]    = "/home/my_username/.local/share",
         -- ["project"] = "/home/my_username/projects",
         -- ["wiki"]    = "/home/my_username/wiki"
-      }
-    }
+      },
+    },
   },
-}
+})
 
 -- telescope.load_extension("noice")
-telescope.load_extension('fzf')
+telescope.load_extension("undo")
+telescope.load_extension("recent_files")
+telescope.load_extension("harpoon")
 
-local action_state = require "telescope.actions.state"
+local action_state = require("telescope.actions.state")
 
 M.sorted_buffers = function(opts)
   opts = opts or {}
@@ -218,26 +268,24 @@ M.sorted_buffers = function(opts)
   -- opts.show_all_buffers = true
   opts.sort_mru = true
   -- opts.shorten_path = false
-  require("telescope.builtin").buffers(
-    require("telescope.themes").get_dropdown(opts)
-  )
+  require("telescope.builtin").buffers(require("telescope.themes").get_dropdown(opts))
 end
 
 -- Implement delta as previewer for diffs
-local delta = previewers.new_termopen_previewer {
+local delta = previewers.new_termopen_previewer({
   get_command = function(entry)
     -- this is for status
     -- You can get the AM things in entry.status. So we are displaying file if entry.status == '??' or 'A '
     -- just do an if and return a different command
-    if entry.status == '??' or 'A ' then
-      return { 'git', '-c', 'core.pager=delta', '-c', 'delta.side-by-side=true', 'diff', entry.value }
+    if entry.status == "??" or "A " then
+      return { "git", "-c", "core.pager=delta", "-c", "delta.side-by-side=true", "diff", entry.value }
     end
 
     -- note we can't use pipes
     -- this command is for git_commits and git_bcommits
-    return { 'git', '-c', 'core.pager=delta', '-c', 'delta.side-by-side=false', 'diff', entry.value .. '^!' }
-  end
-}
+    return { "git", "-c", "core.pager=delta", "-c", "delta.side-by-side=false", "diff", entry.value .. "^!" }
+  end,
+})
 
 -- local delta = previewers.new_termopen_previewer {
 --   get_command = function(entry)
@@ -282,6 +330,8 @@ end
 -- local themes = require("telescope.themes")
 -- local builtin = require("telescope.builtin")
 -- local action_state = require("telescope.actions.state")
+
+
 
 -- local function chained_live_grep(opts)
 --   opts = opts or themes.get_ivy {}

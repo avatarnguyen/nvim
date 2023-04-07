@@ -105,8 +105,8 @@ diffview.setup({
       { "n", "g<C-x>", actions.cycle_layout, { desc = "Cycle through available layouts." } },
       { "n", "[x", actions.prev_conflict, { desc = "In the merge-tool: jump to the previous conflict" } },
       { "n", "]x", actions.next_conflict, { desc = "In the merge-tool: jump to the next conflict" } },
-      { "n", "<leader>xo", actions.conflict_choose("ours"), { desc = "Choose the OURS version of a conflict" } },
-      { "n", "<leader>xt", actions.conflict_choose("theirs"), { desc = "Choose the THEIRS version of a conflict" } },
+      { "n", "]g", actions.conflict_choose("ours"), { desc = "Choose the OURS version of a conflict" } },
+      { "n", "[g", actions.conflict_choose("theirs"), { desc = "Choose the THEIRS version of a conflict" } },
       { "n", "<leader>xb", actions.conflict_choose("base"), { desc = "Choose the BASE version of a conflict" } },
       { "n", "<leader>xa", actions.conflict_choose("all"), { desc = "Choose all the versions of a conflict" } },
       { "n", "dx", actions.conflict_choose("none"), { desc = "Delete the conflict region" } },
@@ -117,8 +117,10 @@ diffview.setup({
     },
    diff3 = {
       -- Mappings in 3-way diff layouts
-      { { "n", "x" }, "2do",  actions.diffget("ours"),            { desc = "Obtain the diff hunk from the OURS version of the file" } },
-      { { "n", "x" }, "3do",  actions.diffget("theirs"),          { desc = "Obtain the diff hunk from the THEIRS version of the file" } },
+      -- { { "n", "x" }, "2do",  actions.diffget("ours"),            { desc = "Obtain the diff hunk from the OURS version of the file" } },
+      -- { { "n", "x" }, "3do",  actions.diffget("theirs"),          { desc = "Obtain the diff hunk from the THEIRS version of the file" } },
+      { { "n", "x" }, "[g",  actions.diffget("ours"),            { desc = "Obtain the diff hunk from the OURS version of the file" } },
+      { { "n", "x" }, "]g",  actions.diffget("theirs"),          { desc = "Obtain the diff hunk from the THEIRS version of the file" } },
       { "n",          "g?",   actions.help({ "view", "diff3" }),  { desc = "Open the help panel" } },
     },
     diff4 = {

@@ -15,16 +15,16 @@
 --     },
 --   },
 --   suggestion = {
---     enabled = false,
+--     enabled = true,
 --     auto_trigger = true,
 --     debounce = 75,
 --     keymap = {
---       accept = "<C-l>",
+--       accept = false, --"<C-CR>",
 --       accept_word = false,
 --       accept_line = false,
 --       next = "<C-]>",
 --       prev = "<C-[>",
---       dismiss = "<A-]>",
+--       dismiss = "<C-\\>",
 --     },
 --   },
 --   filetypes = {
@@ -55,8 +55,12 @@ vim.g.copilot_filetypes = { xml = false, yaml = false }
 
 
 vim.cmd [[
- imap <silent><script><expr> <C-l> copilot#Accept("\<CR>")
+ imap <silent><script><expr> <C-CR> copilot#Accept("\<CR>")
+ imap <silent><script><expr> <C-]> copilot#Next("\<CR>")
 ]]
+
+
+vim.cmd [[highlight CopilotSuggestion guifg=#555555 ctermfg=8]]
 -- vim.g.copilot_no_tab_map = true
 -- FIXME: this is not working
 -- vim.keymap.set("i", "<C-l>", ":copilot#Accept('\\<CR>')<CR>", { silent = true })
@@ -73,4 +77,3 @@ vim.cmd [[
 -- <Plug>(copilot-previous)
 
 
-vim.cmd [[highlight CopilotSuggestion guifg=#555555 ctermfg=8]]

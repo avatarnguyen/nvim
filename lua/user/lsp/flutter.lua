@@ -3,7 +3,7 @@ if not status_ok then
   return
 end
 
-local colorscheme = require("user.colorscheme").colorscheme
+--  local colorscheme = require("user.colorscheme").colorscheme
 
 flutter.setup({
   ui = {
@@ -18,7 +18,7 @@ flutter.setup({
   },
   dev_tools = {
     autostart = true, -- autostart devtools server if not detected
-    auto_open_browser = false, -- Automatically opens devtools in the browser
+    auto_open_browser = true, -- Automatically opens devtools in the browser
   },
   widget_guides = {
     enabled = true,
@@ -57,13 +57,13 @@ flutter.setup({
       require("user.lsp.handlers").on_attach(client, bufnr)
       vim.g.dart_style_guide = 2
       vim.g.dart_format_on_save = 1
-      if colorscheme == "nightfly" then
-        vim.cmd "highlight FlutterWidgetGuides ctermfg=9 guifg=#82aaff"
-      elseif colorscheme == "github" then
-        vim.cmd "highlight FlutterWidgetGuides ctermfg=9 guifg=#56d4dd"
-      else
+      -- if colorscheme == "nightfly" then
+      --  vim.cmd "highlight FlutterWidgetGuides ctermfg=9 guifg=#82aaff"
+      --elseif colorscheme == "github" then
+      --  vim.cmd "highlight FlutterWidgetGuides ctermfg=9 guifg=#56d4dd"
+      --else
         vim.cmd "highlight FlutterWidgetGuides ctermfg=9 guifg=cyan"
-      end
+      -- end
 
       require('user.neotest')
 

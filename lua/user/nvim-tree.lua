@@ -10,11 +10,14 @@ end
 
 local tree_cb = nvim_tree_config.nvim_tree_callback
 
+-- vim.g.loaded_netrw = 1
+-- vim.g.loaded_netrwPlugin = 1
+
 nvim_tree.setup {
-  hijack_directories = {
-    enable = true,
-  },
-  disable_netrw = true,
+  -- hijack_directories = {
+  --   enable = true,
+  -- },
+  disable_netrw = false,
   hijack_netrw = true,
   update_cwd = true,
   renderer = {

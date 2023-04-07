@@ -45,3 +45,7 @@ configs.setup({
     -- disable = { "html" },
   },
 })
+
+require "user.treesitter_object"
+require "user.treesitter-context"
+

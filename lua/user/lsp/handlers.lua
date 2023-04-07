@@ -63,7 +63,7 @@ M.setup = function()
     border = "rounded",
     style = "minimal",
     width = 110,
-    height = 24,
+    -- height = 24,
   })
 
   vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers.signature_help, {
@@ -90,17 +90,12 @@ local function lsp_keymaps(bufnr)
     "<cmd>lua require('telescope.builtin').lsp_references()<cr>", opts)
 
   -- Show line diagnostics
-  keymap(
-    bufnr, "n", "<leader>ls",
-    '<cmd>lua vim.lsp.diagnostic.show_line_diagnostics()<CR>', opts)
-  keymap(bufnr, "n", "<leader>le", "<cmd>Lspsaga show_line_diagnostics<CR>", opts)
-  -- keymap(bufnr, "n", "gL", "<cmd>lua vim.diagnostic.open_float()<CR>", opts)
-  -- Show cursor diagnostics
-  -- keymap(bufnr, "n", "E", "<cmd>Lspsaga show_cursor_diagnostics<CR>", opts)
-
+  -- keymap(bufnr, "n", "<leader>le", "<cmd>Lspsaga show_line_diagnostics<CR>", opts)
+  keymap(bufnr, "n", "<leader>le", "<cmd>lua vim.diagnostic.open_float()<CR>", opts)
 
   keymap(bufnr, 'n', 'gs', '<cmd>lua vim.lsp.buf.signature_help()<CR>', opts)
-  keymap(bufnr, 'i', '<C-;>', '<cmd>lua vim.lsp.buf.signature_help()<CR>', opts)
+  -- keymap(bufnr, 'i', '<C-k>', '<cmd>lua vim.lsp.buf.signature_help()<CR>', opts)
+
   keymap(bufnr, 'n', 'gy', '<cmd>lua vim.lsp.buf.type_definition()<CR>', opts)
 
   keymap(bufnr, "n", "<leader>q", '<cmd>vim.diagnostic.setloclist()<CR>', opts)
@@ -109,17 +104,16 @@ local function lsp_keymaps(bufnr)
   keymap(bufnr, "n", "ge", "<cmd>Lspsaga diagnostic_jump_next<CR>", opts)
   keymap(bufnr, "n", "gE", "<cmd>Lspsaga diagnostic_jump_prev<CR>", opts)
   -- Standard LSP
-  keymap(bufnr, "n", "]d", '<cmd>lua vim.diagnostic.goto_next({ border = "rounded" })<CR>', opts)
-  keymap(bufnr, "n", "[d", '<cmd>lua vim.diagnostic.goto_prev({ border = "rounded" })<CR>', opts)
+  keymap(bufnr, "n", "]e", '<cmd>lua vim.diagnostic.goto_next({ border = "rounded" })<CR>', opts)
+  keymap(bufnr, "n", "[e", '<cmd>lua vim.diagnostic.goto_prev({ border = "rounded" })<CR>', opts)
 
-  -- keymap(bufnr, "i", "<C-space>", "<Cmd>Lspsaga signature_help<CR>", { silent = true })
   keymap(bufnr, "n", "<leader>lr", "<cmd>Lspsaga rename<CR>", opts)
 end
 
 M.on_attach = function(client, bufnr)
   if client.name == "gopls" then
     require "user.lsp.lsp-signature".on_attach()
-    require("lsp-inlayhints").on_attach(client, bufnr)
+    -- require("lsp-inlayhints").on_attach(client, bufnr)
   end
 
   if client.name == "jsonls" or client.name == "json" then
@@ -135,8 +129,8 @@ M.on_attach = function(client, bufnr)
   end
 
   if client.name == "dartls" then
-    client.server_capabilities.document_formatting = true
-    require("user.lsp.inlay").on_attach(client, bufnr)
+    client.server_capabilities.document_formatting = false
+    -- require("user.lsp.inlay").on_attach(client, bufnr)
     -- require("lsp-inlayhints").on_attach(client, bufnr)
     -- require "user.lsp.lsp-signature".on_attach()
   end
@@ -149,10 +143,10 @@ M.on_attach = function(client, bufnr)
 
   lsp_keymaps(bufnr)
 
-  local colorscheme = require("user.colorscheme").colorscheme
-  if colorscheme ~= "nightfly" and colorscheme ~= "ayu" then
-    require "user.illuminate".on_attach(client)
-  end
+  -- local colorscheme = require("user.colorscheme").colorscheme
+  -- if colorscheme ~= "nightfly" and colorscheme ~= "ayu" then
+  --   require "user.illuminate".on_attach(client)
+  -- end
 end
 
 local function lsp_execute_command(val)

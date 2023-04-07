@@ -3,9 +3,9 @@
 local M = {}
 
 -- local colorscheme = "kanagawa"
--- local colorscheme = "tokyonight"
+local colorscheme = "tokyonight"
 -- local colorscheme = "cobalt2"
-local colorscheme = "nightfly"
+-- local colorscheme = "nightfly"
 -- local colorscheme = "catppuccin"
 -- local colorscheme = "ayu"
 -- local colorscheme = "github"
@@ -13,11 +13,11 @@ local colorscheme = "nightfly"
 -- catppuccin {{{
 if colorscheme == "catppuccin" then
   require("catppuccin").setup({
-    flavour = "mocha", -- latte, frappe, macchiato, mocha
-    background = { -- :h background
-      light = "mocha",
-      dark = "mocha",
-    },
+    flavour = "macchiato", -- latte, frappe, macchiato, mocha
+    -- background = { -- :h background
+    --   light = "mocha",
+    --   dark = "mocha",
+    -- },
     transparent_background = true,
     show_end_of_buffer = true, -- show the '~' characters after the end of buffers
     term_colors = true,

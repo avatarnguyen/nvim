@@ -122,14 +122,14 @@ local filepath = {
   colored = true,
 }
 
-local fileName = {
-  'filename',
-  padding = 0,
-  file_status = false, -- displays file status (readonly status, modified status)
-  path = 0,            -- 0 = just filename, 1 = relative path, 2 = absolute path
-  shorting_target = 40,
-  colored = false,
-}
+-- local fileName = {
+--   'filename',
+--   padding = 0,
+--   file_status = false, -- displays file status (readonly status, modified status)
+--   path = 0,            -- 0 = just filename, 1 = relative path, 2 = absolute path
+--   shorting_target = 40,
+--   colored = false,
+-- }
 
 --[[ local tabs = { ]]
 --[[   "tabs", ]]
@@ -137,29 +137,30 @@ local fileName = {
 --[[ } ]]
 --local winbar_symbol = require('lspsaga.symbolwinbar'):get_winbar()
 
-local winbar_symbol = function()
-  local exclude = {
-    ['teminal'] = true,
-    ['toggleterm'] = true,
-    ['prompt'] = true,
-    ['NvimTree'] = true,
-    ['lualine'] = true,
-    ['help'] = true,
-    ['dap_ui'] = false,
-    ['dapui_scopes'] = false,
-    ['dap-repl'] = false,
-  }
-  if vim.api.nvim_win_get_config(0).zindex or exclude[vim.bo.filetype] then
-    return ""
-  else
-    local ok, lspsaga = pcall(require, 'lspsaga.symbolwinbar')
-    local sym
-    if ok then sym = lspsaga:get_winbar() end
-    local win_val = ''
-    if sym ~= nil then win_val = win_val .. ' ' .. sym end
-    return win_val
-  end
-end
+-- local winbar_symbol = function()
+--   local exclude = {
+--     ['teminal'] = true,
+--     ['toggleterm'] = true,
+--     ['prompt'] = true,
+--     ['NvimTree'] = true,
+--     ['lualine'] = true,
+--     ['help'] = true,
+--     ['dap_ui'] = false,
+--     ['dapui_scopes'] = false,
+--     ['dap-repl'] = false,
+--   }
+
+--   if vim.api.nvim_win_get_config(0).zindex or exclude[vim.bo.filetype] then
+--     return ""
+--   else
+--     local ok, lspsaga = pcall(require, 'lspsaga.symbolwinbar')
+--     local sym
+--     if ok then sym = lspsaga:get_winbar() end
+--     local win_val = ''
+--     if sym ~= nil then win_val = win_val .. ' ' .. sym end
+--     return win_val
+--   end
+-- end
 
 local config = {
   options = {
@@ -193,14 +194,14 @@ local config = {
     lualine_b = {},       -- { filepath },
     lualine_c = { diff }, -- winbar_symbol
     lualine_x = {
-      -- {
-      --   noice.api.status.command.get,
-      --   cond = noice.api.status.command.has,
-      -- },
-      -- {
-      --   noice.api.status.message.get_hl,
-      --   cond = noice.api.status.message.has,
-      -- },
+      {
+        noice.api.status.command.get,
+        cond = noice.api.status.command.has,
+      },
+      {
+        noice.api.status.message.get_hl,
+        cond = noice.api.status.message.has,
+      },
       {
         noice.api.statusline.mode.get,
         cond = noice.api.statusline.mode.has,
@@ -261,7 +262,7 @@ local config = {
     lualine_y = {},
     lualine_z = {}
   },
-  extensions = { 'nvim-tree', 'toggleterm' }
+  extensions = { 'nvim-tree', 'toggleterm', 'overseer', 'trouble' }
 }
 -- Color for highlights
 -- local colors = {
