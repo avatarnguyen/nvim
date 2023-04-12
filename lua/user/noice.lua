@@ -68,7 +68,7 @@ noice.setup({
 			["cmp.entry.get_documentation"] = true,
 		},
 		hover = {
-			enabled = false,
+			enabled = true,
 			view = nil, -- when nil, use defaults from documentation
 			---@diagnostic disable-next-line: undefined-doc-name
 			---@type NoiceViewOptions
@@ -187,7 +187,7 @@ noice.setup({
 		{
 			filter = {
 				event = "msg_show",
-				kind = "",
+				kind = "lua_error",
 				find = "error drawing label",
 			},
 			opts = { skip = true },
@@ -198,4 +198,3 @@ noice.setup({
 M.noice = noice
 
 return M
-
