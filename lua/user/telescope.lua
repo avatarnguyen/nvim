@@ -164,7 +164,7 @@ telescope.setup({
     lsp_references = {
       search_dirs = "CWD",
       theme = "dropdown",
-      fname_width = 50,
+      fname_width = 70,
       initial_mode = "normal",
       layout_config = {
         width = 0.6,

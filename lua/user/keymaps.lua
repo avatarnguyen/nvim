@@ -34,13 +34,13 @@ keymap("n", "<C-p>", "<cmd>Telescope resume<CR>", opts)
 keymap("n", "<C-q>", ":call QuickFixToggle()<CR>", opts)
 
 -- Explorer
-keymap("", "<C-1>", "<cmd>NvimTreeToggle<cr>", opts)
-keymap("", "<C-S-1>", "<cmd>NvimTreeFocus<cr>", opts)
+-- keymap("", "<C-1>", "<cmd>NvimTreeToggle<cr>", opts)
+-- keymap("", "<C-S-1>", "<cmd>NvimTreeFocus<cr>", opts)
 
 -- Flutter
+-- keymap("", "<C-2>", "<CMD>lua require('harpoon.ui').toggle_quick_menu()<CR>", opts)
 keymap("", "<C-0>", "<cmd>lua require('flutter-tools.outline').toggle()<cr>", opts)
 
-keymap("", "<C-2>", "<CMD>lua require('harpoon.ui').toggle_quick_menu()<CR>", opts)
 
 -- copy and paste
 keymap("n", "<leader>p", '"0p', opts)
@@ -55,14 +55,14 @@ keymap("n", "<C-n>", "<cmd>nohlsearch<CR>", opts)
 keymap("n", "<S-q>", "<cmd>q<CR>", opts)
 
 -- LSP Mapping
-keymap("n", "gj", "<Cmd>Lspsaga code_action<CR>", opts)
-keymap("v", "gj", "<Cmd>Lspsaga code_action<CR>", opts)
+keymap("n", "ga", "<Cmd>Lspsaga code_action<CR>", opts)
+keymap("v", "ga", "<Cmd>Lspsaga code_action<CR>", opts)
+
+keymap("n", "gj", "<cmd>!tmux send-keys -t flutter 'r'<CR>", opts)
+
 -- fastaction
 keymap("n", "<leader>a", "<cmd>lua require('lsp-fastaction').code_action()<CR>", opts)
 keymap("v", "<leader>a", "<esc><cmd>lua require('lsp-fastaction').range_code_action()<CR>", opts)
--- keymap("n", "<leader>la", "<Cmd>Lspsaga code_action<CR>", opts)
--- keymap("v", "<leader>la", "<Cmd>Lspsaga code_action<CR>", opts)
-
 -- SUBSTITUTE plugin  {{{
 keymap("n", "s", "<cmd>lua require('substitute').operator()<cr>", { noremap = true })
 keymap("x", "s", "<cmd>lua require('substitute').visual()<cr>", { noremap = true })
@@ -151,7 +151,7 @@ keymap("x", "K", ":move '<-2<CR>gv-gv", opts)
 -- Insert --
 -- Press jk fast to enter
 keymap("i", "jk", "<ESC>", opts)
-keymap("i", "kj", "<ESC>", opts)
+keymap("i", "jj", "<ESC>", opts)
 
 -- Buffer
 keymap("n", "<leader>c", "<cmd>Bdelete!<CR>", opts)
