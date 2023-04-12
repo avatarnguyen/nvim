@@ -24,7 +24,10 @@ return {
 		end,
 	},
 	"b0o/schemastore.nvim",
-	{ "ray-x/lsp_signature.nvim" },
+	{
+		"ray-x/lsp_signature.nvim",
+		ft = { "go" },
+	},
 
 	-----------------
 	-- Colorschemes
@@ -158,11 +161,22 @@ return {
 	},
 	{
 		"glepnir/lspsaga.nvim",
+		event = "LspAttach",
 		config = function()
 			require("user.lspsaga")
 		end,
+		dependencies = {
+			{ "nvim-treesitter/nvim-treesitter" },
+		},
 	},
 	"onsails/lspkind.nvim",
+
+	{
+		"norcalli/nvim-colorizer.lua",
+		config = function()
+			require("user.colorizer")
+		end,
+	},
 
 	------------------------
 	-- DAP
@@ -175,24 +189,6 @@ return {
 		},
 		config = function()
 			require("user.lsp.dap")
-		end,
-	},
-
-	------------------------
-	-- Flutter
-	------------------------
-	{
-		"sidlatau/lsp-fastaction.nvim",
-		config = function()
-			require("user.fastaction")
-		end,
-	},
-	"dart-lang/dart-vim-plugin",
-	"MTDL9/vim-log-highlighting",
-	{
-		"norcalli/nvim-colorizer.lua",
-		config = function()
-			require("user.colorizer")
 		end,
 	},
 
@@ -225,7 +221,7 @@ return {
 	{
 		"nvim-telescope/telescope.nvim",
 		tag = "0.1.1",
-		lazy = false,
+		-- lazy = false,
 		dependencies = {
 			"nvim-lua/plenary.nvim",
 			"smartpde/telescope-recent-files",
@@ -278,7 +274,7 @@ return {
 		end,
 	},
 	-- Git
-	--  "tpope/vim-fugitive"
+	-- "tpope/vim-fugitive",
 	{
 		"lewis6991/gitsigns.nvim",
 		config = function()
@@ -287,6 +283,7 @@ return {
 	},
 	{
 		"sindrets/diffview.nvim",
+		cmd = { "DiffviewOpen", "DiffviewFileHistory" },
 		dependencies = "nvim-lua/plenary.nvim",
 		config = function()
 			require("user.diffview")
@@ -361,6 +358,7 @@ return {
 	{
 		"numToStr/Navigator.nvim",
 		lazy = false,
+		priority = 200,
 		config = function()
 			require("Navigator").setup({
 				-- Save modified buffer(s) when moving to mux
@@ -393,6 +391,7 @@ return {
 	{
 		"folke/noice.nvim",
 		lazy = false,
+		priority = 100,
 		config = function()
 			require("user.noice")
 		end,
@@ -424,6 +423,7 @@ return {
 	},
 	{
 		"folke/zen-mode.nvim",
+		cmd = "ZenMode",
 		config = function()
 			require("user.zenmode")
 		end,

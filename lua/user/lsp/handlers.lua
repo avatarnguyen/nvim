@@ -81,9 +81,9 @@ local function lsp_keymaps(bufnr)
   keymap(bufnr, "n", "gm", "<cmd>lua vim.lsp.buf.implementation()<CR>", opts)
 
   -- Definition
-  -- keymap(bufnr, "n", "gd", "<cmd>lua vim.lsp.buf.definition()<CR>", opts)
-  keymap(bufnr, "n", "gd",
-    "<cmd>lua require('telescope.builtin').lsp_definitions()<cr>", opts)
+  keymap(bufnr, "n", "gd", "<cmd>lua vim.lsp.buf.definition()<CR>", opts)
+  -- keymap(bufnr, "n", "gd",
+  --   "<cmd>lua require('telescope.builtin').lsp_definitions()<cr>", opts)
 
   -- References
   keymap(bufnr, "n", "gu",
@@ -137,7 +137,7 @@ M.on_attach = function(client, bufnr)
 
   if client.name == "sumneko_lua" then
     client.server_capabilities.document_formatting = true
-    require "user.lsp.lsp-signature".on_attach()
+    -- require "user.lsp.lsp-signature".on_attach()
     -- require("user.lsp.inlay").on_attach(client, bufnr)
   end
 

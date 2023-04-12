@@ -1,7 +1,18 @@
 return {
 	"akinsho/flutter-tools.nvim",
-	dependencies = "nvim-lua/plenary.nvim",
-  ft = { "dart" },
+	lazy = false,
+	dependencies = {
+		"nvim-lua/plenary.nvim",
+		"MTDL9/vim-log-highlighting",
+		"dart-lang/dart-vim-plugin",
+		{
+			"sidlatau/lsp-fastaction.nvim",
+			config = function()
+				require("user.fastaction")
+			end,
+		},
+	},
+	ft = { "dart" },
 	config = function()
 		require("flutter-tools").setup({
 			ui = {
@@ -11,12 +22,12 @@ return {
 			-- flutter_path = "$HOME/flutter/bin/flutter/", -- <-- this takes priority over the lookup
 			fvm = false, -- takes priority over path, uses <workspace>/.fvm/flutter_sdk if enabled
 			dev_log = {
-				enabled = false,
+				enabled = true,
 				open_cmd = "tabedit",
 			},
 			dev_tools = {
 				autostart = true, -- autostart devtools server if not detected
-				auto_open_browser = true, -- Automatically opens devtools in the browser
+				auto_open_browser = false, -- Automatically opens devtools in the browser
 			},
 			widget_guides = {
 				enabled = true,
@@ -58,7 +69,7 @@ return {
 					vim.g.dart_style_guide = 2
 					vim.g.dart_format_on_save = 1
 					-- if colorscheme == "nightfly" then
-					 vim.cmd "highlight FlutterWidgetGuides ctermfg=9 guifg=#82aaff"
+					vim.cmd("highlight FlutterWidgetGuides ctermfg=9 guifg=#82aaff")
 					--elseif colorscheme == "github" then
 					--  vim.cmd "highlight FlutterWidgetGuides ctermfg=9 guifg=#56d4dd"
 					--else
@@ -85,6 +96,7 @@ return {
 					renameFilesWithClasses = "prompt", -- "always"
 					enableSnippets = true,
 					lineLength = 2000,
+					updateImportsOnRename = true, -- Whether to update imports and other directives when files are renamed. Required for `FlutterRename` command.
 				},
 			},
 		})
