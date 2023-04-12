@@ -180,8 +180,8 @@ cmp.setup({
 		["<Down>"] = cmp.mapping(cmp.mapping.select_next_item({ behavior = cmp.SelectBehavior.Select }), { "i" }),
 		["<Up>"] = cmp.mapping(cmp.mapping.select_prev_item({ behavior = cmp.SelectBehavior.Select }), { "i" }),
 		["<C-d>"] = cmp.mapping.scroll_docs(-4),
-		["<C-f>"] = cmp.mapping.scroll_docs(4),
-		["<C-y>"] = cmp.mapping({
+		["<C-u>"] = cmp.mapping.scroll_docs(4),
+		["<C-f>"] = cmp.mapping({
 			i = cmp.mapping.confirm({ behavior = cmp.ConfirmBehavior.Replace, select = false }),
 			c = function(fallback)
 				if cmp.visible() then
@@ -396,7 +396,7 @@ cmp.setup({
 		-- },
 	},
 	experimental = {
-		ghost_text = true,
+		ghost_text = false,
 		native_menu = false,
 	},
 })
