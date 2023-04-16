@@ -192,6 +192,14 @@ noice.setup({
 			},
 			opts = { skip = true },
 		},
+		{
+			filter = {
+				event = "msg_show",
+				kind = "lua_error",
+				find = "tmux",
+			},
+			opts = { skip = true },
+		},
 	},
 })
 

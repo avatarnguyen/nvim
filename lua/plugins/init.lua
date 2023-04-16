@@ -283,7 +283,7 @@ return {
 	},
 	{
 		"sindrets/diffview.nvim",
-		cmd = { "DiffviewOpen", "DiffviewFileHistory" },
+		cmd = { "DiffviewClose", "DiffviewOpen", "DiffviewFileHistory" },
 		dependencies = "nvim-lua/plenary.nvim",
 		config = function()
 			require("user.diffview")
@@ -388,26 +388,28 @@ return {
 		-- end,
 	},
 	-- "christoomey/vim-tmux-runner",
-	{
-		"folke/noice.nvim",
-		lazy = false,
-		priority = 100,
-		config = function()
-			require("user.noice")
-		end,
-		dependencies = {
-			"MunifTanjim/nui.nvim",
-			{
-				"rcarriga/nvim-notify",
-				config = function()
-					require("user.notify")
-				end,
-			},
-		},
-	},
+	-- {
+	-- 	"folke/noice.nvim",
+	-- 	lazy = false,
+	-- 	priority = 100,
+	-- 	config = function()
+	-- 		require("user.noice")
+	-- 	end,
+	-- 	dependencies = {
+	-- 		"MunifTanjim/nui.nvim",
+	-- 		{
+	-- 			"rcarriga/nvim-notify",
+	-- 			config = function()
+	-- 				require("user.notify")
+	-- 			end,
+	-- 		},
+	-- 	},
+	-- },
 	{
 		"j-hui/fidget.nvim",
-		enabled = false,
+		-- enabled = false,
+		lazy = false,
+		priority = 100,
 		config = function()
 			require("user.fidget")
 		end,
